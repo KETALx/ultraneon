@@ -1,0 +1,127 @@
+{
+  "__guid": "c040faaa-5a2a-4c9a-b14d-cc60f747f619",
+  "GameObjects": [
+    {
+      "__guid": "e6364aee-df83-470d-ae30-69fdcba64631",
+      "Flags": 0,
+      "Name": "#WORLDGEO",
+      "Enabled": true,
+      "Children": [
+        {
+          "__guid": "ccfcee96-9a3b-442d-aad7-4adf3961fecf",
+          "Flags": 0,
+          "Name": "Box",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.MeshComponent",
+              "__guid": "1f595e8a-4c6d-477b-8da3-fea6adf95abe",
+              "Collision": "Mesh",
+              "Color": "1,1,1,1",
+              "HideInGame": false,
+              "IsTrigger": false,
+              "Mesh": {
+                "Topology": "H4sIAAAAAAAACk2MAQoAIAgDrSz7/4drBwoOjmKbczO7Ygg0hYuTHuB1hXgS/so\u002Bqi4vOdnOrb6NT15bJXy63JDz/\u002Bg6SXigAAAA",
+                "Positions": [
+                  "-448,-560,0",
+                  "448,-560,0",
+                  "448,560,0",
+                  "-448,560,0"
+                ],
+                "TextureCoord": [
+                  "3.5,4.375",
+                  "0,0",
+                  "3.5,-4.375",
+                  "0,0",
+                  "-3.5,-4.375",
+                  "0,0",
+                  "-3.5,4.375",
+                  "0,0"
+                ],
+                "TextureUAxis": [
+                  "1,0,0"
+                ],
+                "TextureVAxis": [
+                  "0,-1,0"
+                ],
+                "TextureScale": [
+                  "0.25,0.25"
+                ],
+                "TextureOffset": [
+                  "0,0"
+                ],
+                "MaterialIndex": [
+                  0
+                ],
+                "EdgeFlags": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "Materials": [
+                  "materials/dev/reflectivity_30.vmat"
+                ]
+              },
+              "SmoothingAngle": 40,
+              "Static": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "__guid": "b87199b9-b058-4432-a87e-7e047b6014f7",
+      "Flags": 0,
+      "Name": "#LIGHTING",
+      "Enabled": true,
+      "Children": [
+        {
+          "__guid": "008b59da-2441-4c2e-b9a5-bfc6ca17fd64",
+          "Flags": 0,
+          "Name": "2D Skybox",
+          "Tags": "skybox",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.SkyBox2D",
+              "__guid": "6a280ad8-a6fa-4706-8597-053ac1bf5ff3",
+              "SkyMaterial": "materials/skybox/skybox_day_01.vmat",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "NetworkInterpolation": true,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "Title": null,
+  "Description": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
