@@ -96,6 +96,12 @@
           ]
         }
       ]
+    },
+    {
+      "__guid": "f11ffcc6-4a76-496d-b233-714cdb490764",
+      "Flags": 0,
+      "Name": "#FRAMEWORK",
+      "Enabled": true
     }
   ],
   "SceneProperties": {
