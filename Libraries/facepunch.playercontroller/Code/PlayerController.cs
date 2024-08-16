@@ -1,14 +1,14 @@
 using Sandbox.Citizen;
 
-[Group( "Walker" )]
-[Title( "Walker - Player Controller" )]
+[Group( "Ultraneon" )]
+[Title( "Ultraneon - Player Controller" )]
 public sealed class PlayerController : Component
 {
 	[Property] public CharacterController CharacterController { get; set; }
 	[Property] public float CrouchMoveSpeed { get; set; } = 64.0f;
 	[Property] public float WalkMoveSpeed { get; set; } = 190.0f;
-	[Property] public float RunMoveSpeed { get; set; } = 190.0f;
-	[Property] public float SprintMoveSpeed { get; set; } = 320.0f;
+
+	[Property] public float JumpForce { get; set; } = 190.0f;
 
 	[Property] public CitizenAnimationHelper AnimationHelper { get; set; }
 
@@ -53,10 +53,8 @@ public sealed class PlayerController : Component
 		get
 		{
 			if ( Crouching ) return CrouchMoveSpeed;
-			if ( Input.Down( "run" ) ) return SprintMoveSpeed;
-			if ( Input.Down( "walk" ) ) return WalkMoveSpeed;
 
-			return RunMoveSpeed;
+			return WalkMoveSpeed;
 		}
 	}
 
@@ -83,10 +81,10 @@ public sealed class PlayerController : Component
 
 		WishVelocity = Input.AnalogMove;
 
-		if ( lastGrounded < 0.2f && lastJump > 0.3f && Input.Pressed( "jump" ) )
+		if ( lastGrounded < 0.2f && lastJump > 0.3f && Input.Down( "jump" ) )
 		{
 			lastJump = 0;
-			cc.Punch( Vector3.Up * 300 );
+			cc.Punch( Vector3.Up * JumpForce);
 		}
 
 		if ( !WishVelocity.IsNearlyZero() )
@@ -114,7 +112,7 @@ public sealed class PlayerController : Component
 		{
 			cc.Velocity += halfGravity;
 			cc.Accelerate( WishVelocity );
-
+			
 		}
 
 		//
@@ -182,7 +180,7 @@ public sealed class PlayerController : Component
 			if ( !CharacterController.IsOnGround )
 			{
 				CharacterController.MoveTo( Transform.Position += Vector3.Up * DuckHeight, false );
-				Transform.ClearLerp();
+				Transform.ClearInterpolation();
 				EyeHeight -= DuckHeight;
 			}
 

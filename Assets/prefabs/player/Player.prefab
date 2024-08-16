@@ -1,0 +1,84 @@
+{
+  "RootObject": {
+    "__guid": "c644d827-81ae-43b7-9acf-b99cf657628c",
+    "Flags": 0,
+    "Name": "player",
+    "Enabled": true,
+    "NetworkMode": 1,
+    "Components": [
+      {
+        "__type": "Sandbox.CharacterController",
+        "__guid": "b4bc18cc-8ea7-4f9d-8b6f-3494032d9b06",
+        "Acceleration": 10,
+        "Bounciness": 0.3,
+        "GroundAngle": 45,
+        "Height": 64,
+        "IgnoreLayers": "",
+        "Radius": 16,
+        "StepHeight": 18,
+        "UseCollisionRules": false
+      },
+      {
+        "__type": "Sandbox.Citizen.CitizenAnimationHelper",
+        "__guid": "f598506d-6dec-488d-9bbc-9ea718084b35",
+        "BodyWeight": 1,
+        "EyesWeight": 1,
+        "HeadWeight": 1,
+        "LookAtEnabled": false,
+        "Target": {
+          "_type": "component",
+          "component_id": "bf8e85b5-5d1d-4447-8776-47005f5d0128",
+          "go": "c644d827-81ae-43b7-9acf-b99cf657628c",
+          "component_type": "SkinnedModelRenderer"
+        }
+      },
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "bf8e85b5-5d1d-4447-8776-47005f5d0128",
+        "BodyGroups": 341,
+        "CreateBoneObjects": false,
+        "Model": "models/citizen/citizen.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
+      },
+      {
+        "__type": "PlayerController",
+        "__guid": "097c5e5e-b18b-4fca-b277-c67beaf1bd5c",
+        "AnimationHelper": {
+          "_type": "component",
+          "component_id": "f598506d-6dec-488d-9bbc-9ea718084b35",
+          "go": "c644d827-81ae-43b7-9acf-b99cf657628c",
+          "component_type": "CitizenAnimationHelper"
+        },
+        "CharacterController": {
+          "_type": "component",
+          "component_id": "b4bc18cc-8ea7-4f9d-8b6f-3494032d9b06",
+          "go": "c644d827-81ae-43b7-9acf-b99cf657628c",
+          "component_type": "CharacterController"
+        },
+        "CrouchMoveSpeed": 120,
+        "JumpForce": 320,
+        "WalkMoveSpeed": 270
+      },
+      {
+        "__type": "PlayerFootsteps",
+        "__guid": "b5e4bb4e-210c-4e43-bb34-90869dd1a32b",
+        "Source": {
+          "_type": "component",
+          "component_id": "bf8e85b5-5d1d-4447-8776-47005f5d0128",
+          "go": "c644d827-81ae-43b7-9acf-b99cf657628c",
+          "component_type": "SkinnedModelRenderer"
+        }
+      }
+    ],
+    "Children": [],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
