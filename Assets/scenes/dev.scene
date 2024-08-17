@@ -135,7 +135,7 @@
               "__guid": "ab13ef90-b707-4f0d-845a-f41ef593d84d",
               "BackgroundColor": "0.33333,0.46275,0.52157,1",
               "ClearFlags": "All",
-              "FieldOfView": 60,
+              "FieldOfView": 90,
               "IsMainCamera": true,
               "Orthographic": false,
               "OrthographicHeight": 1204,
@@ -146,19 +146,6 @@
               "Viewport": "0,0,1,1",
               "ZFar": 10000,
               "ZNear": 10
-            }
-          ]
-        },
-        {
-          "__guid": "66250d33-709f-4345-80bc-f700f053e781",
-          "Flags": 0,
-          "Name": "spawn",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Sandbox.SpawnPoint",
-              "__guid": "f4b54712-7683-4ce2-938b-06780d48f1b3",
-              "Color": "0.8902,0.31765,0.05098,1"
             }
           ]
         },
@@ -178,12 +165,44 @@
               "SpawnPoints": [
                 {
                   "_type": "gameobject",
-                  "go": "66250d33-709f-4345-80bc-f700f053e781"
+                  "go": "27b5cdc1-6c43-4c82-8936-84cb034dfde3"
                 }
               ],
               "StartServer": true
             }
           ]
+        },
+        {
+          "__guid": "c4545362-9875-4508-9517-cba31212fe81",
+          "Flags": 0,
+          "Name": "mapLoader",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.MapInstance",
+              "__guid": "2e16499c-6942-4754-9861-54ebac757558",
+              "__version": 1,
+              "EnableCollision": true,
+              "MapName": "maps/un_facility.vmap",
+              "NoOrigin": false,
+              "UseMapFromLaunch": false
+            }
+          ],
+          "Children": []
+        }
+      ]
+    },
+    {
+      "__guid": "27b5cdc1-6c43-4c82-8936-84cb034dfde3",
+      "Flags": 0,
+      "Name": "Object",
+      "Position": "64,-448,0.000003993358",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SpawnPoint",
+          "__guid": "21975d9c-0d8b-43a2-a167-3e9ddcf0dc5a",
+          "Color": "0.8902,0.31765,0.05098,1"
         }
       ]
     }

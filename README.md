@@ -24,3 +24,5 @@ Note: im (ketal) is in gmt+7 timezone so there might be some date differences
 # Gameplay loop
 
 2-4 PvP free-for all fast paced capture-the-zone style
+
+
