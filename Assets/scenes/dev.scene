@@ -205,6 +205,19 @@
           "Color": "0.8902,0.31765,0.05098,1"
         }
       ]
+    },
+    {
+      "__guid": "cd2d7e06-735b-4d77-ae08-f48f8e06e45a",
+      "Flags": 0,
+      "Name": "weapon_pistol",
+      "Position": "0,-288,0",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "WeaponBaseNeon",
+          "__guid": "a1ae995c-834b-4ce3-8278-6d37b76ee3a3"
+        }
+      ]
     }
   ],
   "SceneProperties": {

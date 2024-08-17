@@ -26,3 +26,12 @@ Note: im (ketal) is in gmt+7 timezone so there might be some date differences
 2-4 PvP free-for all fast paced capture-the-zone style
 
 
+todo:
+- [ ] Player inventory
+- [ ] Item pickup
+- [ ] Capture zones
+- [ ] Health regeneration zones
+- [ ] spawns/respawns
+- [ ] health ui
+- [ ] inventory ui
+

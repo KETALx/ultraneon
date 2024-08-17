@@ -14,7 +14,7 @@
               "type": "markdown",
               "state": {
                 "file": "README.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -147,5 +147,9 @@
     }
   },
   "active": "1f29988cca691c15",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "code/weapons/WeaponBaseNeon.cs",
+    "code/weapons",
+    "code/New folder"
+  ]
 }
