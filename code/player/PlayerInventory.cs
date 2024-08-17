@@ -6,10 +6,10 @@ using System;
 
 public sealed class PlayerInventory : Component
 {
-	[Property] WeaponBaseNeon pistol { get; set; }
-	[Property] WeaponBaseNeon semiauto { get; set; }
-	[Property] WeaponBaseNeon fullauto { get; set; }
-	[Property] WeaponBaseNeon boltrifle { get; set; }
+	[Property] public WeaponBaseNeon pistol { get; set; }
+	[Property] public WeaponBaseNeon semiauto { get; set; }
+	[Property] public WeaponBaseNeon fullauto { get; set; }
+	[Property] public WeaponBaseNeon boltrifle { get; set; }
 
 	[Property] public GameObject activeWeapon { get; private set; }
 
@@ -54,4 +54,8 @@ public sealed class PlayerInventory : Component
 		if ( !weapon.IsValid() ) return;
 		activeWeapon = weapon.GameObject;
 	}
+
+
+
+
 }

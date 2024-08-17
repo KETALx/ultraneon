@@ -210,12 +210,131 @@
       "__guid": "cd2d7e06-735b-4d77-ae08-f48f8e06e45a",
       "Flags": 0,
       "Name": "weapon_pistol",
-      "Position": "0,-288,0",
+      "Position": "0,-288,32",
       "Enabled": true,
       "Components": [
         {
           "__type": "WeaponBaseNeon",
-          "__guid": "a1ae995c-834b-4ce3-8278-6d37b76ee3a3"
+          "__guid": "a1ae995c-834b-4ce3-8278-6d37b76ee3a3",
+          "isPickedUp": false,
+          "weaponType": "pistol"
+        },
+        {
+          "__type": "Sandbox.SkinnedModelRenderer",
+          "__guid": "6eb81083-303f-425f-9279-68e5523e2cee",
+          "BodyGroups": 17685,
+          "CreateBoneObjects": false,
+          "Model": "models/weapons/sbox_pistol_usp/v_usp.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1",
+          "UseAnimGraph": true
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "62d85e3a-b964-4d13-847b-dd51c0f8b134",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "32,32,32",
+          "Static": false
+        }
+      ]
+    },
+    {
+      "__guid": "d9b51831-8aa4-4903-aacf-49555d47eda1",
+      "Flags": 0,
+      "Name": "weapon_semi",
+      "Position": "96,-288,32",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "WeaponBaseNeon",
+          "__guid": "b147493a-3f49-4eac-9567-7d649d923e5a",
+          "isPickedUp": false,
+          "weaponType": "semi"
+        },
+        {
+          "__type": "Sandbox.SkinnedModelRenderer",
+          "__guid": "b7225ee5-e002-46da-a6da-58b1a5fb2e9f",
+          "BodyGroups": 42259,
+          "CreateBoneObjects": false,
+          "Model": "models/weapons/sbox_assault_m4a1/v_m4a1.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1",
+          "UseAnimGraph": true
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "ae0df750-6c0a-42b8-ad34-c0adc2bfc208",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "32,32,32",
+          "Static": false
+        }
+      ]
+    },
+    {
+      "__guid": "4e00321c-fac1-4e38-a817-9a0f24af6c68",
+      "Flags": 0,
+      "Name": "weapon_auto",
+      "Position": "192,-288,32",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "WeaponBaseNeon",
+          "__guid": "cf2c2bda-0cc9-4d89-9fa8-8c19d6d2aff1",
+          "isPickedUp": false,
+          "weaponType": "auto"
+        },
+        {
+          "__type": "Sandbox.SkinnedModelRenderer",
+          "__guid": "412b4798-3f36-4a70-9be7-4fec02bee19a",
+          "BodyGroups": 75,
+          "CreateBoneObjects": false,
+          "Model": "models/weapons/sbox_smg_mp5/v_mp5.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1",
+          "UseAnimGraph": true
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "7a561a71-ab4b-4be8-8c1d-ad5e6a013945",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "32,32,32",
+          "Static": false
+        }
+      ]
+    },
+    {
+      "__guid": "a3add265-5ca9-4525-955b-45830c25617e",
+      "Flags": 0,
+      "Name": "weapon_bolt",
+      "Position": "256,-288,32",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "WeaponBaseNeon",
+          "__guid": "c1aa54b4-d7fa-4c6c-a5e7-b3ca0c393fe0",
+          "isPickedUp": false,
+          "weaponType": "bolt"
+        },
+        {
+          "__type": "Sandbox.SkinnedModelRenderer",
+          "__guid": "50a89187-4228-46a9-a8d6-957daa37e573",
+          "BodyGroups": 18446744073709551615,
+          "CreateBoneObjects": false,
+          "Model": "models/weapons/sbox_melee_trenchknife/w_trenchknife.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1",
+          "UseAnimGraph": true
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "60026a9f-1bf2-4a26-ac95-03dae07e0deb",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "32,32,32",
+          "Static": false
         }
       ]
     }
@@ -244,6 +363,11 @@
   "Title": "dev",
   "Description": "",
   "ResourceVersion": 1,
-  "__references": [],
+  "__references": [
+    "facepunch.v_m4a1",
+    "facepunch.v_mp5",
+    "facepunch.v_usp",
+    "facepunch.w_trenchknife"
+  ],
   "__version": 1
 }

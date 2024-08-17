@@ -81,6 +81,14 @@
           "go": "c644d827-81ae-43b7-9acf-b99cf657628c",
           "component_type": "SkinnedModelRenderer"
         }
+      },
+      {
+        "__type": "Sandbox.BoxCollider",
+        "__guid": "bc9b0917-021a-42f7-83e9-096aa7255c1b",
+        "Center": "0,0,32",
+        "IsTrigger": true,
+        "Scale": "32,32,64",
+        "Static": false
       }
     ],
     "Children": [],
