@@ -193,6 +193,44 @@
       ]
     },
     {
+      "__guid": "c84b5356-7419-4e06-8417-f48be4bd04b8",
+      "Flags": 0,
+      "Name": "#UI",
+      "Enabled": true,
+      "Children": [
+        {
+          "__guid": "06abf8b0-63f4-4859-a487-417c8f9bd79e",
+          "Flags": 0,
+          "Name": "Screen",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ScreenPanel",
+              "__guid": "db759ca7-d317-4a24-8162-95aac1e3b501",
+              "AutoScreenScale": true,
+              "Opacity": 1,
+              "Scale": 1,
+              "ZIndex": 100
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "ee40f32f-6922-49b2-b35f-9577e2724d1c",
+              "Flags": 0,
+              "Name": "PlayerHud",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "PlayerUI",
+                  "__guid": "8101e2fe-1bf8-4df7-a066-54d2154c3d66"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "__guid": "27b5cdc1-6c43-4c82-8936-84cb034dfde3",
       "Flags": 0,
       "Name": "Object",

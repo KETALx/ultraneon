@@ -17,6 +17,11 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 	[Property]
 	public bool isPickedUp { get; set; } = false;
 
+	public void Shoot()
+	{
+		Log.Info( "shot" );
+	}
+
 
 	public void OnTriggerEnter( Collider other )
 	{

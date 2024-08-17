@@ -22,6 +22,8 @@ public sealed class PlayerInventory : Component
 		if ( Input.Pressed( "Slot3" ) ) SelectWeapon( 2 );
 		if ( Input.Pressed( "Slot4" ) ) SelectWeapon( 3 );
 		if ( Input.Pressed( "Slot5" ) ) HolsterWeapon();
+
+		if ( Input.Down( "attack1" ) ) activeWeapon?.Components.Get<WeaponBaseNeon>()?.Shoot();
 	}
 
 	private void HolsterWeapon()
