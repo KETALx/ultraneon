@@ -13,6 +13,8 @@ public sealed class PlayerInventory : Component
 
 	[Property] public WeaponBaseNeon activeWeapon { get; set; }
 
+	private int SelectedSlot { get; set; }
+
 	protected override void OnFixedUpdate()
 	{
 		base.OnFixedUpdate();
@@ -24,6 +26,15 @@ public sealed class PlayerInventory : Component
 		if ( Input.Pressed( "Slot5" ) ) SetActive( null );
 
 		if ( Input.Down( "attack1" ) ) activeWeapon?.Shoot();
+
+		if ( Input.MouseWheel.Length > 0)
+		{
+			SelectedSlot += (int)Input.MouseWheel.y;
+			SelectedSlot = Math.Clamp( SelectedSlot, 0, 3 );
+			SelectWeapon( SelectedSlot );
+			Log.Info( SelectedSlot );
+		}
+		
 	}
 
 
@@ -49,15 +60,10 @@ public sealed class PlayerInventory : Component
 
 	private void SetActive( WeaponBaseNeon weapon )
 	{
-		if ( weapon is null )
-		{
-			activeWeapon = null;
-		}
-		else
-		{
+		if ( weapon is null ) return;
+
 			activeWeapon = weapon;
 			activeWeapon?.Equip();
-		}
 	}
 
 }

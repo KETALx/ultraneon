@@ -268,10 +268,10 @@
           "fireRate": 1,
           "isPickedUp": false,
           "sinceEquippd": {
-            "Relative": 301.9598
+            "Relative": 1645.929
           },
           "sinceShot": {
-            "Relative": 301.9598
+            "Relative": 1645.929
           },
           "weaponType": "pistol"
         },
@@ -310,10 +310,10 @@
           "fireRate": 0,
           "isPickedUp": false,
           "sinceEquippd": {
-            "Relative": 301.9598
+            "Relative": 1645.929
           },
           "sinceShot": {
-            "Relative": 301.9598
+            "Relative": 1645.929
           },
           "weaponType": "semi"
         },
@@ -352,10 +352,10 @@
           "fireRate": 0,
           "isPickedUp": false,
           "sinceEquippd": {
-            "Relative": 301.9598
+            "Relative": 1645.929
           },
           "sinceShot": {
-            "Relative": 301.9598
+            "Relative": 1645.929
           },
           "weaponType": "auto"
         },
@@ -394,10 +394,10 @@
           "fireRate": 0,
           "isPickedUp": false,
           "sinceEquippd": {
-            "Relative": 301.9598
+            "Relative": 1645.929
           },
           "sinceShot": {
-            "Relative": 301.9598
+            "Relative": 1645.929
           },
           "weaponType": "bolt"
         },
@@ -420,113 +420,12 @@
           "Static": false
         }
       ]
-    },
-    {
-      "__guid": "d7b38390-ec84-4148-9ddc-797e8469f4e5",
-      "Flags": 0,
-      "Name": "Object",
-      "Position": "352,-576,128",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.BoxCollider",
-          "__guid": "77645496-0cbd-46f6-a165-792e0ca7447f",
-          "Center": "0,0,0",
-          "IsTrigger": false,
-          "OnTriggerEnter": {
-            "__version": 7,
-            "__guid": "da670488-0780-490f-af04-53236db28aa1",
-            "UserData": {
-              "Title": "On Trigger Enter",
-              "ReferencedComponentTypes": []
-            },
-            "Variables": [],
-            "Nodes": [
-              {
-                "Id": 0,
-                "Type": "input"
-              },
-              {
-                "Id": 3,
-                "Type": "call",
-                "Properties": {
-                  "_isStatic": false,
-                  "_type": "Sandbox.IComponentLister",
-                  "T": "PlayerEntity",
-                  "_name": "TryGet"
-                },
-                "UserData": {
-                  "Position": "256,96"
-                }
-              },
-              {
-                "Id": 4,
-                "Type": "log.info",
-                "UserData": {
-                  "Position": "528,-16"
-                }
-              },
-              {
-                "Id": 5,
-                "Type": "property",
-                "Properties": {
-                  "_type": "PlayerEntity",
-                  "_name": "health"
-                },
-                "UserData": {
-                  "Position": "608,160"
-                }
-              }
-            ],
-            "Links": [
-              {
-                "SrcId": 0,
-                "SrcName": "obj",
-                "DstId": 3,
-                "DstName": "_target"
-              },
-              {
-                "SrcId": 0,
-                "SrcName": "_signal",
-                "DstId": 4,
-                "DstName": "_signal"
-              },
-              {
-                "SrcId": 3,
-                "SrcName": "component",
-                "DstId": 4,
-                "DstName": "args",
-                "DstIndex": 0
-              },
-              {
-                "SrcId": 4,
-                "SrcName": "_signal",
-                "DstId": 5,
-                "DstName": "_signal"
-              },
-              {
-                "SrcId": 3,
-                "SrcName": "component",
-                "DstId": 5,
-                "DstName": "_target"
-              },
-              {
-                "Value": 50,
-                "DstId": 5,
-                "DstName": "_value"
-              }
-            ]
-          },
-          "Scale": "121,1000,255",
-          "Static": false
-        }
-      ]
     }
   ],
   "SceneProperties": {
-    "FixedUpdateFrequency": 50,
+    "FixedUpdateFrequency": 64,
     "MaxFixedUpdates": 5,
-    "NetworkFrequency": 30,
+    "NetworkFrequency": 64,
     "NetworkInterpolation": true,
     "ThreadedAnimation": true,
     "TimeScale": 1,
