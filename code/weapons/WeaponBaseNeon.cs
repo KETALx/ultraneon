@@ -41,6 +41,11 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 		sinceShot = 0f;
 	}
 
+	public void Holster()
+	{
+
+	}
+
 	public void Equip()
 	{
 		sinceEquippd = 0f;
@@ -53,30 +58,22 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 		var inventory = other.GameObject.Components.Get<PlayerInventory>();
 		if ( inventory.IsValid() )
 		{
-			switch( weaponType )
+			switch ( weaponType )
 			{
 				case WeaponType.pistol:
-					if(inventory.pistol == null ) inventory.pistol = this;
+					inventory.weapons[0] = GameObject;
 					break;
-			}
-			switch ( weaponType )
-			{
 				case WeaponType.semi:
-					inventory.semiauto = this;
+					inventory.weapons[1] = GameObject;
 					break;
-			}
-			switch ( weaponType )
-			{
 				case WeaponType.auto:
-					inventory.fullauto = this;
+					inventory.weapons[2] = GameObject;
 					break;
-			}
-			switch ( weaponType )
-			{
 				case WeaponType.bolt:
-					inventory.boltrifle = this;
+					inventory.weapons[3] = GameObject;
 					break;
 			}
+
 			this.GameObject.SetParent( inventory.GameObject );
 			var mdl = GameObject.Components.Get<ModelRenderer>();
 			if ( mdl.IsValid() )

@@ -268,10 +268,10 @@
           "fireRate": 1,
           "isPickedUp": false,
           "sinceEquippd": {
-            "Relative": 1645.929
+            "Relative": 4667.6694
           },
           "sinceShot": {
-            "Relative": 1645.929
+            "Relative": 4667.6694
           },
           "weaponType": "pistol"
         },
@@ -310,10 +310,10 @@
           "fireRate": 0,
           "isPickedUp": false,
           "sinceEquippd": {
-            "Relative": 1645.929
+            "Relative": 4667.6694
           },
           "sinceShot": {
-            "Relative": 1645.929
+            "Relative": 4667.6694
           },
           "weaponType": "semi"
         },
@@ -352,10 +352,10 @@
           "fireRate": 0,
           "isPickedUp": false,
           "sinceEquippd": {
-            "Relative": 1645.929
+            "Relative": 4667.6694
           },
           "sinceShot": {
-            "Relative": 1645.929
+            "Relative": 4667.6694
           },
           "weaponType": "auto"
         },
@@ -394,10 +394,10 @@
           "fireRate": 0,
           "isPickedUp": false,
           "sinceEquippd": {
-            "Relative": 1645.929
+            "Relative": 4667.6694
           },
           "sinceShot": {
-            "Relative": 1645.929
+            "Relative": 4667.6694
           },
           "weaponType": "bolt"
         },

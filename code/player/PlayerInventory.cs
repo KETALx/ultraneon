@@ -1,5 +1,6 @@
 using Sandbox;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 [Category( "Ultraneon" )]
 
@@ -13,12 +14,16 @@ public sealed class PlayerInventory : Component
 
 	[Property] public WeaponBaseNeon activeWeapon { get; set; }
 
+	[Property] public GameObject[] weapons { get; set; } = new GameObject[4];
+
 	private int SelectedSlot { get; set; }
+
+	private int prevSelect;
 
 	protected override void OnFixedUpdate()
 	{
 		base.OnFixedUpdate();
-
+		
 		if ( Input.Pressed( "Slot1" )) SelectWeapon( 0 );
 		if ( Input.Pressed( "Slot2" ) ) SelectWeapon( 1 );
 		if ( Input.Pressed( "Slot3" ) ) SelectWeapon( 2 );
@@ -29,9 +34,12 @@ public sealed class PlayerInventory : Component
 
 		if ( Input.MouseWheel.Length > 0)
 		{
-			SelectedSlot += (int)Input.MouseWheel.y;
-			SelectedSlot = Math.Clamp( SelectedSlot, 0, 3 );
+			
+			
+			SelectedSlot = Math.Clamp( SelectedSlot + (int)Input.MouseWheel.y, 0, 3 );
+			if ( prevSelect == SelectedSlot ) return;
 			SelectWeapon( SelectedSlot );
+			prevSelect = SelectedSlot;
 			Log.Info( SelectedSlot );
 		}
 		
@@ -61,6 +69,7 @@ public sealed class PlayerInventory : Component
 	private void SetActive( WeaponBaseNeon weapon )
 	{
 		if ( weapon is null ) return;
+		if ( weapon == activeWeapon ) return;
 
 			activeWeapon = weapon;
 			activeWeapon?.Equip();
