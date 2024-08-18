@@ -16,14 +16,14 @@
 
 @code
 {
-    [Property] PlayerEntity player { get; set; }
 
+    [Property] PlayerEntity player { get; set; }
 
 
     protected override int BuildHash()
     {
-        player = Scene.GetAllComponents<PlayerEntity>().FirstOrDefault();
-      
+        player = Scene.GetAllComponents<PlayerEntity>().Where(x => !x.IsProxy).FirstOrDefault();
+
         return player.IsValid()? System.HashCode.Combine(player.health) : 0;
     }
 }
