@@ -267,11 +267,13 @@
           "dryTime": 2,
           "fireRate": 1,
           "isPickedUp": false,
+          "isReloading": false,
+          "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 4667.6694
+            "Relative": 11889.349
           },
           "sinceShot": {
-            "Relative": 4667.6694
+            "Relative": 11889.349
           },
           "weaponType": "pistol"
         },
@@ -309,11 +311,13 @@
           "dryTime": 0,
           "fireRate": 0,
           "isPickedUp": false,
+          "isReloading": false,
+          "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 4667.6694
+            "Relative": 11889.349
           },
           "sinceShot": {
-            "Relative": 4667.6694
+            "Relative": 11889.349
           },
           "weaponType": "semi"
         },
@@ -351,11 +355,13 @@
           "dryTime": 0,
           "fireRate": 0,
           "isPickedUp": false,
+          "isReloading": false,
+          "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 4667.6694
+            "Relative": 11889.349
           },
           "sinceShot": {
-            "Relative": 4667.6694
+            "Relative": 11889.349
           },
           "weaponType": "auto"
         },
@@ -380,6 +386,50 @@
       ]
     },
     {
+      "__guid": "ff165114-427e-41db-bb4a-2f321972e1de",
+      "Flags": 0,
+      "Name": "weapon_auto (1)",
+      "Position": "320,-288,32",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "WeaponBaseNeon",
+          "__guid": "ad04ab25-8ab2-4c73-a7df-1596c04425ba",
+          "clipSize": 0,
+          "dryTime": 0,
+          "fireRate": 0,
+          "isPickedUp": false,
+          "isReloading": false,
+          "reloadTime": 0,
+          "sinceEquippd": {
+            "Relative": 11889.349
+          },
+          "sinceShot": {
+            "Relative": 11889.349
+          },
+          "weaponType": "auto"
+        },
+        {
+          "__type": "Sandbox.SkinnedModelRenderer",
+          "__guid": "0fef3225-2a7a-493c-a919-b6d8fc1ed6d7",
+          "BodyGroups": 75,
+          "CreateBoneObjects": false,
+          "Model": "models/weapons/sbox_smg_mp5/v_mp5.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1",
+          "UseAnimGraph": true
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "702902c8-7a40-407d-bf01-802e99ee2e7d",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "32,32,32",
+          "Static": false
+        }
+      ]
+    },
+    {
       "__guid": "a3add265-5ca9-4525-955b-45830c25617e",
       "Flags": 0,
       "Name": "weapon_bolt",
@@ -393,11 +443,13 @@
           "dryTime": 0,
           "fireRate": 0,
           "isPickedUp": false,
+          "isReloading": false,
+          "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 4667.6694
+            "Relative": 11889.349
           },
           "sinceShot": {
-            "Relative": 4667.6694
+            "Relative": 11889.349
           },
           "weaponType": "bolt"
         },
