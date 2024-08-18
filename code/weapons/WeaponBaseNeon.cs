@@ -1,5 +1,6 @@
 using Sandbox;
 using Sandbox.Diagnostics;
+using System;
 
 public enum WeaponType
 {
@@ -17,11 +18,34 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 	[Property]
 	public bool isPickedUp { get; set; } = false;
 
+	[Property,Group("Weapon stats")]
+	public int clipSize { get; set; }
+	[Property, Group( "Weapon stats" )]
+	public float fireRate { get; set; }
+	[Property, Group( "Weapon stats" )]
+	public float dryTime { get; set; }
+
+	[Property] public TimeSince sinceEquippd { get; set; } = 0f;
+	[Property] public TimeSince sinceShot { get; set; } = 0f;
+	bool canShoot { get; set; } = false;
+
+
 	public void Shoot()
 	{
-		Log.Info( "shot" );
+		if ( sinceEquippd < dryTime ) return;
+		if ( sinceShot < fireRate ) return;
+
+			canShoot = true;
+			Log.Info( "shot" );
+
+		sinceShot = 0f;
 	}
 
+	public void Equip()
+	{
+		sinceEquippd = 0f;
+		Log.Info( "equpped" );
+	}
 
 	public void OnTriggerEnter( Collider other )
 	{
@@ -62,4 +86,6 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 			isPickedUp = true;
 		}
 	}
+
+
 }

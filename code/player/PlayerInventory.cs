@@ -11,7 +11,7 @@ public sealed class PlayerInventory : Component
 	[Property] public WeaponBaseNeon fullauto { get; set; }
 	[Property] public WeaponBaseNeon boltrifle { get; set; }
 
-	[Property] public GameObject activeWeapon { get; private set; }
+	[Property] public WeaponBaseNeon activeWeapon { get; set; }
 
 	protected override void OnFixedUpdate()
 	{
@@ -21,15 +21,11 @@ public sealed class PlayerInventory : Component
 		if ( Input.Pressed( "Slot2" ) ) SelectWeapon( 1 );
 		if ( Input.Pressed( "Slot3" ) ) SelectWeapon( 2 );
 		if ( Input.Pressed( "Slot4" ) ) SelectWeapon( 3 );
-		if ( Input.Pressed( "Slot5" ) ) HolsterWeapon();
+		if ( Input.Pressed( "Slot5" ) ) SetActive( null );
 
-		if ( Input.Down( "attack1" ) ) activeWeapon?.Components.Get<WeaponBaseNeon>()?.Shoot();
+		if ( Input.Down( "attack1" ) ) activeWeapon?.Shoot();
 	}
 
-	private void HolsterWeapon()
-	{
-		activeWeapon = null;
-	}
 
 	private void SelectWeapon( int weaponId )
 	{
@@ -53,11 +49,15 @@ public sealed class PlayerInventory : Component
 
 	private void SetActive( WeaponBaseNeon weapon )
 	{
-		if ( !weapon.IsValid() ) return;
-		activeWeapon = weapon.GameObject;
+		if ( weapon is null )
+		{
+			activeWeapon = null;
+		}
+		else
+		{
+			activeWeapon = weapon;
+			activeWeapon?.Equip();
+		}
 	}
-
-
-
 
 }
