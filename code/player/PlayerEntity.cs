@@ -17,7 +17,7 @@ public sealed class PlayerEntity : Component, Component.IDamageable
 	{
 		if ( !isAlive ) return;
 
-		health -= Math.Clamp(health - damage.Damage, 0f, maxHealth);
+		health = Math.Clamp(health - damage.Damage, 0f, maxHealth);
 
 		if ( health <= 0 ) killPlayer();
 

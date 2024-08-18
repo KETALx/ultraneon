@@ -6,7 +6,9 @@
     <div class="vitals">
         <div class="health">
             <div class="icon">heart_broken</div>
-            <div class="value">100</div>
+            <div class="value">
+                <p>@player?.health</p>
+            </div>
 
         </div>
     </div>
@@ -14,5 +16,14 @@
 
 @code
 {
+    [Property] PlayerEntity player { get; set; }
 
+
+
+    protected override int BuildHash()
+    {
+        player = Scene.GetAllComponents<PlayerEntity>().FirstOrDefault();
+      
+        return player.IsValid()? System.HashCode.Combine(player.health) : 0;
+    }
 }
