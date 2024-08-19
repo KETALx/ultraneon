@@ -12,7 +12,7 @@ public sealed class PlayerInventory : Component
 
 	[Property] public WeaponBaseNeon[] weapons { get; set; } = new WeaponBaseNeon[4];
 
-	[Property] private int SelectedSlot { get; set; } = 0;
+	[Property] public int SelectedSlot { get; set; } = 0;
 
 
 	protected override void OnFixedUpdate()

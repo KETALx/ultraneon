@@ -69,32 +69,44 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 			switch ( weaponType )
 			{
 				case WeaponType.pistol:
+					if ( inventory.weapons[0] != null ) return;
 					inventory.weapons[0] = this;
+					addToOwner( inventory );
 					break;
 				case WeaponType.semi:
+					if ( inventory.weapons[1] != null ) return;
 					inventory.weapons[1] = this;
+					addToOwner( inventory );
 					break;
 				case WeaponType.auto:
+					if ( inventory.weapons[2] != null ) return;
 					inventory.weapons[2] = this;
+					addToOwner( inventory );
 					break;				   
-				case WeaponType.bolt:	   
+				case WeaponType.bolt:
+					if ( inventory.weapons[3] != null ) return;
 					inventory.weapons[3] = this;
+					addToOwner( inventory );
 					break;
 			}
 
-			this.GameObject.SetParent( inventory.GameObject );
-			var mdl = GameObject.Components.Get<ModelRenderer>();
-			if ( mdl.IsValid() )
-			{
-				mdl.Enabled = false;
-			}
-			isPickedUp = true;
-			if ( inventory.weapons.Count( x => x != null ) == 1 )
-			{
-				inventory.SelectWeapon( (int)weaponType );
-			}
+
 		}
 	}
 
+	void addToOwner(PlayerInventory inventory)
+	{
+		this.GameObject.SetParent( inventory.GameObject );
+		var mdl = GameObject.Components.Get<ModelRenderer>();
+		if ( mdl.IsValid() )
+		{
+			mdl.Enabled = false;
+		}
+		isPickedUp = true;
+		if ( inventory.weapons.Count( x => x != null ) == 1 )
+		{
+			inventory.SelectWeapon( (int)weaponType );
+		}
+	}
 
 }

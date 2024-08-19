@@ -11,15 +11,18 @@
         "__guid": "de63f997-7764-4984-a225-e14eb4cfc991",
         "health": 0,
         "isAlive": true,
-        "maxHealth": 100,
-        "PlayerHudPrefab": {
-          "_type": "gameobject",
-          "prefab": "prefabs/ui/playerscreen.prefab"
-        }
+        "maxHealth": 100
       },
       {
         "__type": "PlayerInventory",
-        "__guid": "417e178e-d57c-41af-bc09-f073df7e7b8e"
+        "__guid": "417e178e-d57c-41af-bc09-f073df7e7b8e",
+        "SelectedSlot": 0,
+        "weapons": [
+          null,
+          null,
+          null,
+          null
+        ]
       },
       {
         "__type": "PlayerController",

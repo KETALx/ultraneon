@@ -27,8 +27,8 @@ Note: im (ketal) is in gmt+7 timezone so there might be some date differences
 
 
 todo:
-- [ ] Player inventory
-- [ ] Item pickup
+- [x] Player inventory
+- [x] Item pickup
 - [ ] Capture zones
 - [ ] Health regeneration zones
 - [ ] spawns/respawns

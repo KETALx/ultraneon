@@ -22,8 +22,8 @@
     "LeaderboardType": "None",
     "CsProjName": "",
     "LaunchMode": "QuickPlay",
-    "StartupScene": "scenes/ui/mainmenu.scene",
-    "MapStartupScene": "scenes/ui/mainmenu.scene",
+    "StartupScene": "scenes/dev.scene",
+    "MapStartupScene": "scenes/dev.scene",
     "ControlModes": {},
     "InputSettings": {
       "Actions": [

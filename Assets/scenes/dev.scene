@@ -153,6 +153,7 @@
           "__guid": "d8419b65-4e30-4c35-8357-87c3b109e63b",
           "Flags": 0,
           "Name": "network",
+          "Enabled": true,
           "Components": [
             {
               "__type": "Sandbox.NetworkHelper",
@@ -172,7 +173,6 @@
             {
               "__type": "UltraneonNetwork",
               "__guid": "4bd2ed5e-2a6e-48f3-8292-af2099251d8e",
-              "__enabled": false,
               "PlayerHudPrefab": {
                 "_type": "gameobject",
                 "prefab": "prefabs/ui/playerscreen.prefab"
@@ -204,7 +204,6 @@
       "__guid": "c84b5356-7419-4e06-8417-f48be4bd04b8",
       "Flags": 0,
       "Name": "#UI",
-      "Enabled": true,
       "Children": [
         {
           "__guid": "a047f7a0-442b-4744-bc9c-f5f4142657d4",
@@ -226,13 +225,7 @@
               "__guid": "1ffc6806-20fc-4af3-9903-d63b9704736c",
               "Flags": 0,
               "Name": "PlayerHud",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "PlayerUI",
-                  "__guid": "a6c100e3-63e2-48d5-8419-14209b70766c"
-                }
-              ]
+              "Enabled": true
             }
           ]
         }
@@ -269,10 +262,10 @@
           "isReloading": false,
           "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 11832.015
+            "Relative": 2159.997
           },
           "sinceShot": {
-            "Relative": 11832.015
+            "Relative": 2159.997
           },
           "weaponType": "pistol"
         },
@@ -313,10 +306,10 @@
           "isReloading": false,
           "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 11832.015
+            "Relative": 2159.997
           },
           "sinceShot": {
-            "Relative": 11832.015
+            "Relative": 2159.997
           },
           "weaponType": "semi"
         },
@@ -357,10 +350,10 @@
           "isReloading": false,
           "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 11832.015
+            "Relative": 2159.997
           },
           "sinceShot": {
-            "Relative": 11832.015
+            "Relative": 2159.997
           },
           "weaponType": "auto"
         },
@@ -401,10 +394,10 @@
           "isReloading": false,
           "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 11832.015
+            "Relative": 2159.997
           },
           "sinceShot": {
-            "Relative": 11832.015
+            "Relative": 2159.997
           },
           "weaponType": "auto"
         },
@@ -445,10 +438,10 @@
           "isReloading": false,
           "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 11832.015
+            "Relative": 2159.997
           },
           "sinceShot": {
-            "Relative": 11832.015
+            "Relative": 2159.997
           },
           "weaponType": "bolt"
         },
@@ -477,7 +470,6 @@
       "Flags": 0,
       "Name": "player",
       "Position": "64,-544,4",
-      "Enabled": true,
       "NetworkMode": 1,
       "__Prefab": "prefabs/player/player.prefab",
       "__PrefabVariables": {}
