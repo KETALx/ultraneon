@@ -57,7 +57,7 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 	public void Equip()
 	{
 		sinceEquippd = 0f;
-		Log.Info( "equpped" );
+		//Log.Info( "equpped" );
 	}
 
 	public void OnTriggerEnter( Collider other )

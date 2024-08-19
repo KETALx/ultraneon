@@ -40,6 +40,7 @@ public sealed class PlayerInventory : Component
 			SelectedSlot += delta;
 			SelectedSlot = Math.Clamp(SelectedSlot,0,weapons.Length - 1 );
 			if ( SelectedSlot == lastSlot ) return;
+			
 
 			for ( int i = SelectedSlot; i >=0 && i < weapons.Length;i += delta )
 			{
@@ -50,6 +51,12 @@ public sealed class PlayerInventory : Component
 					SelectWeapon( i );
 					break;
 				}
+				else
+				{
+					SelectedSlot = lastSlot;
+					Log.Info("else:" + SelectedSlot);
+				}
+				
 			}
 			
 		}
@@ -67,12 +74,15 @@ public sealed class PlayerInventory : Component
 				break;
 			case 1:
 				SetActive( weapons[1] );
+				SelectedSlot = 1;
 				break;
 			case 2:
 				SetActive( weapons[2] );
+				SelectedSlot = 2;
 				break;
 			case 3:
 				SetActive( weapons[3] );
+				SelectedSlot = 3;
 				break;
 		}
 	}

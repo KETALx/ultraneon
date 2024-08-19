@@ -153,7 +153,6 @@
           "__guid": "d8419b65-4e30-4c35-8357-87c3b109e63b",
           "Flags": 0,
           "Name": "network",
-          "Enabled": true,
           "Components": [
             {
               "__type": "Sandbox.NetworkHelper",
@@ -270,10 +269,10 @@
           "isReloading": false,
           "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 11889.349
+            "Relative": 1464.551
           },
           "sinceShot": {
-            "Relative": 11889.349
+            "Relative": 1464.551
           },
           "weaponType": "pistol"
         },
@@ -314,10 +313,10 @@
           "isReloading": false,
           "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 11889.349
+            "Relative": 1464.551
           },
           "sinceShot": {
-            "Relative": 11889.349
+            "Relative": 1464.551
           },
           "weaponType": "semi"
         },
@@ -358,10 +357,10 @@
           "isReloading": false,
           "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 11889.349
+            "Relative": 1464.551
           },
           "sinceShot": {
-            "Relative": 11889.349
+            "Relative": 1464.551
           },
           "weaponType": "auto"
         },
@@ -402,10 +401,10 @@
           "isReloading": false,
           "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 11889.349
+            "Relative": 1464.551
           },
           "sinceShot": {
-            "Relative": 11889.349
+            "Relative": 1464.551
           },
           "weaponType": "auto"
         },
@@ -446,10 +445,10 @@
           "isReloading": false,
           "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 11889.349
+            "Relative": 1464.551
           },
           "sinceShot": {
-            "Relative": 11889.349
+            "Relative": 1464.551
           },
           "weaponType": "bolt"
         },
@@ -472,6 +471,16 @@
           "Static": false
         }
       ]
+    },
+    {
+      "__guid": "9d5fb978-e836-43c8-8415-3159e8bc949c",
+      "Flags": 0,
+      "Name": "player",
+      "Position": "64,-544,4",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "__Prefab": "prefabs/player/player.prefab",
+      "__PrefabVariables": {}
     }
   ],
   "SceneProperties": {
