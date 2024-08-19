@@ -9,69 +9,60 @@ PlayerUI {
 
 	.vitals {
 		position: absolute;
-		left: 200px;
+		left: 100px;
 		bottom: 100px;
 		gap: 10px;
 	}
 
-	.item {
+	.crosshair {
 		position: absolute;
-		right: 200px;
-		bottom: 100px;
-		gap: 10px;
+		right: 50%;
+		bottom:50%;
 	}
 
-	.health, .armor, .item {
+	.hotbar {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		right: 25%;
+		bottom: 20px;
+		gap: 8px;
+		font-family: Material Icons;
+	}
+
+	.items {
 		background-color: #0004;
+		opacity: 0.7;
 		border-radius: 3px;
-		padding: 10px 20px;
-		color: white;
-		font-weight: bolder;
-		font-size: 30px;
-		font-family: poppins;
+		padding: 2px 120px;
+		color: dimgrey;
+		font-weight: 400;
+		font-size: 50px;
+		font-family: Cascadia Code;
 		justify-content: center;
 		align-items: center;
 		gap: 16px;
-		backdrop-filter: blur( 20px );
+		backdrop-filter: blur( 2px );
+	}
 
-		.value {
-		}
+	.health {
+		background-color: #0004;
+		opacity: 0.7;
+		border-radius: 3px;
+		padding: 10px 20px;
+		color: palegreen;
+		font-weight: 400;
+		font-size: 50px;
+		font-family: Cascadia Code;
+		justify-content: center;
+		align-items: center;
+		gap: 16px;
+		backdrop-filter: blur( 2px );
 
 		.icon {
 			font-family: Material Icons;
-			opacity: 0.2;
-		}
-
-		.subvalue {
-			padding-top: 6px;
-			opacity: 0.5;
-			font-size: 16px;
-		}
-	}
-
-	.overlay {
-		position: absolute;
-		left: 0px;
-		top: 0px;
-		right: 0px;
-		bottom: 0px;
-		// this is showing how to position things around things in the scene
-		// but in screen space instead of using a world panel
-		.model-overlay {
-			position: absolute;
-			background-color: #fff;
-			padding: 10px;
-			box-shadow: 5px 5px 32px rgba( black, 0.4 );
-			cursor: pointer;
-			flex-direction: column;
-
-			&:hover {
-				background-color: #ff0;
-			}
-
-			&:active {
-				background-color: #0ff;
-			}
 		}
 	}
 }
