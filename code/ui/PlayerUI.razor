@@ -43,7 +43,8 @@
         setActiveStyle(2);
         setActiveStyle(3);
 
-        
+
+
     }
 
     void setActiveStyle(int i)
@@ -52,6 +53,12 @@
         {
             itemPanels[i].Style.BackgroundColor = new Color(0.8f, 1f, 0.8f, 0.2f);
         }
+        if (inventory?.SelectedSlot is not null && inventory?.weapons.Count(x => x != null) > 0)
+        {
+           
+            itemPanels[inventory.SelectedSlot].Style.BackgroundColor = Color.Red;
+        }
+
     }
 
     protected override int BuildHash()

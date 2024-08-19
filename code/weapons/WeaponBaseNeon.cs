@@ -105,7 +105,7 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 		isPickedUp = true;
 		if ( inventory.weapons.Count( x => x != null ) == 1 )
 		{
-			inventory.SelectWeapon( (int)weaponType );
+			inventory.SetActive( this );
 		}
 	}
 

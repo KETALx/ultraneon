@@ -21,10 +21,10 @@ public sealed class PlayerInventory : Component
 
 
 
-		if ( Input.Pressed( "Slot1" )) SelectWeapon( 0 );
-		if ( Input.Pressed( "Slot2" ) ) SelectWeapon( 1 );
-		if ( Input.Pressed( "Slot3" ) ) SelectWeapon( 2 );
-		if ( Input.Pressed( "Slot4" ) ) SelectWeapon( 3 );
+		if ( Input.Pressed( "Slot1" )) SetActive( weapons[0] );
+		if ( Input.Pressed( "Slot2" ) ) SetActive( weapons[1] );
+		if ( Input.Pressed( "Slot3" ) ) SetActive(weapons[2]);
+		if ( Input.Pressed( "Slot4" ) ) SetActive(weapons[3]);
 		if ( Input.Pressed( "Slot5" ) ) SetActive( null );
 
 		if ( Input.Down( "attack1" ) ) activeWeapon?.Shoot();
@@ -48,7 +48,7 @@ public sealed class PlayerInventory : Component
 				{
 					Log.Info( i );
 					SelectedSlot = i;
-					SelectWeapon( i );
+					SetActive(weapons[i]);
 					break;
 				}
 				else
@@ -62,12 +62,14 @@ public sealed class PlayerInventory : Component
 		}
 	}
 
-
+	/*
 	public void SelectWeapon( int weaponId )
 	{
-
-		switch(weaponId)
+		
+		
+		switch (weaponId)
 		{
+
 			case 0:
 				SetActive( weapons[0] );
 				SelectedSlot = 0;
@@ -85,15 +87,18 @@ public sealed class PlayerInventory : Component
 				SelectedSlot = 3;
 				break;
 		}
-	}
+	}*/
 
-	private void SetActive( WeaponBaseNeon weapon )
+	public void SetActive( WeaponBaseNeon weapon )
 	{
 		if ( weapon is null ) return;
 		if ( weapon == activeWeapon ) return;
 
-			activeWeapon = weapon;
-			activeWeapon?.Equip();
+		SelectedSlot = (int)weapon.weaponType;
+		Log.Info( SelectedSlot );
+
+		activeWeapon = weapon;
+		activeWeapon?.Equip();
 	}
 
 }
