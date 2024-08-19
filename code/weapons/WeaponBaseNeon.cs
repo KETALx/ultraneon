@@ -25,7 +25,7 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 	public float fireRate { get; set; }
 
 	[Property, Group( "Weapon stats" )]
-	public float dryTime { get; set; }
+	public float equipTime { get; set; }
 
 	[Property, Group( "Weapon stats" )]
 	public float reloadTime { get; set; }
@@ -33,18 +33,40 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 	[Property, Group( "Weapon stats" )]
 	public bool isReloading { get; set; }
 
+	[Property, Group( "Weapon stats" )]
+	public float weaponDamage { get; set; }
+	[Property, Group( "Weapon stats" )] 
+	public bool isSemiAuto { get; set; }
+
+	[Property, Group( "Weapon effects" )]
+	public SoundEvent shootSound { get; set; }
+
+	[Property, Group( "Weapon effects" )]
+	public GameObject ImpactPrefab { get; set; }
+
 	[Property] public TimeSince sinceEquippd { get; set; } = 0f;
 	[Property] public TimeSince sinceShot { get; set; } = 0f;
-	bool canShoot { get; set; } = false;
+	bool hasShoot { get; set; } = false;
 
 
+	protected override void OnUpdate()
+	{
+		base.OnUpdate();
+		if ( !Input.Down( "attack1" ) && hasShoot )
+		{
+			hasShoot = false;
+		}
+	}
 	public void Shoot()
 	{
-		if ( sinceEquippd < dryTime ) return;
+		if ( sinceEquippd < equipTime ) return;
 		if ( sinceShot < fireRate ) return;
+		if(hasShoot) return;
 
-			canShoot = true;
-			Log.Info( "shot" );
+		Sound.Play( shootSound );
+		hasShoot= true;
+			
+		Log.Info( "shot" );
 
 		sinceShot = 0f;
 	}

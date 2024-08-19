@@ -145,7 +145,7 @@
               "TargetEye": "None",
               "Viewport": "0,0,1,1",
               "ZFar": 10000,
-              "ZNear": 10
+              "ZNear": 0.1
             }
           ]
         },
@@ -256,17 +256,20 @@
           "__type": "WeaponBaseNeon",
           "__guid": "a1ae995c-834b-4ce3-8278-6d37b76ee3a3",
           "clipSize": 5,
-          "dryTime": 2,
+          "equipTime": 0.3,
           "fireRate": 1,
           "isPickedUp": false,
           "isReloading": false,
+          "isSemiAuto": false,
           "reloadTime": 0,
+          "shootSound": "sounds/placeholders/pistol_shoot.sound",
           "sinceEquippd": {
-            "Relative": 8922.625
+            "Relative": 212.13672
           },
           "sinceShot": {
-            "Relative": 8922.625
+            "Relative": 212.13672
           },
+          "weaponDamage": 0,
           "weaponType": "pistol"
         },
         {
@@ -300,17 +303,19 @@
           "__type": "WeaponBaseNeon",
           "__guid": "b147493a-3f49-4eac-9567-7d649d923e5a",
           "clipSize": 0,
-          "dryTime": 0,
+          "equipTime": 0,
           "fireRate": 0,
           "isPickedUp": false,
           "isReloading": false,
+          "isSemiAuto": false,
           "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 8922.625
+            "Relative": 212.13672
           },
           "sinceShot": {
-            "Relative": 8922.625
+            "Relative": 212.13672
           },
+          "weaponDamage": 0,
           "weaponType": "semi"
         },
         {
@@ -344,17 +349,19 @@
           "__type": "WeaponBaseNeon",
           "__guid": "cf2c2bda-0cc9-4d89-9fa8-8c19d6d2aff1",
           "clipSize": 0,
-          "dryTime": 0,
+          "equipTime": 0,
           "fireRate": 0,
           "isPickedUp": false,
           "isReloading": false,
+          "isSemiAuto": false,
           "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 8922.625
+            "Relative": 212.13672
           },
           "sinceShot": {
-            "Relative": 8922.625
+            "Relative": 212.13672
           },
+          "weaponDamage": 0,
           "weaponType": "auto"
         },
         {
@@ -388,17 +395,19 @@
           "__type": "WeaponBaseNeon",
           "__guid": "ad04ab25-8ab2-4c73-a7df-1596c04425ba",
           "clipSize": 0,
-          "dryTime": 0,
+          "equipTime": 0,
           "fireRate": 0,
           "isPickedUp": false,
           "isReloading": false,
+          "isSemiAuto": false,
           "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 8922.625
+            "Relative": 212.13672
           },
           "sinceShot": {
-            "Relative": 8922.625
+            "Relative": 212.13672
           },
+          "weaponDamage": 0,
           "weaponType": "auto"
         },
         {
@@ -432,17 +441,19 @@
           "__type": "WeaponBaseNeon",
           "__guid": "c1aa54b4-d7fa-4c6c-a5e7-b3ca0c393fe0",
           "clipSize": 0,
-          "dryTime": 0,
+          "equipTime": 0,
           "fireRate": 0,
           "isPickedUp": false,
           "isReloading": false,
+          "isSemiAuto": false,
           "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 8922.625
+            "Relative": 212.13672
           },
           "sinceShot": {
-            "Relative": 8922.625
+            "Relative": 212.13672
           },
+          "weaponDamage": 0,
           "weaponType": "bolt"
         },
         {
@@ -580,7 +591,7 @@
               "-1,0,0",
               "1,0,0",
               "0,-1,0",
-              "1,0,0",
+              "1,0,-0",
               "0,1,0",
               "1,0,0"
             ],
@@ -588,54 +599,54 @@
               "0,-1,0",
               "0,-1,0",
               "0,0,-1",
-              "-0,0,-1",
+              "0,0,-1",
               "0,0,-1",
               "-0,0,-1",
               "0,-1,0",
               "0,0,-1",
               "0,0,-1",
-              "0,0,-1",
+              "-0,0,-1",
               "0,0,-1",
               "0,0,-1",
               "0,0,-1",
               "0,-1,0",
-              "0,0,-1",
-              "0,-1,0"
+              "-0,-0,-1",
+              "0,-1,-0"
             ],
             "TextureScale": [
               "0.25,0.25",
               "0.25,0.25",
+              "0.25,0.2399997",
+              "0.25,0.2399997",
               "0.25,0.25",
+              "0.25,0.2399997",
               "0.25,0.25",
+              "0.25,0.2500001",
               "0.25,0.25",
+              "0.25,0.2500001",
+              "0.25,0.2500001",
+              "0.25,0.2608696",
+              "0.25,0.2608696",
               "0.25,0.25",
-              "0.25,0.25",
-              "0.25,0.25",
-              "0.25,0.25",
-              "0.25,0.25",
-              "0.25,0.25",
-              "0.25,0.25",
-              "0.25,0.25",
-              "0.25,0.25",
-              "0.25,0.25",
+              "0.25,0.2608696",
               "0.25,0.25"
             ],
             "TextureOffset": [
               "64,192",
               "64,192",
-              "192,80.0069",
-              "320,80.0069",
-              "448,80.0069",
-              "64,80.0069",
+              "192,80.00717",
+              "320,80.00717",
+              "448,80.00688",
+              "64,80.00716",
               "64,192",
+              "0,511.9999",
               "0,0",
+              "0,511.9999",
+              "0,511.9999",
+              "0,496",
+              "0,496",
               "0,0",
-              "0,0",
-              "0,0",
-              "0,0",
-              "0,0",
-              "0,0",
-              "0,0",
+              "0,496",
               "0,0"
             ],
             "MaterialIndex": [
@@ -719,7 +730,7 @@
             ]
           },
           "SmoothingAngle": 40,
-          "Static": false
+          "Static": true
         }
       ]
     },
@@ -846,7 +857,7 @@
             ]
           },
           "SmoothingAngle": 40,
-          "Static": false
+          "Static": true
         }
       ]
     }

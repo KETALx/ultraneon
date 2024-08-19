@@ -15,7 +15,7 @@
 
     <div class="hotbar">
 
-        <div class="items"@ref="itemPanels[0]" >1</div>
+        <div class="items" @ref="itemPanels[0]">1</div>
         <div class="items" @ref="itemPanels[1]">2</div>
         <div class="items" @ref="itemPanels[2]">3</div>
         <div class="items" @ref="itemPanels[3]">4</div>
@@ -51,12 +51,14 @@
     {
         if (inventory?.weapons[i] is not null)
         {
-            itemPanels[i].Style.BackgroundColor = new Color(0.8f, 1f, 0.8f, 0.2f);
+            
+            itemPanels[i].Style.BackgroundColor = new Color(0.7f, 0.75f, 0.7f, 0.7f);
+
         }
         if (inventory?.SelectedSlot is not null && inventory?.weapons.Count(x => x != null) > 0)
         {
 
-            itemPanels[inventory.SelectedSlot].Style.BackgroundColor = new Color(0.4f, 1f, 0.4f, 0.8f);
+            itemPanels[inventory.SelectedSlot].Style.BackgroundColor = new Color(0.3f, 0.8f, 0.3f, 0.6f);
         }
 
     }

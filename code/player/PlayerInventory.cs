@@ -42,7 +42,7 @@ public sealed class PlayerInventory : Component
 			if ( SelectedSlot == lastSlot ) return;
 			
 
-			for ( int i = SelectedSlot; i >=0 && i < weapons.Length;i += delta )
+			for ( int i = SelectedSlot; i >=0 && i < weapons.Length;i -= delta )
 			{
 				if ( weapons[i] != null )
 				{
