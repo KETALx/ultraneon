@@ -173,6 +173,7 @@
             {
               "__type": "UltraneonNetwork",
               "__guid": "4bd2ed5e-2a6e-48f3-8292-af2099251d8e",
+              "__enabled": false,
               "PlayerHudPrefab": {
                 "_type": "gameobject",
                 "prefab": "prefabs/ui/playerscreen.prefab"
@@ -204,6 +205,7 @@
       "__guid": "c84b5356-7419-4e06-8417-f48be4bd04b8",
       "Flags": 0,
       "Name": "#UI",
+      "Enabled": true,
       "Children": [
         {
           "__guid": "a047f7a0-442b-4744-bc9c-f5f4142657d4",
@@ -225,7 +227,13 @@
               "__guid": "1ffc6806-20fc-4af3-9903-d63b9704736c",
               "Flags": 0,
               "Name": "PlayerHud",
-              "Enabled": true
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "PlayerUI",
+                  "__guid": "68052205-1836-4e1b-b6ec-6a9c929e9a06"
+                }
+              ]
             }
           ]
         }
@@ -279,15 +287,6 @@
       "Position": "256,-288,32",
       "Enabled": true,
       "__Prefab": "prefabs/weapons/weapon_bolt.prefab",
-      "__PrefabVariables": {}
-    },
-    {
-      "__guid": "9d5fb978-e836-43c8-8415-3159e8bc949c",
-      "Flags": 0,
-      "Name": "player",
-      "Position": "64,-544,4",
-      "NetworkMode": 1,
-      "__Prefab": "prefabs/player/player.prefab",
       "__PrefabVariables": {}
     },
     {
@@ -665,12 +664,6 @@
           "Static": true
         }
       ]
-    },
-    {
-      "__guid": "ce3d974c-35bf-4281-ad26-e022f177c7dd",
-      "Flags": 0,
-      "Name": "GameObject",
-      "Enabled": true
     }
   ],
   "SceneProperties": {

@@ -8,16 +8,17 @@ using System.ComponentModel.DataAnnotations;
 
 public sealed class PlayerInventory : Component
 {
-	[Property] public WeaponBaseNeon activeWeapon { get; set; }
+	[Property,Sync] public WeaponBaseNeon activeWeapon { get; set; }
 
-	[Property] public WeaponBaseNeon[] weapons { get; set; } = new WeaponBaseNeon[4];
+	[Property,Sync] public WeaponBaseNeon[] weapons { get; set; } = new WeaponBaseNeon[4];
 
-	[Property] public int SelectedSlot { get; set; } = 0;
+	[Property,Sync] public int SelectedSlot { get; set; } = 0;
 
 
 	protected override void OnFixedUpdate()
 	{
 		base.OnFixedUpdate();
+
 
 
 

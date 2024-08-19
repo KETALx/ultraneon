@@ -82,7 +82,7 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 		if ( camera is null ) return;
 		var rayStart = camera.Transform.Position;
 		var shotTrace = Scene.Trace.Ray( rayStart, rayStart + camera.Transform.World.Forward * 65536f )
-			.IgnoreGameObjectHierarchy( GameObject )
+			.IgnoreGameObjectHierarchy( GameObject.Parent )
 			.UseHitboxes()
 			.Run();
 		if ( shotTrace.Hit )

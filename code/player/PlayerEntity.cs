@@ -29,6 +29,7 @@ public sealed class PlayerEntity : Component, Component.IDamageable, Component.I
 
 		if ( health <= 0 ) killPlayer();
 
+
 	}
 	[Button( "kill player" )]
 	public void killPlayer()
@@ -39,9 +40,4 @@ public sealed class PlayerEntity : Component, Component.IDamageable, Component.I
 	}
 
 
-	[Button( "take 50 damage" )]
-	void debugdamage()
-	{
-		GameObject.Components.Get<IDamageable>().OnDamage( new DamageInfo() { Damage = 60 } );
-	}
 }

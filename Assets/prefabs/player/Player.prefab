@@ -96,6 +96,16 @@
         "IsTrigger": true,
         "Scale": "32,32,72",
         "Static": false
+      },
+      {
+        "__type": "Sandbox.ModelHitboxes",
+        "__guid": "a77fc76f-3121-47a3-aba7-1c9bec6e3239",
+        "Renderer": {
+          "_type": "component",
+          "component_id": "bf8e85b5-5d1d-4447-8776-47005f5d0128",
+          "go": "c644d827-81ae-43b7-9acf-b99cf657628c",
+          "component_type": "SkinnedModelRenderer"
+        }
       }
     ],
     "Children": [],
