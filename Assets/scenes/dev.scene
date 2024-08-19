@@ -262,10 +262,10 @@
           "isReloading": false,
           "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 7221.7505
+            "Relative": 8922.625
           },
           "sinceShot": {
-            "Relative": 7221.7505
+            "Relative": 8922.625
           },
           "weaponType": "pistol"
         },
@@ -306,10 +306,10 @@
           "isReloading": false,
           "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 7221.7505
+            "Relative": 8922.625
           },
           "sinceShot": {
-            "Relative": 7221.7505
+            "Relative": 8922.625
           },
           "weaponType": "semi"
         },
@@ -350,10 +350,10 @@
           "isReloading": false,
           "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 7221.7505
+            "Relative": 8922.625
           },
           "sinceShot": {
-            "Relative": 7221.7505
+            "Relative": 8922.625
           },
           "weaponType": "auto"
         },
@@ -394,10 +394,10 @@
           "isReloading": false,
           "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 7221.7505
+            "Relative": 8922.625
           },
           "sinceShot": {
-            "Relative": 7221.7505
+            "Relative": 8922.625
           },
           "weaponType": "auto"
         },
@@ -438,10 +438,10 @@
           "isReloading": false,
           "reloadTime": 0,
           "sinceEquippd": {
-            "Relative": 7221.7505
+            "Relative": 8922.625
           },
           "sinceShot": {
-            "Relative": 7221.7505
+            "Relative": 8922.625
           },
           "weaponType": "bolt"
         },
@@ -689,6 +689,133 @@
               0,
               0,
               0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "Materials": [
+              "materials/dev/reflectivity_30.vmat"
+            ]
+          },
+          "SmoothingAngle": 40,
+          "Static": false
+        }
+      ]
+    },
+    {
+      "__guid": "11f523fb-2cf0-48fa-b0fd-33d4afa4fed7",
+      "Flags": 0,
+      "Name": "Box",
+      "Position": "227,-229,32",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.MeshComponent",
+          "__guid": "e0326c57-47fb-41f8-af2a-837cb5da751d",
+          "Collision": "Mesh",
+          "Color": "1,1,1,1",
+          "HideInGame": false,
+          "IsTrigger": false,
+          "Mesh": {
+            "Topology": "H4sIAAAAAAAACl2Qiw6CUAxDh1flgg/wAfr/X2pP0iWLJA25W9t16xHxFc4C30E4\u002Bt2FWbgKd2Ew4NTvIZxcb9ZH4b5db\u002Bb9z/oUzVh8m7lPc9FOzjRYQ8ZXyXxxXvrw4e72wvtWdoEPdzMXj8We9OHDXcvO7EqdN396eKaeLHjkLciePeYxi4z0mMFtMisablFvRXZ2Tj158KQOF78f9WSROMQBAAA=",
+            "Positions": [
+              "-27,-27,32",
+              "27,-27,32",
+              "27,27,32",
+              "-27,27,32",
+              "-27,27,-32",
+              "27,27,-32",
+              "27,-27,-32",
+              "-27,-27,-32"
+            ],
+            "TextureCoord": [
+              "0.2109375,0.2109375",
+              "-0.2109375,-0.28125",
+              "0.2109375,-0.2109375",
+              "-0.2109375,-0.28125",
+              "-0.2109375,-0.2109375",
+              "-0.2109375,-0.28125",
+              "-0.2109375,0.2109375",
+              "-0.2109375,-0.28125",
+              "0.2109375,-0.2109375",
+              "0.2109375,0.28125",
+              "0.2109375,0.2109375",
+              "0.2109375,0.28125",
+              "-0.2109375,0.2109375",
+              "0.2109375,0.28125",
+              "-0.2109375,-0.2109375",
+              "0.2109375,0.28125",
+              "0.2109375,-0.28125",
+              "-0.2109375,0.28125",
+              "-0.2109375,0.28125",
+              "0.2109375,-0.28125",
+              "-0.2109375,0.28125",
+              "0.2109375,-0.28125",
+              "0.2109375,-0.28125",
+              "-0.2109375,0.28125"
+            ],
+            "TextureUAxis": [
+              "1,0,0",
+              "1,0,-0",
+              "0,-1,0",
+              "0,1,0",
+              "-1,0,0",
+              "1,-0,0"
+            ],
+            "TextureVAxis": [
+              "0,-1,0",
+              "0,-1,0",
+              "0,0,-1",
+              "-0,0,-1",
+              "0,0,-1",
+              "-0,0,-1"
+            ],
+            "TextureScale": [
+              "0.25,0.25",
+              "0.25,0.25",
+              "0.25,0.2222222",
+              "0.25,0.2222222",
+              "0.25,0.2222222",
+              "0.25,0.2222222"
+            ],
+            "TextureOffset": [
+              "116,108",
+              "116,108",
+              "107.9999,144",
+              "404.0001,144",
+              "396.0001,144",
+              "115.9999,144"
+            ],
+            "MaterialIndex": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "EdgeFlags": [
               0,
               0,
               0,

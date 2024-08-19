@@ -17,7 +17,7 @@ public sealed class PlayerController : Component
 	[Sync] public Vector3 WishVelocity { get; set; }
 
 	public bool WishCrouch;
-	public float EyeHeight = 64;
+	public float EyeHeight = 70;
 
 	protected override void OnUpdate()
 	{
@@ -205,8 +205,8 @@ public sealed class PlayerController : Component
 		var camera = Scene.GetAllComponents<CameraComponent>().Where( x => x.IsMainCamera ).FirstOrDefault();
 		if ( camera is null ) return;
 
-		var targetEyeHeight = Crouching ? 42 : 64;
-		EyeHeight = EyeHeight.LerpTo( targetEyeHeight, RealTime.Delta * 40.0f );
+		var targetEyeHeight = Crouching ? 36 : 70;
+		EyeHeight = EyeHeight.LerpTo( targetEyeHeight, RealTime.Delta * 20.0f );
 
 		var targetCameraPos = Transform.Position + new Vector3( 0, 0, EyeHeight );
 

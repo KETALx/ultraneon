@@ -39,17 +39,17 @@
           "go": "c644d827-81ae-43b7-9acf-b99cf657628c",
           "component_type": "CharacterController"
         },
-        "CrouchMoveSpeed": 200,
+        "CrouchMoveSpeed": 140,
         "JumpForce": 350,
-        "WalkMoveSpeed": 450
+        "WalkMoveSpeed": 320
       },
       {
         "__type": "Sandbox.CharacterController",
         "__guid": "b4bc18cc-8ea7-4f9d-8b6f-3494032d9b06",
-        "Acceleration": 14,
+        "Acceleration": 8,
         "Bounciness": 0,
         "GroundAngle": 45,
-        "Height": 64,
+        "Height": 72,
         "IgnoreLayers": "",
         "Radius": 16,
         "StepHeight": 18,
@@ -92,9 +92,9 @@
       {
         "__type": "Sandbox.BoxCollider",
         "__guid": "bc9b0917-021a-42f7-83e9-096aa7255c1b",
-        "Center": "0,0,32",
+        "Center": "0,0,36",
         "IsTrigger": true,
-        "Scale": "32,32,64",
+        "Scale": "32,32,72",
         "Static": false
       }
     ],
