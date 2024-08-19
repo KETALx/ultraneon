@@ -55,8 +55,8 @@
         }
         if (inventory?.SelectedSlot is not null && inventory?.weapons.Count(x => x != null) > 0)
         {
-           
-            itemPanels[inventory.SelectedSlot].Style.BackgroundColor = Color.Red;
+
+            itemPanels[inventory.SelectedSlot].Style.BackgroundColor = new Color(0.4f, 1f, 0.4f, 0.8f);
         }
 
     }

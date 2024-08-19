@@ -37,7 +37,7 @@ public sealed class PlayerInventory : Component
 
 			var delta = (int)Input.MouseWheel.y;
 			
-			SelectedSlot += delta;
+			SelectedSlot -= delta;
 			SelectedSlot = Math.Clamp(SelectedSlot,0,weapons.Length - 1 );
 			if ( SelectedSlot == lastSlot ) return;
 			

@@ -5,10 +5,10 @@ using Sandbox.Citizen;
 public sealed class PlayerController : Component
 {
 	[Property] public CharacterController CharacterController { get; set; }
-	[Property] public float CrouchMoveSpeed { get; set; } = 64.0f;
-	[Property] public float WalkMoveSpeed { get; set; } = 190.0f;
+	[Property] public float CrouchMoveSpeed { get; set; }
+	[Property] public float WalkMoveSpeed { get; set; }
 
-	[Property] public float JumpForce { get; set; } = 190.0f;
+	[Property] public float JumpForce { get; set; }
 
 	[Property] public CitizenAnimationHelper AnimationHelper { get; set; }
 
@@ -155,7 +155,7 @@ public sealed class PlayerController : Component
 	bool CanUncrouch()
 	{
 		if ( !Crouching ) return true;
-		if ( lastUngrounded < 0.2f ) return false;
+		//if ( lastUngrounded < 0.2f ) return false;
 
 		var tr = CharacterController.TraceDirection( Vector3.Up * DuckHeight );
 		return !tr.Hit; // hit nothing - we can!
@@ -171,7 +171,7 @@ public sealed class PlayerController : Component
 		// crouch
 		if ( WishCrouch )
 		{
-			CharacterController.Height = 36;
+			CharacterController.Height = 46;
 			Crouching = WishCrouch;
 
 			// if we're not on the ground, slide up our bbox so when we crouch
@@ -205,8 +205,8 @@ public sealed class PlayerController : Component
 		var camera = Scene.GetAllComponents<CameraComponent>().Where( x => x.IsMainCamera ).FirstOrDefault();
 		if ( camera is null ) return;
 
-		var targetEyeHeight = Crouching ? 28 : 64;
-		EyeHeight = EyeHeight.LerpTo( targetEyeHeight, RealTime.Delta * 10.0f );
+		var targetEyeHeight = Crouching ? 42 : 64;
+		EyeHeight = EyeHeight.LerpTo( targetEyeHeight, RealTime.Delta * 40.0f );
 
 		var targetCameraPos = Transform.Position + new Vector3( 0, 0, EyeHeight );
 
