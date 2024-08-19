@@ -1,0 +1,57 @@
+{
+  "RootObject": {
+    "__guid": "cd2d7e06-735b-4d77-ae08-f48f8e06e45a",
+    "Flags": 0,
+    "Name": "weapon_pistol",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "WeaponBaseNeon",
+        "__guid": "a1ae995c-834b-4ce3-8278-6d37b76ee3a3",
+        "clipSize": 12,
+        "equipTime": 0.3,
+        "fireRate": 0.4,
+        "headShotMultiplier": 10,
+        "ImpactPrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/effects/weapons/impacteffect.prefab"
+        },
+        "isPickedUp": false,
+        "isReloading": false,
+        "isSemiAuto": true,
+        "reloadTime": 2,
+        "shootSound": "sounds/placeholders/pistol_shoot.sound",
+        "weaponDamage": 35,
+        "weaponType": "pistol"
+      },
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "6eb81083-303f-425f-9279-68e5523e2cee",
+        "BodyGroups": 17685,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/sbox_pistol_usp/v_usp.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
+      },
+      {
+        "__type": "Sandbox.BoxCollider",
+        "__guid": "62d85e3a-b964-4d13-847b-dd51c0f8b134",
+        "Center": "0,0,0",
+        "IsTrigger": true,
+        "Scale": "32,32,32",
+        "Static": false
+      }
+    ],
+    "Children": [],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [
+    "facepunch.v_usp"
+  ],
+  "__version": 1
+}

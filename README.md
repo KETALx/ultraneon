@@ -33,5 +33,11 @@ todo:
 - [ ] Health regeneration zones
 - [ ] spawns/respawns
 - [ ] health ui
-- [ ] inventory ui
+- [x] inventory ui
+- [ ] compass ui
+- [ ] ammo ui
+- [ ] weapons
+- [ ] view bobbing
+- [ ] extra movement stuff
+- [ ] main game loop
 

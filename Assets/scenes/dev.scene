@@ -251,46 +251,8 @@
       "Name": "weapon_pistol",
       "Position": "0,-288,32",
       "Enabled": true,
-      "Components": [
-        {
-          "__type": "WeaponBaseNeon",
-          "__guid": "a1ae995c-834b-4ce3-8278-6d37b76ee3a3",
-          "clipSize": 5,
-          "equipTime": 0.3,
-          "fireRate": 1,
-          "isPickedUp": false,
-          "isReloading": false,
-          "isSemiAuto": false,
-          "reloadTime": 0,
-          "shootSound": "sounds/placeholders/pistol_shoot.sound",
-          "sinceEquippd": {
-            "Relative": 212.13672
-          },
-          "sinceShot": {
-            "Relative": 212.13672
-          },
-          "weaponDamage": 0,
-          "weaponType": "pistol"
-        },
-        {
-          "__type": "Sandbox.SkinnedModelRenderer",
-          "__guid": "6eb81083-303f-425f-9279-68e5523e2cee",
-          "BodyGroups": 17685,
-          "CreateBoneObjects": false,
-          "Model": "models/weapons/sbox_pistol_usp/v_usp.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1",
-          "UseAnimGraph": true
-        },
-        {
-          "__type": "Sandbox.BoxCollider",
-          "__guid": "62d85e3a-b964-4d13-847b-dd51c0f8b134",
-          "Center": "0,0,0",
-          "IsTrigger": true,
-          "Scale": "32,32,32",
-          "Static": false
-        }
-      ]
+      "__Prefab": "prefabs/weapons/weapon_pistol.prefab",
+      "__PrefabVariables": {}
     },
     {
       "__guid": "d9b51831-8aa4-4903-aacf-49555d47eda1",
@@ -298,45 +260,8 @@
       "Name": "weapon_semi",
       "Position": "96,-288,32",
       "Enabled": true,
-      "Components": [
-        {
-          "__type": "WeaponBaseNeon",
-          "__guid": "b147493a-3f49-4eac-9567-7d649d923e5a",
-          "clipSize": 0,
-          "equipTime": 0,
-          "fireRate": 0,
-          "isPickedUp": false,
-          "isReloading": false,
-          "isSemiAuto": false,
-          "reloadTime": 0,
-          "sinceEquippd": {
-            "Relative": 212.13672
-          },
-          "sinceShot": {
-            "Relative": 212.13672
-          },
-          "weaponDamage": 0,
-          "weaponType": "semi"
-        },
-        {
-          "__type": "Sandbox.SkinnedModelRenderer",
-          "__guid": "b7225ee5-e002-46da-a6da-58b1a5fb2e9f",
-          "BodyGroups": 42259,
-          "CreateBoneObjects": false,
-          "Model": "models/weapons/sbox_assault_m4a1/v_m4a1.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1",
-          "UseAnimGraph": true
-        },
-        {
-          "__type": "Sandbox.BoxCollider",
-          "__guid": "ae0df750-6c0a-42b8-ad34-c0adc2bfc208",
-          "Center": "0,0,0",
-          "IsTrigger": true,
-          "Scale": "32,32,32",
-          "Static": false
-        }
-      ]
+      "__Prefab": "prefabs/weapons/weapon_semi.prefab",
+      "__PrefabVariables": {}
     },
     {
       "__guid": "4e00321c-fac1-4e38-a817-9a0f24af6c68",
@@ -344,91 +269,8 @@
       "Name": "weapon_auto",
       "Position": "192,-288,32",
       "Enabled": true,
-      "Components": [
-        {
-          "__type": "WeaponBaseNeon",
-          "__guid": "cf2c2bda-0cc9-4d89-9fa8-8c19d6d2aff1",
-          "clipSize": 0,
-          "equipTime": 0,
-          "fireRate": 0,
-          "isPickedUp": false,
-          "isReloading": false,
-          "isSemiAuto": false,
-          "reloadTime": 0,
-          "sinceEquippd": {
-            "Relative": 212.13672
-          },
-          "sinceShot": {
-            "Relative": 212.13672
-          },
-          "weaponDamage": 0,
-          "weaponType": "auto"
-        },
-        {
-          "__type": "Sandbox.SkinnedModelRenderer",
-          "__guid": "412b4798-3f36-4a70-9be7-4fec02bee19a",
-          "BodyGroups": 75,
-          "CreateBoneObjects": false,
-          "Model": "models/weapons/sbox_smg_mp5/v_mp5.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1",
-          "UseAnimGraph": true
-        },
-        {
-          "__type": "Sandbox.BoxCollider",
-          "__guid": "7a561a71-ab4b-4be8-8c1d-ad5e6a013945",
-          "Center": "0,0,0",
-          "IsTrigger": true,
-          "Scale": "32,32,32",
-          "Static": false
-        }
-      ]
-    },
-    {
-      "__guid": "ff165114-427e-41db-bb4a-2f321972e1de",
-      "Flags": 0,
-      "Name": "weapon_auto (1)",
-      "Position": "320,-288,32",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "WeaponBaseNeon",
-          "__guid": "ad04ab25-8ab2-4c73-a7df-1596c04425ba",
-          "clipSize": 0,
-          "equipTime": 0,
-          "fireRate": 0,
-          "isPickedUp": false,
-          "isReloading": false,
-          "isSemiAuto": false,
-          "reloadTime": 0,
-          "sinceEquippd": {
-            "Relative": 212.13672
-          },
-          "sinceShot": {
-            "Relative": 212.13672
-          },
-          "weaponDamage": 0,
-          "weaponType": "auto"
-        },
-        {
-          "__type": "Sandbox.SkinnedModelRenderer",
-          "__guid": "0fef3225-2a7a-493c-a919-b6d8fc1ed6d7",
-          "BodyGroups": 75,
-          "CreateBoneObjects": false,
-          "Model": "models/weapons/sbox_smg_mp5/v_mp5.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1",
-          "UseAnimGraph": true
-        },
-        {
-          "__type": "Sandbox.BoxCollider",
-          "__guid": "702902c8-7a40-407d-bf01-802e99ee2e7d",
-          "Center": "0,0,0",
-          "IsTrigger": true,
-          "Scale": "32,32,32",
-          "Static": false
-        }
-      ]
+      "__Prefab": "prefabs/weapons/weapon_auto.prefab",
+      "__PrefabVariables": {}
     },
     {
       "__guid": "a3add265-5ca9-4525-955b-45830c25617e",
@@ -436,45 +278,8 @@
       "Name": "weapon_bolt",
       "Position": "256,-288,32",
       "Enabled": true,
-      "Components": [
-        {
-          "__type": "WeaponBaseNeon",
-          "__guid": "c1aa54b4-d7fa-4c6c-a5e7-b3ca0c393fe0",
-          "clipSize": 0,
-          "equipTime": 0,
-          "fireRate": 0,
-          "isPickedUp": false,
-          "isReloading": false,
-          "isSemiAuto": false,
-          "reloadTime": 0,
-          "sinceEquippd": {
-            "Relative": 212.13672
-          },
-          "sinceShot": {
-            "Relative": 212.13672
-          },
-          "weaponDamage": 0,
-          "weaponType": "bolt"
-        },
-        {
-          "__type": "Sandbox.SkinnedModelRenderer",
-          "__guid": "50a89187-4228-46a9-a8d6-957daa37e573",
-          "BodyGroups": 18446744073709551615,
-          "CreateBoneObjects": false,
-          "Model": "models/weapons/sbox_melee_trenchknife/w_trenchknife.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1",
-          "UseAnimGraph": true
-        },
-        {
-          "__type": "Sandbox.BoxCollider",
-          "__guid": "60026a9f-1bf2-4a26-ac95-03dae07e0deb",
-          "Center": "0,0,0",
-          "IsTrigger": true,
-          "Scale": "32,32,32",
-          "Static": false
-        }
-      ]
+      "__Prefab": "prefabs/weapons/weapon_bolt.prefab",
+      "__PrefabVariables": {}
     },
     {
       "__guid": "9d5fb978-e836-43c8-8415-3159e8bc949c",
@@ -860,6 +665,12 @@
           "Static": true
         }
       ]
+    },
+    {
+      "__guid": "ce3d974c-35bf-4281-ad26-e022f177c7dd",
+      "Flags": 0,
+      "Name": "GameObject",
+      "Enabled": true
     }
   ],
   "SceneProperties": {
@@ -886,11 +697,6 @@
   "Title": "dev",
   "Description": "",
   "ResourceVersion": 1,
-  "__references": [
-    "facepunch.v_m4a1",
-    "facepunch.v_mp5",
-    "facepunch.v_usp",
-    "facepunch.w_trenchknife"
-  ],
+  "__references": [],
   "__version": 1
 }

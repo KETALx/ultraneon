@@ -12,11 +12,18 @@ public enum WeaponType
 
 public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 {
-	[Property]
-	public WeaponType weaponType { get; set; }
 
-	[Property]
+
+	[Property,ReadOnly]
 	public bool isPickedUp { get; set; } = false;
+
+	public TimeSince sinceEquippd { get; set; } = 0f;
+	public TimeSince sinceShot { get; set; } = 0f;
+	bool hasShoot { get; set; } = false;
+
+	#region weapon stats
+	[Property, Group( "Weapon stats" )]
+	public WeaponType weaponType { get; set; }
 
 	[Property,Group("Weapon stats")]
 	public int clipSize { get; set; }
@@ -32,11 +39,19 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 
 	[Property, Group( "Weapon stats" )]
 	public bool isReloading { get; set; }
-
 	[Property, Group( "Weapon stats" )]
-	public float weaponDamage { get; set; }
-	[Property, Group( "Weapon stats" )] 
 	public bool isSemiAuto { get; set; }
+	#endregion
+
+	#region weapon damage
+	[Property, Group( "Weapon damage" )]
+	public float weaponDamage { get; set; }
+
+	[Property, Range( 1f, 10f, 0.1f ), Group( "Weapon damage" )]
+	public float headShotMultiplier { get; set; }
+
+	#endregion
+
 
 	[Property, Group( "Weapon effects" )]
 	public SoundEvent shootSound { get; set; }
@@ -44,9 +59,7 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 	[Property, Group( "Weapon effects" )]
 	public GameObject ImpactPrefab { get; set; }
 
-	[Property] public TimeSince sinceEquippd { get; set; } = 0f;
-	[Property] public TimeSince sinceShot { get; set; } = 0f;
-	bool hasShoot { get; set; } = false;
+
 
 
 	protected override void OnUpdate()
@@ -61,12 +74,38 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 	{
 		if ( sinceEquippd < equipTime ) return;
 		if ( sinceShot < fireRate ) return;
-		if(hasShoot) return;
+		if(hasShoot && isSemiAuto) return;
 
 		Sound.Play( shootSound );
 		hasShoot= true;
-			
-		Log.Info( "shot" );
+		var camera = Scene.GetAllComponents<CameraComponent>().Where( x => x.IsMainCamera ).FirstOrDefault();
+		if ( camera is null ) return;
+		var rayStart = camera.Transform.Position;
+		var shotTrace = Scene.Trace.Ray( rayStart, rayStart + camera.Transform.World.Forward * 65536f )
+			.IgnoreGameObjectHierarchy( GameObject )
+			.UseHitboxes()
+			.Run();
+		if ( shotTrace.Hit )
+		{
+
+			GameObject bullet = ImpactPrefab.Clone( shotTrace.EndPosition, Rotation.LookAt( -shotTrace.Normal ) );
+
+
+			var dmg = shotTrace.GameObject.Components.Get<IDamageable>();
+			if ( dmg != null )
+			{
+				var totalDamage = weaponDamage;
+				if ( shotTrace.Hitbox.Bone.Name == "head" ) totalDamage *= headShotMultiplier;
+				dmg.OnDamage( new DamageInfo()
+				{
+					Damage = totalDamage,
+					Attacker = GameObject,
+					Position = Transform.Position,
+				} );
+
+			}
+		}
+
 
 		sinceShot = 0f;
 	}

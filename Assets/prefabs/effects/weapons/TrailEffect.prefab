@@ -1,0 +1,60 @@
+{
+  "RootObject": {
+    "__guid": "ccbf715e-d5e4-4bbd-8fdb-0bef0c7b13ac",
+    "Flags": 0,
+    "Name": "traileffect",
+    "Tags": "particles",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.TrailRenderer",
+        "__guid": "70aa4e9c-cf7a-4616-9da4-ec4308a1096b",
+        "BlendMode": "Lighten",
+        "CastShadows": false,
+        "Color": {
+          "color": [
+            {
+              "c": "1,0.98953,0.37209,1"
+            },
+            {
+              "t": 1,
+              "c": "1,0.56667,0,1"
+            }
+          ],
+          "alpha": []
+        },
+        "LifeTime": 0.5,
+        "MaxPoints": 64,
+        "Opaque": false,
+        "PointDistance": 4,
+        "Texturing": {
+          "Texture": "materials/particles/beam_smoke_04_blurred.vtex",
+          "WorldSpace": true,
+          "UnitsPerTexture": 10,
+          "Scale": 1
+        },
+        "Width": {
+          "rangey": "0,4",
+          "frames": [
+            {
+              "x": 0.48511904,
+              "y": 1
+            },
+            {
+              "x": 1
+            }
+          ]
+        },
+        "Wireframe": false
+      }
+    ],
+    "Children": [],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

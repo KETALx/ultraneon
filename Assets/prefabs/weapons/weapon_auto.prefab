@@ -1,0 +1,57 @@
+{
+  "RootObject": {
+    "__guid": "4e00321c-fac1-4e38-a817-9a0f24af6c68",
+    "Flags": 0,
+    "Name": "weapon_auto",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "WeaponBaseNeon",
+        "__guid": "cf2c2bda-0cc9-4d89-9fa8-8c19d6d2aff1",
+        "clipSize": 30,
+        "equipTime": 1.5,
+        "fireRate": 0.08,
+        "headShotMultiplier": 3,
+        "ImpactPrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/effects/weapons/impacteffect.prefab"
+        },
+        "isPickedUp": false,
+        "isReloading": false,
+        "isSemiAuto": false,
+        "reloadTime": 3,
+        "shootSound": "sounds/placeholders/pistol_shoot.sound",
+        "weaponDamage": 20,
+        "weaponType": "auto"
+      },
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "412b4798-3f36-4a70-9be7-4fec02bee19a",
+        "BodyGroups": 75,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/sbox_smg_mp5/v_mp5.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
+      },
+      {
+        "__type": "Sandbox.BoxCollider",
+        "__guid": "7a561a71-ab4b-4be8-8c1d-ad5e6a013945",
+        "Center": "0,0,0",
+        "IsTrigger": true,
+        "Scale": "32,32,32",
+        "Static": false
+      }
+    ],
+    "Children": [],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [
+    "facepunch.v_mp5"
+  ],
+  "__version": 1
+}

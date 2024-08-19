@@ -1,0 +1,38 @@
+{
+  "RootObject": {
+    "__guid": "f649d2bf-ed66-4887-98d5-536e065b11e5",
+    "Flags": 0,
+    "Name": "impacteffect",
+    "Tags": "particles",
+    "Enabled": true,
+    "Children": [
+      {
+        "__guid": "c3ba679e-ceb0-43f7-b5ee-17bdfd578f2d",
+        "Flags": 0,
+        "Name": "decal",
+        "Position": "-8,0,0",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.DecalRenderer",
+            "__guid": "ec6b0574-6458-4398-ad48-5ce339399674",
+            "CutoffAngle": 60,
+            "CutoffAngleSoftness": 5,
+            "Material": "materials/decals/bullethole.vmat",
+            "Mod2XBlending": false,
+            "Size": "16,16,16",
+            "TintColor": "1,1,1,1",
+            "TriPlanar": false
+          }
+        ]
+      }
+    ],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
