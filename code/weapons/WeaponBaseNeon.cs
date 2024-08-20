@@ -72,6 +72,7 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 	}
 	public void Shoot()
 	{
+		if ( IsProxy ) return;
 		if ( sinceEquippd < equipTime ) return;
 		if ( sinceShot < fireRate ) return;
 		if(hasShoot && isSemiAuto) return;
@@ -99,10 +100,10 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 				dmg.OnDamage( new DamageInfo()
 				{
 					Damage = totalDamage,
-					Attacker = GameObject,
+					Attacker = GameObject.Parent,
 					Position = Transform.Position,
 				} );
-
+				Log.Info( totalDamage);
 			}
 		}
 

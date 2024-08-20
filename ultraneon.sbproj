@@ -24,7 +24,9 @@
     "LaunchMode": "QuickPlay",
     "StartupScene": "scenes/dev.scene",
     "MapStartupScene": "scenes/dev.scene",
-    "ControlModes": {},
+    "ControlModes": {
+      "Keyboard": true
+    },
     "InputSettings": {
       "Actions": [
         {
@@ -61,12 +63,6 @@
           "Name": "Run",
           "KeyboardCode": "shift",
           "GamepadCode": "LeftJoystickButton",
-          "GroupName": "Movement"
-        },
-        {
-          "Name": "Walk",
-          "KeyboardCode": "alt",
-          "GamepadCode": "None",
           "GroupName": "Movement"
         },
         {
@@ -120,98 +116,8 @@
         {
           "Name": "Slot4",
           "KeyboardCode": "4",
-          "GamepadCode": "None",
-          "GroupName": "Inventory"
-        },
-        {
-          "Name": "Slot5",
-          "KeyboardCode": "5",
-          "GamepadCode": "None",
-          "GroupName": "Inventory"
-        },
-        {
-          "Name": "Slot6",
-          "KeyboardCode": "6",
-          "GamepadCode": "None",
-          "GroupName": "Inventory"
-        },
-        {
-          "Name": "Slot7",
-          "KeyboardCode": "7",
-          "GamepadCode": "None",
-          "GroupName": "Inventory"
-        },
-        {
-          "Name": "Slot8",
-          "KeyboardCode": "8",
-          "GamepadCode": "None",
-          "GroupName": "Inventory"
-        },
-        {
-          "Name": "Slot9",
-          "KeyboardCode": "9",
-          "GamepadCode": "None",
-          "GroupName": "Inventory"
-        },
-        {
-          "Name": "Slot0",
-          "KeyboardCode": "0",
-          "GamepadCode": "None",
-          "GroupName": "Inventory"
-        },
-        {
-          "Name": "SlotPrev",
-          "KeyboardCode": "mouse4",
-          "GamepadCode": "SwitchLeftBumper",
-          "GroupName": "Inventory"
-        },
-        {
-          "Name": "SlotNext",
-          "KeyboardCode": "mouse5",
-          "GamepadCode": "SwitchRightBumper",
-          "GroupName": "Inventory"
-        },
-        {
-          "Name": "View",
-          "KeyboardCode": "C",
-          "GamepadCode": "RightJoystickButton",
-          "GroupName": "Other"
-        },
-        {
-          "Name": "Voice",
-          "KeyboardCode": "v",
-          "GamepadCode": "None",
-          "GroupName": "Other"
-        },
-        {
-          "Name": "Drop",
-          "KeyboardCode": "g",
-          "GamepadCode": "None",
-          "GroupName": "Other"
-        },
-        {
-          "Name": "Flashlight",
-          "KeyboardCode": "f",
           "GamepadCode": "DpadNorth",
-          "GroupName": "Other"
-        },
-        {
-          "Name": "Score",
-          "KeyboardCode": "tab",
-          "GamepadCode": "SwitchLeftMenu",
-          "GroupName": "Other"
-        },
-        {
-          "Name": "Menu",
-          "KeyboardCode": "Q",
-          "GamepadCode": "SwitchRightMenu",
-          "GroupName": "Other"
-        },
-        {
-          "Name": "Chat",
-          "KeyboardCode": "enter",
-          "GamepadCode": "None",
-          "GroupName": "Other"
+          "GroupName": "Inventory"
         }
       ],
       "__guid": "fe0f42e4-7ae6-4ff9-a99d-b4662e9cb941"

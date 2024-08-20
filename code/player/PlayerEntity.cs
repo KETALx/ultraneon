@@ -1,4 +1,5 @@
 using Sandbox;
+using Sandbox.Diagnostics;
 using System;
 using System.Threading.Channels;
 
@@ -7,29 +8,23 @@ public sealed class PlayerEntity : Component, Component.IDamageable, Component.I
 {
 	[Property, ReadOnly] private float maxHealth { get; set; } = 100f;
 	[Property,ReadOnly] public bool isAlive { get;private set; } = true;
-	[Property, Sync()] public float health { get; private set; }
-
-	[ConCmd("set_health")]
-	public static void SetHealth(int num)
-	{
-		var pl = Game.ActiveScene.GetAllComponents<PlayerEntity>().FirstOrDefault();
-
-		pl.health = num;
-	}
-	protected override void OnEnabled()
-	{
-		health = maxHealth;
-	}
+	[Property,HostSync, Change( nameof( OnDamage ) )] public float health { get; set; }
 
 	public void OnDamage( in DamageInfo damage )
 	{
 		if ( !isAlive ) return;
+		Assert.True( Networking.IsHost );
 
 		health = Math.Clamp(health - damage.Damage, 0f, maxHealth);
 
 		if ( health <= 0 ) killPlayer();
+		Log.Info( damage.Attacker );
 
+	}
 
+	protected override void OnEnabled()
+	{
+		health = maxHealth;
 	}
 	[Button( "kill player" )]
 	public void killPlayer()
