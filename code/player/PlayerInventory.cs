@@ -4,7 +4,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 
 [Category( "Ultraneon" )]
-
+[Icon( "backpack" )]
 
 public sealed class PlayerInventory : Component
 {
@@ -55,7 +55,7 @@ public sealed class PlayerInventory : Component
 				else
 				{
 					SelectedSlot = lastSlot;
-					Log.Info("else:" + SelectedSlot);
+
 				}
 				
 			}
@@ -63,32 +63,7 @@ public sealed class PlayerInventory : Component
 		}
 	}
 
-	/*
-	public void SelectWeapon( int weaponId )
-	{
-		
-		
-		switch (weaponId)
-		{
-
-			case 0:
-				SetActive( weapons[0] );
-				SelectedSlot = 0;
-				break;
-			case 1:
-				SetActive( weapons[1] );
-				SelectedSlot = 1;
-				break;
-			case 2:
-				SetActive( weapons[2] );
-				SelectedSlot = 2;
-				break;
-			case 3:
-				SetActive( weapons[3] );
-				SelectedSlot = 3;
-				break;
-		}
-	}*/
+	
 
 	public void SetActive( WeaponBaseNeon weapon )
 	{
@@ -96,7 +71,6 @@ public sealed class PlayerInventory : Component
 		if ( weapon == activeWeapon ) return;
 
 		SelectedSlot = (int)weapon.weaponType;
-		Log.Info( SelectedSlot );
 
 		activeWeapon = weapon;
 		activeWeapon?.Equip();

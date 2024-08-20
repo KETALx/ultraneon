@@ -4,7 +4,8 @@ using System;
 using System.Threading.Channels;
 
 [Category("Ultraneon")]
-public sealed class PlayerEntity : Component, Component.IDamageable, Component.INetworkListener
+[Icon( "settings_accessibility" )]
+public sealed class Entity : Component, Component.IDamageable, Component.INetworkListener
 {
 	[Property, ReadOnly] private float maxHealth { get; set; } = 100f;
 	[Property,ReadOnly] public bool isAlive { get;private set; } = true;

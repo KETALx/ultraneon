@@ -3,12 +3,13 @@
     "__guid": "c644d827-81ae-43b7-9acf-b99cf657628c",
     "Flags": 0,
     "Name": "player",
+    "Tags": "player",
     "Enabled": true,
     "NetworkMode": 1,
     "Components": [
       {
-        "__type": "PlayerEntity",
-        "__guid": "de63f997-7764-4984-a225-e14eb4cfc991",
+        "__type": "Entity",
+        "__guid": "751a8182-31bd-4112-baea-c0227c4bbc0c",
         "health": 0,
         "isAlive": true,
         "maxHealth": 100

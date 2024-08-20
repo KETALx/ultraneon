@@ -29,7 +29,7 @@
 @code
 {
 
-    [Property] PlayerEntity player { get; set; }
+    [Property] Entity player { get; set; }
     [Property] PlayerInventory inventory { get; set; }
 
     Panel[] itemPanels = new Panel[4];
@@ -51,7 +51,7 @@
     {
         if (inventory?.weapons[i] is not null)
         {
-            
+
             itemPanels[i].Style.BackgroundColor = new Color(0.7f, 0.75f, 0.7f, 0.7f);
 
         }
@@ -65,7 +65,7 @@
 
     protected override int BuildHash()
     {
-        player = Scene.GetAllComponents<PlayerEntity>().Where(x => !x.IsProxy).FirstOrDefault();
+        player = Scene.GetAllComponents<Entity>().FirstOrDefault(x => x.GameObject.Tags.Has("player"));
         inventory = player.GameObject.Components.Get<PlayerInventory>();
         
         return player.IsValid()? System.HashCode.Combine(player.health) : 0;
