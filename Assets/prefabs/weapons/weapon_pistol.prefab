@@ -3,6 +3,7 @@
     "__guid": "cd2d7e06-735b-4d77-ae08-f48f8e06e45a",
     "Flags": 0,
     "Name": "weapon_pistol",
+    "Tags": "trigger",
     "Enabled": true,
     "Components": [
       {

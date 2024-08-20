@@ -118,6 +118,12 @@
           "KeyboardCode": "4",
           "GamepadCode": "DpadNorth",
           "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot5",
+          "KeyboardCode": "5",
+          "GamepadCode": "None",
+          "GroupName": "Inventory"
         }
       ],
       "__guid": "fe0f42e4-7ae6-4ff9-a99d-b4662e9cb941"

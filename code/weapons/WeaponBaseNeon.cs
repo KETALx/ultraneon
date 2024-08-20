@@ -1,4 +1,5 @@
 using Sandbox;
+using Sandbox.Citizen;
 using Sandbox.Diagnostics;
 using System;
 
@@ -89,22 +90,25 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 		if ( shotTrace.Hit )
 		{
 
-			GameObject bullet = ImpactPrefab.Clone( shotTrace.EndPosition, Rotation.LookAt( -shotTrace.Normal ) );
+			GameObject impact = ImpactPrefab.Clone( shotTrace.EndPosition, Rotation.LookAt( -shotTrace.Normal ) );
 
+			var totalDamage = weaponDamage;
+			if ( shotTrace.Hitbox.Bone.Name == "head" ) totalDamage *= headShotMultiplier;
 
 			var dmg = shotTrace.GameObject.Components.Get<IDamageable>();
 			if ( dmg != null )
 			{
-				var totalDamage = weaponDamage;
-				if ( shotTrace.Hitbox.Bone.Name == "head" ) totalDamage *= headShotMultiplier;
+
 				dmg.OnDamage( new DamageInfo()
 				{
 					Damage = totalDamage,
 					Attacker = GameObject.Parent,
 					Position = Transform.Position,
+					
 				} );
 				Log.Info( totalDamage);
 			}
+
 		}
 
 

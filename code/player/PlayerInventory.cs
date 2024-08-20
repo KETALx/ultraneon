@@ -47,7 +47,6 @@ public sealed class PlayerInventory : Component
 			{
 				if ( weapons[i] != null )
 				{
-					Log.Info( i );
 					SelectedSlot = i;
 					SetActive(weapons[i]);
 					break;

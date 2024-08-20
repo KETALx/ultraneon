@@ -3,6 +3,7 @@
     "__guid": "d9b51831-8aa4-4903-aacf-49555d47eda1",
     "Flags": 0,
     "Name": "weapon_semi",
+    "Tags": "trigger",
     "Enabled": true,
     "Components": [
       {

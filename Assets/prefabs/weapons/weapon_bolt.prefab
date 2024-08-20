@@ -3,6 +3,7 @@
     "__guid": "a3add265-5ca9-4525-955b-45830c25617e",
     "Flags": 0,
     "Name": "weapon_bolt",
+    "Tags": "trigger",
     "Enabled": true,
     "Components": [
       {

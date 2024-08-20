@@ -3,6 +3,7 @@
     "__guid": "4e00321c-fac1-4e38-a817-9a0f24af6c68",
     "Flags": 0,
     "Name": "weapon_auto",
+    "Tags": "trigger",
     "Enabled": true,
     "Components": [
       {

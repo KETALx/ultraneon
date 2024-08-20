@@ -1,4 +1,5 @@
 using Sandbox;
+using Sandbox.Citizen;
 using Sandbox.Diagnostics;
 using System;
 using System.Threading.Channels;
@@ -14,11 +15,12 @@ public sealed class Entity : Component, Component.IDamageable, Component.INetwor
 	public void OnDamage( in DamageInfo damage )
 	{
 		if ( !isAlive ) return;
-		Assert.True( Networking.IsHost );
+
+
 
 		health = Math.Clamp(health - damage.Damage, 0f, maxHealth);
 
-		if ( health <= 0 ) killPlayer();
+		if ( health <= 0 ) killEntity();
 		Log.Info( damage.Attacker );
 
 	}
@@ -28,12 +30,17 @@ public sealed class Entity : Component, Component.IDamageable, Component.INetwor
 		health = maxHealth;
 	}
 	[Button( "kill player" )]
-	public void killPlayer()
+	public void killEntity()
 	{
 		health = 0f;
 		isAlive = false;
-		Log.Info( Network.OwnerConnection.DisplayName + "has been killed" );
+		becomeRagdoll();
 	}
 
+	void becomeRagdoll()
+	{
+		var ragdoll = GameObject.Components.Get<ModelPhysics>(true);
+		ragdoll.Enabled = true;
+	}
 
 }
