@@ -51,7 +51,7 @@
         "Bounciness": 0,
         "GroundAngle": 45,
         "Height": 72,
-        "IgnoreLayers": "debris",
+        "IgnoreLayers": "debris,player",
         "Radius": 16,
         "StepHeight": 18,
         "UseCollisionRules": false
@@ -94,7 +94,7 @@
         "__type": "Sandbox.BoxCollider",
         "__guid": "bc9b0917-021a-42f7-83e9-096aa7255c1b",
         "Center": "0,0,36",
-        "IsTrigger": true,
+        "IsTrigger": false,
         "Scale": "32,32,72",
         "Static": false
       },
