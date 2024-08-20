@@ -90,11 +90,11 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 		if ( shotTrace.Hit )
 		{
 
-			GameObject impact = ImpactPrefab.Clone( shotTrace.EndPosition, Rotation.LookAt( -shotTrace.Normal ) );
+			//GameObject impact = ImpactPrefab.Clone( shotTrace.EndPosition, Rotation.LookAt( -shotTrace.Normal ) );
 
+			if ( shotTrace.GameObject.Components.Get<Entity>() == null ) return;
 			var totalDamage = weaponDamage;
-			if ( shotTrace.Hitbox.Bone.Name == "head" ) totalDamage *= headShotMultiplier;
-
+			//if ( shotTrace.Hitbox.Bone.Name == "head" ) totalDamage *= headShotMultiplier;
 			var dmg = shotTrace.GameObject.Components.Get<IDamageable>();
 			if ( dmg != null )
 			{

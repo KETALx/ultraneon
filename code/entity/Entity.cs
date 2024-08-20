@@ -39,8 +39,16 @@ public sealed class Entity : Component, Component.IDamageable, Component.INetwor
 
 	void becomeRagdoll()
 	{
+		var collider = GameObject.Components.Get<BoxCollider>();
+		collider.Enabled = false;
 		var ragdoll = GameObject.Components.Get<ModelPhysics>(true);
 		ragdoll.Enabled = true;
+
+		if ( GameObject.Tags.Has( "bot" ) )
+		{
+			GameObject.Components.Get<NavMeshAgent>().Enabled = false;
+			GameObject.Tags.Add( "debris" );
+		}
 	}
 
 }
