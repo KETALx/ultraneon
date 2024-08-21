@@ -13,8 +13,10 @@
 
 @code
 {
-	private Entity player;
-	private WeaponBaseNeon weapon;
+	[Property]
+	public PlayerInventory Inventory { get; set; }
+
+	private WeaponBaseNeon lastWeapon;
 	public int CurrentAmmo { get; set; }
 	public int MaxAmmo { get; set; }
 
@@ -24,39 +26,29 @@
 
 		if ( firstTime )
 		{
-			player = Scene.GetAllComponents<Entity>().FirstOrDefault( x => x.GameObject.Tags.Has( "player" ) );
-			weapon = player?.Components.Get<WeaponBaseNeon>();
+			lastWeapon = Inventory.activeWeapon;
 		}
 	}
 
 	public override void Tick()
 	{
-		if ( player == null )
+		if ( Inventory.activeWeapon == null )
 		{
-			return;
-		}
-
-		var currentPlayerWeapon = player?.Components?.Get<PlayerInventory>()?.activeWeapon;
-
-		if ( currentPlayerWeapon == null )
-		{
-			weapon = null;
-		}
-		else if ( weapon != currentPlayerWeapon )
-		{
-			weapon = currentPlayerWeapon;
-		}
-
-		if ( weapon != null )
-		{
-			// TODO add from WeaponBaseNeon
-			CurrentAmmo = 0;
-			MaxAmmo = weapon.clipSize;
+			lastWeapon = null;
 		}
 		else
 		{
+			lastWeapon = Inventory.activeWeapon;
+		}
+		
+		if (lastWeapon == null)
+		{
 			CurrentAmmo = 0;
 			MaxAmmo = 0;
+			return;
 		}
+		
+		CurrentAmmo = 0; // TODO: lastWeapon.currentAmmo
+		MaxAmmo = lastWeapon.clipSize; // TODO: lastWeapon.maxAmmo
 	}
 }
