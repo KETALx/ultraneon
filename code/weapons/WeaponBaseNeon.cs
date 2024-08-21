@@ -94,6 +94,9 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 
 		Sound.Play( shootSound );
 		hasShoot= true;
+
+		Viewmodel?.Set( "b_attack", true );
+
 		var camera = Scene.GetAllComponents<CameraComponent>().Where( x => x.IsMainCamera ).FirstOrDefault();
 		if ( camera is null ) return;
 		var rayStart = camera.Transform.Position;
@@ -104,7 +107,7 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 		if ( shotTrace.Hit )
 		{
 
-			//GameObject impact = ImpactPrefab.Clone( shotTrace.EndPosition, Rotation.LookAt( -shotTrace.Normal ) );
+			GameObject impact = ImpactPrefab.Clone( shotTrace.EndPosition, Rotation.LookAt( -shotTrace.Normal ) );
 
 			if ( shotTrace.GameObject.Components.Get<Entity>() == null ) return;
 			var totalDamage = weaponDamage;
