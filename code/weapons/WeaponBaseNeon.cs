@@ -22,6 +22,10 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 	public TimeSince sinceShot { get; set; } = 0f;
 	bool hasShoot { get; set; } = false;
 
+	[Property, Group( "Viewmodel" )] public SkinnedModelRenderer Viewmodel { get; set; }
+
+	[Property, Group( "Viewmodel" )] public SkinnedModelRenderer Worldmodel { get; set; }
+
 	#region weapon stats
 	[Property, Group( "Weapon stats" )]
 	public WeaponType weaponType { get; set; }
@@ -60,12 +64,22 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 	[Property, Group( "Weapon effects" )]
 	public GameObject ImpactPrefab { get; set; }
 
+	public GameObject owner { get;set; }
 
 
 
 	protected override void OnUpdate()
 	{
 		base.OnUpdate();
+
+		if ( isPickedUp )
+		{
+			var camera = Scene.GetAllComponents<CameraComponent>().Where( x => x.IsMainCamera ).FirstOrDefault();
+			if ( camera is null ) return;
+			Transform.Position = camera.Transform.Position;
+			
+		}
+
 		if ( !Input.Down( "attack1" ) && hasShoot )
 		{
 			hasShoot = false;
@@ -129,6 +143,7 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 	public void OnTriggerEnter( Collider other )
 	{
 		if ( isPickedUp ) return;
+		if ( !other.GameObject.Tags.Has( "player" ) ) return;
 		var inventory = other.GameObject.Components.Get<PlayerInventory>();
 		if ( inventory.IsValid() )
 		{
@@ -162,12 +177,22 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 
 	void addToOwner(PlayerInventory inventory)
 	{
-		this.GameObject.SetParent( inventory.GameObject );
-		var mdl = GameObject.Components.Get<ModelRenderer>();
-		if ( mdl.IsValid() )
+		this.GameObject.SetParent( inventory.GameObject, false );
+
+		GameObject.Transform.Position = inventory.GameObject.Transform.Position;
+		GameObject.Transform.Rotation = inventory.GameObject.Transform.Rotation;
+
+		Worldmodel.Enabled = false;
+		Viewmodel.Enabled = true;
+
+		var v_arms = inventory.GameObject.Children.FirstOrDefault().Components.Get<SkinnedModelRenderer>(true);
+		v_arms.Enabled = true;
+		if ( v_arms != null )
 		{
-			mdl.Enabled = false;
+			
+			v_arms.BoneMergeTarget = Viewmodel;
 		}
+		owner = inventory.GameObject;
 		isPickedUp = true;
 		if ( inventory.weapons.Count( x => x != null ) == 1 )
 		{
