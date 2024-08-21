@@ -22,7 +22,7 @@
         "isReloading": false,
         "isSemiAuto": true,
         "reloadTime": 2,
-        "shootSound": "sounds/placeholders/pistol_shoot.sound",
+        "shootSound": "sounds/weapons/pistol_laser_shoot_1.sound",
         "Viewmodel": {
           "_type": "component",
           "component_id": "b4a4919a-28f1-425e-9644-26a585f5c74d",
