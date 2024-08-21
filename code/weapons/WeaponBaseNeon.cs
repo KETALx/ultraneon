@@ -18,9 +18,9 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 	[Property,ReadOnly]
 	public bool isPickedUp { get; set; } = false;
 
-	public TimeSince sinceEquippd { get; set; } = 0f;
-	public TimeSince sinceShot { get; set; } = 0f;
-	bool hasShoot { get; set; } = false;
+	[Property,ReadOnly]public TimeSince sinceEquippd { get; set; } = 0f;
+	[Property,ReadOnly]public TimeSince sinceShot { get; set; } = 0f;
+	[Property, ReadOnly] bool hasShoot { get; set; } = false;
 
 	[Property, Group( "Viewmodel" )] public SkinnedModelRenderer Viewmodel { get; set; }
 
@@ -90,7 +90,7 @@ public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
 		if ( IsProxy ) return;
 		if ( sinceEquippd < equipTime ) return;
 		if ( sinceShot < fireRate ) return;
-		if(hasShoot && isSemiAuto) return;
+		if (hasShoot && isSemiAuto) return;
 
 		Sound.Play( shootSound );
 		hasShoot= true;
