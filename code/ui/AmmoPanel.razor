@@ -18,24 +18,40 @@
 	public int CurrentAmmo { get; set; }
 	public int MaxAmmo { get; set; }
 
-	protected override void OnAfterTreeRender(bool firstTime)
+	protected override void OnAfterTreeRender( bool firstTime )
 	{
-		base.OnAfterTreeRender(firstTime);
+		base.OnAfterTreeRender( firstTime );
 
-		if (firstTime)
+		if ( firstTime )
 		{
-			player = Scene.GetAllComponents<Entity>().FirstOrDefault(x => x.GameObject.Tags.Has("player"));
+			player = Scene.GetAllComponents<Entity>().FirstOrDefault( x => x.GameObject.Tags.Has( "player" ) );
 			weapon = player?.Components.Get<WeaponBaseNeon>();
 		}
 	}
 
 	public override void Tick()
 	{
-		if (weapon != null)
+		if ( player == null )
+		{
+			return;
+		}
+
+		var currentPlayerWeapon = player?.Components?.Get<PlayerInventory>()?.activeWeapon;
+
+		if ( currentPlayerWeapon == null )
+		{
+			weapon = null;
+		}
+		else if ( weapon != currentPlayerWeapon )
+		{
+			weapon = currentPlayerWeapon;
+		}
+
+		if ( weapon != null )
 		{
 			// TODO add from WeaponBaseNeon
 			CurrentAmmo = 0;
-			MaxAmmo = 0;
+			MaxAmmo = weapon.clipSize;
 		}
 		else
 		{
