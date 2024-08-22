@@ -12,7 +12,7 @@
 				<div class="radar-blip @point.ControllingTeam" style="left: @( point.MinimapX )%; top: @( point.MinimapY )%;">
 				</div>
 			}
-			<div class="player-dot"></div> 
+			<div class="player-dot"></div>
 		</div>
 	</div>
 </root>
@@ -46,14 +46,12 @@
 		foreach ( var point in CapturePoints )
 		{
 			var relativePos = point.Transform.Position - playerPosition;
-
 			var rotatedPos = playerRotation.Inverse * relativePos;
-
 			var distance = rotatedPos.Length;
 			distance = Math.Min( distance, maxRadarDistance );
 
 			point.MinimapX = 50f + (rotatedPos.x / maxRadarDistance) * 50f;
-			point.MinimapY = 50f - (rotatedPos.y / maxRadarDistance) * 50f; // Subtract because Y is inverted in UI space
+			point.MinimapY = 50f - (rotatedPos.y / maxRadarDistance) * 50f;
 		}
 	}
 
