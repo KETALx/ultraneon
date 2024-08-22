@@ -24,10 +24,10 @@
         "reloadTime": 6,
         "shootSound": "sounds/weapons/bolt_shoot_1.sound",
         "sinceEquippd": {
-          "Relative": 1989.5748
+          "Relative": 4944.8877
         },
         "sinceShot": {
-          "Relative": 1989.5748
+          "Relative": 4944.8877
         },
         "Viewmodel": {
           "_type": "component",
