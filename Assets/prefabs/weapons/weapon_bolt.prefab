@@ -10,8 +10,9 @@
         "__type": "WeaponBaseNeon",
         "__guid": "c1aa54b4-d7fa-4c6c-a5e7-b3ca0c393fe0",
         "clipSize": 5,
-        "equipTime": 2,
+        "equipTime": 0.5,
         "fireRate": 4,
+        "hasShoot": false,
         "headShotMultiplier": 4,
         "ImpactPrefab": {
           "_type": "gameobject",
@@ -22,6 +23,12 @@
         "isSemiAuto": true,
         "reloadTime": 6,
         "shootSound": "sounds/weapons/bolt_shoot_1.sound",
+        "sinceEquippd": {
+          "Relative": 1989.5748
+        },
+        "sinceShot": {
+          "Relative": 1989.5748
+        },
         "Viewmodel": {
           "_type": "component",
           "component_id": "0569bd32-86ee-4d14-b3cc-712ee6555520",
@@ -32,7 +39,7 @@
         "weaponType": "bolt",
         "Worldmodel": {
           "_type": "component",
-          "component_id": "50a89187-4228-46a9-a8d6-957daa37e573",
+          "component_id": "c427806b-1128-4c06-a279-827c42fa8211",
           "go": "a3add265-5ca9-4525-955b-45830c25617e",
           "component_type": "SkinnedModelRenderer"
         }
@@ -41,7 +48,7 @@
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "0569bd32-86ee-4d14-b3cc-712ee6555520",
         "__enabled": false,
-        "BodyGroups": 42259,
+        "BodyGroups": 120611,
         "CreateBoneObjects": false,
         "Model": "models/weapons/sbox_assault_m4a1/v_m4a1.vmdl",
         "RenderType": "On",
@@ -50,10 +57,10 @@
       },
       {
         "__type": "Sandbox.SkinnedModelRenderer",
-        "__guid": "50a89187-4228-46a9-a8d6-957daa37e573",
-        "BodyGroups": 18446744073709551615,
+        "__guid": "c427806b-1128-4c06-a279-827c42fa8211",
+        "BodyGroups": 58,
         "CreateBoneObjects": false,
-        "Model": "models/weapons/sbox_melee_trenchknife/w_trenchknife.vmdl",
+        "Model": "models/weapons/autorifle/weapon_autorifle.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
@@ -75,8 +82,7 @@
   "MenuIcon": null,
   "ResourceVersion": 1,
   "__references": [
-    "facepunch.v_m4a1",
-    "facepunch.w_trenchknife"
+    "facepunch.v_m4a1"
   ],
   "__version": 1
 }

@@ -178,7 +178,7 @@
               "Enabled": true,
               "Components": [
                 {
-                  "__type": "PlayerUI",
+                  "__type": "Ultraneon.UI.PlayerUI",
                   "__guid": "68052205-1836-4e1b-b6ec-6a9c929e9a06"
                 }
               ]
@@ -606,6 +606,26 @@
           },
           "SmoothingAngle": 40,
           "Static": true
+        }
+      ]
+    },
+    {
+      "__guid": "04e992a7-d061-4b82-8505-0186af1e59ac",
+      "Flags": 0,
+      "Name": "Object",
+      "Position": "432,-138,68",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "CaptureZoneEntity",
+          "__guid": "2df00d8b-025d-4b1e-bcc9-6c715ca39dba",
+          "CaptureProgress": 0,
+          "CaptureRadius": 5,
+          "CaptureTime": 10,
+          "ControllingTeam": "Neutral",
+          "Health": 0,
+          "MaxHealth": 100,
+          "PointName": "Capture Zone"
         }
       ]
     }

@@ -1,0 +1,22 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/blendable.shader"
+
+	//---- Texture Filtering ----
+	F_TEXTURE_FILTERING 4 // Nearest Neighbour
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material A ----
+	g_flTintColorA "[1.000000 1.000000 1.000000 0.000000]"
+	TextureAmbientOcclusionA "materials/default/default_ao.tga"
+	TextureBlendMaskA "materials/default/default_blend.tga"
+	TextureColorA "materials/models/weapons/weapon_auto_128_color.png"
+	TextureMetalnessA "materials/models/weapons/weapon_auto_128_metal.png"
+	TextureNormalA "materials/default/default_normal.tga"
+	TextureRoughnessA "materials/models/weapons/weapon_auto_128_rough.png"
+	TextureTintMaskA "materials/default/default.tga"
+}
