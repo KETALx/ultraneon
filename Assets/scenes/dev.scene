@@ -236,28 +236,28 @@
       "Enabled": true,
       "Components": [
         {
-          "__type": "Entity",
-          "__guid": "cf374dc6-08e2-47d8-a2be-b8cd98002ff4",
-          "health": 0,
-          "isAlive": true,
-          "maxHealth": 100
-        },
-        {
-          "__type": "EnemyAi",
-          "__guid": "b0166651-833f-47b4-a42e-f7af2cadd89e",
-          "agent": {
+          "__type": "BotAi",
+          "__guid": "090b4747-b2f5-43f5-a2f2-daf60f1debd0",
+          "Agent": {
             "_type": "component",
             "component_id": "4eec2632-8196-40fb-8daf-296e6517cdff",
             "go": "e3a6c309-0a49-4905-b357-6091e0c24a0d",
             "component_type": "NavMeshAgent"
           },
-          "animationHelper": {
+          "AnimationHelper": {
             "_type": "component",
             "component_id": "273f8c95-b5d5-4927-8ebd-5fb6883f749c",
             "go": "e3a6c309-0a49-4905-b357-6091e0c24a0d",
             "component_type": "CitizenAnimationHelper"
           },
-          "stopDistance": 255
+          "AttackRange": 200,
+          "CurrentTeam": "Enemy",
+          "EntityName": "enemy_regular",
+          "Health": 100,
+          "Id": "00000000-0000-0000-0000-000000000000",
+          "isAlive": true,
+          "MaxHealth": 100,
+          "StopDistance": 600
         },
         {
           "__type": "Sandbox.SkinnedModelRenderer",
@@ -354,7 +354,8 @@
             {
               "__type": "SpotAi",
               "__guid": "220d9c41-3b5d-4c2f-9808-fe33486483dd",
-              "lastSeenLocation": "0,0,0"
+              "DetectionInterval": 0.5,
+              "DetectionRadius": 500
             }
           ]
         }
@@ -364,7 +365,7 @@
       "__guid": "7584abe1-ac04-4f25-a3c9-a2d6f29cc86b",
       "Flags": 0,
       "Name": "Box",
-      "Position": "169,-597,61.00001",
+      "Position": "647.2552,-853.1647,61.00006",
       "Enabled": true,
       "Components": [
         {
@@ -507,22 +508,22 @@
               "0.25,0.25"
             ],
             "TextureOffset": [
-              "348.0011,214.6318",
-              "348.0011,214.6318",
-              "214.6318,244",
-              "297.3682,244.0001",
-              "163.9996,244",
+              "482.9836,451.9583",
+              "482.9836,451.9583",
+              "451.9583,244.0002",
+              "60.04175,244.0002",
+              "29.0188,244.0002",
               "348,244",
-              "348.0012,244.0001",
-              "0,0.0000152588",
+              "482.9836,244.0002",
+              "0.6586914,0.0002136231",
+              "134.9792,511.3413",
               "0,0",
-              "0,0",
-              "0,0",
-              "0,0.00006103516",
-              "0,0",
-              "0,0",
-              "0,0",
-              "0,0.00001525879"
+              "134.9792,511.3413",
+              "511.3413,0.0002441406",
+              "134.9792,511.3413",
+              "377.0208,0.0001831055",
+              "134.9792,511.3413",
+              "134.9792,0.000213623"
             ],
             "MaterialIndex": [
               0,
@@ -610,22 +611,111 @@
       ]
     },
     {
-      "__guid": "04e992a7-d061-4b82-8505-0186af1e59ac",
+      "__guid": "ff9c3881-ceb5-4b55-9046-cb597e8d4786",
       "Flags": 0,
-      "Name": "Object",
-      "Position": "432,-138,68",
+      "Name": "Capture Point A",
+      "Position": "-26.91423,-494.3108,74.56119",
       "Enabled": true,
       "Components": [
         {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "142af44b-896d-4f21-b347-f5d838ea9571",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/dev/box.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
           "__type": "CaptureZoneEntity",
-          "__guid": "2df00d8b-025d-4b1e-bcc9-6c715ca39dba",
+          "__guid": "80c2b359-9700-4704-9e85-a3f83cc8bfb2",
           "CaptureProgress": 0,
-          "CaptureRadius": 5,
-          "CaptureTime": 10,
+          "CaptureTime": 3,
           "ControllingTeam": "Neutral",
-          "Health": 0,
-          "MaxHealth": 100,
-          "PointName": "Capture Zone"
+          "EnemyColor": "0.97255,0.20784,0.41961,1",
+          "NeutralColor": "0.35294,0.45098,0.5451,1",
+          "PlayerColor": "0.32941,0.7451,0.20784,1",
+          "PointName": "A",
+          "ZoneModel": {
+            "_type": "component",
+            "component_id": "142af44b-896d-4f21-b347-f5d838ea9571",
+            "go": "ff9c3881-ceb5-4b55-9046-cb597e8d4786",
+            "component_type": "ModelRenderer"
+          }
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "1f979f6f-708c-4905-84f9-68d0c52cb779",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "97.20003,147.7998,87.00007",
+          "Static": false
+        }
+      ]
+    },
+    {
+      "__guid": "31b1ea49-bbb5-4516-94f9-5b81e6c76fa7",
+      "Flags": 0,
+      "Name": "Capture Point B",
+      "Position": "-451.2886,700.6271,74.56231",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "01f3292d-324b-4bd9-a43d-d101ccbc122c",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/dev/box.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "CaptureZoneEntity",
+          "__guid": "dd3295c1-9b2f-4728-b62c-368923cdb77b",
+          "CaptureProgress": 0,
+          "CaptureTime": 3,
+          "ControllingTeam": "Neutral",
+          "EnemyColor": "0.97255,0.20784,0.41961,1",
+          "NeutralColor": "0.35294,0.45098,0.5451,1",
+          "PlayerColor": "0.32941,0.7451,0.20784,1",
+          "PointName": "B",
+          "ZoneModel": {
+            "_type": "component",
+            "component_id": "01f3292d-324b-4bd9-a43d-d101ccbc122c",
+            "go": "31b1ea49-bbb5-4516-94f9-5b81e6c76fa7",
+            "component_type": "ModelRenderer"
+          }
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "c034c522-52f5-41dd-bb59-7bfdea118a95",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Scale": "97.20003,147.7998,87.00007",
+          "Static": false
+        }
+      ]
+    },
+    {
+      "__guid": "f2d1c66d-773f-436b-8490-ad1d8cf4d369",
+      "Flags": 0,
+      "Name": "Game Service",
+      "Position": "-827.2766,-254.7903,301.302",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Ultraneon.GameService",
+          "__guid": "ba0f7a02-c3b4-410d-8822-23f69915f107",
+          "CaptureZones": [
+            {
+              "_type": "component",
+              "component_id": "80c2b359-9700-4704-9e85-a3f83cc8bfb2",
+              "go": "ff9c3881-ceb5-4b55-9046-cb597e8d4786",
+              "component_type": "CaptureZoneEntity"
+            }
+          ],
+          "RoundTime": 600,
+          "ScoreCaptureZone": 100,
+          "ScoreLoseZone": 50,
+          "ScoreToWin": 1000
         }
       ]
     }

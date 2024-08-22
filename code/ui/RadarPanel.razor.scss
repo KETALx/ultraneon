@@ -12,6 +12,29 @@
     background-color: rgba(0, 0, 0, 0.5);
     position: relative;
     overflow: hidden;
+    z-index: 1;
+  }
+
+  .radar-content {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    transform: rotate(-90deg);
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+  }
+
+  .player-dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
   }
 
   .radar-blip {
@@ -20,25 +43,18 @@
     height: 16px;
     border-radius: 50%;
     transform: translate(-50%, -50%);
+    z-index: 10;
 
     &.Neutral {
-      background-color: gray;
+      background-color: #5A738B;
     }
 
-    &.team1 {
-      background-color: blue;
+    &.Player {
+      background-color: #54be35;
     }
 
-    &.team2 {
-      background-color: red;
-    }
-
-    .health-indicator {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      height: 2px;
-      background-color: green;
+    &.Enemy {
+      background-color: #f8356b;
     }
   }
 }

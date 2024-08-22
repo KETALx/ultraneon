@@ -4,8 +4,8 @@
 @attribute [StyleSheet]
 
 <root>
-	<div class="ammo-display">
-		<div class="current-ammo">@CurrentAmmo</div>
+	<div class="ammo-display @( IsReloading ? "reloading" : "" )">
+		<div class="current-ammo @( IsEmpty ? "empty" : "" ) @( IsLowWarning ? "low-warning" : "" )">@CurrentAmmo</div>
 		<div class="ammo-separator">/</div>
 		<div class="max-ammo">@MaxAmmo</div>
 	</div>
@@ -14,41 +14,42 @@
 @code
 {
 	[Property]
-	public PlayerInventory Inventory { get; set; }
+	public WeaponBaseNeon Weapon { get; set; }
 
-	private WeaponBaseNeon lastWeapon;
 	public int CurrentAmmo { get; set; }
 	public int MaxAmmo { get; set; }
-
-	protected override void OnAfterTreeRender( bool firstTime )
-	{
-		base.OnAfterTreeRender( firstTime );
-
-		if ( firstTime )
-		{
-			lastWeapon = Inventory.activeWeapon;
-		}
-	}
+	public bool IsReloading { get; set; }
+	public bool IsLowWarning { get; set; }
+	public bool IsEmpty { get; set; }
 
 	public override void Tick()
 	{
-		if ( Inventory.activeWeapon == null )
+		if ( Weapon == null )
 		{
-			lastWeapon = null;
-		}
-		else
-		{
-			lastWeapon = Inventory.activeWeapon;
-		}
-		
-		if (lastWeapon == null)
-		{
-			CurrentAmmo = 0;
-			MaxAmmo = 0;
+			CurrentAmmo = -1;
+			MaxAmmo = -1;
 			return;
 		}
-		
-		CurrentAmmo = 0; // TODO: lastWeapon.currentAmmo
-		MaxAmmo = lastWeapon.clipSize; // TODO: lastWeapon.maxAmmo
+
+		CurrentAmmo = Weapon.CurrentAmmo;
+		MaxAmmo = Weapon.ClipSize;
+		IsReloading = Weapon.IsReloading;
+		IsEmpty = Weapon.CurrentAmmo <= 0;
+		IsLowWarning = CurrentAmmo <= MaxAmmo / 3;
+
+		StateHasChanged(); // FIXME: HACK: We shouldn't need to call this manually. We are consuming one state change too late for some reason
+	}
+
+	protected override int BuildHash()
+	{
+		if ( !Weapon.IsValid() ) return 0;
+
+		var hash = System.HashCode.Combine(
+			Weapon.CurrentAmmo,
+			Weapon.ClipSize,
+			Weapon.WeaponType
+		);
+
+		return hash;
 	}
 }
