@@ -1,4 +1,5 @@
 using Sandbox.Events;
+using System.Runtime.CompilerServices;
 using Ultraneon.Events;
 
 namespace Ultraneon
@@ -111,6 +112,7 @@ namespace Ultraneon
 			if ( camera != null )
 			{
 				Transform.Position = camera.Transform.Position;
+				Transform.Rotation = camera.Transform.Rotation;
 			}
 		}
 

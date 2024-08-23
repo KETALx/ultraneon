@@ -34,6 +34,9 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 	[Property]
 	public ModelRenderer ZoneModel { get; set; }
 
+	[Property]
+	public Action<Team> OnCaptureAction { get; set; }
+
 	public float MinimapX { get; set; }
 	public float MinimapY { get; set; }
 	public Team PreviousTeam { get; set; }
@@ -152,6 +155,8 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 		Log.Info( $"{PointName} has been captured by {ControllingTeam}!" );
 		PreviousTeam = previousTeam;
 		GameObject.Dispatch( new CaptureZoneEvent( PointName, previousTeam, ControllingTeam ) );
+
+		if(OnCaptureAction != null) OnCaptureAction(previousTeam);
 	}
 
 	private void OnPointNeutralized( Team previousTeam )

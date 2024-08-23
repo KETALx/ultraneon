@@ -57,6 +57,7 @@ public sealed class BotAi : BaseNeonCharacterEntity
 		UpdateAnimation();
 	}
 
+
 	private void UpdateMovement()
 	{
 		float distanceToTarget = Vector3.DistanceBetween( Transform.Position, CurrentTarget.Transform.Position );

@@ -42,7 +42,7 @@ namespace Ultraneon
 		{
 		}
 
-		public void OnDamage( in DamageInfo damageInfo )
+		public virtual void OnDamage( in DamageInfo damageInfo )
 		{
 			return;
 		}

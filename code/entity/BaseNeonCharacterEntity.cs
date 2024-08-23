@@ -22,10 +22,9 @@ public class BaseNeonCharacterEntity : Entity, Component.INetworkListener
 	[Property]
 	public Team CurrentTeam { get; set; } = Team.Neutral;
 
-	public void OnDamage( DamageInfo damage )
+	public override void OnDamage(in DamageInfo damage )
 	{
 		if ( !isAlive ) return;
-
 		Health = Math.Clamp( Health - damage.Damage, 0f, MaxHealth );
 
 		if ( Health <= 0 ) KillCharacter( damage.Attacker );
