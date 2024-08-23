@@ -680,6 +680,86 @@
           ]
         }
       ]
+    },
+    {
+      "__guid": "92122562-005c-4a93-a425-f9d675b228c2",
+      "Flags": 0,
+      "Name": "Object",
+      "Position": "764.3608,3383.316,972.886",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SpawnPoint",
+          "__guid": "a468e20c-a342-4f24-825f-453960cd04bb",
+          "Color": "0.8902,0.31765,0.05098,1"
+        }
+      ]
+    },
+    {
+      "__guid": "0b576f9f-eb82-4f88-82d5-1d7136c07399",
+      "Flags": 0,
+      "Name": "Box",
+      "Position": "1384,3440,896.0194",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.MeshComponent",
+          "__guid": "d98c0df4-f3bf-41af-9ef8-b0b7cc81fa8f",
+          "Collision": "Mesh",
+          "Color": "1,1,1,1",
+          "HideInGame": false,
+          "IsTrigger": false,
+          "Mesh": {
+            "Topology": "H4sIAAAAAAAACmNhYGDgAGJGIP4/CAEAeTQzxaAAAAA=",
+            "Positions": [
+              "-264,-208,0",
+              "264,-208,0",
+              "264,208,0",
+              "-264,208,0"
+            ],
+            "TextureCoord": [
+              "51.5,-101",
+              "0,0",
+              "51.5,-114",
+              "0,0",
+              "35,-114",
+              "0,0",
+              "35,-101",
+              "0,0"
+            ],
+            "TextureUAxis": [
+              "1,0,0"
+            ],
+            "TextureVAxis": [
+              "0,-1,0"
+            ],
+            "TextureScale": [
+              "0.25,0.25"
+            ],
+            "TextureOffset": [
+              "0,0"
+            ],
+            "MaterialIndex": [
+              0
+            ],
+            "EdgeFlags": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "Materials": [
+              "materials/world/nature/rocks/un_rock1.vmat"
+            ]
+          },
+          "SmoothingAngle": 40,
+          "Static": false
+        }
+      ]
     }
   ],
   "SceneProperties": {

@@ -1,0 +1,42 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/blendable.shader"
+
+	F_MULTIBLEND 1 // 2 Layers
+
+	//---- Texture Filtering ----
+	F_TEXTURE_FILTERING 4 // Nearest Neighbour
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material A ----
+	g_flTintColorA "[1.000000 1.000000 1.000000 0.000000]"
+	TextureAmbientOcclusionA "materials/default/default_ao.tga"
+	TextureBlendMaskA "materials/default/default_blend.tga"
+	TextureColorA "materials/world/nature/rocks/un_rock1_color.tga"
+	TextureMetalnessA "materials/default/default_metal.tga"
+	TextureNormalA "materials/world/nature/rocks/un_rock1_normal.tga"
+	TextureRoughnessA "materials/world/nature/rocks/un_rock1_rough.tga"
+	TextureTintMaskA "materials/default/default.tga"
+
+	//---- Material B ----
+	g_flBlendSoftnessB "0.500"
+	g_flTintColorB "[1.000000 1.000000 1.000000 0.000000]"
+	g_vTexCoordScale2 "[1.000 1.000]"
+	TextureAmbientOcclusionB "materials/default/default_ao.tga"
+	TextureBlendMaskB "materials/default/default_blend.tga"
+	TextureColorB "materials/world/nature/rocks/un_rock1_b_color.tga"
+	TextureMetalnessB "materials/default/default_metal.tga"
+	TextureNormalB "materials/world/nature/rocks/un_rock1_b_normal.tga"
+	TextureRoughnessB "materials/world/nature/rocks/un_rock1_b_rough.tga"
+	TextureTintMaskB "materials/default/default.tga"
+
+	SystemAttributes
+	{
+		WorldMappingWidth "512"
+		WorldMappingHeight "512"
+	}
+}
