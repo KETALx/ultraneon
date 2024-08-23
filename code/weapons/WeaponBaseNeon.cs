@@ -215,6 +215,7 @@ namespace Ultraneon
 			TimeInReload = 0f;
 
 			// TODO: Play reload animation
+			Viewmodel?.Set( "b_reload", true );
 			// TODO: Play reload sound
 
 			Log.Info( $"Weapon {GameObject.Name} started reloading." );

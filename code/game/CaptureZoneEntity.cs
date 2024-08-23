@@ -37,6 +37,7 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 	[Property]
 	public Action<Team> OnCaptureAction { get; set; }
 
+
 	public float MinimapX { get; set; }
 	public float MinimapY { get; set; }
 	public Team PreviousTeam { get; set; }
