@@ -1,5 +1,5 @@
 {
-  "__guid": "c040faaa-5a2a-4c9a-b14d-cc60f747f619",
+  "__guid": "447dc9fe-186e-4e81-bcb6-67b40c1a57b2",
   "GameObjects": [
     {
       "__guid": "b87199b9-b058-4432-a87e-7e047b6014f7",
@@ -660,18 +660,10 @@
       "Enabled": true,
       "Components": [
         {
-          "__type": "Sandbox.ModelRenderer",
-          "__guid": "01f3292d-324b-4bd9-a43d-d101ccbc122c",
-          "BodyGroups": 18446744073709551615,
-          "Model": "models/dev/box.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
           "__type": "CaptureZoneEntity",
           "__guid": "dd3295c1-9b2f-4728-b62c-368923cdb77b",
           "CaptureProgress": 0,
-          "CaptureTime": 3,
+          "CaptureTime": 5,
           "ControllingTeam": "Neutral",
           "EnemyColor": "0.97255,0.20784,0.41961,1",
           "NeutralColor": "0.35294,0.45098,0.5451,1",
@@ -683,6 +675,14 @@
             "go": "31b1ea49-bbb5-4516-94f9-5b81e6c76fa7",
             "component_type": "ModelRenderer"
           }
+        },
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "01f3292d-324b-4bd9-a43d-d101ccbc122c",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/dev/box.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
         },
         {
           "__type": "Sandbox.BoxCollider",
@@ -712,10 +712,11 @@
               "component_type": "CaptureZoneEntity"
             }
           ],
+          "isMultiplayer": false,
           "RoundTime": 600,
           "ScoreCaptureZone": 100,
           "ScoreLoseZone": 50,
-          "ScoreToWin": 1000
+          "ScoreToWin": 0
         }
       ]
     }

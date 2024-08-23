@@ -13,19 +13,27 @@ public class GameService : Component,
 	IGameEventHandler<CharacterDeathEvent>,
 	IGameEventHandler<DamageEvent>
 {
-	[Property]
+	[Property,ToggleGroup("isMultiplayer")] public bool isMultiplayer { get; set; }
+
+	/// <summary>
+	/// Time of the round, 0 means no round timer
+	/// </summary>
+	[Property, ToggleGroup( "isMultiplayer" )]
 	public float RoundTime { get; set; } = 600f; // 10 min
 
-	[Property]
+	/// <summary>
+	/// 0 means disabled
+	/// </summary>
+	[Property, ToggleGroup( "isMultiplayer" )]
 	public int ScoreToWin { get; set; } = 1000;
 
 	[Property]
 	public List<CaptureZoneEntity> CaptureZones { get; set; } = new();
 
-	[Property]
+	[Property, ToggleGroup( "isMultiplayer" )]
 	public int ScoreCaptureZone { get; set; } = 100;
 
-	[Property]
+	[Property, ToggleGroup( "isMultiplayer" )]
 	public int ScoreLoseZone { get; set; } = 50;
 
 	private TimeSince roundStartTime;
@@ -66,15 +74,16 @@ public class GameService : Component,
 
 	private void UpdateGameState()
 	{
-		if ( roundStartTime >= RoundTime )
+		if ( roundStartTime >= RoundTime && RoundTime > 0 )
 		{
 			EndGame();
 			return;
 		}
 
+
 		UpdateScores();
 
-		if ( teamScores[Team.Player] >= ScoreToWin || teamScores[Team.Enemy] >= ScoreToWin )
+		if ( teamScores[Team.Player] >= ScoreToWin || teamScores[Team.Enemy] >= ScoreToWin && ScoreToWin > 0 )
 		{
 			if ( !gameFinished )
 			{

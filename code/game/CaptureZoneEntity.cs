@@ -28,7 +28,7 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 	[Property, HostSync]
 	public Team ControllingTeam { get; set; } = Team.Neutral;
 
-	[Property, HostSync]
+	[Property,ReadOnly, HostSync]
 	public float CaptureProgress { get; set; } = 0f;
 
 	[Property]
@@ -85,6 +85,10 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 
 			timeSinceLastCapture = 0f;
 		}
+		else if(CaptureProgress > 0)
+		{
+			CaptureProgress -= Time.Delta / CaptureTime;
+		}/*
 		else if ( timeSinceLastCapture > 5f && ControllingTeam != Team.Neutral )
 		{
 			CaptureProgress += Time.Delta / CaptureTime;
@@ -95,7 +99,7 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 				CaptureProgress = 0f;
 				OnPointNeutralized( previousTeam );
 			}
-		}
+		}*/
 	}
 
 	private void UpdateZoneVisuals()
