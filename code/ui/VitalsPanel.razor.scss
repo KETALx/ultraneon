@@ -1,0 +1,20 @@
+﻿VitalsPanel {
+  .vitals {
+    position: absolute;
+    display: flex;
+    left: 32px;
+    bottom: 32px;
+    gap: 10px;
+    background-color: #0004;
+    opacity: 0.7;
+    border-radius: 3px;
+    padding: 10px 20px;
+    color: palegreen;
+    font-weight: 400;
+    font-size: 50px;
+    font-family: Cascadia Code;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(2px);
+  }
+}
