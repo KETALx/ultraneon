@@ -12,7 +12,7 @@
         "CurrentAmmo": 0,
         "ClipSize": 5,
         "EquipTime": 0.5,
-        "FireRate": 4,
+        "FireRate": 3,
         "HeadshotMultiplier": 4,
         "ImpactPrefab": {
           "_type": "gameobject",

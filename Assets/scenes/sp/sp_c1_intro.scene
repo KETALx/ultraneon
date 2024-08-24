@@ -267,17 +267,6 @@
       "__PrefabVariables": {}
     },
     {
-      "__guid": "6e7e11b7-d38e-4635-8789-d1f2eb3b4ee5",
-      "Flags": 0,
-      "Name": "enemy_regular (3)",
-      "Position": "1045.261,2348.344,432.9291",
-      "Rotation": "-0.08240944,0.05960298,0.8060804,0.5830014",
-      "Tags": "bot",
-      "Enabled": true,
-      "__Prefab": "prefabs/entites/enemy_regular.prefab",
-      "__PrefabVariables": {}
-    },
-    {
       "__guid": "69d27e27-a878-4f56-a028-3857e3669c99",
       "Flags": 0,
       "Name": "enemy_regular (4)",
@@ -286,6 +275,50 @@
       "Tags": "bot",
       "Enabled": true,
       "__Prefab": "prefabs/entites/enemy_regular.prefab",
+      "__PrefabVariables": {}
+    },
+    {
+      "__guid": "acc1d8d4-5f3e-447c-991d-ff8bf231e54d",
+      "Flags": 0,
+      "Name": "weapon_auto (1)",
+      "Position": "677.9223,2064.621,514.2096",
+      "Rotation": "-0.09167701,0.06799474,0.7979485,0.5918194",
+      "Tags": "trigger",
+      "Enabled": true,
+      "__Prefab": "prefabs/weapons/weapon_auto.prefab",
+      "__PrefabVariables": {}
+    },
+    {
+      "__guid": "6587127d-cf83-4a44-af74-8a640c215e49",
+      "Flags": 0,
+      "Name": "weapon_bolt",
+      "Position": "683.2449,2002.277,521.4719",
+      "Rotation": "-0.03570437,-0.007579774,0.9775484,-0.2075254",
+      "Tags": "trigger",
+      "Enabled": true,
+      "__Prefab": "prefabs/weapons/weapon_bolt.prefab",
+      "__PrefabVariables": {}
+    },
+    {
+      "__guid": "5a3c9d1f-5990-468d-b330-ef6576c319bb",
+      "Flags": 0,
+      "Name": "weapon_pistol",
+      "Position": "642.8065,2093.256,493.5216",
+      "Rotation": "-0.1177916,0.07804582,0.8252572,0.5467948",
+      "Tags": "trigger",
+      "Enabled": true,
+      "__Prefab": "prefabs/weapons/weapon_pistol.prefab",
+      "__PrefabVariables": {}
+    },
+    {
+      "__guid": "d15e58bb-45c5-40d4-9822-e808ef55a319",
+      "Flags": 0,
+      "Name": "weapon_semi",
+      "Position": "646.3159,2003.368,538.0869",
+      "Rotation": "-0.03570437,-0.007579774,0.9775484,-0.2075254",
+      "Tags": "trigger",
+      "Enabled": true,
+      "__Prefab": "prefabs/weapons/weapon_semi.prefab",
       "__PrefabVariables": {}
     }
   ],

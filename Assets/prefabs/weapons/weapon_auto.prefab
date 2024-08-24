@@ -21,27 +21,21 @@
         "IsPickedUp": false,
         "IsSemiAuto": false,
         "ReloadTime": 3,
-        "ShootSound": "sounds/placeholders/pistol_shoot.sound",
-        "SinceEquipped": {
-          "Relative": 348.20987
-        },
-        "SinceShot": {
-          "Relative": 348.20987
-        },
+        "ShootSound": "sounds/weapons/pistol_laser_shoot_1.sound",
         "Viewmodel": {
           "_type": "component",
           "component_id": "412b4798-3f36-4a70-9be7-4fec02bee19a",
           "go": "4e00321c-fac1-4e38-a817-9a0f24af6c68",
           "component_type": "SkinnedModelRenderer"
         },
-        "ViewmodelArms": {
+        "WeaponDamage": 20,
+        "WeaponType": "Auto",
+        "Worldmodel": {
           "_type": "component",
-          "component_id": "412b4798-3f36-4a70-9be7-4fec02bee19a",
+          "component_id": "fcc6999c-d0c1-4bed-8e0a-e4a46eb9b107",
           "go": "4e00321c-fac1-4e38-a817-9a0f24af6c68",
           "component_type": "SkinnedModelRenderer"
-        },
-        "WeaponDamage": 20,
-        "WeaponType": "Auto"
+        }
       },
       {
         "__type": "Sandbox.SkinnedModelRenderer",
@@ -49,6 +43,16 @@
         "BodyGroups": 75,
         "CreateBoneObjects": false,
         "Model": "models/weapons/sbox_smg_mp5/v_mp5.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
+      },
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "fcc6999c-d0c1-4bed-8e0a-e4a46eb9b107",
+        "BodyGroups": 41,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/autorifle/weapon_autorifle.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
