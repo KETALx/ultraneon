@@ -22,9 +22,6 @@ public class SingleplayerGameMode : GameMode,
 	public float HealAmount { get; set; } = 10f;
 
 	[Property]
-	public float RespawnDelay { get; set; } = 3f;
-
-	[Property]
 	public int ScoreLoseZone { get; set; } = 50;
 
 	[Property]
@@ -109,7 +106,7 @@ public class SingleplayerGameMode : GameMode,
 	private void EndGame( bool playerWon )
 	{
 		gameEnded = true;
-		Log.Info( $"Game Over! {(playerWon ? "Player won!" : "Enemies won!")}" );
+		Log.Info( $"[SingleplayerGameMode] Game Over! {(playerWon ? "Player won!" : "Enemies won!")}" );
 		// TODO: Implement game end logic (show results, restart, etc.)
 	}
 
@@ -186,52 +183,6 @@ public class SingleplayerGameMode : GameMode,
 		}
 	}
 
-	private void RespawnCharacter( BaseNeonCharacterEntity character )
-	{
-		CaptureZoneEntity spawnZone = null;
-		if ( character.CurrentTeam == Team.Player )
-		{
-			spawnZone = CaptureZones.FirstOrDefault( z => z.ControllingTeam == Team.Player );
-		}
-		else
-		{
-			spawnZone = CaptureZones.FirstOrDefault( z => z.ControllingTeam == Team.Enemy );
-		}
-
-		if ( spawnZone != null )
-		{
-			// Create a beam effect and clear the area
-			CreateRespawnBeamEffect( spawnZone.Transform.Position );
-			ClearAreaAroundSpawnPoint( spawnZone.Transform.Position );
-
-			// Respawn the character
-			character.Transform.Position = spawnZone.Transform.Position;
-			character.Health = character.MaxHealth;
-			// Remove the assignment to isAlive as it's not accessible
-		}
-		else if ( character is PlayerNeon )
-		{
-			// Player has no captured zones, game over
-			EndGame( false );
-		}
-		else
-		{
-			// Bot has no captured zones, remove it from the game
-			bots.Remove( character as BotAi );
-			character.GameObject.Destroy();
-		}
-	}
-
-	private void CreateRespawnBeamEffect( Vector3 position )
-	{
-		// TODO: Implement respawn beam effect
-	}
-
-	private void ClearAreaAroundSpawnPoint( Vector3 position )
-	{
-		// TODO: Implement area clearing logic
-	}
-
 	public void OnGameEvent( CaptureZoneEvent eventArgs )
 	{
 		if ( eventArgs.PreviousTeam != Team.Neutral )
@@ -259,12 +210,6 @@ public class SingleplayerGameMode : GameMode,
 			var scoreAward = eventArgs.IsStylish ? 40 : 10;
 			teamScores[killer.CurrentTeam] += scoreAward;
 			Log.Info( $"{killer.CurrentTeam} scored {scoreAward} points for a kill" );
-		}
-
-		if ( eventArgs.Victim is PlayerNeon || eventArgs.Victim is BotAi )
-		{
-			Task.Delay( TimeSpan.FromSeconds( RespawnDelay ).Milliseconds )
-				.ContinueWith( _ => RespawnCharacter( eventArgs.Victim ) );
 		}
 	}
 
