@@ -15,7 +15,8 @@ public enum UiInfoFeedType
 {
 	Normal,
 	Warning,
-	Success
+	Success,
+	Debug
 }
 
 public record UiInfoFeedEvent(string Message, UiInfoFeedType Type) : IGameEvent;

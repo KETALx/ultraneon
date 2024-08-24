@@ -1,12 +1,12 @@
 InfoFeedPanel {
   position: absolute;
-  left: 50%;
-  top: 15%;
-  transform: translateX(-25%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  max-width: 600px;
-  z-index: 100;
   height: 100%;
+  z-index: 100;
+  top: 64px;
 
   .info-feed {
     display: flex;
@@ -19,12 +19,27 @@ InfoFeedPanel {
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 700;
     text-align: center;
     opacity: 1;
     transform: translateY(0px);
     transition: opacity 0.1s ease, transform 0.1s ease;
     backdrop-filter: blur(16px);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    .icon {
+      font-size: 32px;
+    }
+
+    .message-text {
+      font-family: Cascadia Code;
+      font-size: 32px;
+      text-transform: uppercase;
+    }
 
     &.hidden {
       opacity: 0;
@@ -33,17 +48,22 @@ InfoFeedPanel {
 
     &.normal {
       background-color: rgba(52, 152, 219, 0.2);
-      color: white;
+      color: #fff;
     }
 
     &.warning {
       background-color: rgba(241, 196, 15, 0.2);
-      color: #333;
+      color: #fff;
     }
 
     &.success {
       background-color: rgba(46, 204, 113, 0.2);
-      color: white;
+      color: #fff;
+    }
+
+    &.debug {
+      background-color: rgba(204, 46, 159, 0.2);
+      color: #fff;
     }
   }
 }

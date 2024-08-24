@@ -7,8 +7,25 @@
 	<div class="info-feed">
 		@foreach ( var message in Messages )
 		{
-			<div class="message @message.Type.ToString().ToLower() @(message.TimeSinceAdded > 4.8 ? "hidden" : "")">
-				@message.Text
+			<div class="message @message.Type.ToString().ToLower() @( message.TimeSinceAdded < 0.2f || message.TimeSinceAdded > 4.8f ? "hidden" : "" )">
+				@{
+					switch ( message.Type.ToString().ToLower() )
+					{
+						case "warning":
+							<div class="icon">priority_high</div>
+							break;
+						case "success":
+							<div class="icon">check</div>
+							break;
+						case "debug":
+							<div class="icon">bug_report</div>
+							break;
+						case "normal":
+							<div class="icon">info</div>
+							break;
+					}
+				}
+				<div class="message-text">@message.Text</div>
 			</div>
 		}
 	</div>
@@ -39,7 +56,8 @@
 	{
 		Normal,
 		Warning,
-		Success
+		Success,
+		Debug
 	}
 
 	public override void Tick()

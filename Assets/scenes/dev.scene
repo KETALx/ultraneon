@@ -597,7 +597,8 @@
       "__guid": "ff9c3881-ceb5-4b55-9046-cb597e8d4786",
       "Flags": 0,
       "Name": "Capture Point A",
-      "Position": "-26.91423,-494.3108,74.56119",
+      "Position": "-26.91423,-513.2108,11.26119",
+      "Scale": "5.199997,6.199998,1",
       "Enabled": true,
       "Components": [
         {
@@ -630,23 +631,32 @@
           "__guid": "1f979f6f-708c-4905-84f9-68d0c52cb779",
           "Center": "0,0,0",
           "IsTrigger": true,
-          "Scale": "97.20003,147.7998,87.00007",
+          "Scale": "54.20001,50.49976,87.00007",
           "Static": false
         }
       ]
     },
     {
-      "__guid": "31b1ea49-bbb5-4516-94f9-5b81e6c76fa7",
+      "__guid": "b74d05c1-ebf3-4e18-8654-b12f5108cb3f",
       "Flags": 0,
       "Name": "Capture Point B",
-      "Position": "-451.2886,700.6271,74.56231",
+      "Position": "-297.6555,749.7561,11.25904",
+      "Scale": "5.199997,6.199998,1",
       "Enabled": true,
       "Components": [
         {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "067da981-281d-4407-95a3-d0214d1f0507",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/dev/box.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
           "__type": "CaptureZoneEntity",
-          "__guid": "dd3295c1-9b2f-4728-b62c-368923cdb77b",
+          "__guid": "acecb79d-eff3-459f-9878-bda0584f003f",
           "CaptureProgress": 0,
-          "CaptureTime": 5,
+          "CaptureTime": 3,
           "ControllingTeam": "Neutral",
           "EnemyColor": "0.97255,0.20784,0.41961,1",
           "NeutralColor": "0.35294,0.45098,0.5451,1",
@@ -654,25 +664,17 @@
           "PointName": "B",
           "ZoneModel": {
             "_type": "component",
-            "component_id": "01f3292d-324b-4bd9-a43d-d101ccbc122c",
-            "go": "31b1ea49-bbb5-4516-94f9-5b81e6c76fa7",
+            "component_id": "067da981-281d-4407-95a3-d0214d1f0507",
+            "go": "b74d05c1-ebf3-4e18-8654-b12f5108cb3f",
             "component_type": "ModelRenderer"
           }
         },
         {
-          "__type": "Sandbox.ModelRenderer",
-          "__guid": "01f3292d-324b-4bd9-a43d-d101ccbc122c",
-          "BodyGroups": 18446744073709551615,
-          "Model": "models/dev/box.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
           "__type": "Sandbox.BoxCollider",
-          "__guid": "c034c522-52f5-41dd-bb59-7bfdea118a95",
+          "__guid": "93402eb4-0a17-4c64-973b-b804f4a19c50",
           "Center": "0,0,0",
           "IsTrigger": true,
-          "Scale": "97.20003,147.7998,87.00007",
+          "Scale": "54.20001,50.49976,87.00007",
           "Static": false
         }
       ]
@@ -700,6 +702,51 @@
           ]
         },
         {
+          "__guid": "df706794-2aa5-4105-920b-1e3308d34655",
+          "Flags": 0,
+          "Name": "BotSpawn",
+          "Position": "494.5695,-418.1334,-0.0005332271",
+          "Tags": "botspawn",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.SpawnPoint",
+              "__guid": "24403f0f-8108-4228-92e7-5e60562414b5",
+              "Color": "0.8902,0.31765,0.05098,1"
+            }
+          ]
+        },
+        {
+          "__guid": "c9ea7252-1875-4bf7-a372-7467c153202f",
+          "Flags": 0,
+          "Name": "BotSpawn",
+          "Position": "-665.4095,-838.0204,0.001145694",
+          "Tags": "botspawn",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.SpawnPoint",
+              "__guid": "c743c63e-aa1d-4d6b-96d9-5da1c82f42f5",
+              "Color": "0.8902,0.31765,0.05098,1"
+            }
+          ]
+        },
+        {
+          "__guid": "89955def-ee88-4a00-aafe-d3e2618119aa",
+          "Flags": 0,
+          "Name": "BotSpawn",
+          "Position": "-828.7384,776.4935,0.001584",
+          "Tags": "botspawn",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.SpawnPoint",
+              "__guid": "6c7884f7-85de-439b-accb-aaa8928d694a",
+              "Color": "0.8902,0.31765,0.05098,1"
+            }
+          ]
+        },
+        {
           "__guid": "0e9b95bf-deed-4df6-8345-11ae2844987d",
           "Flags": 0,
           "Name": "BotSpawn",
@@ -715,6 +762,51 @@
           ]
         },
         {
+          "__guid": "7b257ac9-0fd6-4270-ab06-cadc47d3e928",
+          "Flags": 0,
+          "Name": "BotSpawn",
+          "Position": "609.923,-501.9606,-0.0005263515",
+          "Tags": "botspawn",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.SpawnPoint",
+              "__guid": "3f78fb3d-0411-4c94-8229-1b94a6536182",
+              "Color": "0.8902,0.31765,0.05098,1"
+            }
+          ]
+        },
+        {
+          "__guid": "98bb5e24-e39e-47ee-bc7a-674192b6748d",
+          "Flags": 0,
+          "Name": "BotSpawn",
+          "Position": "-550.056,-921.8477,0.00115257",
+          "Tags": "botspawn",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.SpawnPoint",
+              "__guid": "f2feb6f0-c92a-45fd-8c71-6cb0f7649006",
+              "Color": "0.8902,0.31765,0.05098,1"
+            }
+          ]
+        },
+        {
+          "__guid": "f5624043-d4e3-4b7a-905a-7bf3258d9b96",
+          "Flags": 0,
+          "Name": "BotSpawn",
+          "Position": "-713.3849,692.6662,0.001590876",
+          "Tags": "botspawn",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.SpawnPoint",
+              "__guid": "7a44d41f-caf2-42bc-a21d-b6334ef08ab7",
+              "Color": "0.8902,0.31765,0.05098,1"
+            }
+          ]
+        },
+        {
           "__guid": "e4f16533-7a4e-4610-b26d-58d5cb8d2189",
           "Flags": 0,
           "Name": "BotSpawn",
@@ -725,6 +817,51 @@
             {
               "__type": "Sandbox.SpawnPoint",
               "__guid": "ecd58634-3f7e-4326-8f59-55ae647bc4f7",
+              "Color": "0.8902,0.31765,0.05098,1"
+            }
+          ]
+        },
+        {
+          "__guid": "3f352797-4e4e-409e-9838-893c33ec7f29",
+          "Flags": 0,
+          "Name": "BotSpawn",
+          "Position": "626.5311,-362.6509,-0.0005253616",
+          "Tags": "botspawn",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.SpawnPoint",
+              "__guid": "a78e90b8-01b2-4e98-a241-03b2614a88f3",
+              "Color": "0.8902,0.31765,0.05098,1"
+            }
+          ]
+        },
+        {
+          "__guid": "95e4450e-1fce-4b3a-b92c-9eb4aae5f569",
+          "Flags": 0,
+          "Name": "BotSpawn",
+          "Position": "-533.4479,-782.538,0.00115356",
+          "Tags": "botspawn",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.SpawnPoint",
+              "__guid": "ba8aef63-0390-456f-bfba-198f28687056",
+              "Color": "0.8902,0.31765,0.05098,1"
+            }
+          ]
+        },
+        {
+          "__guid": "3f543dc7-24d0-4040-9b01-17eeff5257b3",
+          "Flags": 0,
+          "Name": "BotSpawn",
+          "Position": "-696.7768,831.9759,0.001591866",
+          "Tags": "botspawn",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.SpawnPoint",
+              "__guid": "b1d9f1b9-974c-4eee-a8f8-8f77e93c1fc2",
               "Color": "0.8902,0.31765,0.05098,1"
             }
           ]

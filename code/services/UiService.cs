@@ -67,7 +67,6 @@ public class UiService : Component,
 
 	public void OnGameEvent( PlayerSpawnEvent eventArgs )
 	{
-		HudPanel?.AddInfoMessage( "Player spawned", InfoFeedPanel.InfoType.Normal );
 	}
 
 	public void OnGameEvent( CharacterDeathEvent eventArgs )

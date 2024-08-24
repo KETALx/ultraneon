@@ -221,7 +221,7 @@ public class SingleplayerGameMode : GameMode,
 
 	public void OnGameEvent( PlayerSpawnEvent eventArgs )
 	{
-		ShowInfoMessage( $"Player spawned for team {eventArgs.Team}", UiInfoFeedType.Normal );
+		ShowInfoMessage( $"Player spawned for team {eventArgs.Team}", UiInfoFeedType.Debug );
 	}
 
 	public void OnGameEvent( CharacterDeathEvent eventArgs )
