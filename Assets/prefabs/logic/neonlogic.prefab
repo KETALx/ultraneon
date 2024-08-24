@@ -2,7 +2,7 @@
   "RootObject": {
     "__guid": "340972f3-1927-4daf-84a2-ab0d35951d21",
     "Flags": 0,
-    "Name": "#LOGIC",
+    "Name": "neonlogic",
     "Enabled": true,
     "Children": [
       {
@@ -86,7 +86,7 @@
             "BotSpawnPoolTag": "botspawnpool",
             "InitialBotCount": 2,
             "MaxBotsAlive": 30,
-            "WaveDuration": 60
+            "WaveDuration": 40
           }
         ]
       },
@@ -145,7 +145,8 @@
           }
         ]
       }
-    ]
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
