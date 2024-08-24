@@ -10,7 +10,7 @@ using Ultraneon.Services;
 namespace Ultraneon.Game.GameMode.Sp;
 
 public class SingleplayerGameMode : GameMode,
-	IGameEventHandler<CaptureZoneEvent>,
+	IGameEventHandler<CaptureZoneCapturedEvent>,
 	IGameEventHandler<PlayerSpawnEvent>,
 	IGameEventHandler<CharacterDeathEvent>,
 	IGameEventHandler<DamageEvent>
@@ -211,9 +211,9 @@ public class SingleplayerGameMode : GameMode,
 		}
 	}
 
-	public void OnGameEvent( CaptureZoneEvent eventArgs )
+	public void OnGameEvent( CaptureZoneCapturedEvent capturedEventArgs )
 	{
-		if ( eventArgs.NewTeam == Team.Player && isOvertime )
+		if ( capturedEventArgs.NewTeam == Team.Player && isOvertime )
 		{
 			EndOvertime();
 		}

@@ -305,564 +305,280 @@
       ]
     },
     {
-      "__guid": "cd2d7e06-735b-4d77-ae08-f48f8e06e45a",
+      "__guid": "37d157bc-d6b4-418b-8f6a-e2236859ef00",
       "Flags": 0,
-      "Name": "weapon_pistol",
-      "Position": "4,-288,36",
-      "Tags": "trigger",
-      "Enabled": true,
-      "__Prefab": "prefabs/weapons/weapon_pistol.prefab",
-      "__PrefabVariables": {}
-    },
-    {
-      "__guid": "d9b51831-8aa4-4903-aacf-49555d47eda1",
-      "Flags": 0,
-      "Name": "weapon_semi",
-      "Position": "86,-288,38",
-      "Tags": "trigger",
-      "Enabled": true,
-      "__Prefab": "prefabs/weapons/weapon_semi.prefab",
-      "__PrefabVariables": {}
-    },
-    {
-      "__guid": "4e00321c-fac1-4e38-a817-9a0f24af6c68",
-      "Flags": 0,
-      "Name": "weapon_auto",
-      "Position": "192,-288,32",
-      "Tags": "trigger",
-      "Enabled": true,
-      "__Prefab": "prefabs/weapons/weapon_auto.prefab",
-      "__PrefabVariables": {}
-    },
-    {
-      "__guid": "a3add265-5ca9-4525-955b-45830c25617e",
-      "Flags": 0,
-      "Name": "weapon_bolt",
-      "Position": "256,-288,32",
-      "Tags": "trigger",
-      "Enabled": true,
-      "__Prefab": "prefabs/weapons/weapon_bolt.prefab",
-      "__PrefabVariables": {}
-    },
-    {
-      "__guid": "7584abe1-ac04-4f25-a3c9-a2d6f29cc86b",
-      "Flags": 0,
-      "Name": "Box",
-      "Position": "647.2552,-853.1647,61.00006",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.MeshComponent",
-          "__guid": "37d496c1-d2aa-4e01-b969-7cb29052e67b",
-          "Collision": "Mesh",
-          "Color": "1,1,1,1",
-          "HideInGame": false,
-          "IsTrigger": false,
-          "Mesh": {
-            "Topology": "H4sIAAAAAAAACl2SiU4CQRBEd1xckFVAFPBCBBW87\u002Bv/f0z7JW\u002BSiZNUdna6uvocVVX1ExgFOFuBTqAJ9AL9wG5gEDgKnATOAueBm8Bd4CHwFEgCjfJcqcV7rX5VcA99B9vGLnOZFT7dQreWO5aL7445J32Ie1DU1FpPkg93qhbae9aa5MO9lIfGUM0kf2Dvcs37vvPf1fahbsdchkUvxuaR85uYY20MenNRaM7\u002B9WpqzfjzPXZGeX7MbOmdGk6dXyMf7rs5EXfubBv5cDfe0ViomXsJd2V\u002BPWMt/E/mnrQ19nKivdV3rj75XFsD/Lw7L86hby5f9h2Ntb3FxvfWncxzZkdfi7neu6\u002Btb3A/tdGDxwC7jJ03uN/a0HtWEztvcN\u002B0AWLB4c4hd3aCWNRHr6kRO/74EpM7HHKhBu7Ux\u002B5QI7kAcqEG7tRML5gp/vSXd3aKvWBXfuPkGTEb/ulhzpt8iYnuHxoQnZ0MBAAA",
-            "Positions": [
-              "-37,-39,61",
-              "37,-39,61",
-              "37,155,61",
-              "-37,155,61",
-              "-37,155,-61",
-              "37,155,-61",
-              "37,-39,-61",
-              "-37,-39,-61",
-              "37,-115,61",
-              "-37,-115,61",
-              "-37,-115,-61",
-              "37,-115,-61",
-              "-249,-39,61",
-              "-249,-39,-61",
-              "-249,-115,-61",
-              "-249,-115,61"
-            ],
-            "TextureCoord": [
-              "2.289062,4.233921",
-              "1.03125,4.96875",
-              "2.289062,3.070312",
-              "-3.233921,-0.4765625",
-              "1.710938,3.070312",
-              "-1.289062,-0.4765625",
-              "1.710938,4.233921",
-              "3.070312,-0.4765625",
-              "2.289062,3.070312",
-              "-0.7109375,0.4765625",
-              "2.289062,4.233921",
-              "-2.070312,0.4765625",
-              "1.710938,4.233921",
-              "1.609375,4.96875",
-              "1.710938,3.070312",
-              "4.233921,0.4765625",
-              "4.233921,-0.4765625",
-              "-1.03125,-0.00000005960464",
-              "3.070312,0.4765625",
-              "-0.7109375,-0.4765625",
-              "-3.233921,0.4765625",
-              "-4.96875,-0.9531251",
-              "-2.070312,-0.4765625",
-              "-1.289062,0.4765625",
-              "1.710938,-0.4765625",
-              "1.609375,5.5625",
-              "1.710938,0.4765625",
-              "1.03125,-0.9531251",
-              "2.289062,0.4765625",
-              "1.03125,5.5625",
-              "2.289062,-0.4765625",
-              "-5.5625,-0.00000005960464",
-              "-5.5625,-0.9531251",
-              "1.609375,4.96875",
-              "-4.96875,-0.00000005960464",
-              "1.609375,5.5625",
-              "1.03125,5.5625",
-              "1.03125,4.96875",
-              "1.03125,5.5625",
-              "1.03125,4.96875",
-              "4.96875,-0.00000005960464",
-              "0.625,-0.9531251",
-              "5.5625,-0.00000005960464",
-              "-0.625,4.96875",
-              "5.5625,-0.9531251",
-              "-0.625,-0.00000005960464",
-              "4.96875,-0.9531251",
-              "-0.625,5.5625",
-              "-0.625,4.96875",
-              "-1.03125,-0.9531251",
-              "1.03125,5.5625",
-              "-0.625,-0.9531251",
-              "0.625,-0.00000005960464",
-              "1.03125,4.96875",
-              "-0.625,5.5625",
-              "1.03125,-0.00000005960464"
-            ],
-            "TextureUAxis": [
-              "1,0,0",
-              "1,0,-0",
-              "0,-1,0",
-              "0,1,0",
-              "-1,0,0",
-              "1,-0,0",
-              "1,-0,0",
-              "0,1,0",
-              "1,0,0",
-              "0,-1,0",
-              "1,0,-0",
-              "0,-1,0",
-              "1,0,0",
-              "-1,0,0",
-              "1,-0,-0",
-              "1,-0,0"
-            ],
-            "TextureVAxis": [
-              "0,-1,0",
-              "0,-1,0",
-              "0,0,-1",
-              "-0,0,-1",
-              "0,0,-1",
-              "-0,0,-1",
-              "-0,0,-1",
-              "-0,-0,-1",
-              "0,-1,-0",
-              "0,0,-1",
-              "0,-1,0",
-              "0,0,-1",
-              "-0,-1,-0",
-              "0,0,-1",
-              "-0,-1,0",
-              "0,0,-1"
-            ],
-            "TextureScale": [
-              "0.2500004,0.3256302",
-              "0.2500004,0.3256302",
-              "0.3256302,0.25",
-              "0.3256302,0.25",
-              "0.2500002,0.25",
-              "0.25,0.25",
-              "0.2500004,0.25",
-              "0.25,0.25",
-              "0.25,0.25",
-              "0.25,0.25",
-              "0.25,0.25",
-              "0.25,0.25",
-              "0.25,0.25",
-              "0.25,0.25",
-              "0.25,0.25",
-              "0.25,0.25"
-            ],
-            "TextureOffset": [
-              "482.9836,451.9583",
-              "482.9836,451.9583",
-              "451.9583,244.0002",
-              "60.04175,244.0002",
-              "29.0188,244.0002",
-              "348,244",
-              "482.9836,244.0002",
-              "0.6586914,0.0002136231",
-              "134.9792,511.3413",
-              "0,0",
-              "134.9792,511.3413",
-              "511.3413,0.0002441406",
-              "134.9792,511.3413",
-              "377.0208,0.0001831055",
-              "134.9792,511.3413",
-              "134.9792,0.000213623"
-            ],
-            "MaterialIndex": [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            "EdgeFlags": [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            "Materials": [
-              "materials/dev/reflectivity_30.vmat"
-            ]
-          },
-          "SmoothingAngle": 40,
-          "Static": true
-        }
-      ]
-    },
-    {
-      "__guid": "ff9c3881-ceb5-4b55-9046-cb597e8d4786",
-      "Flags": 0,
-      "Name": "Capture Point A",
-      "Position": "-26.91423,-513.2108,11.26119",
-      "Scale": "5.199997,6.199998,1",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.ModelRenderer",
-          "__guid": "142af44b-896d-4f21-b347-f5d838ea9571",
-          "BodyGroups": 18446744073709551615,
-          "Model": "models/dev/box.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "CaptureZoneEntity",
-          "__guid": "80c2b359-9700-4704-9e85-a3f83cc8bfb2",
-          "CaptureProgress": 0,
-          "CaptureTime": 3,
-          "ControllingTeam": "Neutral",
-          "EnemyColor": "0.97255,0.20784,0.41961,1",
-          "NeutralColor": "0.35294,0.45098,0.5451,1",
-          "PlayerColor": "0.32941,0.7451,0.20784,1",
-          "PointName": "A",
-          "ZoneModel": {
-            "_type": "component",
-            "component_id": "142af44b-896d-4f21-b347-f5d838ea9571",
-            "go": "ff9c3881-ceb5-4b55-9046-cb597e8d4786",
-            "component_type": "ModelRenderer"
-          }
-        },
-        {
-          "__type": "Sandbox.BoxCollider",
-          "__guid": "1f979f6f-708c-4905-84f9-68d0c52cb779",
-          "Center": "0,0,0",
-          "IsTrigger": true,
-          "Scale": "54.20001,50.49976,87.00007",
-          "Static": false
-        }
-      ]
-    },
-    {
-      "__guid": "b74d05c1-ebf3-4e18-8654-b12f5108cb3f",
-      "Flags": 0,
-      "Name": "Capture Point B",
-      "Position": "-297.6555,749.7561,11.25904",
-      "Scale": "5.199997,6.199998,1",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.ModelRenderer",
-          "__guid": "067da981-281d-4407-95a3-d0214d1f0507",
-          "BodyGroups": 18446744073709551615,
-          "Model": "models/dev/box.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "CaptureZoneEntity",
-          "__guid": "acecb79d-eff3-459f-9878-bda0584f003f",
-          "CaptureProgress": 0,
-          "CaptureTime": 3,
-          "ControllingTeam": "Neutral",
-          "EnemyColor": "0.97255,0.20784,0.41961,1",
-          "NeutralColor": "0.35294,0.45098,0.5451,1",
-          "PlayerColor": "0.32941,0.7451,0.20784,1",
-          "PointName": "B",
-          "ZoneModel": {
-            "_type": "component",
-            "component_id": "067da981-281d-4407-95a3-d0214d1f0507",
-            "go": "b74d05c1-ebf3-4e18-8654-b12f5108cb3f",
-            "component_type": "ModelRenderer"
-          }
-        },
-        {
-          "__type": "Sandbox.BoxCollider",
-          "__guid": "93402eb4-0a17-4c64-973b-b804f4a19c50",
-          "Center": "0,0,0",
-          "IsTrigger": true,
-          "Scale": "54.20001,50.49976,87.00007",
-          "Static": false
-        }
-      ]
-    },
-    {
-      "__guid": "5422dce1-a0e0-433f-93e1-04ec2292cc97",
-      "Flags": 0,
-      "Name": "BotSpawnPool",
-      "Tags": "botspawnpool",
+      "Name": "#LEVEL",
       "Enabled": true,
       "Children": [
         {
-          "__guid": "a6ab0084-3183-4edc-83ea-0dd58c8d1f5f",
+          "__guid": "cd2d7e06-735b-4d77-ae08-f48f8e06e45a",
           "Flags": 0,
-          "Name": "BotSpawn",
-          "Position": "205.783,692.1253,0.0005472668",
-          "Tags": "botspawn",
+          "Name": "weapon_pistol",
+          "Position": "4,-288,36",
+          "Tags": "trigger",
+          "Enabled": true,
+          "__Prefab": "prefabs/weapons/weapon_pistol.prefab",
+          "__PrefabVariables": {}
+        },
+        {
+          "__guid": "d9b51831-8aa4-4903-aacf-49555d47eda1",
+          "Flags": 0,
+          "Name": "weapon_semi",
+          "Position": "86,-288,38",
+          "Tags": "trigger",
+          "Enabled": true,
+          "__Prefab": "prefabs/weapons/weapon_semi.prefab",
+          "__PrefabVariables": {}
+        },
+        {
+          "__guid": "4e00321c-fac1-4e38-a817-9a0f24af6c68",
+          "Flags": 0,
+          "Name": "weapon_auto",
+          "Position": "192,-288,32",
+          "Tags": "trigger",
+          "Enabled": true,
+          "__Prefab": "prefabs/weapons/weapon_auto.prefab",
+          "__PrefabVariables": {}
+        },
+        {
+          "__guid": "a3add265-5ca9-4525-955b-45830c25617e",
+          "Flags": 0,
+          "Name": "weapon_bolt",
+          "Position": "256,-288,32",
+          "Tags": "trigger",
+          "Enabled": true,
+          "__Prefab": "prefabs/weapons/weapon_bolt.prefab",
+          "__PrefabVariables": {}
+        },
+        {
+          "__guid": "ff9c3881-ceb5-4b55-9046-cb597e8d4786",
+          "Flags": 0,
+          "Name": "Capture Point A",
+          "Position": "-26.91423,-513.2108,11.26119",
+          "Scale": "5.199997,6.199998,1",
           "Enabled": true,
           "Components": [
             {
-              "__type": "Sandbox.SpawnPoint",
-              "__guid": "ac1ac45c-a3ee-44ac-a55c-e03ccc640f20",
-              "Color": "0.8902,0.31765,0.05098,1"
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "142af44b-896d-4f21-b347-f5d838ea9571",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/dev/box.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "CaptureZoneEntity",
+              "__guid": "80c2b359-9700-4704-9e85-a3f83cc8bfb2",
+              "CaptureProgress": 0,
+              "CaptureTime": 3,
+              "ContestingTeam": "Neutral",
+              "ControllingTeam": "Neutral",
+              "EnemyColor": "0.97255,0.20784,0.41961,1",
+              "NeutralColor": "0.35294,0.45098,0.5451,1",
+              "PlayerColor": "0.32941,0.7451,0.20784,1",
+              "PointName": "A",
+              "ZoneModel": {
+                "_type": "component",
+                "component_id": "142af44b-896d-4f21-b347-f5d838ea9571",
+                "go": "ff9c3881-ceb5-4b55-9046-cb597e8d4786",
+                "component_type": "ModelRenderer"
+              }
+            },
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "1f979f6f-708c-4905-84f9-68d0c52cb779",
+              "Center": "0,0,0",
+              "IsTrigger": true,
+              "Scale": "109,89.49974,87.00007",
+              "Static": false
             }
           ]
         },
         {
-          "__guid": "df706794-2aa5-4105-920b-1e3308d34655",
+          "__guid": "b74d05c1-ebf3-4e18-8654-b12f5108cb3f",
           "Flags": 0,
-          "Name": "BotSpawn",
-          "Position": "494.5695,-418.1334,-0.0005332271",
-          "Tags": "botspawn",
+          "Name": "Capture Point B",
+          "Position": "-297.6555,749.7561,11.25904",
+          "Scale": "5.199997,6.199998,1",
           "Enabled": true,
           "Components": [
             {
-              "__type": "Sandbox.SpawnPoint",
-              "__guid": "24403f0f-8108-4228-92e7-5e60562414b5",
-              "Color": "0.8902,0.31765,0.05098,1"
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "067da981-281d-4407-95a3-d0214d1f0507",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/dev/box.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "CaptureZoneEntity",
+              "__guid": "acecb79d-eff3-459f-9878-bda0584f003f",
+              "CaptureProgress": 0,
+              "CaptureTime": 3,
+              "ContestingTeam": "Neutral",
+              "ControllingTeam": "Neutral",
+              "EnemyColor": "0.97255,0.20784,0.41961,1",
+              "NeutralColor": "0.35294,0.45098,0.5451,1",
+              "PlayerColor": "0.32941,0.7451,0.20784,1",
+              "PointName": "B",
+              "ZoneModel": {
+                "_type": "component",
+                "component_id": "067da981-281d-4407-95a3-d0214d1f0507",
+                "go": "b74d05c1-ebf3-4e18-8654-b12f5108cb3f",
+                "component_type": "ModelRenderer"
+              }
+            },
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "93402eb4-0a17-4c64-973b-b804f4a19c50",
+              "Center": "0,0,0",
+              "IsTrigger": true,
+              "Scale": "80.2998,69.99972,87.00007",
+              "Static": false
             }
           ]
         },
         {
-          "__guid": "c9ea7252-1875-4bf7-a372-7467c153202f",
+          "__guid": "5422dce1-a0e0-433f-93e1-04ec2292cc97",
           "Flags": 0,
-          "Name": "BotSpawn",
-          "Position": "-665.4095,-838.0204,0.001145694",
-          "Tags": "botspawn",
+          "Name": "BotSpawnPool",
+          "Tags": "botspawnpool",
           "Enabled": true,
-          "Components": [
+          "Children": [
             {
-              "__type": "Sandbox.SpawnPoint",
-              "__guid": "c743c63e-aa1d-4d6b-96d9-5da1c82f42f5",
-              "Color": "0.8902,0.31765,0.05098,1"
-            }
-          ]
-        },
-        {
-          "__guid": "89955def-ee88-4a00-aafe-d3e2618119aa",
-          "Flags": 0,
-          "Name": "BotSpawn",
-          "Position": "-828.7384,776.4935,0.001584",
-          "Tags": "botspawn",
-          "Enabled": true,
-          "Components": [
+              "__guid": "a6ab0084-3183-4edc-83ea-0dd58c8d1f5f",
+              "Flags": 0,
+              "Name": "BotSpawn",
+              "Position": "205.783,692.1253,0.0005472668",
+              "Tags": "botspawn",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.SpawnPoint",
+                  "__guid": "ac1ac45c-a3ee-44ac-a55c-e03ccc640f20",
+                  "Color": "0.8902,0.31765,0.05098,1"
+                }
+              ]
+            },
             {
-              "__type": "Sandbox.SpawnPoint",
-              "__guid": "6c7884f7-85de-439b-accb-aaa8928d694a",
-              "Color": "0.8902,0.31765,0.05098,1"
-            }
-          ]
-        },
-        {
-          "__guid": "0e9b95bf-deed-4df6-8345-11ae2844987d",
-          "Flags": 0,
-          "Name": "BotSpawn",
-          "Position": "321.1365,608.2981,0.0005541424",
-          "Tags": "botspawn",
-          "Enabled": true,
-          "Components": [
+              "__guid": "df706794-2aa5-4105-920b-1e3308d34655",
+              "Flags": 0,
+              "Name": "BotSpawn",
+              "Position": "494.5695,-418.1334,-0.0005332271",
+              "Tags": "botspawn",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.SpawnPoint",
+                  "__guid": "24403f0f-8108-4228-92e7-5e60562414b5",
+                  "Color": "0.8902,0.31765,0.05098,1"
+                }
+              ]
+            },
             {
-              "__type": "Sandbox.SpawnPoint",
-              "__guid": "d81431b7-2100-49dc-8e5f-591d3399c8e8",
-              "Color": "0.8902,0.31765,0.05098,1"
-            }
-          ]
-        },
-        {
-          "__guid": "7b257ac9-0fd6-4270-ab06-cadc47d3e928",
-          "Flags": 0,
-          "Name": "BotSpawn",
-          "Position": "609.923,-501.9606,-0.0005263515",
-          "Tags": "botspawn",
-          "Enabled": true,
-          "Components": [
+              "__guid": "c9ea7252-1875-4bf7-a372-7467c153202f",
+              "Flags": 0,
+              "Name": "BotSpawn",
+              "Position": "-665.4095,-838.0204,0.001145694",
+              "Tags": "botspawn",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.SpawnPoint",
+                  "__guid": "c743c63e-aa1d-4d6b-96d9-5da1c82f42f5",
+                  "Color": "0.8902,0.31765,0.05098,1"
+                }
+              ]
+            },
             {
-              "__type": "Sandbox.SpawnPoint",
-              "__guid": "3f78fb3d-0411-4c94-8229-1b94a6536182",
-              "Color": "0.8902,0.31765,0.05098,1"
-            }
-          ]
-        },
-        {
-          "__guid": "98bb5e24-e39e-47ee-bc7a-674192b6748d",
-          "Flags": 0,
-          "Name": "BotSpawn",
-          "Position": "-550.056,-921.8477,0.00115257",
-          "Tags": "botspawn",
-          "Enabled": true,
-          "Components": [
+              "__guid": "0e9b95bf-deed-4df6-8345-11ae2844987d",
+              "Flags": 0,
+              "Name": "BotSpawn",
+              "Position": "321.1365,608.2981,0.0005541424",
+              "Tags": "botspawn",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.SpawnPoint",
+                  "__guid": "d81431b7-2100-49dc-8e5f-591d3399c8e8",
+                  "Color": "0.8902,0.31765,0.05098,1"
+                }
+              ]
+            },
             {
-              "__type": "Sandbox.SpawnPoint",
-              "__guid": "f2feb6f0-c92a-45fd-8c71-6cb0f7649006",
-              "Color": "0.8902,0.31765,0.05098,1"
-            }
-          ]
-        },
-        {
-          "__guid": "f5624043-d4e3-4b7a-905a-7bf3258d9b96",
-          "Flags": 0,
-          "Name": "BotSpawn",
-          "Position": "-713.3849,692.6662,0.001590876",
-          "Tags": "botspawn",
-          "Enabled": true,
-          "Components": [
+              "__guid": "7b257ac9-0fd6-4270-ab06-cadc47d3e928",
+              "Flags": 0,
+              "Name": "BotSpawn",
+              "Position": "609.923,-501.9606,-0.0005263515",
+              "Tags": "botspawn",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.SpawnPoint",
+                  "__guid": "3f78fb3d-0411-4c94-8229-1b94a6536182",
+                  "Color": "0.8902,0.31765,0.05098,1"
+                }
+              ]
+            },
             {
-              "__type": "Sandbox.SpawnPoint",
-              "__guid": "7a44d41f-caf2-42bc-a21d-b6334ef08ab7",
-              "Color": "0.8902,0.31765,0.05098,1"
-            }
-          ]
-        },
-        {
-          "__guid": "e4f16533-7a4e-4610-b26d-58d5cb8d2189",
-          "Flags": 0,
-          "Name": "BotSpawn",
-          "Position": "337.7446,747.6077,0.0005551323",
-          "Tags": "botspawn",
-          "Enabled": true,
-          "Components": [
+              "__guid": "98bb5e24-e39e-47ee-bc7a-674192b6748d",
+              "Flags": 0,
+              "Name": "BotSpawn",
+              "Position": "-550.056,-921.8477,0.00115257",
+              "Tags": "botspawn",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.SpawnPoint",
+                  "__guid": "f2feb6f0-c92a-45fd-8c71-6cb0f7649006",
+                  "Color": "0.8902,0.31765,0.05098,1"
+                }
+              ]
+            },
             {
-              "__type": "Sandbox.SpawnPoint",
-              "__guid": "ecd58634-3f7e-4326-8f59-55ae647bc4f7",
-              "Color": "0.8902,0.31765,0.05098,1"
-            }
-          ]
-        },
-        {
-          "__guid": "3f352797-4e4e-409e-9838-893c33ec7f29",
-          "Flags": 0,
-          "Name": "BotSpawn",
-          "Position": "626.5311,-362.6509,-0.0005253616",
-          "Tags": "botspawn",
-          "Enabled": true,
-          "Components": [
+              "__guid": "e4f16533-7a4e-4610-b26d-58d5cb8d2189",
+              "Flags": 0,
+              "Name": "BotSpawn",
+              "Position": "337.7446,747.6077,0.0005551323",
+              "Tags": "botspawn",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.SpawnPoint",
+                  "__guid": "ecd58634-3f7e-4326-8f59-55ae647bc4f7",
+                  "Color": "0.8902,0.31765,0.05098,1"
+                }
+              ]
+            },
             {
-              "__type": "Sandbox.SpawnPoint",
-              "__guid": "a78e90b8-01b2-4e98-a241-03b2614a88f3",
-              "Color": "0.8902,0.31765,0.05098,1"
-            }
-          ]
-        },
-        {
-          "__guid": "95e4450e-1fce-4b3a-b92c-9eb4aae5f569",
-          "Flags": 0,
-          "Name": "BotSpawn",
-          "Position": "-533.4479,-782.538,0.00115356",
-          "Tags": "botspawn",
-          "Enabled": true,
-          "Components": [
+              "__guid": "3f352797-4e4e-409e-9838-893c33ec7f29",
+              "Flags": 0,
+              "Name": "BotSpawn",
+              "Position": "626.5311,-362.6509,-0.0005253616",
+              "Tags": "botspawn",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.SpawnPoint",
+                  "__guid": "a78e90b8-01b2-4e98-a241-03b2614a88f3",
+                  "Color": "0.8902,0.31765,0.05098,1"
+                }
+              ]
+            },
             {
-              "__type": "Sandbox.SpawnPoint",
-              "__guid": "ba8aef63-0390-456f-bfba-198f28687056",
-              "Color": "0.8902,0.31765,0.05098,1"
-            }
-          ]
-        },
-        {
-          "__guid": "3f543dc7-24d0-4040-9b01-17eeff5257b3",
-          "Flags": 0,
-          "Name": "BotSpawn",
-          "Position": "-696.7768,831.9759,0.001591866",
-          "Tags": "botspawn",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Sandbox.SpawnPoint",
-              "__guid": "b1d9f1b9-974c-4eee-a8f8-8f77e93c1fc2",
-              "Color": "0.8902,0.31765,0.05098,1"
+              "__guid": "95e4450e-1fce-4b3a-b92c-9eb4aae5f569",
+              "Flags": 0,
+              "Name": "BotSpawn",
+              "Position": "-533.4479,-782.538,0.00115356",
+              "Tags": "botspawn",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.SpawnPoint",
+                  "__guid": "ba8aef63-0390-456f-bfba-198f28687056",
+                  "Color": "0.8902,0.31765,0.05098,1"
+                }
+              ]
             }
           ]
         }

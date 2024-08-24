@@ -9,7 +9,11 @@ public record WeaponStateChangedEvent( WeaponBaseNeon Weapon ) : IGameEvent;
 public record ActiveWeaponChangedEvent( WeaponBaseNeon OldWeapon, WeaponBaseNeon NewWeapon ) : IGameEvent;
 
 // Zone Capture Stuff
-public record CaptureZoneEvent( string ZoneName, Team PreviousTeam, Team NewTeam ) : IGameEvent;
+public record CaptureZoneCharacterEnteredEvent( string ZoneName, Team CurrentTeam, BaseNeonCharacterEntity EnteredCharacter ) : IGameEvent;
+
+public record CaptureZoneCharacterExitedEvent( string ZoneName, Team CurrentTeam, BaseNeonCharacterEntity ExitCharacter ) : IGameEvent;
+
+public record CaptureZoneCapturedEvent( string ZoneName, Team PreviousTeam, Team NewTeam ) : IGameEvent;
 
 // Game Events
 public record GamePausedEvent() : IGameEvent;
@@ -24,4 +28,4 @@ public record CharacterDeathEvent( BaseNeonCharacterEntity Victim, Entity Killer
 
 public record GameModeActivatedEvent( GameMode GameMode ) : IGameEvent;
 
-public record GameOverEvent(int MaxWaveReached) : IGameEvent;
+public record GameOverEvent( int MaxWaveReached ) : IGameEvent;

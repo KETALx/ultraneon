@@ -5,7 +5,7 @@ using Ultraneon.Domain.Events;
 namespace Ultraneon.Game.GameMode.Mp;
 
 public class MultiplayerGameMode : GameMode,
-	IGameEventHandler<CaptureZoneEvent>,
+	IGameEventHandler<CaptureZoneCapturedEvent>,
 	IGameEventHandler<PlayerSpawnEvent>,
 	IGameEventHandler<CharacterDeathEvent>,
 	IGameEventHandler<DamageEvent>
@@ -150,20 +150,20 @@ public class MultiplayerGameMode : GameMode,
 		}
 	}
 
-	public void OnGameEvent( CaptureZoneEvent eventArgs )
+	public void OnGameEvent( CaptureZoneCapturedEvent capturedEventArgs )
 	{
-		if ( eventArgs.PreviousTeam != Team.Neutral )
+		if ( capturedEventArgs.PreviousTeam != Team.Neutral )
 		{
-			teamScores[eventArgs.PreviousTeam] += ScoreLoseZone; // Lose points for losing a zone
+			teamScores[capturedEventArgs.PreviousTeam] += ScoreLoseZone; // Lose points for losing a zone
 		}
 
-		if ( eventArgs.NewTeam != Team.Neutral )
+		if ( capturedEventArgs.NewTeam != Team.Neutral )
 		{
-			teamScores[eventArgs.PreviousTeam] += ScoreCaptureZone; // Lose points for losing a zone
+			teamScores[capturedEventArgs.PreviousTeam] += ScoreCaptureZone; // Lose points for losing a zone
 		}
 
 		Log.Info(
-			$"Zone {eventArgs.ZoneName} captured by {eventArgs.NewTeam}. New scores - Player: {teamScores[Team.Player]}, Enemy: {teamScores[Team.Enemy]}" );
+			$"Zone {capturedEventArgs.ZoneName} captured by {capturedEventArgs.NewTeam}. New scores - Player: {teamScores[Team.Player]}, Enemy: {teamScores[Team.Enemy]}" );
 	}
 
 	public void OnGameEvent( PlayerSpawnEvent eventArgs )

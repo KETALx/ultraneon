@@ -5,7 +5,7 @@ using Ultraneon.UI;
 namespace Ultraneon.Services;
 
 public class UiService : Component,
-	IGameEventHandler<CaptureZoneEvent>,
+	IGameEventHandler<CaptureZoneCapturedEvent>,
 	IGameEventHandler<PlayerSpawnEvent>,
 	IGameEventHandler<CharacterDeathEvent>,
 	IGameEventHandler<DamageEvent>,
@@ -60,9 +60,9 @@ public class UiService : Component,
 		GameObject.Dispatch( new GameResumedEvent() );
 	}
 
-	public void OnGameEvent( CaptureZoneEvent eventArgs )
+	public void OnGameEvent( CaptureZoneCapturedEvent capturedEventArgs )
 	{
-		HudPanel?.AddInfoMessage( $"Zone {eventArgs.ZoneName} captured by {eventArgs.NewTeam}!", InfoFeedPanel.InfoType.Success );
+		HudPanel?.AddInfoMessage( $"Zone {capturedEventArgs.ZoneName} captured by {capturedEventArgs.NewTeam}!", InfoFeedPanel.InfoType.Success );
 	}
 
 	public void OnGameEvent( PlayerSpawnEvent eventArgs )
