@@ -53,6 +53,8 @@
 	public void Show()
 	{
 		Panel.SetClass( "hidden", false );
+		Player ??= Scene.GetAllComponents<PlayerNeon>().FirstOrDefault(x => x.GameObject.Tags.Has("player"));
+		Inventory ??= Player?.GameObject.Components.Get<PlayerInventory>();
 	}
 
 	public void Hide()
