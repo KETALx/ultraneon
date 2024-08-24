@@ -22,6 +22,8 @@ public class BaseNeonCharacterEntity : Entity, Component.INetworkListener
 	[Property]
 	public Team CurrentTeam { get; set; } = Team.Neutral;
 
+
+
 	public override void OnDamage(in DamageInfo damage )
 	{
 		if ( !isAlive ) return;

@@ -46,9 +46,9 @@
           "go": "c644d827-81ae-43b7-9acf-b99cf657628c",
           "component_type": "CharacterController"
         },
-        "CrouchMoveSpeed": 140,
+        "CrouchMoveSpeed": 250,
         "JumpForce": 350,
-        "WalkMoveSpeed": 320
+        "WalkMoveSpeed": 400
       },
       {
         "__type": "Sandbox.CharacterController",

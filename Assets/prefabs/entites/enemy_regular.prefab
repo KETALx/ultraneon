@@ -16,7 +16,7 @@
         "__guid": "bfc6a3c7-8016-4bac-bb90-dfa8f37adfee",
         "AttackRange": 200,
         "CurrentTeam": "Enemy",
-        "Health": 100,
+        "Health": 0,
         "Id": "00000000-0000-0000-0000-000000000000",
         "isAlive": true,
         "MaxHealth": 100,
