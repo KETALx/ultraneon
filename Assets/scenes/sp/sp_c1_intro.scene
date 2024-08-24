@@ -240,7 +240,6 @@
       "Name": "enemy_regular",
       "Position": "751.3261,2459.83,464",
       "Tags": "bot",
-      "Enabled": true,
       "__Prefab": "prefabs/entites/enemy_regular.prefab",
       "__PrefabVariables": {}
     },
@@ -251,7 +250,6 @@
       "Position": "1245.461,2685.203,451.9651",
       "Rotation": "0.00002197921,0.00002369285,-0.3651027,0.9309671",
       "Tags": "bot",
-      "Enabled": true,
       "__Prefab": "prefabs/entites/enemy_regular.prefab",
       "__PrefabVariables": {}
     },
@@ -262,7 +260,6 @@
       "Position": "1320.457,2262.25,451.9732",
       "Rotation": "-0.00007751584,-0.00005310774,0.9552394,-0.2958337",
       "Tags": "bot",
-      "Enabled": true,
       "__Prefab": "prefabs/entites/enemy_regular.prefab",
       "__PrefabVariables": {}
     },
@@ -273,7 +270,6 @@
       "Position": "1154.187,2394.068,438.8634",
       "Rotation": "-0.07635444,0.0314731,0.9213788,0.3797901",
       "Tags": "bot",
-      "Enabled": true,
       "__Prefab": "prefabs/entites/enemy_regular.prefab",
       "__PrefabVariables": {}
     },
@@ -320,6 +316,50 @@
       "Enabled": true,
       "__Prefab": "prefabs/weapons/weapon_semi.prefab",
       "__PrefabVariables": {}
+    },
+    {
+      "__guid": "39c29d72-7213-40ea-97c7-fcd5c0af1826",
+      "Flags": 0,
+      "Name": "Object",
+      "Position": "880,2080,512",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "ExplosiveEntity",
+          "__guid": "ca63ab51-880b-4fca-aba7-a8d63d07a08f",
+          "damage": 0,
+          "explosionParticle": "particles/explosion/fire_extinguisher/extinguisher_explosion_c.vpcf",
+          "prop": {
+            "_type": "component",
+            "component_id": "46fc9772-6861-4c2a-8914-a1b56b08681e",
+            "go": "39c29d72-7213-40ea-97c7-fcd5c0af1826",
+            "component_type": "Prop"
+          },
+          "sphereCollider": {
+            "_type": "component",
+            "component_id": "d46bf33e-e740-4ad7-967c-7206f37cc39e",
+            "go": "39c29d72-7213-40ea-97c7-fcd5c0af1826",
+            "component_type": "SphereCollider"
+          }
+        },
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "d46bf33e-e740-4ad7-967c-7206f37cc39e",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Radius": 80,
+          "Static": false
+        },
+        {
+          "__type": "Sandbox.Prop",
+          "__guid": "46fc9772-6861-4c2a-8914-a1b56b08681e",
+          "BodyGroups": 18446744073709551615,
+          "Health": 2000,
+          "IsStatic": true,
+          "Model": "models/sbox_props/concrete_barrier/concrete_barrier.vmdl",
+          "Tint": "1,1,1,1"
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -346,6 +386,8 @@
   "Title": "dev",
   "Description": "",
   "ResourceVersion": 1,
-  "__references": [],
+  "__references": [
+    "facepunch.concrete_barrier"
+  ],
   "__version": 1
 }

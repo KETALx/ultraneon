@@ -1,0 +1,95 @@
+{
+  "Model": null,
+  "Description": "",
+  "BlendMode": "Masked",
+  "nodes": [
+    {
+      "_class": "Result",
+      "DefaultOpacity": 1,
+      "DefaultRoughness": 1,
+      "DefaultMetalness": 0,
+      "DefaultAmbientOcclusion": 1,
+      "Identifier": "0",
+      "Position": "0,0",
+      "Albedo": {
+        "Identifier": "1",
+        "Output": "Result"
+      },
+      "Opacity": {
+        "Identifier": "2",
+        "Output": "Result"
+      },
+      "Roughness": {
+        "Identifier": "3",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "TextureSampler",
+      "Image": "materials/dev/white_color.tga",
+      "Sampler": {
+        "Filter": "Point"
+      },
+      "UI": {
+        "Name": "Color",
+        "Default": "1,1,1,1",
+        "CustomExtension": "",
+        "SrgbRead": true,
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "1",
+      "Position": "-448,-176"
+    },
+    {
+      "_class": "TextureSampler",
+      "Image": "materials/dev/white_color.tga",
+      "Sampler": {
+        "Filter": "Point"
+      },
+      "UI": {
+        "Name": "Transparency",
+        "Default": "1,1,1,1",
+        "Extension": "Trans",
+        "CustomExtension": "",
+        "ColorSpace": "Linear",
+        "SrgbRead": true,
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "2",
+      "Position": "-448,64"
+    },
+    {
+      "_class": "TextureSampler",
+      "Image": "materials/dev/white_color.tga",
+      "Sampler": {
+        "Filter": "Point"
+      },
+      "UI": {
+        "Name": "Roughness",
+        "Default": "1,1,1,1",
+        "Extension": "Rough",
+        "CustomExtension": "",
+        "ColorSpace": "Linear",
+        "SrgbRead": true,
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "3",
+      "Position": "-448,272"
+    }
+  ]
+}
