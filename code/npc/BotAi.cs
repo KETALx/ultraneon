@@ -1,6 +1,8 @@
 using Sandbox;
 using Sandbox.Citizen;
 using Ultraneon;
+using Ultraneon.Domain;
+using Ultraneon.Player;
 
 public sealed class BotAi : BaseNeonCharacterEntity
 {

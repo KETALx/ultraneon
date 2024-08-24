@@ -1,6 +1,6 @@
 @using Sandbox
 @using Sandbox.UI
-@using Ultraneon.Events
+@using Ultraneon.Player
 @inherits PanelComponent
 @attribute [StyleSheet]
 @namespace Ultraneon.UI
@@ -19,12 +19,10 @@
 @code
 {
 	[Property]
-	PlayerNeon Player { get; set; }
+	public PlayerNeon Player { get; set; }
 
 	[Property]
-	PlayerInventory Inventory { get; set; }
-
-	private AmmoPanel ammoPanel;
+	public PlayerInventory Inventory { get; set; }
 
 	protected override void OnEnabled()
 	{
@@ -38,7 +36,7 @@
 		if ( !Player.IsValid() ) return 0;
 
 		var hash = System.HashCode.Combine(
-			((BaseNeonCharacterEntity)Player).Health,
+			Player?.Health,
 			Inventory?.SelectedSlot,
 			Inventory?.ActiveWeapon?.WeaponType,
 			Inventory?.ActiveWeapon?.CurrentAmmo,
@@ -46,5 +44,15 @@
 		);
 
 		return hash;
+	}
+
+	public void Show()
+	{
+		Panel.SetClass( "hidden", false );
+	}
+
+	public void Hide()
+	{
+		Panel.SetClass( "hidden", true );
 	}
 }

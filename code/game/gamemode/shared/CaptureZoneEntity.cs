@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Sandbox.Events;
 using Ultraneon;
-using Ultraneon.Events;
+using Ultraneon.Domain;
+using Ultraneon.Domain.Events;
+using Ultraneon.Player;
 
 [Category( "Ultraneon" )]
 [Icon( "place" )]
@@ -28,7 +30,7 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 	[Property, HostSync]
 	public Team ControllingTeam { get; set; } = Team.Neutral;
 
-	[Property,ReadOnly, HostSync]
+	[Property, ReadOnly, HostSync]
 	public float CaptureProgress { get; set; } = 0f;
 
 	[Property]
@@ -37,10 +39,10 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 	[Property]
 	public Action<Team> OnCaptureAction { get; set; }
 
-
 	public float MinimapX { get; set; }
 	public float MinimapY { get; set; }
 	public Team PreviousTeam { get; set; }
+
 	public bool HasChanged { get; set; }
 
 	private TimeSince timeSinceLastCapture;
@@ -89,10 +91,10 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 
 			timeSinceLastCapture = 0f;
 		}
-		else if(CaptureProgress > 0)
+		else if ( CaptureProgress > 0 )
 		{
 			CaptureProgress -= Time.Delta / CaptureTime;
-		}/*
+		} /*
 		else if ( timeSinceLastCapture > 5f && ControllingTeam != Team.Neutral )
 		{
 			CaptureProgress += Time.Delta / CaptureTime;
@@ -157,7 +159,7 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 		PreviousTeam = previousTeam;
 		GameObject.Dispatch( new CaptureZoneEvent( PointName, previousTeam, ControllingTeam ) );
 
-		if(OnCaptureAction != null) OnCaptureAction(previousTeam);
+		if ( OnCaptureAction != null ) OnCaptureAction( previousTeam );
 	}
 
 	private void OnPointNeutralized( Team previousTeam )

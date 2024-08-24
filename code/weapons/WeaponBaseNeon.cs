@@ -1,6 +1,7 @@
 using Sandbox.Events;
 using System.Runtime.CompilerServices;
-using Ultraneon.Events;
+using Ultraneon.Domain.Events;
+using Ultraneon.Player;
 
 namespace Ultraneon
 {

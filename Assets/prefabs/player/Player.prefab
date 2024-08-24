@@ -8,20 +8,22 @@
     "NetworkMode": 1,
     "Components": [
       {
-        "__type": "Ultraneon.PlayerNeon",
-        "__guid": "98a827c8-40ab-4441-8a5d-5f78d88e626f",
+        "__type": "Ultraneon.Player.PlayerNeon",
+        "__guid": "6803c03e-3d30-4c2a-8a2d-5abffc3b51af",
         "CaptureTime": 15,
+        "CurrentTeam": "Neutral",
+        "HealAmount": 10,
         "HealInterval": 5,
-        "health": 0,
+        "Health": 100,
         "isAlive": true,
         "MaxHealth": 100,
         "RespawnDelay": 5
       },
       {
-        "__type": "PlayerInventory",
+        "__type": "Ultraneon.Player.PlayerInventory",
         "__guid": "417e178e-d57c-41af-bc09-f073df7e7b8e",
         "SelectedSlot": 0,
-        "weapons": [
+        "Weapons": [
           null,
           null,
           null,

@@ -1,5 +1,5 @@
 {
-  "__guid": "447dc9fe-186e-4e81-bcb6-67b40c1a57b2",
+  "__guid": "d20f54fb-721a-403c-a539-2343c79cd9f7",
   "GameObjects": [
     {
       "__guid": "b87199b9-b058-4432-a87e-7e047b6014f7",
@@ -153,33 +153,120 @@
       "__guid": "c84b5356-7419-4e06-8417-f48be4bd04b8",
       "Flags": 0,
       "Name": "#UI",
+      "Enabled": true
+    },
+    {
+      "__guid": "340972f3-1927-4daf-84a2-ab0d35951d21",
+      "Flags": 0,
+      "Name": "#LOGIC",
+      "Position": "113.0441,113.5441,-158.0756",
       "Enabled": true,
       "Children": [
         {
-          "__guid": "a047f7a0-442b-4744-bc9c-f5f4142657d4",
+          "__guid": "a98f3866-d7bb-452e-ad9f-ea9c71260d19",
           "Flags": 0,
-          "Name": "playerscreen",
+          "Name": "NeonLogic",
+          "Position": "0,0,0",
           "Enabled": true,
-          "Components": [
-            {
-              "__type": "Sandbox.ScreenPanel",
-              "__guid": "20e3adde-15de-4bbf-b6af-d16a96ccc4a6",
-              "AutoScreenScale": true,
-              "Opacity": 1,
-              "Scale": 1,
-              "ZIndex": 100
-            }
-          ],
           "Children": [
             {
-              "__guid": "1ffc6806-20fc-4af3-9903-d63b9704736c",
+              "__guid": "5a572586-cede-4970-8d5b-3b7b1f8fbad8",
               "Flags": 0,
-              "Name": "PlayerHud",
+              "Name": "Services",
+              "Position": "-940.3207,-368.3344,459.3776",
               "Enabled": true,
               "Components": [
                 {
-                  "__type": "Ultraneon.UI.PlayerUI",
-                  "__guid": "68052205-1836-4e1b-b6ec-6a9c929e9a06"
+                  "__type": "Ultraneon.Services.GameService",
+                  "__guid": "b3d47f50-5dd2-42b7-900b-00e48f995255"
+                },
+                {
+                  "__type": "Ultraneon.Services.UiService",
+                  "__guid": "c7c5dd06-f7cc-4829-a42a-e982ef690d62",
+                  "CanvasTag": "canvasroot",
+                  "GameService": {
+                    "_type": "component",
+                    "component_id": "b3d47f50-5dd2-42b7-900b-00e48f995255",
+                    "go": "5a572586-cede-4970-8d5b-3b7b1f8fbad8",
+                    "component_type": "GameService"
+                  },
+                  "HudPanel": {
+                    "_type": "component",
+                    "component_id": "c37f464f-8713-4fcb-a448-33e783553847",
+                    "go": "08c4b22e-739f-416b-b174-e6eb861bfec5",
+                    "component_type": "Hud"
+                  },
+                  "MainMenuPanel": {
+                    "_type": "component",
+                    "component_id": "1c7c1c9f-1afd-41f1-b80e-e84ec7058460",
+                    "go": "0d7feda3-e151-4e4a-a422-b4de04b527a5",
+                    "component_type": "MainMenu"
+                  },
+                  "RootPanel": {
+                    "_type": "component",
+                    "component_id": "44ef8e4e-330d-47f0-b2e0-e002692daba1",
+                    "go": "e56ceab5-d914-45dd-a1e1-daefb4329929",
+                    "component_type": "ScreenPanel"
+                  }
+                },
+                {
+                  "__type": "Ultraneon.Game.GameMode.Sp.SingleplayerGameMode",
+                  "__guid": "3cd285ea-f7f3-4556-b779-d19ca4aa5513",
+                  "CaptureTime": 15,
+                  "CaptureZones": [],
+                  "HealAmount": 10,
+                  "HealInterval": 5,
+                  "MaxBots": 10,
+                  "RespawnDelay": 3,
+                  "ScoreCaptureZone": 100,
+                  "ScoreLoseZone": 50,
+                  "ScoreToWin": 1000
+                }
+              ]
+            },
+            {
+              "__guid": "e56ceab5-d914-45dd-a1e1-daefb4329929",
+              "Flags": 0,
+              "Name": "RootCanvas",
+              "Position": "0,0,0",
+              "Tags": "canvasroot",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.ScreenPanel",
+                  "__guid": "44ef8e4e-330d-47f0-b2e0-e002692daba1",
+                  "AutoScreenScale": true,
+                  "Opacity": 1,
+                  "Scale": 1,
+                  "ZIndex": 100
+                }
+              ],
+              "Children": [
+                {
+                  "__guid": "08c4b22e-739f-416b-b174-e6eb861bfec5",
+                  "Flags": 0,
+                  "Name": "Hud",
+                  "Position": "0,0,0",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Ultraneon.UI.Hud",
+                      "__guid": "c37f464f-8713-4fcb-a448-33e783553847"
+                    }
+                  ]
+                },
+                {
+                  "__guid": "0d7feda3-e151-4e4a-a422-b4de04b527a5",
+                  "Flags": 0,
+                  "Name": "Menu",
+                  "Position": "0,0,0",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Ultraneon.UI.MainMenu",
+                      "__guid": "1c7c1c9f-1afd-41f1-b80e-e84ec7058460"
+                    }
+                  ]
                 }
               ]
             }
@@ -237,27 +324,14 @@
       "Components": [
         {
           "__type": "BotAi",
-          "__guid": "090b4747-b2f5-43f5-a2f2-daf60f1debd0",
-          "Agent": {
-            "_type": "component",
-            "component_id": "4eec2632-8196-40fb-8daf-296e6517cdff",
-            "go": "e3a6c309-0a49-4905-b357-6091e0c24a0d",
-            "component_type": "NavMeshAgent"
-          },
-          "AnimationHelper": {
-            "_type": "component",
-            "component_id": "273f8c95-b5d5-4927-8ebd-5fb6883f749c",
-            "go": "e3a6c309-0a49-4905-b357-6091e0c24a0d",
-            "component_type": "CitizenAnimationHelper"
-          },
+          "__guid": "e6a91e7e-9615-4c6f-bbd1-4d85c7f85b98",
           "AttackRange": 200,
           "CurrentTeam": "Enemy",
-          "EntityName": "enemy_regular",
           "Health": 100,
           "Id": "00000000-0000-0000-0000-000000000000",
           "isAlive": true,
           "MaxHealth": 100,
-          "StopDistance": 600
+          "StopDistance": 100
         },
         {
           "__type": "Sandbox.SkinnedModelRenderer",
@@ -691,32 +765,6 @@
           "IsTrigger": true,
           "Scale": "97.20003,147.7998,87.00007",
           "Static": false
-        }
-      ]
-    },
-    {
-      "__guid": "f2d1c66d-773f-436b-8490-ad1d8cf4d369",
-      "Flags": 0,
-      "Name": "Game Service",
-      "Position": "-827.2766,-254.7903,301.302",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Ultraneon.GameService",
-          "__guid": "ba0f7a02-c3b4-410d-8822-23f69915f107",
-          "CaptureZones": [
-            {
-              "_type": "component",
-              "component_id": "80c2b359-9700-4704-9e85-a3f83cc8bfb2",
-              "go": "ff9c3881-ceb5-4b55-9046-cb597e8d4786",
-              "component_type": "CaptureZoneEntity"
-            }
-          ],
-          "isMultiplayer": false,
-          "RoundTime": 600,
-          "ScoreCaptureZone": 100,
-          "ScoreLoseZone": 50,
-          "ScoreToWin": 0
         }
       ]
     }

@@ -1,12 +1,4 @@
-PlayerUI {
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  top: 0px;
-  display: flex;
-  pointer-events: none;
-
+Hud {
   .icon {
     font-family: Material Icons;
   }
