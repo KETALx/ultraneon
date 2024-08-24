@@ -173,6 +173,7 @@ namespace Ultraneon
 			var damageable = shotTrace.GameObject?.Components.Get<IDamageable>();
 			if ( damageable != null )
 			{
+				Log.Info(damageable.ToString() );
 				float totalDamage = CalculateDamage( shotTrace );
 				ApplyDamage( damageable, totalDamage, shotTrace );
 			}

@@ -89,7 +89,7 @@
               "__guid": "2e16499c-6942-4754-9861-54ebac757558",
               "__version": 1,
               "EnableCollision": true,
-              "MapName": "maps/map1.vmap",
+              "MapName": "maps/sp_cp_compound.vmap",
               "NoOrigin": false,
               "UseMapFromLaunch": false
             },
@@ -160,13 +160,14 @@
               "__guid": "008b59da-2441-4c2e-b9a5-bfc6ca17fd64",
               "Flags": 0,
               "Name": "2D Skybox",
+              "Rotation": "0,0,0.1305262,0.9914449",
               "Tags": "skybox",
               "Enabled": true,
               "Components": [
                 {
                   "__type": "Sandbox.SkyBox2D",
                   "__guid": "6a280ad8-a6fa-4706-8597-053ac1bf5ff3",
-                  "SkyMaterial": "materials/skybox/skybox_dark_01.vmat",
+                  "SkyMaterial": "materials/world/nature/sky/sky_orange.vmat",
                   "Tint": "1,1,1,1"
                 }
               ]
@@ -200,20 +201,125 @@
                 {
                   "__type": "Sandbox.CubemapFog",
                   "__guid": "58b7530e-13ba-46da-99e2-e39ae3a001ba",
-                  "Blur": 0.08,
-                  "EndDistance": 2048,
+                  "Blur": 0,
+                  "EndDistance": 3000,
                   "FalloffExponent": 2,
                   "HeightExponent": 2,
                   "HeightStart": 2000,
                   "HeightWidth": 0,
                   "StartDistance": 1024,
-                  "Tint": "1,1,1,1"
+                  "Tint": "1,1,1,0"
+                }
+              ]
+            },
+            {
+              "__guid": "0480d3c3-f506-4b46-a900-ae58d252d452",
+              "Flags": 0,
+              "Name": "Gradient Fog",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.GradientFog",
+                  "__guid": "15569457-7763-4c97-b4c4-13170aee52d3",
+                  "Color": "0.82326,0.50672,0.22975,1",
+                  "EndDistance": 1024,
+                  "FalloffExponent": 2.9999993,
+                  "Height": 1024,
+                  "StartDistance": 256,
+                  "VerticalFalloffExponent": 2
                 }
               ]
             }
           ]
         }
       ]
+    },
+    {
+      "__guid": "854e0cd8-f4e6-4e9a-a47f-8d9119b5c6cb",
+      "Flags": 0,
+      "Name": "enemy_regular",
+      "Position": "751.3261,2459.83,464",
+      "Tags": "bot",
+      "Enabled": true,
+      "__Prefab": "prefabs/entites/enemy_regular.prefab",
+      "__PrefabVariables": {}
+    },
+    {
+      "__guid": "c6a2147c-663d-49bb-b733-34ab8ec2377f",
+      "Flags": 0,
+      "Name": "enemy_regular (1)",
+      "Position": "1245.461,2685.203,451.9651",
+      "Rotation": "0.00002197921,0.00002369285,-0.3651027,0.9309671",
+      "Tags": "bot",
+      "Enabled": true,
+      "__Prefab": "prefabs/entites/enemy_regular.prefab",
+      "__PrefabVariables": {}
+    },
+    {
+      "__guid": "c595c651-bec3-4c3c-9564-27acdbb4a7d2",
+      "Flags": 0,
+      "Name": "enemy_regular (2)",
+      "Position": "1320.457,2262.25,451.9732",
+      "Rotation": "-0.00007751584,-0.00005310774,0.9552394,-0.2958337",
+      "Tags": "bot",
+      "Enabled": true,
+      "__Prefab": "prefabs/entites/enemy_regular.prefab",
+      "__PrefabVariables": {}
+    },
+    {
+      "__guid": "69d27e27-a878-4f56-a028-3857e3669c99",
+      "Flags": 0,
+      "Name": "enemy_regular (4)",
+      "Position": "1154.187,2394.068,438.8634",
+      "Rotation": "-0.07635444,0.0314731,0.9213788,0.3797901",
+      "Tags": "bot",
+      "Enabled": true,
+      "__Prefab": "prefabs/entites/enemy_regular.prefab",
+      "__PrefabVariables": {}
+    },
+    {
+      "__guid": "acc1d8d4-5f3e-447c-991d-ff8bf231e54d",
+      "Flags": 0,
+      "Name": "weapon_auto (1)",
+      "Position": "677.9223,2064.621,514.2096",
+      "Rotation": "-0.09167701,0.06799474,0.7979485,0.5918194",
+      "Tags": "trigger",
+      "Enabled": true,
+      "__Prefab": "prefabs/weapons/weapon_auto.prefab",
+      "__PrefabVariables": {}
+    },
+    {
+      "__guid": "6587127d-cf83-4a44-af74-8a640c215e49",
+      "Flags": 0,
+      "Name": "weapon_bolt",
+      "Position": "683.2449,2002.277,521.4719",
+      "Rotation": "-0.03570437,-0.007579774,0.9775484,-0.2075254",
+      "Tags": "trigger",
+      "Enabled": true,
+      "__Prefab": "prefabs/weapons/weapon_bolt.prefab",
+      "__PrefabVariables": {}
+    },
+    {
+      "__guid": "5a3c9d1f-5990-468d-b330-ef6576c319bb",
+      "Flags": 0,
+      "Name": "weapon_pistol",
+      "Position": "642.8065,2093.256,493.5216",
+      "Rotation": "-0.1177916,0.07804582,0.8252572,0.5467948",
+      "Tags": "trigger",
+      "Enabled": true,
+      "__Prefab": "prefabs/weapons/weapon_pistol.prefab",
+      "__PrefabVariables": {}
+    },
+    {
+      "__guid": "d15e58bb-45c5-40d4-9822-e808ef55a319",
+      "Flags": 0,
+      "Name": "weapon_semi",
+      "Position": "646.3159,2003.368,538.0869",
+      "Rotation": "-0.03570437,-0.007579774,0.9775484,-0.2075254",
+      "Tags": "trigger",
+      "Enabled": true,
+      "__Prefab": "prefabs/weapons/weapon_semi.prefab",
+      "__PrefabVariables": {}
     }
   ],
   "SceneProperties": {

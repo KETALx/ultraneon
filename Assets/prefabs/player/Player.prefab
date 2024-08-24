@@ -8,19 +8,20 @@
     "NetworkMode": 1,
     "Components": [
       {
-        "__type": "Ultraneon.Player.PlayerNeon",
-        "__guid": "6803c03e-3d30-4c2a-8a2d-5abffc3b51af",
+        "__type": "Ultraneon.PlayerNeon",
+        "__guid": "98a827c8-40ab-4441-8a5d-5f78d88e626f",
         "CaptureTime": 15,
         "CurrentTeam": "Neutral",
         "HealAmount": 10,
         "HealInterval": 5,
-        "Health": 100,
+        "Health": 0,
+        "Id": "00000000-0000-0000-0000-000000000000",
         "isAlive": true,
         "MaxHealth": 100,
         "RespawnDelay": 5
       },
       {
-        "__type": "Ultraneon.Player.PlayerInventory",
+        "__type": "Ultraneon.PlayerInventory",
         "__guid": "417e178e-d57c-41af-bc09-f073df7e7b8e",
         "SelectedSlot": 0,
         "Weapons": [
@@ -45,9 +46,9 @@
           "go": "c644d827-81ae-43b7-9acf-b99cf657628c",
           "component_type": "CharacterController"
         },
-        "CrouchMoveSpeed": 140,
+        "CrouchMoveSpeed": 250,
         "JumpForce": 350,
-        "WalkMoveSpeed": 320
+        "WalkMoveSpeed": 400
       },
       {
         "__type": "Sandbox.CharacterController",
@@ -96,14 +97,6 @@
         }
       },
       {
-        "__type": "Sandbox.BoxCollider",
-        "__guid": "bc9b0917-021a-42f7-83e9-096aa7255c1b",
-        "Center": "0,0,36",
-        "IsTrigger": false,
-        "Scale": "32,32,72",
-        "Static": false
-      },
-      {
         "__type": "Sandbox.ModelHitboxes",
         "__guid": "a77fc76f-3121-47a3-aba7-1c9bec6e3239",
         "Renderer": {
@@ -112,6 +105,14 @@
           "go": "c644d827-81ae-43b7-9acf-b99cf657628c",
           "component_type": "SkinnedModelRenderer"
         }
+      },
+      {
+        "__type": "Sandbox.BoxCollider",
+        "__guid": "bc9b0917-021a-42f7-83e9-096aa7255c1b",
+        "Center": "0,0,36",
+        "IsTrigger": false,
+        "Scale": "32,32,72",
+        "Static": false
       }
     ],
     "Children": [
