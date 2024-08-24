@@ -20,6 +20,13 @@ public class GameService : Component, IGameEventHandler<GameModeActivatedEvent>
 	{
 		if ( IsProxy ) return;
 		InitializeService();
+		
+		var gameMode = GameModes?.FirstOrDefault();
+		if ( gameMode != null )
+		{
+			ActiveGameMode.Initialize();
+			ActiveGameMode.StartGame();
+		}
 	}
 
 	protected override void OnUpdate()

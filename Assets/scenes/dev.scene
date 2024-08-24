@@ -217,7 +217,6 @@
                   "HealAmount": 10,
                   "HealInterval": 5,
                   "MaxBots": 10,
-                  "RespawnDelay": 3,
                   "ScoreCaptureZone": 100,
                   "ScoreLoseZone": 50,
                   "ScoreToWin": 1000
@@ -260,7 +259,6 @@
                   "Flags": 0,
                   "Name": "Menu",
                   "Position": "0,0,0",
-                  "Enabled": true,
                   "Components": [
                     {
                       "__type": "Ultraneon.UI.MainMenu",
