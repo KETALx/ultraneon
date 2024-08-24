@@ -126,13 +126,15 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 
     private void OnStartCapture()
     {
-        Log.Info($"{PointName} is being captured!");
+        Log.Info($"[CaptureZoneEntity] {PointName} is being captured!");
+        GameObject.Dispatch( new UiInfoFeedEvent( $"{{PointName}} is being captured!", UiInfoFeedType.Warning ) );
         // TODO: Send a lightwave in radius to alert other players
     }
 
     private void OnPointCaptured(Team previousTeam)
     {
-        Log.Info($"{PointName} has been captured by {ControllingTeam}!");
+	    GameObject.Dispatch( new UiInfoFeedEvent( $"{{PointName}} has been captured by {{ControllingTeam}}!", UiInfoFeedType.Success ) );
+        Log.Info($"[CaptureZoneEntity] {PointName} has been captured by {ControllingTeam}!");
         PreviousTeam = previousTeam;
         GameObject.Dispatch(new CaptureZoneEvent(PointName, previousTeam, ControllingTeam));
 

@@ -99,13 +99,14 @@ public class SingleplayerGameMode : GameMode,
 		SpawnPlayer();
 		gameStarted = true;
 		warmupPhase = true;
-		GameObject.Dispatch( new UiInfoFeedEvent( "Capture the zone to start the game!", UiInfoFeedType.Normal ) );
 		ResumeGame();
+		ShowInfoMessage( "Capture the zone to start the game!", UiInfoFeedType.Normal );
 		Log.Info( "[SinglePlayerGameMode] Let there be light!" );
 	}
 
 	public override void EndGame()
 	{
+		ShowInfoMessage( "Game over!", UiInfoFeedType.Warning );
 		gameStarted = false;
 		int maxWave = WaveManager.GetCurrentWave();
 		GameObject.Dispatch( new GameOverEvent( maxWave ) );
@@ -141,7 +142,7 @@ public class SingleplayerGameMode : GameMode,
 		{
 			warmupPhase = false;
 			WaveManager.StartWaves();
-			GameObject.Dispatch( new UiInfoFeedEvent( "Zone captured! Prepare for incoming waves!", UiInfoFeedType.Success ) );
+			ShowInfoMessage( "Zone captured! Prepare for incoming waves!", UiInfoFeedType.Success );
 		}
 	}
 
@@ -169,7 +170,7 @@ public class SingleplayerGameMode : GameMode,
 		isOvertime = true;
 		overtimeEnd = OvertimeSeconds;
 		player.EnterOvertime();
-		GameObject.Dispatch( new UiInfoFeedEvent( $"OVERTIME! Recapture the zone in {OvertimeSeconds} seconds or the game is over!", UiInfoFeedType.Warning ) );
+		ShowInfoMessage( $"OVERTIME! Recapture the zone in {OvertimeSeconds} seconds or the game is over!", UiInfoFeedType.Warning );
 
 		foreach ( var zone in CaptureZones )
 		{
@@ -181,7 +182,7 @@ public class SingleplayerGameMode : GameMode,
 	{
 		isOvertime = false;
 		player.ExitOvertime();
-		GameObject.Dispatch( new UiInfoFeedEvent( "Zone recaptured! Continue defending!", UiInfoFeedType.Success ) );
+		ShowInfoMessage( "Zone recaptured! Continue defending!", UiInfoFeedType.Success );
 
 		foreach ( var zone in CaptureZones )
 		{
@@ -198,7 +199,7 @@ public class SingleplayerGameMode : GameMode,
 		}
 		else if ( remainingTime <= 10 && (int)remainingTime != (int)(remainingTime + Time.Delta) )
 		{
-			GameObject.Dispatch( new UiInfoFeedEvent( $"Overtime ending in {(int)remainingTime} seconds!", UiInfoFeedType.Warning ) );
+			ShowInfoMessage( $"Overtime ending in {(int)remainingTime} seconds!", UiInfoFeedType.Warning );
 		}
 	}
 
@@ -220,7 +221,7 @@ public class SingleplayerGameMode : GameMode,
 
 	public void OnGameEvent( PlayerSpawnEvent eventArgs )
 	{
-		GameObject.Dispatch( new UiInfoFeedEvent( $"Player spawned for team {eventArgs.Team}", UiInfoFeedType.Normal ) );
+		ShowInfoMessage( $"Player spawned for team {eventArgs.Team}", UiInfoFeedType.Normal );
 	}
 
 	public void OnGameEvent( CharacterDeathEvent eventArgs )
@@ -254,5 +255,10 @@ public class SingleplayerGameMode : GameMode,
 	{
 		// TODO: Implement logic for determining if it's a stylish kill (airborne, wallbang)
 		return false;
+	}
+
+	private void ShowInfoMessage( string message, UiInfoFeedType type )
+	{
+		GameObject.Dispatch( new UiInfoFeedEvent( message, type ) );
 	}
 }

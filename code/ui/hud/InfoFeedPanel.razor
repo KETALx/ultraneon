@@ -7,7 +7,7 @@
 	<div class="info-feed">
 		@foreach ( var message in Messages )
 		{
-			<div class="message @message.Type.ToString().ToLower()">
+			<div class="message @message.Type.ToString().ToLower() @(message.TimeSinceAdded > 4.8 ? "hidden" : "")">
 				@message.Text
 			</div>
 		}
