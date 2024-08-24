@@ -1,0 +1,47 @@
+InfoFeedPanel {
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  transform: translateX(-25%);
+  width: 100%;
+  max-width: 600px;
+  z-index: 100;
+
+  .info-feed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .message {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+
+    &:nth-child(1) {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &.normal {
+      background-color: rgba(52, 152, 219, 0.8);
+      color: white;
+    }
+
+    &.warning {
+      background-color: rgba(241, 196, 15, 0.8);
+      color: #333;
+    }
+
+    &.success {
+      background-color: rgba(46, 204, 113, 0.8);
+      color: white;
+    }
+  }
+}

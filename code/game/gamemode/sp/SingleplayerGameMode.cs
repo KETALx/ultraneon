@@ -1,8 +1,11 @@
 ﻿using Sandbox.Events;
 using System;
+using System.Linq;
 using Ultraneon.Domain;
 using Ultraneon.Domain.Events;
 using Ultraneon.Player;
+using Ultraneon.Game;
+using Ultraneon.Services;
 
 namespace Ultraneon.Game.GameMode.Sp;
 
@@ -16,19 +19,7 @@ public class SingleplayerGameMode : GameMode,
 	public float CaptureTime { get; set; } = 15f;
 
 	[Property]
-	public float HealInterval { get; set; } = 5f;
-
-	[Property]
-	public float HealAmount { get; set; } = 10f;
-
-	[Property]
-	public int ScoreLoseZone { get; set; } = 50;
-
-	[Property]
-	public int ScoreCaptureZone { get; set; } = 100;
-
-	[Property]
-	public int ScoreToWin { get; set; } = 1000;
+	public float OvertimeSeconds { get; set; } = 60f;
 
 	[Property]
 	public List<CaptureZoneEntity> CaptureZones { get; set; } = new();
@@ -37,17 +28,13 @@ public class SingleplayerGameMode : GameMode,
 	public GameObject PlayerPrefab { get; set; }
 
 	[Property]
-	public GameObject BotPrefab { get; set; }
-
-	[Property]
-	public int MaxBots { get; set; } = 10;
+	public WaveManager WaveManager { get; set; }
 
 	private PlayerNeon player;
-	private List<BotAi> bots = new();
-	private Dictionary<Team, int> teamScores = new();
-	private Dictionary<BaseNeonCharacterEntity, TimeSince> lastHealTimes = new();
 	private bool gameStarted;
-	private bool gameEnded;
+	private bool warmupPhase = true;
+	private TimeUntil overtimeEnd;
+	private bool isOvertime;
 
 	public override void Initialize()
 	{
@@ -58,158 +45,196 @@ public class SingleplayerGameMode : GameMode,
 			zone.CaptureProgress = 0f;
 		}
 
-		teamScores[Team.Player] = 0;
-		teamScores[Team.Enemy] = 0;
-		gameEnded = false;
+		gameStarted = false;
+		warmupPhase = true;
+		isOvertime = false;
+		PauseGame();
+		Log.Info( "[SinglePlayerGameMode] SingleplayerGameMode initialized" );
 	}
 
 	public override void Cleanup()
 	{
 		CaptureZones.Clear();
-		bots.Clear();
 		gameStarted = false;
+		Log.Info( "[SinglePlayerGameMode] SingleplayerGameMode cleaned up" );
 	}
 
 	public override void LogicUpdate()
 	{
-		if ( !gameStarted || gameEnded ) return;
-
-		UpdateScores();
-		UpdateHealing();
-		SpawnBots();
-
-		if ( teamScores[Team.Player] >= ScoreToWin )
+		if ( !gameStarted )
 		{
-			EndGame( true );
+			Log.Warning( "[SingleplayerGameMode] LogicUpdate called but game not started" );
+			return;
 		}
-		else if ( teamScores[Team.Enemy] >= ScoreToWin )
+
+		if ( warmupPhase )
 		{
-			EndGame( false );
+			CheckWarmupEnd();
+		}
+		else
+		{
+			UpdateGameState();
+			CheckGameOver();
 		}
 	}
 
-	public override void PhysicsUpdate()
+	public override void PhysicsUpdate() { }
+
+	public override void PauseGame()
 	{
+		Log.Info( "[SinglePlayerGameMode] Paused Game" );
+		Scene.TimeScale = 0.0f;
+		// TODO: Show pause menu
+	}
+
+	public override void ResumeGame()
+	{
+		Log.Info( "[SinglePlayerGameMode] Resumed Game" );
+		Scene.TimeScale = 1.0f;
+		// TODO: Hide pause menu
 	}
 
 	public override void StartGame()
 	{
 		SpawnPlayer();
 		gameStarted = true;
-		GameObject.Dispatch( new GameModeActivatedEvent( this ) );
+		warmupPhase = true;
+		GameObject.Dispatch( new UiInfoFeedEvent( "Capture the zone to start the game!", UiInfoFeedType.Normal ) );
+		ResumeGame();
+		Log.Info( "[SinglePlayerGameMode] Let there be light!" );
 	}
 
 	public override void EndGame()
 	{
-	}
-
-	private void EndGame( bool playerWon )
-	{
-		gameEnded = true;
-		Log.Info( $"[SingleplayerGameMode] Game Over! {(playerWon ? "Player won!" : "Enemies won!")}" );
-		// TODO: Implement game end logic (show results, restart, etc.)
-	}
-
-	public override void PauseGame()
-	{
-		Scene.TimeScale = 0.0f;
-	}
-
-	public override void ResumeGame()
-	{
-		Scene.TimeScale = 1.0f;
-	}
-
-	private void UpdateScores()
-	{
-		foreach ( var zone in CaptureZones )
-		{
-			if ( zone.ControllingTeam != Team.Neutral )
-			{
-				teamScores[zone.ControllingTeam]++;
-			}
-		}
-	}
-
-	private void UpdateHealing()
-	{
-		foreach ( var character in lastHealTimes.Keys.ToList() )
-		{
-			if ( character.isAlive && IsInCapturedZone( character ) && lastHealTimes[character] >= HealInterval )
-			{
-				character.Health = Math.Min( character.Health + HealAmount, character.MaxHealth );
-				lastHealTimes[character] = 0f;
-			}
-		}
-	}
-
-	private bool IsInCapturedZone( BaseNeonCharacterEntity character )
-	{
-		return CaptureZones.Any( zone => zone.ControllingTeam == character.CurrentTeam && zone.IsPlayerInZone( (PlayerNeon)character ) );
+		gameStarted = false;
+		int maxWave = WaveManager.GetCurrentWave();
+		GameObject.Dispatch( new GameOverEvent( maxWave ) );
 	}
 
 	private void SpawnPlayer()
 	{
-		var spawnPoint = Scene.GetAllComponents<SpawnPoint>().FirstOrDefault();
+		Log.Info( "[SingleplayerGameMode] Attempting to spawn player" );
+		var spawnPoint = Scene.GetAllComponents<SpawnPoint>().FirstOrDefault( s => s.Tags.Contains( "player" ) || s.GameObject.Name.Equals( "info_player_start" ) );
 		if ( spawnPoint != null && PlayerPrefab != null )
 		{
 			var playerObject = PlayerPrefab.Clone( spawnPoint.Transform.Position, spawnPoint.Transform.Rotation );
 			player = playerObject.Components.Get<PlayerNeon>();
 			if ( player != null )
 			{
-				lastHealTimes[player] = 0f;
+				Log.Info( $"[SingleplayerGameMode] Player spawned at {spawnPoint.Transform.Position}" );
 				GameObject.Dispatch( new PlayerSpawnEvent( Team.Player ) );
 			}
+			else
+			{
+				Log.Error( "[SingleplayerGameMode] Failed to get PlayerNeon component from spawned player object" );
+			}
+		}
+		else
+		{
+			Log.Error( "[SingleplayerGameMode] Failed to spawn player: No valid spawn point or player prefab" );
 		}
 	}
 
-	private void SpawnBots()
+	private void CheckWarmupEnd()
 	{
-		if ( bots.Count < MaxBots )
+		if ( CaptureZones.Any( z => z.ControllingTeam == Team.Player ) )
 		{
-			var spawnPoints = Scene.GetAllComponents<SpawnPoint>().ToList();
-			var spawnPoint = spawnPoints[Random.Shared.Int( 0, spawnPoints.Count - 1 )];
-			if ( spawnPoint != null && BotPrefab != null )
-			{
-				var botObject = BotPrefab.Clone( spawnPoint.Transform.Position, spawnPoint.Transform.Rotation );
-				var bot = botObject.Components.Get<BotAi>();
-				if ( bot != null )
-				{
-					bot.CurrentTeam = Team.Enemy;
-					bots.Add( bot );
-					lastHealTimes[bot] = 0f;
-				}
-			}
+			warmupPhase = false;
+			WaveManager.StartWaves();
+			GameObject.Dispatch( new UiInfoFeedEvent( "Zone captured! Prepare for incoming waves!", UiInfoFeedType.Success ) );
+		}
+	}
+
+	private void UpdateGameState()
+	{
+		bool allZonesEnemyControlled = CaptureZones.All( z => z.ControllingTeam == Team.Enemy );
+
+		if ( allZonesEnemyControlled && !isOvertime )
+		{
+			StartOvertime();
+		}
+		else if ( !allZonesEnemyControlled && isOvertime )
+		{
+			EndOvertime();
+		}
+
+		if ( isOvertime )
+		{
+			UpdateOvertime();
+		}
+	}
+
+	private void StartOvertime()
+	{
+		isOvertime = true;
+		overtimeEnd = OvertimeSeconds;
+		player.EnterOvertime();
+		GameObject.Dispatch( new UiInfoFeedEvent( $"OVERTIME! Recapture the zone in {OvertimeSeconds} seconds or the game is over!", UiInfoFeedType.Warning ) );
+
+		foreach ( var zone in CaptureZones )
+		{
+			zone.AllowBotCapture = false;
+		}
+	}
+
+	private void EndOvertime()
+	{
+		isOvertime = false;
+		player.ExitOvertime();
+		GameObject.Dispatch( new UiInfoFeedEvent( "Zone recaptured! Continue defending!", UiInfoFeedType.Success ) );
+
+		foreach ( var zone in CaptureZones )
+		{
+			zone.AllowBotCapture = true;
+		}
+	}
+
+	private void UpdateOvertime()
+	{
+		float remainingTime = overtimeEnd;
+		if ( remainingTime <= 0 )
+		{
+			EndGame();
+		}
+		else if ( remainingTime <= 10 && (int)remainingTime != (int)(remainingTime + Time.Delta) )
+		{
+			GameObject.Dispatch( new UiInfoFeedEvent( $"Overtime ending in {(int)remainingTime} seconds!", UiInfoFeedType.Warning ) );
+		}
+	}
+
+	private void CheckGameOver()
+	{
+		if ( isOvertime && player.IsDead )
+		{
+			EndGame();
 		}
 	}
 
 	public void OnGameEvent( CaptureZoneEvent eventArgs )
 	{
-		if ( eventArgs.PreviousTeam != Team.Neutral )
+		if ( eventArgs.NewTeam == Team.Player && isOvertime )
 		{
-			teamScores[eventArgs.PreviousTeam] -= ScoreLoseZone;
+			EndOvertime();
 		}
-
-		if ( eventArgs.NewTeam != Team.Neutral )
-		{
-			teamScores[eventArgs.NewTeam] += ScoreCaptureZone;
-		}
-
-		Log.Info( $"Zone {eventArgs.ZoneName} captured by {eventArgs.NewTeam}. Scores - Player: {teamScores[Team.Player]}, Enemy: {teamScores[Team.Enemy]}" );
 	}
 
 	public void OnGameEvent( PlayerSpawnEvent eventArgs )
 	{
-		Log.Info( $"Player spawned for team {eventArgs.Team}" );
+		GameObject.Dispatch( new UiInfoFeedEvent( $"Player spawned for team {eventArgs.Team}", UiInfoFeedType.Normal ) );
 	}
 
 	public void OnGameEvent( CharacterDeathEvent eventArgs )
 	{
-		if ( eventArgs.Killer is BaseNeonCharacterEntity killer )
+		if ( eventArgs.Victim == player )
 		{
-			var scoreAward = eventArgs.IsStylish ? 40 : 10;
-			teamScores[killer.CurrentTeam] += scoreAward;
-			Log.Info( $"{killer.CurrentTeam} scored {scoreAward} points for a kill" );
+			if ( isOvertime )
+			{
+				EndGame();
+			}
+			else
+			{
+				SpawnPlayer();
+			}
 		}
 	}
 
@@ -217,8 +242,6 @@ public class SingleplayerGameMode : GameMode,
 	{
 		if ( eventArgs.Target is BaseNeonCharacterEntity targetEntity )
 		{
-			Log.Info( $"{targetEntity.EntityName} took {eventArgs.Damage} damage from {eventArgs.Attacker?.EntityName ?? "unknown"}. Remaining health: {targetEntity.Health}" );
-
 			if ( targetEntity.Health <= 0 )
 			{
 				var killerEntity = eventArgs.Attacker?.Components.Get<BaseNeonCharacterEntity>();

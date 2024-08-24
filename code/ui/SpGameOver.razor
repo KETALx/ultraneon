@@ -1,0 +1,47 @@
+﻿@using System
+@using Sandbox.UI
+@using Ultraneon.Domain.Events
+@inherits PanelComponent
+@namespace Ultraneon.UI
+@attribute [StyleSheet]
+
+<root class="@( IsVisible ? "visible" : "" )">
+	<div class="content">
+		<h1 class="title">Game Over</h1>
+		<p class="max-wave">Max Wave Reached: @MaxWaveReached</p>
+		<div class="buttons">
+			<button class="button" onclick=@OnRestartClick>Restart</button>
+			<button class="button" onclick=@OnMainMenuClick>Main Menu</button>
+		</div>
+	</div>
+</root>
+
+@code {
+	private bool IsVisible { get; set; }
+	private int MaxWaveReached { get; set; }
+
+	public void Show( int maxWaveReached )
+	{
+		MaxWaveReached = maxWaveReached;
+		IsVisible = true;
+		StateHasChanged();
+	}
+
+	public void Hide()
+	{
+		IsVisible = false;
+		StateHasChanged();
+	}
+
+	private void OnRestartClick()
+	{
+		// TODO: Restart game
+	}
+
+	private void OnMainMenuClick()
+	{
+		// TODO: Return to main menu
+	}
+
+	protected override int BuildHash() => HashCode.Combine( IsVisible, MaxWaveReached );
+}

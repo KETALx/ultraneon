@@ -10,7 +10,9 @@ public class UiService : Component,
 	IGameEventHandler<CharacterDeathEvent>,
 	IGameEventHandler<DamageEvent>,
 	IGameEventHandler<MenuActionEvent>,
-	IGameEventHandler<GameModeActivatedEvent>
+	IGameEventHandler<GameModeActivatedEvent>,
+	IGameEventHandler<UiInfoFeedEvent>,
+	IGameEventHandler<GameOverEvent>
 {
 	[Property]
 	public ScreenPanel RootPanel { get; set; }
@@ -25,6 +27,9 @@ public class UiService : Component,
 	public Hud HudPanel { get; set; }
 
 	[Property]
+	public SpGameOver GameOverPanel { get; set; }
+
+	[Property]
 	public GameService GameService { get; set; }
 
 	protected override void OnStart()
@@ -32,66 +37,57 @@ public class UiService : Component,
 		base.OnStart();
 		RootPanel ??= Scene.GetAllComponents<ScreenPanel>().FirstOrDefault( x => x.GameObject.Tags.Has( CanvasTag ) );
 
-		if ( MainMenuPanel == null )
-		{
-			Log.Warning( "MainMenu panel is not set in UiService" );
-		}
-
-		if ( HudPanel == null )
-		{
-			Log.Warning( "HUD panel is not set in UiService" );
-		}
+		if ( MainMenuPanel == null ) Log.Warning( "MainMenu panel is not set in UiService" );
+		if ( HudPanel == null ) Log.Warning( "HUD panel is not set in UiService" );
+		if ( GameOverPanel == null ) Log.Warning( "GameOverPanel is not set in UiService" );
 
 		ShowHud();
-		// ShowMainMenu(); TODO Enable when I find out why Menu isn't sending events
 	}
 
 	private void ShowMainMenu()
 	{
 		MainMenuPanel?.Show();
 		HudPanel?.Hide();
+		GameOverPanel?.Hide();
 		GameObject.Dispatch( new GamePausedEvent() );
-		Log.Info( "[UiService] ShowMainMenu called" );
 	}
 
 	private void ShowHud()
 	{
 		MainMenuPanel?.Hide();
 		HudPanel?.Show();
+		GameOverPanel?.Hide();
 		GameObject.Dispatch( new GameResumedEvent() );
-		Log.Info( "[UiService] ShowHud called" );
 	}
 
 	public void OnGameEvent( CaptureZoneEvent eventArgs )
 	{
-		// TODO Update UI for zone capture
+		HudPanel?.AddInfoMessage( $"Zone {eventArgs.ZoneName} captured by {eventArgs.NewTeam}!", InfoFeedPanel.InfoType.Success );
 	}
 
 	public void OnGameEvent( PlayerSpawnEvent eventArgs )
 	{
-		// TODO Update UI for player spawn
+		HudPanel?.AddInfoMessage( "Player spawned", InfoFeedPanel.InfoType.Normal );
 	}
 
 	public void OnGameEvent( CharacterDeathEvent eventArgs )
 	{
-		// TODO Update UI for character death
+		HudPanel?.AddInfoMessage( $"{eventArgs.Victim.EntityName} was killed by {eventArgs.Killer?.EntityName ?? "unknown"}", InfoFeedPanel.InfoType.Warning );
 	}
 
 	public void OnGameEvent( DamageEvent eventArgs )
 	{
-		// TODO Update UI for damage events
+		// Handle damage event if needed
 	}
 
 	public void OnGameEvent( MenuActionEvent eventArgs )
 	{
-		Log.Info( $"[UiService] Received MenuActionEvent: {eventArgs.Action}" );
 		switch ( eventArgs.Action )
 		{
 			case MenuAction.Play:
 				var gameMode = GameService?.GameModes.FirstOrDefault();
 				if ( gameMode != null )
 				{
-					Log.Info( $"[UiService] Activating game mode: {gameMode.GetType().Name}" );
 					GameObject.Dispatch( new GameModeActivatedEvent( gameMode ) );
 					ShowHud();
 				}
@@ -99,14 +95,11 @@ public class UiService : Component,
 				{
 					Log.Error( "[UiService] No game mode found to activate." );
 				}
-
 				break;
 			case MenuAction.Settings:
-				// TODO
 				Log.Info( "[UiService] Settings!!!" );
 				break;
 			case MenuAction.Quit:
-				// TODO
 				Log.Info( "[UiService] Quit!!!" );
 				break;
 		}
@@ -115,5 +108,18 @@ public class UiService : Component,
 	public void OnGameEvent( GameModeActivatedEvent eventArgs )
 	{
 		ShowHud();
+		HudPanel?.AddInfoMessage( "Game started!", InfoFeedPanel.InfoType.Success );
+	}
+
+	public void OnGameEvent( UiInfoFeedEvent eventArgs )
+	{
+		HudPanel?.AddInfoMessage( eventArgs.Message, (InfoFeedPanel.InfoType)eventArgs.Type );
+	}
+
+	public void OnGameEvent( GameOverEvent eventArgs )
+	{
+		HudPanel?.Hide();
+		GameOverPanel?.Show( eventArgs.MaxWaveReached );
+		HudPanel?.AddInfoMessage( $"Game Over! Max wave reached: {eventArgs.MaxWaveReached}", InfoFeedPanel.InfoType.Warning );
 	}
 }

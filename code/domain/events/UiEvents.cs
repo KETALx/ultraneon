@@ -10,3 +10,12 @@ public enum MenuAction
 }
 
 public record MenuActionEvent( MenuAction Action ) : IGameEvent;
+
+public enum UiInfoFeedType
+{
+	Normal,
+	Warning,
+	Success
+}
+
+public record UiInfoFeedEvent(string Message, UiInfoFeedType Type) : IGameEvent;

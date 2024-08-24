@@ -8,27 +8,15 @@ namespace Ultraneon.Player;
 public class PlayerNeon : BaseNeonCharacterEntity
 {
 	[Property]
-	public float CaptureTime { get; set; } = 15f;
+	public float RespawnDelay { get; set; } = 3f;
 
-	[Sync]
-	public float CurrentCaptureProgress { get; private set; } = 0f;
-
-	[Property]
-	public float HealInterval { get; set; } = 5f;
-
-	[Property]
-	public float HealAmount { get; set; } = 10f;
-
-	[Property]
-	public float RespawnDelay { get; set; } = 5f;
-
-	private TimeSince TimeSinceLastHeal { get; set; }
 	private TimeSince TimeSinceDeath { get; set; }
 
 	[RequireComponent]
 	public PlayerInventory Inventory { get; private set; }
 
 	public bool IsDead => Health <= 0;
+	public bool IsInOvertime { get; private set; }
 
 	protected override void OnStart()
 	{
@@ -38,147 +26,98 @@ public class PlayerNeon : BaseNeonCharacterEntity
 		CurrentTeam = Team.Player;
 		Health = MaxHealth;
 		Inventory = Components.Get<PlayerInventory>();
+		IsInOvertime = false;
+		Log.Info($"[PlayerNeon] Player initialized. Health: {Health}, Team: {CurrentTeam}");
 	}
 
 	protected override void OnUpdate()
 	{
-		if ( IsProxy || IsDead ) return;
+		if ( IsProxy || !IsDead ) return;
 
-		HandleInput();
-		TryHeal();
-		UpdateCapture();
+		if ( !IsInOvertime && TimeSinceDeath >= RespawnDelay )
+		{
+			Respawn();
+		}
 	}
 
-	public void OnDamage( DamageInfo info )
+	public override void OnDamage( in DamageInfo info )
 	{
+		base.OnDamage( info );
+
 		if ( IsProxy || IsDead ) return;
 
 		if ( info.Attacker.Components.Get<Entity>() is { } entity )
 		{
 			GameObject.Dispatch( new DamageEvent( this, entity, info.Damage, info.Position ) );
 		}
-	}
-
-	private void HandleInput()
-	{
-		// TODO: Implement input handling
-	}
-
-	private void TryHeal()
-	{
-		if ( TimeSinceLastHeal >= HealInterval && IsInCapturedZone() )
-		{
-			Health = Math.Min( Health + HealAmount, MaxHealth );
-			TimeSinceLastHeal = 0;
-		}
-	}
-
-	private void UpdateCapture()
-	{
-		if ( IsInCaptureZone() )
-		{
-			CurrentCaptureProgress += Time.Delta;
-			if ( CurrentCaptureProgress >= CaptureTime )
-			{
-				CompleteCaptureZone();
-			}
-		}
-		else
-		{
-			CurrentCaptureProgress = Math.Max( 0, CurrentCaptureProgress - Time.Delta );
-		}
-	}
-
-	private bool IsInCapturedZone()
-	{
-		// TODO: Implement logic to check if the player is in a captured zone
-		return false;
-	}
-
-	private bool IsInCaptureZone()
-	{
-		// TODO: Implement logic to check if the player is in a capturable zone
-		return false;
-	}
-
-	private void CompleteCaptureZone()
-	{
-		// TODO: Implement zone capture logic
-	}
-
-	public void TakeDamage( DamageInfo info )
-	{
-		if ( IsProxy || IsDead ) return;
-
-		float damageAmount = CalculateDamage( info );
-		Health -= damageAmount;
 
 		if ( Health <= 0 )
 		{
-			Die( info.Attacker.Components.Get<PlayerNeon>() );
+			Die( info.Attacker.Components.Get<BaseNeonCharacterEntity>() );
 		}
 	}
 
-	private float CalculateDamage( DamageInfo info )
+	private void Die( BaseNeonCharacterEntity killer )
 	{
-		float damage = info.Damage;
+		if ( IsProxy ) return;
 
-		// TODO: Wallbang hit reduction
-		// if (info.Flags.HasFlag(DamageFlags.Wallbang))
-		// {
-		//     damage *= 0.5f;
-		// }
+		Health = 0;
+		TimeSinceDeath = 0;
 
-		return damage;
-	}
+		GameObject.Dispatch( new CharacterDeathEvent( this, killer ) );
 
-	private void Die( PlayerNeon killer )
-	{
-		bool isStylishKill = IsStylishKill( killer );
-		GameObject.Dispatch( new CharacterDeathEvent( this, killer, isStylishKill ) );
+		DisableControls();
 
-		if ( HasCapturedZone() )
+		if ( IsInOvertime )
 		{
-			TimeSinceDeath = 0;
-			EnableRespawnState();
+			GameObject.Dispatch( new GameOverEvent( 0 ) ); // TODO: Pass the correct max wave reached
 		}
-		else
+	}
+
+	private void Respawn()
+	{
+		if ( IsProxy ) return;
+
+		Health = MaxHealth;
+		var spawnPoint = Scene.GetAllComponents<SpawnPoint>().OrderBy( _ => Random.Shared.Next() ).FirstOrDefault();
+		if ( spawnPoint != null )
 		{
-			HandlePermanentDeath();
+			Transform.Position = spawnPoint.Transform.Position;
+			Transform.Rotation = spawnPoint.Transform.Rotation;
 		}
+
+		EnableControls();
+
+		GameObject.Dispatch( new PlayerSpawnEvent( Team.Player ) );
 	}
 
-	private bool HasCapturedZone()
-	{
-		// TODO: Implement logic to check if the player has any captured zones
-		return false;
-	}
-
-	private void EnableRespawnState()
-	{
-		// TODO: Disable player controls and show respawn UI
-	}
-
-	private void HandlePermanentDeath()
-	{
-		// TODO: Implement permanent death logic and show game over UI
-	}
-
-	private bool IsStylishKill( PlayerNeon killer )
+	private bool IsStylishKill( BaseNeonCharacterEntity killer )
 	{
 		// TODO: Implement logic for determining if it's a stylish kill (airborne, wallbang)
 		return false;
 	}
 
-	public void Respawn( Vector3 position )
+	private void DisableControls()
 	{
-		Health = MaxHealth;
-		Transform.Position = position;
-		EnablePlayerControls();
+		// TODO: Implement disabling player controls
 	}
 
-	private void EnablePlayerControls()
+	
+	private void EnableControls()
 	{
-		// TODO: Re-enable player controls after respawn
+		// TODO: Implement enabling player controls
+		Log.Info("[PlayerNeon] Player controls enabled");
+	}
+
+	public void EnterOvertime()
+	{
+		IsInOvertime = true;
+		// TODO: Implement any player-specific overtime behavior
+	}
+
+	public void ExitOvertime()
+	{
+		IsInOvertime = false;
+		// TODO: Implement any player-specific behavior when exiting overtime
 	}
 }

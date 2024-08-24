@@ -1,0 +1,61 @@
+@using Sandbox.UI
+@inherits Panel
+@namespace Ultraneon.UI
+@attribute [StyleSheet]
+
+<root>
+	<div class="info-feed">
+		@foreach ( var message in Messages )
+		{
+			<div class="message @message.Type.ToString().ToLower()">
+				@message.Text
+			</div>
+		}
+	</div>
+</root>
+
+@code
+{
+	[Property]
+	public List<InfoMessage> Messages { get; set; } = new List<InfoMessage>();
+
+	public const int MaxMessages = 5;
+
+	public class InfoMessage
+	{
+		public string Text { get; set; }
+		public InfoType Type { get; set; }
+		public TimeSince TimeSinceAdded { get; set; }
+
+		public InfoMessage( string text, InfoType type )
+		{
+			Text = text;
+			Type = type;
+			TimeSinceAdded = 0;
+		}
+	}
+
+	public enum InfoType
+	{
+		Normal,
+		Warning,
+		Success
+	}
+
+	public override void Tick()
+	{
+		base.Tick();
+
+		Messages.RemoveAll( m => m.TimeSinceAdded > 5.0f );
+
+		if ( Messages.Count > 0 )
+		{
+			StateHasChanged();
+		}
+	}
+
+	protected override int BuildHash()
+	{
+		return System.HashCode.Combine( Messages.Count, Messages.LastOrDefault()?.Text );
+	}
+}

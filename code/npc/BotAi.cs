@@ -1,3 +1,4 @@
+using System;
 using Sandbox;
 using Sandbox.Citizen;
 using Ultraneon;
@@ -6,103 +7,143 @@ using Ultraneon.Player;
 
 public sealed class BotAi : BaseNeonCharacterEntity
 {
-	[Property]
-	public NavMeshAgent Agent { get; set; }
+    [Property] public NavMeshAgent Agent { get; set; }
+    [Property] public CitizenAnimationHelper AnimationHelper { get; set; }
+    [Property] public float StopDistance { get; set; } = 100f;
+    [Property] public float AttackRange { get; set; } = 200f;
 
-	[Property]
-	public CitizenAnimationHelper AnimationHelper { get; set; }
+    private PlayerNeon CurrentTarget { get; set; }
+    private CaptureZoneEntity TargetZone { get; set; }
 
-	[Property]
-	public float StopDistance { get; set; } = 100f;
+    protected override void OnStart()
+    {
+        base.OnStart();
 
-	[Property]
-	public float AttackRange { get; set; } = 200f;
+        if (Agent == null)
+        {
+            Agent = Components.GetOrCreate<NavMeshAgent>();
+        }
 
-	private PlayerNeon CurrentTarget { get; set; }
+        if (AnimationHelper == null)
+        {
+            AnimationHelper = Components.GetOrCreate<CitizenAnimationHelper>();
+        }
 
-	protected override void OnStart()
-	{
-		base.OnStart();
+        CurrentTeam = Team.Enemy;
+    }
 
-		if ( Agent == null )
-		{
-			Agent = Components.GetOrCreate<NavMeshAgent>();
-		}
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
 
-		if ( AnimationHelper == null )
-		{
-			AnimationHelper = Components.GetOrCreate<CitizenAnimationHelper>();
-		}
-	}
+        if (!isAlive) return;
 
-	protected override void OnUpdate()
-	{
-		base.OnUpdate();
+        if (CurrentTarget != null && !CurrentTarget.isAlive)
+        {
+            CurrentTarget = null;
+        }
 
-		if ( !isAlive ) return;
+        if (TargetZone == null || TargetZone.ControllingTeam == Team.Enemy)
+        {
+            FindNewTargetZone();
+        }
 
-		if ( CurrentTarget != null && CurrentTarget.IsDead )
-		{
-			CurrentTarget = null;
-		}
+        if (TargetZone != null)
+        {
+            if (CurrentTarget == null || Random.Shared.NextSingle() < 0.1f) // 10% chance to switch focus to zone
+            {
+                MoveToZone();
+            }
+            else
+            {
+                AttackTarget();
+            }
+        }
+        else if (CurrentTarget != null)
+        {
+            AttackTarget();
+        }
+        else
+        {
+            Agent.Stop();
+        }
 
-		if ( CurrentTarget != null )
-		{
-			UpdateMovement();
-			UpdateCombat();
-		}
-		else
-		{
-			Agent.Stop();
-		}
+        UpdateAnimation();
+    }
 
-		UpdateAnimation();
-	}
+    private void FindNewTargetZone()
+    {
+        var zones = Scene.GetAllComponents<CaptureZoneEntity>();
+        TargetZone = zones.FirstOrDefault(z => z.ControllingTeam != Team.Enemy && z.AllowBotCapture);
+    }
 
+    private void MoveToZone()
+    {
+        if (TargetZone == null) return;
 
-	private void UpdateMovement()
-	{
-		float distanceToTarget = Vector3.DistanceBetween( Transform.Position, CurrentTarget.Transform.Position );
+        float distanceToZone = Vector3.DistanceBetween(Transform.Position, TargetZone.Transform.Position);
 
-		if ( distanceToTarget > StopDistance )
-		{
-			Agent.MoveTo( CurrentTarget.Transform.Position );
-		}
-		else
-		{
-			Agent.Stop();
-		}
-	}
+        if (distanceToZone > StopDistance)
+        {
+            Agent.MoveTo(TargetZone.Transform.Position);
+        }
+        else
+        {
+            Agent.Stop();
+            if (TargetZone.AllowBotCapture)
+            {
+                // Attempt to capture the zone
+                TargetZone.OnTriggerEnter(Agent.Components.Get<Collider>());
+            }
+        }
+    }
 
-	private void UpdateCombat()
-	{
-		float distanceToTarget = Vector3.DistanceBetween( Transform.Position, CurrentTarget.Transform.Position );
+    private void AttackTarget()
+    {
+        if (CurrentTarget == null) return;
 
-		// if ( distanceToTarget <= AttackRange )
-		// {
-		// 	Log.Info( $"BotAi {EntityName} is attacking {CurrentTarget.EntityName}" );
-		// }
-	}
+        float distanceToTarget = Vector3.DistanceBetween(Transform.Position, CurrentTarget.Transform.Position);
 
-	private void UpdateAnimation()
-	{
-		if ( AnimationHelper != null )
-		{
-			AnimationHelper.WithVelocity( Agent.Velocity );
+        if (distanceToTarget > StopDistance)
+        {
+            Agent.MoveTo(CurrentTarget.Transform.Position);
+        }
+        else
+        {
+            Agent.Stop();
 
-			if ( CurrentTarget != null )
-			{
-				AnimationHelper.WithLook( CurrentTarget.Transform.Position - Transform.Position );
-			}
-		}
-	}
+            if (distanceToTarget <= AttackRange)
+            {
+                // Perform attack
+                // TODO: Implement attack logic
+                Log.Info($"BotAi {EntityName} is attacking {CurrentTarget.EntityName}");
+            }
+        }
+    }
 
-	public void SetTarget( PlayerNeon newTarget )
-	{
-		if ( newTarget != null && newTarget != CurrentTarget && newTarget.isAlive )
-		{
-			CurrentTarget = newTarget;
-			Log.Info( $"BotAi {EntityName} is now targeting {CurrentTarget.EntityName}" );
-		}
-	}
+    private void UpdateAnimation()
+    {
+        if (AnimationHelper != null)
+        {
+            AnimationHelper.WithVelocity(Agent.Velocity);
+
+            if (CurrentTarget != null)
+            {
+                AnimationHelper.WithLook(CurrentTarget.Transform.Position - Transform.Position);
+            }
+            else if (TargetZone != null)
+            {
+                AnimationHelper.WithLook(TargetZone.Transform.Position - Transform.Position);
+            }
+        }
+    }
+
+    public void SetTarget(PlayerNeon newTarget)
+    {
+        if (newTarget != null && newTarget != CurrentTarget && newTarget.isAlive)
+        {
+            CurrentTarget = newTarget;
+            Log.Info($"BotAi {EntityName} is now targeting {CurrentTarget.EntityName}");
+        }
+    }
 }

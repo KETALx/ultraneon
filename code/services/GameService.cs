@@ -6,27 +6,33 @@ namespace Ultraneon.Services;
 
 public class GameService : Component, IGameEventHandler<GameModeActivatedEvent>
 {
-	private GameMode ActiveGameMode { get; set; }
-
+	[Property]
 	public List<GameMode> GameModes { get; set; }
+
+	[Property]
+	public GameMode ActiveGameMode { get; set; }
 
 	public void InitializeService()
 	{
 		GameModes = GameObject.Components.GetAll<GameMode>().ToList();
-		Log.Info( GameModes );
+		Log.Info($"[GameService] Initialized with {GameModes.Count} game modes");
+
+		var gameMode = GameModes?.FirstOrDefault();
+		if ( gameMode != null )
+		{
+			Log.Info($"[GameService] Activating game mode: {gameMode.GetType().Name}");
+			GameObject.Dispatch( new GameModeActivatedEvent(gameMode) );
+		}
+		else
+		{
+			Log.Warning("[GameService] No game mode found to activate");
+		}
 	}
 
 	protected override void OnStart()
 	{
 		if ( IsProxy ) return;
 		InitializeService();
-		
-		var gameMode = GameModes?.FirstOrDefault();
-		if ( gameMode != null )
-		{
-			ActiveGameMode.Initialize();
-			ActiveGameMode.StartGame();
-		}
 	}
 
 	protected override void OnUpdate()
@@ -51,9 +57,9 @@ public class GameService : Component, IGameEventHandler<GameModeActivatedEvent>
 	public void OnGameEvent( GameModeActivatedEvent eventArgs )
 	{
 		var gameModeToActivate = eventArgs.GameMode;
-		Log.Info( $"[GameService] Activating {gameModeToActivate.GetType().Name}" );
 		ActiveGameMode = gameModeToActivate;
 		ActiveGameMode.Initialize();
 		ActiveGameMode.StartGame();
+		Log.Info( $"[GameService] Activating {gameModeToActivate.GetType().Name}" );
 	}
 }

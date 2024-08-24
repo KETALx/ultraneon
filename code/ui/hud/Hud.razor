@@ -14,6 +14,7 @@
 	}
 	<CrosshairPanel/>
 	<RadarPanel/>
+	<InfoFeedPanel Messages="@InfoMessages"/>
 </root>
 
 @code
@@ -23,6 +24,8 @@
 
 	[Property]
 	public PlayerInventory Inventory { get; set; }
+
+	private List<InfoFeedPanel.InfoMessage> InfoMessages { get; set; } = new List<InfoFeedPanel.InfoMessage>();
 
 	protected override void OnEnabled()
 	{
@@ -40,7 +43,8 @@
 			Inventory?.SelectedSlot,
 			Inventory?.ActiveWeapon?.WeaponType,
 			Inventory?.ActiveWeapon?.CurrentAmmo,
-			Inventory?.ActiveWeapon?.ClipSize
+			Inventory?.ActiveWeapon?.ClipSize,
+			InfoMessages.Count
 		);
 
 		return hash;
@@ -54,5 +58,17 @@
 	public void Hide()
 	{
 		Panel.SetClass( "hidden", true );
+	}
+
+	public void AddInfoMessage( string message, InfoFeedPanel.InfoType type )
+	{
+		Log.Info( $"[Hud] [{{type}}] {message} " );
+		InfoMessages.Add( new InfoFeedPanel.InfoMessage( message, type ) );
+		if ( InfoMessages.Count > InfoFeedPanel.MaxMessages )
+		{
+			InfoMessages.RemoveAt( 0 );
+		}
+
+		StateHasChanged();
 	}
 }
