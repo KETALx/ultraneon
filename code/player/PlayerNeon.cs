@@ -29,6 +29,9 @@ namespace Ultraneon
 		[RequireComponent]
 		public PlayerInventory Inventory { get; private set; }
 
+		[RequireComponent]
+		public BoxCollider playerTrigger { get; private set; }
+
 		public bool IsDead => Health <= 0;
 
 		protected override void OnStart()
@@ -48,6 +51,14 @@ namespace Ultraneon
 			HandleInput();
 			TryHeal();
 			UpdateCapture();
+
+			
+		}
+
+		protected override void OnFixedUpdate()
+		{
+			//clears the bbox trigger rotation so it doesnt move with camera
+			playerTrigger.Transform.Rotation = Rotation.Identity;
 		}
 
 		public new void OnDamage( DamageInfo info )

@@ -1,0 +1,134 @@
+{
+  "RootObject": {
+    "__guid": "e3a6c309-0a49-4905-b357-6091e0c24a0d",
+    "Flags": 0,
+    "Name": "enemy_regular",
+    "Tags": "bot",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Ultraneon.Entity",
+        "__guid": "cf374dc6-08e2-47d8-a2be-b8cd98002ff4",
+        "Id": "00000000-0000-0000-0000-000000000000"
+      },
+      {
+        "__type": "BotAi",
+        "__guid": "bfc6a3c7-8016-4bac-bb90-dfa8f37adfee",
+        "AttackRange": 200,
+        "CurrentTeam": "Neutral",
+        "Health": 0,
+        "Id": "00000000-0000-0000-0000-000000000000",
+        "isAlive": true,
+        "MaxHealth": 100,
+        "StopDistance": 100
+      },
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "bf8e85b5-5d1d-4447-8776-47005f5d0128",
+        "BodyGroups": 341,
+        "CreateBoneObjects": false,
+        "Model": "models/citizen/citizen.vmdl",
+        "RenderType": "On",
+        "Tint": "0,1,0.36667,1",
+        "UseAnimGraph": true
+      },
+      {
+        "__type": "Sandbox.NavMeshAgent",
+        "__guid": "4eec2632-8196-40fb-8daf-296e6517cdff",
+        "Acceleration": 2000,
+        "Height": 64,
+        "MaxSpeed": 250,
+        "Radius": 16,
+        "Separation": 0.25,
+        "UpdatePosition": true,
+        "UpdateRotation": true
+      },
+      {
+        "__type": "Sandbox.ModelHitboxes",
+        "__guid": "0fbf8907-3af2-4aeb-a57b-65383300c0b6",
+        "Renderer": {
+          "_type": "component",
+          "component_id": "bf8e85b5-5d1d-4447-8776-47005f5d0128",
+          "go": "e3a6c309-0a49-4905-b357-6091e0c24a0d",
+          "component_type": "SkinnedModelRenderer"
+        }
+      },
+      {
+        "__type": "Sandbox.Citizen.CitizenAnimationHelper",
+        "__guid": "273f8c95-b5d5-4927-8ebd-5fb6883f749c",
+        "BodyWeight": 1,
+        "EyesWeight": 1,
+        "HeadWeight": 1,
+        "LookAtEnabled": false,
+        "Target": {
+          "_type": "component",
+          "component_id": "bf8e85b5-5d1d-4447-8776-47005f5d0128",
+          "go": "e3a6c309-0a49-4905-b357-6091e0c24a0d",
+          "component_type": "SkinnedModelRenderer"
+        }
+      },
+      {
+        "__type": "Sandbox.BoxCollider",
+        "__guid": "385a5607-1cc4-4950-94bd-7f939b05e063",
+        "Center": "0,0,32",
+        "IsTrigger": false,
+        "Scale": "32,32,64",
+        "Static": false
+      },
+      {
+        "__type": "Sandbox.ModelPhysics",
+        "__guid": "28f4aac1-f8a5-4b22-b6fc-892c7bb4740f",
+        "__enabled": false,
+        "Locking": {},
+        "Model": "models/citizen/citizen.vmdl",
+        "MotionEnabled": true,
+        "Renderer": {
+          "_type": "component",
+          "component_id": "bf8e85b5-5d1d-4447-8776-47005f5d0128",
+          "go": "e3a6c309-0a49-4905-b357-6091e0c24a0d",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "RigidbodyFlags": 0
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "499c671e-2ca1-4fce-955e-f28ff1e29d92",
+        "Flags": 0,
+        "Name": "trigger_spot",
+        "Position": "4,0,64",
+        "Rotation": "0,-0.7071067,0,0.7071068",
+        "Tags": "trigger",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.HullCollider",
+            "__guid": "dbd05840-49bf-4c1a-be0d-ceafbb34b66a",
+            "BoxSize": "50,50,50",
+            "Center": "0,0,-2048",
+            "Height": 4096,
+            "IsTrigger": true,
+            "Radius": 32768,
+            "Radius2": 8,
+            "Slices": 16,
+            "Static": false,
+            "Type": "Cone"
+          },
+          {
+            "__type": "SpotAi",
+            "__guid": "220d9c41-3b5d-4c2f-9808-fe33486483dd",
+            "DetectionInterval": 0.5,
+            "DetectionRadius": 500
+          }
+        ]
+      }
+    ],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

@@ -11,17 +11,20 @@
         "__type": "Ultraneon.PlayerNeon",
         "__guid": "98a827c8-40ab-4441-8a5d-5f78d88e626f",
         "CaptureTime": 15,
+        "CurrentTeam": "Neutral",
+        "HealAmount": 10,
         "HealInterval": 5,
-        "health": 0,
+        "Health": 0,
+        "Id": "00000000-0000-0000-0000-000000000000",
         "isAlive": true,
         "MaxHealth": 100,
         "RespawnDelay": 5
       },
       {
-        "__type": "PlayerInventory",
+        "__type": "Ultraneon.PlayerInventory",
         "__guid": "417e178e-d57c-41af-bc09-f073df7e7b8e",
         "SelectedSlot": 0,
-        "weapons": [
+        "Weapons": [
           null,
           null,
           null,
@@ -94,14 +97,6 @@
         }
       },
       {
-        "__type": "Sandbox.BoxCollider",
-        "__guid": "bc9b0917-021a-42f7-83e9-096aa7255c1b",
-        "Center": "0,0,36",
-        "IsTrigger": false,
-        "Scale": "32,32,72",
-        "Static": false
-      },
-      {
         "__type": "Sandbox.ModelHitboxes",
         "__guid": "a77fc76f-3121-47a3-aba7-1c9bec6e3239",
         "Renderer": {
@@ -129,6 +124,22 @@
             "RenderType": "On",
             "Tint": "1,1,1,1",
             "UseAnimGraph": true
+          }
+        ]
+      },
+      {
+        "__guid": "6d720aaf-ebee-4162-8203-96bd32d1e83a",
+        "Flags": 0,
+        "Name": "boxtrigger",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.BoxCollider",
+            "__guid": "bc9b0917-021a-42f7-83e9-096aa7255c1b",
+            "Center": "0,0,36",
+            "IsTrigger": false,
+            "Scale": "32,32,72",
+            "Static": false
           }
         ]
       }
