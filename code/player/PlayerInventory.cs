@@ -100,11 +100,14 @@ public sealed class PlayerInventory : Component
 		{
 			SelectedSlot = -1;
 			Log.Info( "No active weapon. SelectedSlot set to -1" );
+			SetupViewmodelArms( null );
 			return;
 		}
 
 		SelectedSlot = Array.IndexOf( Weapons, ActiveWeapon );
 		ActiveWeapon.Equip();
+
+		SetupViewmodelArms( weapon.Viewmodel );
 
 		Log.Info(
 			$"New active weapon: {ActiveWeapon.GameObject.Name}, SelectedSlot: {SelectedSlot}, Ammo: {ActiveWeapon.CurrentAmmo}/{ActiveWeapon.ClipSize}" );
@@ -133,5 +136,25 @@ public sealed class PlayerInventory : Component
 				SetActive( Weapons.FirstOrDefault( w => w != null ) );
 			}
 		}
+	}
+
+	private void SetupViewmodelArms( SkinnedModelRenderer viewmodel )
+	{
+		var viewmodelArms = GameObject.Children.FirstOrDefault()?.Components.Get<SkinnedModelRenderer>( true );
+
+		if ( viewmodelArms == null )
+		{
+			Log.Error( "[PlayerInventory] Could not find viewmodel arms." );
+			return;
+		}
+
+		if ( viewmodel == null )
+		{
+			viewmodelArms.Enabled = false;
+			return;
+		}
+
+		viewmodelArms.Enabled = true;
+		viewmodelArms.BoneMergeTarget = viewmodel;
 	}
 }

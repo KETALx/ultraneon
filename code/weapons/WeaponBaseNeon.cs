@@ -29,9 +29,6 @@ namespace Ultraneon
 		[Property, Group( "Viewmodel" )]
 		public SkinnedModelRenderer Worldmodel { get; set; }
 
-		[Property, Group( "Viewmodel" )]
-		public SkinnedModelRenderer ViewmodelArms { get; set; }
-
 		[Property, Group( "Current Ammo" )]
 		public int CurrentAmmo;
 
@@ -112,8 +109,8 @@ namespace Ultraneon
 			var camera = Scene.GetAllComponents<CameraComponent>().FirstOrDefault( x => x.IsMainCamera );
 			if ( camera != null )
 			{
-				Transform.Position = camera.Transform.Position;
-				Transform.Rotation = camera.Transform.Rotation;
+				Transform.Position = Transform.Position.LerpTo( camera.Transform.Position, 0.025f );
+				Transform.Rotation = camera.Transform.Rotation.Clamp( camera.Transform.Rotation, 5f );
 			}
 		}
 
@@ -173,7 +170,7 @@ namespace Ultraneon
 			var damageable = shotTrace.GameObject?.Components.Get<IDamageable>();
 			if ( damageable != null )
 			{
-				Log.Info(damageable.ToString() );
+				Log.Info( damageable.ToString() );
 				float totalDamage = CalculateDamage( shotTrace );
 				ApplyDamage( damageable, totalDamage, shotTrace );
 			}
@@ -289,24 +286,10 @@ namespace Ultraneon
 				Viewmodel.Enabled = true;
 			}
 
-			SetupViewmodelArms( inventory );
-
 			Owner = inventory.GameObject;
 			IsPickedUp = true;
 
 			inventory.SetActive( this );
-		}
-
-		private void SetupViewmodelArms( PlayerInventory inventory )
-		{
-			var viewmodelArms = inventory.GameObject.Children
-				.FirstOrDefault()?.Components.Get<SkinnedModelRenderer>( true );
-
-			if ( viewmodelArms != null )
-			{
-				viewmodelArms.Enabled = true;
-				viewmodelArms.BoneMergeTarget = Viewmodel;
-			}
 		}
 	}
 }
