@@ -2,10 +2,10 @@
   "publish": {
     "Enabled": false,
     "ProjectConfig": {
-      "Title": "map1",
+      "Title": "sp_cp_compound",
       "Type": "map",
       "Org": "local",
-      "Ident": "map1",
+      "Ident": "sp_cp_compound",
       "Schema": 0,
       "IncludeSourceFiles": false,
       "Resources": null,
@@ -13,7 +13,7 @@
       "EditorReferences": [],
       "IsWhitelistDisabled": false,
       "Metadata": {
-        "SingleAssetSource": "maps/map1.vmap"
+        "SingleAssetSource": "maps/sp_cp_compound.vmap"
       }
     }
   }

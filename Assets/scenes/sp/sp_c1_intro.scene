@@ -89,7 +89,7 @@
               "__guid": "2e16499c-6942-4754-9861-54ebac757558",
               "__version": 1,
               "EnableCollision": true,
-              "MapName": "maps/map1.vmap",
+              "MapName": "maps/sp_cp_compound.vmap",
               "NoOrigin": false,
               "UseMapFromLaunch": false
             },
@@ -160,13 +160,14 @@
               "__guid": "008b59da-2441-4c2e-b9a5-bfc6ca17fd64",
               "Flags": 0,
               "Name": "2D Skybox",
+              "Rotation": "0,0,0.1305262,0.9914449",
               "Tags": "skybox",
               "Enabled": true,
               "Components": [
                 {
                   "__type": "Sandbox.SkyBox2D",
                   "__guid": "6a280ad8-a6fa-4706-8597-053ac1bf5ff3",
-                  "SkyMaterial": "materials/skybox/skybox_dark_01.vmat",
+                  "SkyMaterial": "materials/world/nature/sky/sky_orange.vmat",
                   "Tint": "1,1,1,1"
                 }
               ]
@@ -200,14 +201,32 @@
                 {
                   "__type": "Sandbox.CubemapFog",
                   "__guid": "58b7530e-13ba-46da-99e2-e39ae3a001ba",
-                  "Blur": 0.08,
-                  "EndDistance": 2048,
+                  "Blur": 0,
+                  "EndDistance": 3000,
                   "FalloffExponent": 2,
                   "HeightExponent": 2,
                   "HeightStart": 2000,
                   "HeightWidth": 0,
                   "StartDistance": 1024,
-                  "Tint": "1,1,1,1"
+                  "Tint": "1,1,1,0"
+                }
+              ]
+            },
+            {
+              "__guid": "0480d3c3-f506-4b46-a900-ae58d252d452",
+              "Flags": 0,
+              "Name": "Gradient Fog",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.GradientFog",
+                  "__guid": "15569457-7763-4c97-b4c4-13170aee52d3",
+                  "Color": "0.82326,0.50672,0.22975,1",
+                  "EndDistance": 1024,
+                  "FalloffExponent": 2.9999993,
+                  "Height": 1024,
+                  "StartDistance": 256,
+                  "VerticalFalloffExponent": 2
                 }
               ]
             }

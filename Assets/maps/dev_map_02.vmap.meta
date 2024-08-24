@@ -2,10 +2,10 @@
   "publish": {
     "Enabled": false,
     "ProjectConfig": {
-      "Title": "map1",
+      "Title": "dev_map_02",
       "Type": "map",
       "Org": "local",
-      "Ident": "map1",
+      "Ident": "dev_map_02",
       "Schema": 0,
       "IncludeSourceFiles": false,
       "Resources": null,
@@ -13,7 +13,7 @@
       "EditorReferences": [],
       "IsWhitelistDisabled": false,
       "Metadata": {
-        "SingleAssetSource": "maps/map1.vmap"
+        "SingleAssetSource": "maps/dev_map_02.vmap"
       }
     }
   }
