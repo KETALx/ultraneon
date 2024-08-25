@@ -1,0 +1,79 @@
+@using Sandbox.UI
+@inherits Panel
+@namespace Ultraneon.UI
+@attribute [StyleSheet]
+
+<root>
+	<div class="info-feed">
+		@foreach ( var message in Messages )
+		{
+			<div class="message @message.Type.ToString().ToLower() @( message.TimeSinceAdded < 0.2f || message.TimeSinceAdded > 4.8f ? "hidden" : "" )">
+				@{
+					switch ( message.Type.ToString().ToLower() )
+					{
+						case "warning":
+							<div class="icon">priority_high</div>
+							break;
+						case "success":
+							<div class="icon">check</div>
+							break;
+						case "debug":
+							<div class="icon">bug_report</div>
+							break;
+						case "normal":
+							<div class="icon">info</div>
+							break;
+					}
+				}
+				<div class="message-text">@message.Text</div>
+			</div>
+		}
+	</div>
+</root>
+
+@code
+{
+	[Property]
+	public List<InfoMessage> Messages { get; set; } = new List<InfoMessage>();
+
+	public const int MaxMessages = 5;
+
+	public class InfoMessage
+	{
+		public string Text { get; set; }
+		public InfoType Type { get; set; }
+		public TimeSince TimeSinceAdded { get; set; }
+
+		public InfoMessage( string text, InfoType type )
+		{
+			Text = text;
+			Type = type;
+			TimeSinceAdded = 0;
+		}
+	}
+
+	public enum InfoType
+	{
+		Normal,
+		Warning,
+		Success,
+		Debug
+	}
+
+	public override void Tick()
+	{
+		base.Tick();
+
+		Messages.RemoveAll( m => m.TimeSinceAdded > 5.0f );
+
+		if ( Messages.Count > 0 )
+		{
+			StateHasChanged();
+		}
+	}
+
+	protected override int BuildHash()
+	{
+		return System.HashCode.Combine( Messages.Count, Messages.LastOrDefault()?.Text );
+	}
+}

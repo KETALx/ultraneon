@@ -1,5 +1,7 @@
 using Sandbox;
 using Ultraneon;
+using Ultraneon.Domain;
+using Ultraneon.Player;
 
 public sealed class SpotAi : Component
 {

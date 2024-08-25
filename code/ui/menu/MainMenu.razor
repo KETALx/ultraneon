@@ -1,0 +1,80 @@
+@using System
+@using Sandbox.Events
+@using Sandbox.UI
+@using Ultraneon.Domain.Events
+@namespace Ultraneon.UI
+@inherits PanelComponent
+
+<root>
+	<div class="menu-container">
+		<div class="title"><span class="title-1">U L T R A</span>&nbsp;<span class="title-2">N E O N</span></div>
+		<div class="button-container">
+			<button class="menu-button" onclick=@( () => OnMenuAction( MenuAction.Play ) )>Play</button>
+			<button class="menu-button" onclick=@( () => OnMenuAction( MenuAction.Settings ) )>Settings</button>
+			<button class="menu-button" onclick=@( () => OnMenuAction( MenuAction.Quit ) )>Quit</button>
+		</div>
+	</div>
+</root>
+
+@code {
+
+	protected override void OnEnabled()
+	{
+		base.OnEnabled();
+
+		if ( Panel != null )
+		{
+			Panel.AcceptsFocus = true;
+			Panel.Focus();
+		}
+	}
+
+	protected override void OnTreeBuilt()
+	{
+		base.OnTreeBuilt();
+		UpdatePanelState();
+	}
+
+	private void UpdatePanelState()
+	{
+		if ( Panel != null )
+		{
+			Panel.Style.PointerEvents = PointerEvents.All;
+			Panel.Style.ZIndex = 100;
+		}
+	}
+
+	private void OnMenuAction( MenuAction action )
+	{
+		Log.Info( $"[MainMenu] OnMenuAction called with action: {action}" );
+		GameObject.Dispatch( new MenuActionEvent( action ) );
+	}
+
+	public void Show()
+	{
+		if ( Panel != null )
+		{
+			Panel.SetClass( "hidden", false );
+			Panel.Focus();
+			StateHasChanged();
+			Log.Info( "[MainMenu] Show called" );
+		}
+	}
+
+	public void Hide()
+	{
+		if ( Panel != null )
+		{
+			Panel.SetClass( "hidden", true );
+			Panel.Blur();
+			StateHasChanged();
+			Log.Info( "[MainMenu] Hide called" );
+		}
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( Panel?.HasClass( "hidden" ) );
+	}
+
+}

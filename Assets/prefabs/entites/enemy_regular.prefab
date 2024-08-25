@@ -3,20 +3,16 @@
     "__guid": "e3a6c309-0a49-4905-b357-6091e0c24a0d",
     "Flags": 0,
     "Name": "enemy_regular",
+    "Position": "0,-512,0",
     "Tags": "bot",
     "Enabled": true,
     "Components": [
       {
-        "__type": "Ultraneon.Entity",
-        "__guid": "cf374dc6-08e2-47d8-a2be-b8cd98002ff4",
-        "Id": "00000000-0000-0000-0000-000000000000"
-      },
-      {
         "__type": "BotAi",
-        "__guid": "bfc6a3c7-8016-4bac-bb90-dfa8f37adfee",
+        "__guid": "e6a91e7e-9615-4c6f-bbd1-4d85c7f85b98",
         "AttackRange": 200,
         "CurrentTeam": "Enemy",
-        "Health": 0,
+        "Health": 100,
         "Id": "00000000-0000-0000-0000-000000000000",
         "isAlive": true,
         "MaxHealth": 100,
@@ -122,8 +118,7 @@
           }
         ]
       }
-    ],
-    "__variables": []
+    ]
   },
   "ShowInMenu": false,
   "MenuPath": null,

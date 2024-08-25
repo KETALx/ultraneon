@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Sandbox.Events;
 using Ultraneon;
-using Ultraneon.Events;
+using Ultraneon.Domain;
+using Ultraneon.Domain.Events;
+using Ultraneon.Player;
 
 [Category( "Ultraneon" )]
 [Icon( "place" )]
@@ -28,7 +30,10 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 	[Property, HostSync]
 	public Team ControllingTeam { get; set; } = Team.Neutral;
 
-	[Property,ReadOnly, HostSync]
+	[Property, HostSync]
+	public Team ContestingTeam { get; set; } = Team.Neutral;
+
+	[Property, ReadOnly, HostSync]
 	public float CaptureProgress { get; set; } = 0f;
 
 	[Property]
@@ -37,14 +42,14 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 	[Property]
 	public Action<Team> OnCaptureAction { get; set; }
 
-
 	public float MinimapX { get; set; }
 	public float MinimapY { get; set; }
 	public Team PreviousTeam { get; set; }
 	public bool HasChanged { get; set; }
+	public bool AllowBotCapture { get; set; } = true;
 
 	private TimeSince timeSinceLastCapture;
-	private HashSet<BaseNeonCharacterEntity> charactersInZone = new();
+	private List<BaseNeonCharacterEntity> charactersInZone = new();
 
 	protected override void OnStart()
 	{
@@ -55,8 +60,7 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 
 	protected override void OnUpdate()
 	{
-		if ( IsProxy )
-			return;
+		if ( IsProxy ) return;
 
 		UpdateCapture();
 		UpdateZoneVisuals();
@@ -66,18 +70,25 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 	{
 		if ( charactersInZone.Any() )
 		{
-			var dominantTeam = charactersInZone
+			ContestingTeam = charactersInZone
 				.GroupBy( p => p.CurrentTeam )
 				.OrderByDescending( g => g.Count() )
 				.First().Key;
 
-			if ( dominantTeam != ControllingTeam )
+			if ( ContestingTeam != ControllingTeam )
 			{
-				CaptureProgress += Time.Delta / CaptureTime * charactersInZone.Count( p => p.CurrentTeam == dominantTeam );
+				// Check if it's a bot trying to capture during overtime
+				if ( !AllowBotCapture && ContestingTeam == Team.Enemy )
+				{
+					Log.Error( $"[CaptureZoneEntity-UpdateCapture] {PointName} bot trying to capture during overtime" );
+					return;
+				}
+
+				CaptureProgress += Time.Delta / CaptureTime * charactersInZone.Count( p => p.CurrentTeam == ContestingTeam );
 				if ( CaptureProgress >= 1f )
 				{
 					var previousTeam = ControllingTeam;
-					ControllingTeam = dominantTeam;
+					ControllingTeam = ContestingTeam;
 					CaptureProgress = 0f;
 					OnPointCaptured( previousTeam );
 				}
@@ -89,36 +100,37 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 
 			timeSinceLastCapture = 0f;
 		}
-		else if(CaptureProgress > 0)
+		else if ( CaptureProgress > 0 )
 		{
 			CaptureProgress -= Time.Delta / CaptureTime;
-		}/*
-		else if ( timeSinceLastCapture > 5f && ControllingTeam != Team.Neutral )
-		{
-			CaptureProgress += Time.Delta / CaptureTime;
-			if ( CaptureProgress >= 1f )
-			{
-				var previousTeam = ControllingTeam;
-				ControllingTeam = Team.Neutral;
-				CaptureProgress = 0f;
-				OnPointNeutralized( previousTeam );
-			}
-		}*/
+		}
 	}
 
 	private void UpdateZoneVisuals()
 	{
 		if ( ZoneModel != null )
 		{
-			Color teamColor = ControllingTeam switch
+			Color dominantTeamColor = ControllingTeam switch
+			{
+				Team.Player => PlayerColor,
+				Team.Enemy => EnemyColor,
+				_ => NeutralColor
+			};
+			
+			if ( CaptureProgress >= 1.0f )
+			{
+				ZoneModel.Tint = dominantTeamColor;
+				return;
+			}
+
+			Color contestingTeamColor = ControllingTeam switch
 			{
 				Team.Player => PlayerColor,
 				Team.Enemy => EnemyColor,
 				_ => NeutralColor
 			};
 
-			ZoneModel.Tint = teamColor;
-
+			ZoneModel.Tint = Color.Lerp( dominantTeamColor, contestingTeamColor, CaptureProgress );
 			// TODO: Add particle effects or other visual indicators for capture progress
 		}
 	}
@@ -138,37 +150,45 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 
 	public void OnTriggerExit( Collider other )
 	{
-		var player = other.GameObject.Components.Get<PlayerNeon>();
-		if ( player != null )
+		var character = other.GameObject.Components.Get<BaseNeonCharacterEntity>();
+		if ( character != null )
 		{
-			charactersInZone.Remove( player );
+			charactersInZone.Remove( character );
 		}
 	}
 
 	private void OnStartCapture()
 	{
-		Log.Info( $"{PointName} is being captured!" );
+		Log.Info( $"[CaptureZoneEntity] {PointName} is being captured!" );
+		GameObject.Dispatch( new UiInfoFeedEvent( $"{{PointName}} is being captured!", UiInfoFeedType.Warning ) );
+		// TODO: Send a lightwave in radius to alert other players
+	}
+
+
+	private void OnStopCapture()
+	{
+		Log.Info( $"[CaptureZoneEntity] {PointName} stopped being captured!" );
+		GameObject.Dispatch( new UiInfoFeedEvent( $"{{PointName}} stopped being captured!", UiInfoFeedType.Warning ) );
 		// TODO: Send a lightwave in radius to alert other players
 	}
 
 	private void OnPointCaptured( Team previousTeam )
 	{
-		Log.Info( $"{PointName} has been captured by {ControllingTeam}!" );
+		GameObject.Dispatch( new UiInfoFeedEvent( $"{{PointName}} has been captured by {{ControllingTeam}}!", UiInfoFeedType.Success ) );
+		Log.Info( $"[CaptureZoneEntity] {PointName} has been captured by {ControllingTeam}!" );
 		PreviousTeam = previousTeam;
-		GameObject.Dispatch( new CaptureZoneEvent( PointName, previousTeam, ControllingTeam ) );
+		GameObject.Dispatch( new CaptureZoneCapturedEvent( PointName, previousTeam, ControllingTeam ) );
 
-		if(OnCaptureAction != null) OnCaptureAction(previousTeam);
+		if ( OnCaptureAction != null ) OnCaptureAction( previousTeam );
 	}
 
-	private void OnPointNeutralized( Team previousTeam )
+	public bool IsEntityInZone( BaseNeonCharacterEntity entity )
 	{
-		Log.Info( $"{PointName} has been neutralized!" );
-		PreviousTeam = previousTeam;
-		GameObject.Dispatch( new CaptureZoneEvent( PointName, previousTeam, Team.Neutral ) );
+		return charactersInZone.Contains( entity );
 	}
 
-	public bool IsPlayerInZone( PlayerNeon player )
+	public bool CanCapture( BaseNeonCharacterEntity entity )
 	{
-		return charactersInZone.Contains( player );
+		return AllowBotCapture || entity is PlayerNeon;
 	}
 }

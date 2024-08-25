@@ -1,65 +1,43 @@
-﻿using Sandbox;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Sandbox.Events;
-using Ultraneon.Events;
+﻿using Sandbox.Events;
+using Ultraneon.Domain;
+using Ultraneon.Domain.Events;
 
-namespace Ultraneon;
+namespace Ultraneon.Game.GameMode.Mp;
 
-public class GameService : Component,
-	IGameEventHandler<CaptureZoneEvent>,
+public class MultiplayerGameMode : GameMode,
+	IGameEventHandler<CaptureZoneCapturedEvent>,
 	IGameEventHandler<PlayerSpawnEvent>,
 	IGameEventHandler<CharacterDeathEvent>,
 	IGameEventHandler<DamageEvent>
 {
-	[Property,ToggleGroup("isMultiplayer")] public bool isMultiplayer { get; set; }
+	public bool isMultiplayer { get; set; }
 
 	/// <summary>
 	/// Time of the round, 0 means no round timer
 	/// </summary>
-	[Property, ToggleGroup( "isMultiplayer" )]
 	public float RoundTime { get; set; } = 600f; // 10 min
 
 	/// <summary>
 	/// 0 means disabled
 	/// </summary>
-	[Property, ToggleGroup( "isMultiplayer" )]
 	public int ScoreToWin { get; set; } = 1000;
 
 	[Property]
 	public List<CaptureZoneEntity> CaptureZones { get; set; } = new();
 
-	[Property, ToggleGroup( "isMultiplayer" )]
 	public int ScoreCaptureZone { get; set; } = 100;
 
-	[Property, ToggleGroup( "isMultiplayer" )]
 	public int ScoreLoseZone { get; set; } = 50;
 
 	private TimeSince roundStartTime;
 	private Dictionary<Team, int> teamScores = new();
-	private bool gameFinished = false;
 
-	protected override void OnStart()
+	private bool gameStarted;
+	private bool gamePaused;
+	private bool gameEnded;
+
+	public override void Initialize()
 	{
-		if ( IsProxy ) return;
-
-		InitializeGame();
-	}
-
-	protected override void OnUpdate()
-	{
-		if ( IsProxy ) return;
-
-		UpdateGameState();
-	}
-
-	private void InitializeGame()
-	{
-		roundStartTime = 0f;
-		teamScores[Team.Player] = 0;
-		teamScores[Team.Enemy] = 0;
-
 		// Initialize capture zones
 		CaptureZones = Scene.GetAllComponents<CaptureZoneEntity>().ToList();
 		foreach ( var zone in CaptureZones )
@@ -68,28 +46,18 @@ public class GameService : Component,
 			zone.CaptureProgress = 0f;
 		}
 
-		// Spawn players
-		SpawnPlayers();
+		roundStartTime = 0f;
+		teamScores[Team.Player] = 0;
+		teamScores[Team.Enemy] = 0;
+
+		gamePaused = false;
+		gameEnded = false;
 	}
 
-	private void UpdateGameState()
+	public override void Cleanup()
 	{
-		if ( roundStartTime >= RoundTime && RoundTime > 0 )
-		{
-			EndGame();
-			return;
-		}
-
-
-		UpdateScores();
-
-		if ( teamScores[Team.Player] >= ScoreToWin || teamScores[Team.Enemy] >= ScoreToWin && ScoreToWin > 0 )
-		{
-			if ( !gameFinished )
-			{
-				EndGame();
-			}
-		}
+		CaptureZones.RemoveAll( x => true );
+		gameStarted = false;
 	}
 
 	private void UpdateScores()
@@ -110,12 +78,60 @@ public class GameService : Component,
 		GameObject.Dispatch( new PlayerSpawnEvent( Team.Enemy ) );
 	}
 
-	private void EndGame()
+	public override void LogicUpdate()
+	{
+		if ( !gameStarted )
+		{
+			return;
+		}
+
+		if ( roundStartTime >= RoundTime && RoundTime > 0 )
+		{
+			EndGame(); // TODO
+			return;
+		}
+
+		UpdateScores();
+
+		if ( teamScores[Team.Player] >= ScoreToWin || teamScores[Team.Enemy] >= ScoreToWin && ScoreToWin > 0 )
+		{
+			if ( !gameEnded )
+			{
+				EndGame(); // TODO
+			}
+		}
+	}
+
+	public override void PhysicsUpdate()
+	{
+		if ( !gameStarted )
+		{
+			return;
+		}
+	}
+
+	public override void StartGame()
+	{
+		SpawnPlayers();
+		gameStarted = true;
+	}
+
+	public override void EndGame()
 	{
 		var winningTeam = teamScores[Team.Player] > teamScores[Team.Enemy] ? Team.Player : Team.Enemy;
 		Log.Info( $"Game Over! {winningTeam} wins with a score of {teamScores[winningTeam]}" );
 		// TODO: Implement game end logic (show results, restart, etc.)
-		gameFinished = true;
+		gameEnded = true;
+	}
+
+	public override void PauseGame()
+	{
+		Scene.TimeScale = 0.0f;
+	}
+
+	public override void ResumeGame()
+	{
+		Scene.TimeScale = 1.0f;
 	}
 
 	public void OnGameEvent( DamageEvent eventArgs )
@@ -134,20 +150,20 @@ public class GameService : Component,
 		}
 	}
 
-	public void OnGameEvent( CaptureZoneEvent eventArgs )
+	public void OnGameEvent( CaptureZoneCapturedEvent capturedEventArgs )
 	{
-		if ( eventArgs.PreviousTeam != Team.Neutral )
+		if ( capturedEventArgs.PreviousTeam != Team.Neutral )
 		{
-			teamScores[eventArgs.PreviousTeam] += ScoreLoseZone; // Lose points for losing a zone
+			teamScores[capturedEventArgs.PreviousTeam] += ScoreLoseZone; // Lose points for losing a zone
 		}
 
-		if ( eventArgs.NewTeam != Team.Neutral )
+		if ( capturedEventArgs.NewTeam != Team.Neutral )
 		{
-			teamScores[eventArgs.PreviousTeam] += ScoreCaptureZone; // Lose points for losing a zone
+			teamScores[capturedEventArgs.PreviousTeam] += ScoreCaptureZone; // Lose points for losing a zone
 		}
 
 		Log.Info(
-			$"Zone {eventArgs.ZoneName} captured by {eventArgs.NewTeam}. New scores - Player: {teamScores[Team.Player]}, Enemy: {teamScores[Team.Enemy]}" );
+			$"Zone {capturedEventArgs.ZoneName} captured by {capturedEventArgs.NewTeam}. New scores - Player: {teamScores[Team.Player]}, Enemy: {teamScores[Team.Enemy]}" );
 	}
 
 	public void OnGameEvent( PlayerSpawnEvent eventArgs )
