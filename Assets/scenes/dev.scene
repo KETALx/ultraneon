@@ -131,22 +131,21 @@
               "__type": "Sandbox.MapInstance",
               "__guid": "2e16499c-6942-4754-9861-54ebac757558",
               "__version": 1,
+              "__enabled": false,
               "EnableCollision": true,
-              "MapName": "maps/un_facility.vmap",
+              "MapName": "maps/sp_cp_compound.vmap",
               "NoOrigin": false,
               "UseMapFromLaunch": false
             },
             {
               "__type": "PlayerSpawner",
               "__guid": "3abb8ffe-0cef-41e8-9633-d727db2b8ccf",
-              "__enabled": false,
               "PlayerPrefab": {
                 "_type": "gameobject",
                 "prefab": "prefabs/player/player.prefab"
               }
             }
-          ],
-          "Children": []
+          ]
         }
       ]
     },
@@ -441,6 +440,133 @@
               ]
             }
           ]
+        }
+      ]
+    },
+    {
+      "__guid": "6cf01925-8209-439b-b0e2-994aa22dde66",
+      "Flags": 0,
+      "Name": "Box",
+      "Position": "-64,192,-80",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.MeshComponent",
+          "__guid": "cc4a9fb1-5021-4543-9161-1654e216585f",
+          "Collision": "Mesh",
+          "Color": "1,1,1,1",
+          "HideInGame": false,
+          "IsTrigger": false,
+          "Mesh": {
+            "Topology": "H4sIAAAAAAAACl2Qiw6CUAxDh1flgg/wAfr/X2pP0iWLJA25W9t16xHxFc4C30E4\u002Bt2FWbgKd2Ew4NTvIZxcb9ZH4b5db\u002Bb9z/oUzVh8m7lPc9FOzjRYQ8ZXyXxxXvrw4e72wvtWdoEPdzMXj8We9OHDXcvO7EqdN396eKaeLHjkLciePeYxi4z0mMFtMisablFvRXZ2Tj158KQOF78f9WSROMQBAAA=",
+            "Positions": [
+              "-1248,-1520,64",
+              "1248,-1520,64",
+              "1248,1520,64",
+              "-1248,1520,64",
+              "-1248,1520,-64",
+              "1248,1520,-64",
+              "1248,-1520,-64",
+              "-1248,-1520,-64"
+            ],
+            "TextureCoord": [
+              "9.75,11.875",
+              "-9.75,-0.5",
+              "9.75,-11.875",
+              "-11.875,-0.5",
+              "-9.75,-11.875",
+              "-9.75,-0.5",
+              "-9.75,11.875",
+              "-11.875,-0.5",
+              "9.75,-11.875",
+              "9.75,0.5",
+              "9.75,11.875",
+              "11.875,0.5",
+              "-9.75,11.875",
+              "9.75,0.5",
+              "-9.75,-11.875",
+              "11.875,0.5",
+              "11.875,-0.5",
+              "-9.75,0.5",
+              "-11.875,0.5",
+              "9.75,-0.5",
+              "-11.875,0.5",
+              "9.75,-0.5",
+              "11.875,-0.5",
+              "-9.75,0.5"
+            ],
+            "TextureUAxis": [
+              "1,0,0",
+              "1,0,-0",
+              "0,-1,0",
+              "0,1,0",
+              "-1,0,0",
+              "1,-0,0"
+            ],
+            "TextureVAxis": [
+              "0,-1,0",
+              "0,-1,0",
+              "0,0,-1",
+              "-0,0,-1",
+              "0,0,-1",
+              "-0,0,-1"
+            ],
+            "TextureScale": [
+              "0.25,0.25",
+              "0.25,0.25",
+              "0.25,0.25",
+              "0.25,0.25",
+              "0.25,0.25",
+              "0.25,0.25"
+            ],
+            "TextureOffset": [
+              "256,256",
+              "256,256",
+              "256,192",
+              "256,192",
+              "256,192",
+              "256,192"
+            ],
+            "MaterialIndex": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "EdgeFlags": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "Materials": [
+              "materials/dev/reflectivity_30.vmat"
+            ]
+          },
+          "SmoothingAngle": 40,
+          "Static": false
         }
       ]
     }
