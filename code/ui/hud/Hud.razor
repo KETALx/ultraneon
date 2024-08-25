@@ -6,6 +6,7 @@
 @namespace Ultraneon.UI
 
 <root>
+	@if (Player.IsAlive) {
 	<VitalsPanel Player="@Player"/>
 	<InventoryPanel Inventory="@Inventory"/>
 	@if ( Inventory?.ActiveWeapon != null )
@@ -14,6 +15,7 @@
 	}
 	<CrosshairPanel/>
 	<RadarPanel/>
+	}
 	<InfoFeedPanel Messages="@InfoMessages"/>
 </root>
 

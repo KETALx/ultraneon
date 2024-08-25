@@ -68,7 +68,7 @@
               "IsMainCamera": true,
               "Orthographic": false,
               "OrthographicHeight": 1204,
-              "Priority": 1,
+              "Priority": 2,
               "RenderExcludeTags": "",
               "RenderTags": "",
               "TargetEye": "None",
@@ -649,6 +649,34 @@
       "Enabled": true,
       "__Prefab": "prefabs/player/playerspawn.prefab",
       "__PrefabVariables": {}
+    },
+    {
+      "__guid": "080eb2ab-0355-4bd3-9758-42a6a1be7c6c",
+      "Flags": 0,
+      "Name": "DeathCamera",
+      "Position": "-235.1,-551.5994,447.9001",
+      "Rotation": "0,0.4131042,0,0.9106838",
+      "Tags": "deathcamera",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.CameraComponent",
+          "__guid": "051e50fc-5742-44b2-8f57-112d1a71c761",
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 60,
+          "IsMainCamera": false,
+          "Orthographic": false,
+          "OrthographicHeight": 1204,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 10000,
+          "ZNear": 10
+        }
+      ]
     }
   ],
   "SceneProperties": {

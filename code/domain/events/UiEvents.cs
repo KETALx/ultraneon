@@ -9,8 +9,6 @@ public enum MenuAction
 	Quit
 }
 
-public record MenuActionEvent( MenuAction Action ) : IGameEvent;
-
 public enum UiInfoFeedType
 {
 	Normal,
@@ -19,4 +17,4 @@ public enum UiInfoFeedType
 	Debug
 }
 
-public record UiInfoFeedEvent(string Message, UiInfoFeedType Type) : IGameEvent;
+public record UiInfoFeedEvent( string Message, UiInfoFeedType Type ) : IGameEvent;

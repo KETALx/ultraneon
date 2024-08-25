@@ -9,7 +9,6 @@ public class UiService : Component,
 	IGameEventHandler<CharacterSpawnEvent>,
 	IGameEventHandler<CharacterDeathEvent>,
 	IGameEventHandler<DamageEvent>,
-	IGameEventHandler<MenuActionEvent>,
 	IGameEventHandler<GameModeActivatedEvent>,
 	IGameEventHandler<UiInfoFeedEvent>,
 	IGameEventHandler<GameOverEvent>
@@ -72,39 +71,13 @@ public class UiService : Component,
 
 	public void OnGameEvent( CharacterDeathEvent eventArgs )
 	{
-		HudPanel?.AddInfoMessage( $"{eventArgs.Victim.EntityName} was killed by {eventArgs.Killer?.EntityName ?? "unknown"}", InfoFeedPanel.InfoType.Warning );
-		HudPanel?.Hide();
+		// HudPanel?.AddInfoMessage( $"{eventArgs.Victim.EntityName} was killed by {eventArgs.Killer?.EntityName ?? "unknown"}", InfoFeedPanel.InfoType.Warning );
+		// HudPanel?.Hide();
 	}
 
 	public void OnGameEvent( DamageEvent eventArgs )
 	{
 		// Handle damage event if needed
-	}
-
-	public void OnGameEvent( MenuActionEvent eventArgs )
-	{
-		switch ( eventArgs.Action )
-		{
-			case MenuAction.Play:
-				var gameMode = GameService?.GameModes.FirstOrDefault();
-				if ( gameMode != null )
-				{
-					GameObject.Dispatch( new GameModeActivatedEvent( gameMode ) );
-					ShowHud();
-				}
-				else
-				{
-					Log.Error( "[UiService] No game mode found to activate." );
-				}
-
-				break;
-			case MenuAction.Settings:
-				Log.Info( "[UiService] Settings!!!" );
-				break;
-			case MenuAction.Quit:
-				Log.Info( "[UiService] Quit!!!" );
-				break;
-		}
 	}
 
 	public void OnGameEvent( GameModeActivatedEvent eventArgs )

@@ -94,12 +94,12 @@ public class SingleplayerGameMode : GameMode,
 
 	public override void LogicUpdate()
 	{
-		UpdatePlayerRespawn();
-
 		if ( !gameStarted )
 		{
 			return;
 		}
+		
+		UpdatePlayerRespawn();
 
 		if ( warmupPhase )
 		{
@@ -152,7 +152,6 @@ public class SingleplayerGameMode : GameMode,
 
 	private void SpawnOrRespawnPlayer()
 	{
-		ShowInfoMessage( "Spawning Player...", UiInfoFeedType.Debug );
 		Log.Info( "[SingleplayerGameMode] Attempting to spawn player" );
 		var spawnPoint = FindPlayerSpawnPoint();
 		if ( spawnPoint == null )
@@ -175,11 +174,13 @@ public class SingleplayerGameMode : GameMode,
 
 			Player.Transform.Position = spawnPoint.Transform.Position;
 			Player.Transform.Rotation = spawnPoint.Transform.Rotation;
+			ShowInfoMessage( "Player Respawn!", UiInfoFeedType.Debug );
 		}
 		else
 		{
 			var playerObject = PlayerPrefab.Clone( spawnPoint.Transform.Position, spawnPoint.Transform.Rotation );
 			Player = playerObject.Components.Get<PlayerNeon>();
+			ShowInfoMessage( "Fresh Player Spawn!", UiInfoFeedType.Debug );
 		}
 
 		if ( Player == null )

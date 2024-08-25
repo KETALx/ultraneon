@@ -66,14 +66,12 @@
 		        Game.ActiveScene.LoadFromFile( "scenes/sp/sp_c1_intro.scene" );
 		        break;
 	        case MenuAction.Settings:
-		        // TODO: Implement settings 
+		        // TODO
 		        break;
 	        case MenuAction.Quit:
 		        Game.Close();
 		        break;
         }
-
-        GameObject.Dispatch(new MenuActionEvent(action));
     }
 
     public void Show()
