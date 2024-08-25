@@ -355,6 +355,7 @@
           "Name": "Capture Point A",
           "Position": "-26.91423,-513.2108,11.26119",
           "Scale": "5.199997,6.199998,1",
+          "Tags": "trigger",
           "Enabled": true,
           "Components": [
             {
@@ -370,7 +371,6 @@
               "__guid": "80c2b359-9700-4704-9e85-a3f83cc8bfb2",
               "CaptureProgress": 0,
               "CaptureTime": 3,
-              "ContestingTeam": "Neutral",
               "ControllingTeam": "Neutral",
               "EnemyColor": "0.97255,0.20784,0.41961,1",
               "NeutralColor": "0.35294,0.45098,0.5451,1",
@@ -399,6 +399,7 @@
           "Name": "Capture Point B",
           "Position": "-297.6555,749.7561,11.25904",
           "Scale": "5.199997,6.199998,1",
+          "Tags": "trigger",
           "Enabled": true,
           "Components": [
             {
@@ -414,7 +415,6 @@
               "__guid": "acecb79d-eff3-459f-9878-bda0584f003f",
               "CaptureProgress": 0,
               "CaptureTime": 3,
-              "ContestingTeam": "Neutral",
               "ControllingTeam": "Neutral",
               "EnemyColor": "0.97255,0.20784,0.41961,1",
               "NeutralColor": "0.35294,0.45098,0.5451,1",
@@ -432,7 +432,7 @@
               "__guid": "93402eb4-0a17-4c64-973b-b804f4a19c50",
               "Center": "0,0,0",
               "IsTrigger": true,
-              "Scale": "80.2998,69.99972,87.00007",
+              "Scale": "110.7996,108.4997,87.00007",
               "Static": false
             }
           ]
