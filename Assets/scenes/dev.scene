@@ -208,7 +208,7 @@
                 "_type": "gameobject",
                 "prefab": "prefabs/player/player.prefab"
               },
-              "PlayerRespawnTime": 5.4000006,
+              "PlayerRespawnTime": 2,
               "WaveManager": {
                 "_type": "component",
                 "component_id": "0b4113c2-9602-4d16-9bb9-858aa1995476",
@@ -272,6 +272,34 @@
                   "__guid": "fbb19f12-c4f9-4212-b1cd-ba8120db718c"
                 }
               ]
+            }
+          ]
+        },
+        {
+          "__guid": "080eb2ab-0355-4bd3-9758-42a6a1be7c6c",
+          "Flags": 0,
+          "Name": "DeathCamera",
+          "Position": "-235.1,-551.5994,447.9001",
+          "Rotation": "0,0.4131042,0,0.9106838",
+          "Tags": "deathcamera",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.CameraComponent",
+              "__guid": "051e50fc-5742-44b2-8f57-112d1a71c761",
+              "BackgroundColor": "0.33333,0.46275,0.52157,1",
+              "ClearFlags": "All",
+              "FieldOfView": 60,
+              "IsMainCamera": false,
+              "Orthographic": false,
+              "OrthographicHeight": 1204,
+              "Priority": 1,
+              "RenderExcludeTags": "",
+              "RenderTags": "",
+              "TargetEye": "None",
+              "Viewport": "0,0,1,1",
+              "ZFar": 10000,
+              "ZNear": 10
             }
           ]
         }
@@ -344,7 +372,7 @@
               "__type": "CaptureZoneEntity",
               "__guid": "80c2b359-9700-4704-9e85-a3f83cc8bfb2",
               "CaptureProgress": 0,
-              "CaptureTime": 2,
+              "CaptureTime": 9,
               "ControllingTeam": "Neutral",
               "EnemyColor": "0.97255,0.20784,0.41961,1",
               "NeutralColor": "0.35294,0.45098,0.5451,1",
@@ -649,34 +677,6 @@
       "Enabled": true,
       "__Prefab": "prefabs/player/playerspawn.prefab",
       "__PrefabVariables": {}
-    },
-    {
-      "__guid": "080eb2ab-0355-4bd3-9758-42a6a1be7c6c",
-      "Flags": 0,
-      "Name": "DeathCamera",
-      "Position": "-235.1,-551.5994,447.9001",
-      "Rotation": "0,0.4131042,0,0.9106838",
-      "Tags": "deathcamera",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.CameraComponent",
-          "__guid": "051e50fc-5742-44b2-8f57-112d1a71c761",
-          "BackgroundColor": "0.33333,0.46275,0.52157,1",
-          "ClearFlags": "All",
-          "FieldOfView": 60,
-          "IsMainCamera": false,
-          "Orthographic": false,
-          "OrthographicHeight": 1204,
-          "Priority": 1,
-          "RenderExcludeTags": "",
-          "RenderTags": "",
-          "TargetEye": "None",
-          "Viewport": "0,0,1,1",
-          "ZFar": 10000,
-          "ZNear": 10
-        }
-      ]
     }
   ],
   "SceneProperties": {

@@ -6,7 +6,7 @@ using Ultraneon.Services;
 
 namespace Ultraneon.Player;
 
-public class PlayerNeon : BaseNeonCharacterEntity, IGameEventHandler<CharacterSpawnEvent>
+public class PlayerNeon : BaseNeonCharacterEntity, IGameEventHandler<CharacterSpawnEvent>, IGameEventHandler<CharacterDeathEvent>
 {
 	[RequireComponent]
 	public PlayerInventory Inventory { get; private set; }
@@ -25,31 +25,45 @@ public class PlayerNeon : BaseNeonCharacterEntity, IGameEventHandler<CharacterSp
 
 		MainCamera = Scene.GetAllComponents<CameraComponent>().FirstOrDefault( x => x.Tags.Contains( "maincamera" ) );
 		DeathCamera = Scene.GetAllComponents<CameraComponent>().FirstOrDefault( x => x.Tags.Contains( "deathcamera" ) );
-		EnableControls();
 
 		Log.Info( $"[PlayerNeon] Player initialized. Health: {Health}, Team: {CurrentTeam}" );
 	}
 
 	public void OnGameEvent( CharacterSpawnEvent eventArgs )
 	{
-		Log.Info( $"PlayerNeon received CharacterSpawnEvent with args {eventArgs.character.GameObject.Name} " );
+		if ( eventArgs.character != this )
+		{
+			return;
+		}
+
 		Transform.Position = eventArgs.spawnPosition;
 		SetupCharacter();
+		EnableControls();
+		Log.Info( $"PlayerNeon received CharacterSpawnEvent with args {eventArgs.character.GameObject.Name} " );
 	}
 
-	protected override void Die( GameObject attacker = null )
+	public void OnGameEvent( CharacterDeathEvent eventArgs )
 	{
-		base.Die( attacker );
+		if ( eventArgs.Victim != this )
+		{
+			return;
+		}
+
 		DisableControls();
 	}
 
 	public void DisableControls()
 	{
 		Log.Info( "[PlayerNeon] Player controls disabled" );
+
 		if ( MainCamera == null || DeathCamera == null ) { return; }
 
 		MainCamera.Priority = 1;
 		DeathCamera.Priority = 2;
+	}
+
+	protected override void BecomeRagdoll()
+	{
 	}
 
 	public void EnableControls()
