@@ -126,6 +126,14 @@ public sealed class BotAi : BaseNeonCharacterEntity
         if (Agent != null) Agent.Enabled = false;
         if (AnimationHelper != null) AnimationHelper.Enabled = false;
 
+        // FIXME: Ragdoll goes through map
+        var ragdollPhysics = GameObject.Components.Get<ModelPhysics>();
+        if (ragdollPhysics != null)
+        {
+	        ragdollPhysics.Enabled = true;
+        }
+        GameObject.Tags.Add("debris");
+
         // Notify about bot death
         GameObject.Dispatch(new CharacterDeathEvent(this, null, false));
     }
