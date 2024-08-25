@@ -107,7 +107,7 @@ public class UiService : Component,
 	public void OnGameEvent( GameModeActivatedEvent eventArgs )
 	{
 		ShowHud();
-		HudPanel?.AddInfoMessage( "Game started!", InfoFeedPanel.InfoType.Success );
+		HudPanel?.AddInfoMessage( "Singleplayer Initialized!", InfoFeedPanel.InfoType.Debug );
 	}
 
 	public void OnGameEvent( UiInfoFeedEvent eventArgs )

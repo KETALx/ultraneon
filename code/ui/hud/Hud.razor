@@ -24,6 +24,9 @@
 
 	[Property]
 	public PlayerInventory Inventory { get; set; }
+	
+	[Property]
+	public bool DisplayDebugMessages { get; set; }
 
 	private List<InfoFeedPanel.InfoMessage> InfoMessages { get; set; } = new List<InfoFeedPanel.InfoMessage>();
 
@@ -66,6 +69,11 @@
 	{
 		Player ??= Scene.GetAllComponents<PlayerNeon>().FirstOrDefault(x => x.GameObject.Tags.Has("player"));
 		Inventory ??= Player?.GameObject.Components.Get<PlayerInventory>();
+		if ( type == InfoFeedPanel.InfoType.Debug && !DisplayDebugMessages )
+		{
+			StateHasChanged();
+			return;
+		}
 		Log.Info( $"[Hud] [{{type}}] {message} " );
 		InfoMessages.Add( new InfoFeedPanel.InfoMessage( message, type ) );
 		if ( InfoMessages.Count > InfoFeedPanel.MaxMessages )

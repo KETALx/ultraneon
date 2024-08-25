@@ -270,7 +270,8 @@
               "Components": [
                 {
                   "__type": "Ultraneon.UI.Hud",
-                  "__guid": "40f6e14d-fed4-4765-9831-6147d162006d"
+                  "__guid": "40f6e14d-fed4-4765-9831-6147d162006d",
+                  "DisplayDebugMessages": true
                 }
               ]
             },
