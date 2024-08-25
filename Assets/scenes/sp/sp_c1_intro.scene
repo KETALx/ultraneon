@@ -867,6 +867,25 @@
           "Tint": "1,1,1,1"
         }
       ]
+    },
+    {
+      "__guid": "7dbed505-bc9a-4cb8-8402-382d58c2f613",
+      "Flags": 0,
+      "Name": "Object",
+      "Position": "992,1751.941,464",
+      "Scale": "6.27715,1,2.51967",
+      "Tags": "playerclip",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "d053d288-a90e-4137-a7af-69fbe0cc4d90",
+          "Center": "0,0,0",
+          "IsTrigger": false,
+          "Scale": "50,50,50",
+          "Static": false
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -886,7 +905,7 @@
       "AgentRadius": 16,
       "AgentStepSize": 18,
       "AgentMaxSlope": 40,
-      "ExcludedBodies": "trigger,player",
+      "ExcludedBodies": "trigger,player,playerclip",
       "IncludedBodies": ""
     }
   },
