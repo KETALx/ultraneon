@@ -1,0 +1,28 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/blendable.shader"
+
+	//---- Texture Filtering ----
+	F_TEXTURE_FILTERING 4 // Nearest Neighbour
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material A ----
+	g_flTintColorA "[1.000000 1.000000 1.000000 0.000000]"
+	TextureAmbientOcclusionA "materials/world/metal/diamondplate_1a/diamondplate_1a_ao.jpg"
+	TextureBlendMaskA "materials/default/default_blend.tga"
+	TextureColorA "materials/world/metal/diamondplate_1a/diamondplate_1a_color.jpg"
+	TextureMetalnessA "materials/world/metal/diamondplate_1a/diamondplate_1a_metal.jpg"
+	TextureNormalA "materials/world/metal/diamondplate_1a/diamondplate_1a_normal.jpg"
+	TextureRoughnessA "materials/world/metal/diamondplate_1a/diamondplate_1a_rough.jpg"
+	TextureTintMaskA "materials/default/default.tga"
+
+	SystemAttributes
+	{
+		WorldMappingWidth "128"
+		WorldMappingHeight "128"
+	}
+}

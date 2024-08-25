@@ -1,0 +1,89 @@
+{
+  "RectangleSets": [
+    {
+      "Rectangles": [
+        {
+          "Min": [
+            0,
+            0
+          ],
+          "Max": [
+            8192,
+            32768
+          ],
+          "Properties": {
+            "AllowRotation": true,
+            "AllowTiling": true
+          }
+        },
+        {
+          "Min": [
+            8192,
+            0
+          ],
+          "Max": [
+            16384,
+            32768
+          ],
+          "Properties": {}
+        },
+        {
+          "Min": [
+            16384,
+            0
+          ],
+          "Max": [
+            24576,
+            32768
+          ],
+          "Properties": {
+            "AllowRotation": true,
+            "AllowTiling": true
+          }
+        },
+        {
+          "Min": [
+            24576,
+            0
+          ],
+          "Max": [
+            28672,
+            32768
+          ],
+          "Properties": {
+            "AllowRotation": true,
+            "AllowTiling": true
+          }
+        },
+        {
+          "Min": [
+            28672,
+            0
+          ],
+          "Max": [
+            30720,
+            32768
+          ],
+          "Properties": {
+            "AllowRotation": true,
+            "AllowTiling": true
+          }
+        },
+        {
+          "Min": [
+            30720,
+            0
+          ],
+          "Max": [
+            32768,
+            32768
+          ],
+          "Properties": {
+            "AllowRotation": true,
+            "AllowTiling": true
+          }
+        }
+      ]
+    }
+  ]
+}

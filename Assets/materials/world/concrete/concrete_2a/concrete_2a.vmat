@@ -1,0 +1,28 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/blendable.shader"
+
+	//---- Texture Filtering ----
+	F_TEXTURE_FILTERING 4 // Nearest Neighbour
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material A ----
+	g_flTintColorA "[1.000000 1.000000 1.000000 0.000000]"
+	TextureAmbientOcclusionA "materials/world/concrete/concrete_2a/concrete_2a_ao.jpg"
+	TextureBlendMaskA "materials/default/default_blend.tga"
+	TextureColorA "materials/world/concrete/concrete_2a/concrete_2a_color.jpg"
+	TextureMetalnessA "materials/default/default_metal.tga"
+	TextureNormalA "materials/world/concrete/concrete_2a/concrete_2a_normal.jpg"
+	TextureRoughnessA "materials/world/concrete/concrete_2a/concrete_2a_rough.jpg"
+	TextureTintMaskA "materials/default/default.tga"
+
+	SystemAttributes
+	{
+		WorldMappingWidth "256"
+		WorldMappingHeight "256"
+	}
+}
