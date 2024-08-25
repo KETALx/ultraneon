@@ -11,65 +11,84 @@ public class BaseNeonCharacterEntity : Entity, Component.INetworkListener
 	[Property, ReadOnly]
 	public float MaxHealth { get; set; } = 100f;
 
-	[Property, HostSync, Change( nameof(OnDamage) )]
+	[Property, HostSync, Change( nameof(OnHealthChanged) )]
 	public float Health { get; set; }
 
 	[Property, ReadOnly]
-	public bool IsAlive { get; protected set; } = true;
+	public bool IsAlive { get; private set; } = true;
 
 	[Property]
 	public Team CurrentTeam { get; set; } = Team.Neutral;
 
-	public override void OnDamage( in DamageInfo damage )
-	{
-		if ( !IsAlive ) return;
-		Health = Math.Clamp( Health - damage.Damage, 0f, MaxHealth );
+	[Property]
+	public GameObject LastAttacker { get; set; }
 
-		if ( Health <= 0 ) KillCharacter( damage.Attacker );
-		Log.Info( $"{EntityName} took {damage.Damage} damage from {damage.Attacker?.Name ?? "unknown"}" );
+	public virtual void SetupCharacter()
+	{
+		Health = MaxHealth;
+		IsAlive = true;
 	}
 
 	protected override void OnEnabled()
 	{
 		base.OnEnabled();
-		Health = MaxHealth;
+		SetupCharacter();
 	}
 
-	[Button( "Kill Character" )]
-	public void KillCharacter( GameObject attacker = null )
+	public override void OnDamage( in DamageInfo damage )
 	{
-		Health = 0f;
+		if ( !IsAlive ) return;
+		Health = Math.Clamp( Health - damage.Damage, 0f, MaxHealth );
+		LastAttacker = damage.Attacker;
+		Log.Info( $"{EntityName} took {damage.Damage} damage from {damage.Attacker?.Name ?? "unknown"}. Remaining health: {Health}" );
+
+		GameObject.Dispatch( new DamageEvent( this, damage.Attacker?.Components.Get<Entity>(), damage.Damage, damage.Position ) );
+
+		if ( Health <= 0f )
+		{
+			Die( damage.Attacker );
+		}
+	}
+
+	protected virtual void OnHealthChanged( float oldValue, float newValue )
+	{
+		if ( newValue <= 0f && IsAlive )
+		{
+			Die( LastAttacker );
+		}
+	}
+
+	protected virtual void Die( GameObject attacker = null )
+	{
+		if ( !IsAlive ) return;
+
 		IsAlive = false;
+		Health = 0f;
+
 		BecomeRagdoll();
 
-		var baseNeonCharacterEntity = Components.Get<Entity>();
-		if ( baseNeonCharacterEntity != null )
-		{
-			var killer = attacker?.Components.Get<Entity>();
-			// bool isStylishKill = IsStylishKill( killer ); todo
-			GameObject.Dispatch( new CharacterDeathEvent( this, killer, false ) );
-		}
+		Log.Info( $"[BaseNeonCharacterEntity] {EntityName} has died. Attacker: {attacker?.Name ?? "Unknown"}" );
+		Scene.Dispatch( new CharacterDeathEvent( this, attacker?.Components.Get<Entity>(), IsStylishKill( attacker ) ) );
 	}
 
-	void BecomeRagdoll()
+	protected virtual void BecomeRagdoll()
 	{
 		var collider = GameObject.Components.Get<BoxCollider>();
-		if ( collider == null )
+		if ( collider != null )
 		{
-			return;
+			collider.Enabled = false;
 		}
 
-		collider.Enabled = false;
 		var ragdoll = GameObject.Components.Get<ModelPhysics>( true );
-		if ( ragdoll == null )
+		if ( ragdoll != null )
 		{
-			return;
+			ragdoll.Enabled = true;
 		}
 
-		ragdoll.Enabled = true;
+		GameObject.Tags.Add( "debris" );
 	}
 
-	private bool IsStylishKill( BaseNeonCharacterEntity killer )
+	protected virtual bool IsStylishKill( GameObject attacker )
 	{
 		// TODO: Implement logic for determining if it's a stylish kill (airborne, wallbang)
 		return false;

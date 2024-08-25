@@ -91,7 +91,7 @@ public class WaveManager : Component
 			if ( bot != null )
 			{
 				bot.CurrentTeam = Team.Enemy;
-				ShowInfoMessage( $"Bot Spawned!", UiInfoFeedType.Debug );
+				// ShowInfoMessage( $"Bot Spawned!", UiInfoFeedType.Debug );
 				activeBots.Add( bot );
 			}
 		}

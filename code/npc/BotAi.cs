@@ -1,221 +1,194 @@
 using System;
 using Sandbox;
 using Sandbox.Citizen;
-using Sandbox.Events;
 using Ultraneon;
 using Ultraneon.Domain;
-using Ultraneon.Domain.Events;
 using Ultraneon.Player;
 
 public sealed class BotAi : BaseNeonCharacterEntity
 {
-	[Property]
-	public NavMeshAgent Agent { get; set; }
+    [Property]
+    public NavMeshAgent Agent { get; set; }
 
-	[Property]
-	public CitizenAnimationHelper AnimationHelper { get; set; }
+    [Property]
+    public CitizenAnimationHelper AnimationHelper { get; set; }
 
-	[Property]
-	public float StopDistance { get; set; } = 100f;
+    [Property]
+    public float StopDistance { get; set; } = 100f;
 
-	[Property]
-	public float AttackRange { get; set; } = 200f;
+    [Property]
+    public float AttackRange { get; set; } = 200f;
 
-	[Property]
-	public float AttackRate { get; set; } = 1.0f;
+    [Property]
+    public float AttackRate { get; set; } = 1.0f;
 
-	[Property]
-	public float AttackDamage { get; set; } = 10.0f;
+    [Property]
+    public float AttackDamage { get; set; } = 10.0f;
 
-	[Property]
-	public float RagdollDespawnTime { get; set; } = 5.0f;
+    [Property]
+    public float RagdollDespawnTime { get; set; } = 5.0f;
 
-	private PlayerNeon CurrentTarget { get; set; }
-	private CaptureZoneEntity TargetZone { get; set; }
+    private PlayerNeon CurrentTarget { get; set; }
+    private CaptureZoneEntity TargetZone { get; set; }
 
-	private bool isAttacking = false;
-	private float timeSinceAttackStart = 0.0f;
-	private bool isDead = false;
-	private RealTimeSince timeSinceDeath;
+    private bool isAttacking = false;
+    private float timeSinceAttackStart = 0.0f;
+    private TimeSince timeSinceDeath;
 
-	protected override void OnStart()
-	{
-		base.OnStart();
+    public override void SetupCharacter()
+    {
+        base.SetupCharacter();
+        CurrentTeam = Team.Enemy;
+    }
 
-		if ( Agent == null )
-		{
-			Agent = Components.GetOrCreate<NavMeshAgent>();
-		}
+    protected override void OnStart()
+    {
+        base.OnStart();
 
-		if ( AnimationHelper == null )
-		{
-			AnimationHelper = Components.GetOrCreate<CitizenAnimationHelper>();
-		}
+        if ( Agent == null )
+        {
+            Agent = Components.GetOrCreate<NavMeshAgent>();
+        }
 
-		CurrentTeam = Team.Enemy;
-	}
+        if ( AnimationHelper == null )
+        {
+            AnimationHelper = Components.GetOrCreate<CitizenAnimationHelper>();
+        }
+    }
 
-	protected override void OnUpdate()
-	{
-		base.OnUpdate();
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
 
-		if ( isDead )
-		{
-			if ( timeSinceDeath >= RagdollDespawnTime )
-			{
-				GameObject.Destroy();
-			}
+        if ( !IsAlive )
+        {
+            if ( timeSinceDeath >= RagdollDespawnTime )
+            {
+                GameObject.Destroy();
+            }
+            return;
+        }
 
-			return;
-		}
+        if ( CurrentTarget != null && !CurrentTarget.IsAlive )
+        {
+            CurrentTarget = null;
+        }
 
-		if ( !IsAlive )
-		{
-			Die();
-			return;
-		}
+        if ( TargetZone == null || TargetZone.ControllingTeam == Team.Enemy )
+        {
+            FindNewTargetZone();
+        }
 
-		if ( CurrentTarget != null && !CurrentTarget.IsAlive )
-		{
-			CurrentTarget = null;
-		}
+        if ( TargetZone != null )
+        {
+            if ( CurrentTarget == null || Random.Shared.NextSingle() < 0.1f ) // 10% chance to switch focus to zone
+            {
+                MoveToZone();
+            }
+            else
+            {
+                AttackTarget();
+            }
+        }
+        else if ( CurrentTarget != null )
+        {
+            AttackTarget();
+        }
+        else
+        {
+            Agent.Stop();
+        }
 
-		if ( TargetZone == null || TargetZone.ControllingTeam == Team.Enemy )
-		{
-			FindNewTargetZone();
-		}
+        UpdateAnimation();
+    }
 
-		if ( TargetZone != null )
-		{
-			if ( CurrentTarget == null || Random.Shared.NextSingle() < 0.1f ) // 10% chance to switch focus to zone
-			{
-				MoveToZone();
-			}
-			else
-			{
-				AttackTarget();
-			}
-		}
-		else if ( CurrentTarget != null )
-		{
-			AttackTarget();
-		}
-		else
-		{
-			Agent.Stop();
-		}
+    protected override void Die( GameObject attacker = null )
+    {
+        base.Die( attacker );
+        timeSinceDeath = 0;
 
-		UpdateAnimation();
-	}
+        if ( Agent != null ) Agent.Enabled = false;
+        if ( AnimationHelper != null ) AnimationHelper.Enabled = false;
+    }
 
-	public override void OnDamage( in DamageInfo info )
-	{
-		base.OnDamage( info );
+    private void FindNewTargetZone()
+    {
+        var zones = Scene.GetAllComponents<CaptureZoneEntity>();
+        TargetZone = zones.FirstOrDefault( z => z.ControllingTeam != Team.Enemy && z.AllowBotCapture );
+    }
 
-		if ( Health <= 0 && !isDead )
-		{
-			Die();
-		}
-	}
+    private void MoveToZone()
+    {
+        if ( TargetZone == null ) return;
 
-	private void Die()
-	{
-		isDead = true;
-		timeSinceDeath = 0;
+        float distanceToZone = Vector3.DistanceBetween( Transform.Position, TargetZone.Transform.Position );
 
-		if ( Agent != null ) Agent.Enabled = false;
-		if ( AnimationHelper != null ) AnimationHelper.Enabled = false;
+        if ( distanceToZone > StopDistance )
+        {
+            Agent.MoveTo( TargetZone.Transform.Position );
+        }
+        else
+        {
+            Agent.Stop();
+            if ( TargetZone.AllowBotCapture )
+            {
+                // Attempt to capture the zone
+                TargetZone.OnTriggerEnter( Agent.Components.Get<Collider>() );
+            }
+        }
+    }
 
-		// FIXME: Ragdoll goes through map
-		var ragdollPhysics = GameObject.Components.Get<ModelPhysics>();
-		if ( ragdollPhysics != null )
-		{
-			ragdollPhysics.Enabled = true;
-		}
+    private void AttackTarget()
+    {
+        if ( CurrentTarget == null ) return;
 
-		GameObject.Tags.Add( "debris" );
+        float distanceToTarget = Vector3.DistanceBetween( Transform.Position, CurrentTarget.Transform.Position );
 
-		GameObject.Dispatch( new CharacterDeathEvent( this, null, false ) );
-	}
+        if ( distanceToTarget > AttackRange )
+        {
+            Agent.MoveTo( CurrentTarget.Transform.Position );
+        }
+        else
+        {
+            Agent.Stop();
 
-	private void FindNewTargetZone()
-	{
-		var zones = Scene.GetAllComponents<CaptureZoneEntity>();
-		TargetZone = zones.FirstOrDefault( z => z.ControllingTeam != Team.Enemy && z.AllowBotCapture );
-	}
+            if ( timeSinceAttackStart >= AttackRate )
+            {
+                Log.Info( $"BotAi {EntityName} is attacking {CurrentTarget.EntityName}" );
+                isAttacking = true;
+                timeSinceAttackStart = 0.0f;
 
-	private void MoveToZone()
-	{
-		if ( TargetZone == null ) return;
+                var damageInfo = new DamageInfo { Damage = AttackDamage, Attacker = GameObject, Position = CurrentTarget.Transform.Position };
+                CurrentTarget.OnDamage( damageInfo );
+            }
+        }
 
-		float distanceToZone = Vector3.DistanceBetween( Transform.Position, TargetZone.Transform.Position );
+        timeSinceAttackStart += Time.Delta;
+    }
 
-		if ( distanceToZone > StopDistance )
-		{
-			Agent.MoveTo( TargetZone.Transform.Position );
-		}
-		else
-		{
-			Agent.Stop();
-			if ( TargetZone.AllowBotCapture )
-			{
-				// Attempt to capture the zone
-				TargetZone.OnTriggerEnter( Agent.Components.Get<Collider>() );
-			}
-		}
-	}
+    private void UpdateAnimation()
+    {
+        if ( AnimationHelper != null )
+        {
+            AnimationHelper.WithVelocity( Agent.Velocity );
 
-	private void AttackTarget()
-	{
-		if ( CurrentTarget == null ) return;
+            if ( CurrentTarget != null )
+            {
+                AnimationHelper.WithLook( CurrentTarget.Transform.Position - Transform.Position );
+            }
+            else if ( TargetZone != null )
+            {
+                AnimationHelper.WithLook( TargetZone.Transform.Position - Transform.Position );
+            }
+        }
+    }
 
-		float distanceToTarget = Vector3.DistanceBetween( Transform.Position, CurrentTarget.Transform.Position );
-
-		if ( distanceToTarget > AttackRange )
-		{
-			Agent.MoveTo( CurrentTarget.Transform.Position );
-		}
-		else
-		{
-			Agent.Stop();
-
-			if ( timeSinceAttackStart >= AttackRate )
-			{
-				Log.Info( $"BotAi {EntityName} is attacking {CurrentTarget.EntityName}" );
-				isAttacking = true;
-				timeSinceAttackStart = 0.0f;
-
-				var damageInfo = new DamageInfo { Damage = AttackDamage, Attacker = GameObject, Position = CurrentTarget.Transform.Position };
-				CurrentTarget.OnDamage( damageInfo );
-			}
-		}
-
-		timeSinceAttackStart += Time.Delta;
-	}
-
-	private void UpdateAnimation()
-	{
-		if ( AnimationHelper != null )
-		{
-			AnimationHelper.WithVelocity( Agent.Velocity );
-
-			if ( CurrentTarget != null )
-			{
-				AnimationHelper.WithLook( CurrentTarget.Transform.Position - Transform.Position );
-			}
-			else if ( TargetZone != null )
-			{
-				AnimationHelper.WithLook( TargetZone.Transform.Position - Transform.Position );
-			}
-		}
-	}
-
-	public void SetTarget( PlayerNeon newTarget )
-	{
-		if ( newTarget != null && newTarget != CurrentTarget && newTarget.IsAlive )
-		{
-			CurrentTarget = newTarget;
-			Log.Info( $"BotAi {EntityName} is now targeting {CurrentTarget.EntityName}" );
-		}
-	}
+    public void SetTarget( PlayerNeon newTarget )
+    {
+        if ( newTarget != null && newTarget != CurrentTarget && newTarget.IsAlive )
+        {
+            CurrentTarget = newTarget;
+            Log.Info( $"BotAi {EntityName} is now targeting {CurrentTarget.EntityName}" );
+        }
+    }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using Sandbox;
 using Sandbox.Events;
 using Ultraneon.Domain;
 using Ultraneon.Domain.Events;
@@ -10,11 +9,12 @@ namespace Ultraneon.Game.GameMode.Sp;
 public class SingleplayerGameMode : GameMode,
 	ICaptureZoneGameMode,
 	IGameEventHandler<CaptureZoneCapturedEvent>,
-	IGameEventHandler<PlayerSpawnEvent>,
 	IGameEventHandler<CharacterDeathEvent>,
 	IGameEventHandler<DamageEvent>
 {
-    [Property] public float CaptureTime { get; set; } = 15f;
+	[Property]
+	public float PlayerRespawnTime { get; set; } = 6f;
+
 	[Property]
 	public float OvertimeSeconds { get; set; } = 60f;
 
@@ -25,36 +25,64 @@ public class SingleplayerGameMode : GameMode,
 	public GameObject PlayerPrefab { get; set; }
 
 	[Property]
+	private PlayerNeon Player;
+
+	[Property]
 	public WaveManager WaveManager { get; set; }
 
-	private PlayerNeon player;
 	private bool gameStarted;
 	private bool warmupPhase = true;
 	private TimeSince overtimeStarted;
+	private TimeSince timeSincePlayerDeath;
 	private bool isOvertime;
+
+	[Button( "Kill Player", "close" )]
+	public void DebugKillPlayer()
+	{
+		if ( Player != null && Player.IsAlive )
+		{
+			var damageInfo = new DamageInfo { Damage = 200.0f, Attacker = GameObject, Position = Player.Transform.Position };
+			Player.OnDamage( damageInfo );
+		}
+	}
+
+	[Button( "Kill All Bots", "smart_toy" )]
+	public void DebugKillBots()
+	{
+		var bots = Scene.GetAllComponents<BotAi>();
+		foreach ( var bot in bots )
+		{
+			if ( bot.IsAlive )
+			{
+				var damageInfo = new DamageInfo { Damage = 200.0f, Attacker = GameObject, Position = bot.Transform.Position };
+				bot.OnDamage( damageInfo );
+			}
+		}
+	}
+
+	[Button( "Instant Overtime", "watch" )]
+	public void DebugOvertime()
+	{
+		warmupPhase = false;
+		CaptureZones.ForEach( c => c.ControllingTeam = Team.Enemy );
+		StartOvertime();
+	}
 
 	public override void Initialize()
 	{
-		try
+		CaptureZones = Scene.GetAllComponents<CaptureZoneEntity>().ToList();
+		foreach ( var zone in CaptureZones )
 		{
-			CaptureZones = Scene.GetAllComponents<CaptureZoneEntity>().ToList();
-			foreach ( var zone in CaptureZones )
-			{
-				zone.ControllingTeam = Team.Neutral;
-				zone.CaptureProgress = 0f;
-				zone.GameMode = this;
-			}
+			zone.ControllingTeam = Team.Neutral;
+			zone.CaptureProgress = 0f;
+			zone.GameMode = this;
+		}
 
-			gameStarted = false;
-			warmupPhase = true;
-			isOvertime = false;
-			PauseGame();
-			Log.Info( "[SinglePlayerGameMode] SingleplayerGameMode initialized" );
-		}
-		catch ( Exception ex )
-		{
-			Log.Error( $"[SinglePlayerGameMode] Error in Initialize: {ex.Message}" );
-		}
+		gameStarted = false;
+		warmupPhase = true;
+		isOvertime = false;
+		PauseGame();
+		Log.Info( "[SinglePlayerGameMode] SingleplayerGameMode initialized" );
 	}
 
 	public override void Cleanup()
@@ -66,26 +94,21 @@ public class SingleplayerGameMode : GameMode,
 
 	public override void LogicUpdate()
 	{
-		try
-		{
-			if ( !gameStarted )
-			{
-				return;
-			}
+		UpdatePlayerRespawn();
 
-			if ( warmupPhase )
-			{
-				CheckWarmupEnd();
-			}
-			else
-			{
-				UpdateGameState();
-				CheckGameOver();
-			}
-		}
-		catch ( Exception ex )
+		if ( !gameStarted )
 		{
-			Log.Error( $"[SinglePlayerGameMode] Error in LogicUpdate: {ex.Message}" );
+			return;
+		}
+
+		if ( warmupPhase )
+		{
+			CheckWarmupEnd();
+		}
+		else
+		{
+			UpdateGameState();
+			CheckGameOver();
 		}
 	}
 
@@ -107,7 +130,7 @@ public class SingleplayerGameMode : GameMode,
 
 	public override void StartGame()
 	{
-		SpawnPlayer();
+		SpawnOrRespawnPlayer();
 		gameStarted = true;
 		warmupPhase = true;
 		ResumeGame();
@@ -117,34 +140,56 @@ public class SingleplayerGameMode : GameMode,
 
 	public override void EndGame()
 	{
-		ShowInfoMessage( "Game over!", UiInfoFeedType.Warning );
 		gameStarted = false;
 		int maxWave = WaveManager?.GetCurrentWave() ?? 0;
 		GameObject.Dispatch( new GameOverEvent( maxWave ) );
 	}
 
-	private void SpawnPlayer()
+	private SpawnPoint FindPlayerSpawnPoint()
 	{
+		return Scene.GetAllComponents<SpawnPoint>().FirstOrDefault( s => s.Tags.Contains( "player" ) || s.GameObject.Name.Equals( "info_player_start" ) );
+	}
+
+	private void SpawnOrRespawnPlayer()
+	{
+		ShowInfoMessage( "Spawning Player...", UiInfoFeedType.Debug );
 		Log.Info( "[SingleplayerGameMode] Attempting to spawn player" );
-		var spawnPoint = Scene.GetAllComponents<SpawnPoint>().FirstOrDefault( s => s.Tags.Contains( "player" ) || s.GameObject.Name.Equals( "info_player_start" ) );
-		if ( spawnPoint != null && PlayerPrefab != null )
+		var spawnPoint = FindPlayerSpawnPoint();
+		if ( spawnPoint == null )
 		{
-			var playerObject = PlayerPrefab.Clone( spawnPoint.Transform.Position, spawnPoint.Transform.Rotation );
-			player = playerObject.Components.Get<PlayerNeon>();
-			if ( player != null )
+			Log.Error( "[SingleplayerGameMode] Failed to spawn player: No valid spawn point with Component SpawnPoint, and tag 'player' or name 'info_player_start'" );
+			return;
+		}
+
+		if ( Player != null )
+		{
+			if ( Player.IsAlive )
 			{
-				Log.Info( $"[SingleplayerGameMode] Player spawned at {spawnPoint.Transform.Position}" );
-				GameObject.Dispatch( new PlayerSpawnEvent( Team.Player ) );
+				return;
 			}
-			else
+
+			if ( isOvertime )
 			{
-				Log.Error( "[SingleplayerGameMode] Failed to get PlayerNeon component from spawned player object" );
+				return;
 			}
+
+			Player.Transform.Position = spawnPoint.Transform.Position;
+			Player.Transform.Rotation = spawnPoint.Transform.Rotation;
 		}
 		else
 		{
-			Log.Error( "[SingleplayerGameMode] Failed to spawn player: No valid spawn point or player prefab" );
+			var playerObject = PlayerPrefab.Clone( spawnPoint.Transform.Position, spawnPoint.Transform.Rotation );
+			Player = playerObject.Components.Get<PlayerNeon>();
 		}
+
+		if ( Player == null )
+		{
+			Log.Error( "[SingleplayerGameMode] Failed to find player component" );
+			return;
+		}
+
+		Log.Info( $"[SingleplayerGameMode] Player spawned at {spawnPoint.Transform.Position}" );
+		Scene.Dispatch( new CharacterSpawnEvent( Player, spawnPoint.Transform.Position ) );
 	}
 
 	private void CheckWarmupEnd()
@@ -176,11 +221,23 @@ public class SingleplayerGameMode : GameMode,
 		}
 	}
 
+	private void UpdatePlayerRespawn()
+	{
+		if ( Player is { IsAlive: false } && timeSincePlayerDeath >= PlayerRespawnTime )
+		{
+			SpawnOrRespawnPlayer();
+		}
+	}
+
 	private void StartOvertime()
 	{
 		isOvertime = true;
 		overtimeStarted = 0f;
-		ShowInfoMessage( $"OVERTIME! Recapture the zone in {OvertimeSeconds} seconds or the game is over!", UiInfoFeedType.Warning );
+
+		if ( Player != null && Player.IsAlive )
+		{
+			ShowInfoMessage( $"OVERTIME! Recapture the zone in {OvertimeSeconds} seconds or the game is over!", UiInfoFeedType.Warning );
+		}
 
 		foreach ( var zone in CaptureZones )
 		{
@@ -218,7 +275,7 @@ public class SingleplayerGameMode : GameMode,
 
 	private void CheckGameOver()
 	{
-        if (isOvertime && (player?.IsDead ?? false))
+		if ( isOvertime && (Player == null || !Player.IsAlive) )
 		{
 			EndGame();
 		}
@@ -226,14 +283,13 @@ public class SingleplayerGameMode : GameMode,
 
 	public void OnCaptureStarted( CaptureZoneEntity zone )
 	{
-		ShowInfoMessage( $"Capture of {zone.PointName} has started!", UiInfoFeedType.Debug );
+		// ShowInfoMessage( $"Capture of {zone.PointName} has started!", UiInfoFeedType.Debug );
 	}
 
 	public void OnCaptureStopped( CaptureZoneEntity zone )
 	{
-		ShowInfoMessage( $"Capture of {zone.PointName} has stopped!", UiInfoFeedType.Debug );
+		// ShowInfoMessage( $"Capture of {zone.PointName} has stopped!", UiInfoFeedType.Debug );
 	}
-
 
 	public void OnPointCaptured( CaptureZoneEntity zone, Team previousTeam, Team newTeam )
 	{
@@ -244,7 +300,6 @@ public class SingleplayerGameMode : GameMode,
 			EndOvertime();
 		}
 
-		// Check if all zones are controlled by the enemy team
 		if ( CaptureZones.All( z => z.ControllingTeam == Team.Enemy ) && !isOvertime )
 		{
 			StartOvertime();
@@ -264,48 +319,37 @@ public class SingleplayerGameMode : GameMode,
 		}
 	}
 
-	public void OnGameEvent( PlayerSpawnEvent eventArgs )
-	{
-		ShowInfoMessage( $"Player spawned for team {eventArgs.Team}", UiInfoFeedType.Debug );
-	}
-
 	public void OnGameEvent( CharacterDeathEvent eventArgs )
 	{
+		if ( eventArgs.Victim == null )
+		{
+			return;
+		}
+
+		Log.Info( $"[SingleplayerGameMode] Character {eventArgs.Victim.GameObject.Name} has died!" );
+
+		ShowInfoMessage( $"Character {eventArgs.Victim.CurrentTeam} has died!", UiInfoFeedType.Debug );
 		var zonesWithCharacters = CaptureZones.Where( z => z.IsEntityInZone( eventArgs.Victim ) );
 		foreach ( var zone in zonesWithCharacters )
 		{
 			zone.RemoveDeadCharacterFromZone( eventArgs.Victim );
 		}
-		
-		if (eventArgs.Victim == player)
+
+		if ( eventArgs.Victim == Player )
 		{
-			if (isOvertime)
+			if ( isOvertime )
 			{
 				EndGame();
 			}
 			else
 			{
-				SpawnPlayer();
+				timeSincePlayerDeath = 0;
 			}
 		}
 	}
 
 	public void OnGameEvent( DamageEvent eventArgs )
 	{
-		if ( eventArgs.Target is BaseNeonCharacterEntity targetEntity )
-		{
-			if ( targetEntity.Health <= 0 )
-			{
-				var killerEntity = eventArgs.Attacker?.Components.Get<BaseNeonCharacterEntity>();
-				GameObject.Dispatch( new CharacterDeathEvent( targetEntity, killerEntity, IsStylishKill( killerEntity, targetEntity ) ) );
-			}
-		}
-	}
-
-	private bool IsStylishKill( BaseNeonCharacterEntity killer, BaseNeonCharacterEntity victim )
-	{
-		// TODO: Implement logic for determining if it's a stylish kill (airborne, wallbang)
-		return false;
 	}
 
 	private void ShowInfoMessage( string message, UiInfoFeedType type )

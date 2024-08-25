@@ -38,20 +38,14 @@ public class GameService : Component, IGameEventHandler<GameModeActivatedEvent>
 	protected override void OnUpdate()
 	{
 		if ( IsProxy ) return;
-		if ( ActiveGameMode is not null )
-		{
-			ActiveGameMode.LogicUpdate();
-		}
+		ActiveGameMode?.LogicUpdate();
 	}
 
 	protected override void OnFixedUpdate()
 	{
 		if ( IsProxy ) return;
 
-		if ( ActiveGameMode is not null )
-		{
-			ActiveGameMode.PhysicsUpdate();
-		}
+		ActiveGameMode?.PhysicsUpdate();
 	}
 
 	public void OnGameEvent( GameModeActivatedEvent eventArgs )

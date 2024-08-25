@@ -1,0 +1,23 @@
+{
+  "RootObject": {
+    "__guid": "4b8d1ce1-3073-4491-9634-c793fa55834c",
+    "Flags": 0,
+    "Name": "PlayerSpawn",
+    "Position": "-324.9133,-444.1223,160.7792",
+    "Tags": "player",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SpawnPoint",
+        "__guid": "c083c40e-fa89-47f2-8283-66478bcc3eff",
+        "Color": "0.07895,0.8902,0.05098,1"
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

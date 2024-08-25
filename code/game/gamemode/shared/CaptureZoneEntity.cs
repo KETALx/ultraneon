@@ -100,7 +100,7 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 		}
 
 		// Log capture progress for debugging
-		Log.Info( $"[CaptureZoneEntity] {PointName} Capture Progress: {CaptureProgress}, Contesting Team: {contestingTeam}, Controlling Team: {ControllingTeam}" );
+		//Log.Info( $"[CaptureZoneEntity] {PointName} Capture Progress: {CaptureProgress}, Contesting Team: {contestingTeam}, Controlling Team: {ControllingTeam}" );
 
 		HasChanged = true;
 	}
@@ -110,7 +110,7 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 		var playerPresent = charactersInZone.Any( c => c.CurrentTeam == Team.Player && c.IsAlive );
 		var enemyPresent = charactersInZone.Any( c => c.CurrentTeam == Team.Enemy && c.IsAlive );
 
-		Log.Info( $"[CaptureZoneEntity] {PointName} Player Present: {playerPresent}, Enemy Present: {enemyPresent}, Allow Bot Capture: {AllowBotCapture}" );
+		//Log.Info( $"[CaptureZoneEntity] {PointName} Player Present: {playerPresent}, Enemy Present: {enemyPresent}, Allow Bot Capture: {AllowBotCapture}" );
 
 		if ( playerPresent && !enemyPresent ) return Team.Player;
 		if ( enemyPresent && !playerPresent && AllowBotCapture ) return Team.Enemy;
@@ -187,21 +187,21 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 
 	private void OnStartCapture()
 	{
-		Log.Info( $"[CaptureZoneEntity] {PointName} is being captured!" );
+		//Log.Info( $"[CaptureZoneEntity] {PointName} is being captured!" );
 		GameMode?.OnCaptureStarted( this );
 		HasChanged = true;
 	}
 
 	private void OnStopCapture()
 	{
-		Log.Info( $"[CaptureZoneEntity] {PointName} stopped being captured!" );
+		//Log.Info( $"[CaptureZoneEntity] {PointName} stopped being captured!" );
 		GameMode?.OnCaptureStopped( this );
 		HasChanged = true;
 	}
 
 	private void OnPointCaptured( Team previousTeam )
 	{
-		Log.Info( $"[CaptureZoneEntity] {PointName} has been captured by {ControllingTeam}!" );
+		//Log.Info( $"[CaptureZoneEntity] {PointName} has been captured by {ControllingTeam}!" );
 		GameMode?.OnPointCaptured( this, previousTeam, ControllingTeam );
 		OnCaptureAction?.Invoke( previousTeam );
 		HasChanged = true;
@@ -216,7 +216,7 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 	{
 		if ( charactersInZone.Contains( entity ) )
 		{
-			Log.Info( "[CaptureZoneEntity] Removed killed character ${entity.Name}" );
+			//Log.Info( "[CaptureZoneEntity] Removed killed character ${entity.Name}" );
 			charactersInZone.Remove( entity );
 		}
 	}

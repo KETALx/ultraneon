@@ -6,7 +6,7 @@ namespace Ultraneon.Game.GameMode.Mp;
 
 public class MultiplayerGameMode : GameMode,
 	IGameEventHandler<CaptureZoneCapturedEvent>,
-	IGameEventHandler<PlayerSpawnEvent>,
+	IGameEventHandler<CharacterSpawnEvent>,
 	IGameEventHandler<CharacterDeathEvent>,
 	IGameEventHandler<DamageEvent>
 {
@@ -73,9 +73,6 @@ public class MultiplayerGameMode : GameMode,
 
 	private void SpawnPlayers()
 	{
-		// TODO: Implement player spawning logic
-		GameObject.Dispatch( new PlayerSpawnEvent( Team.Player ) );
-		GameObject.Dispatch( new PlayerSpawnEvent( Team.Enemy ) );
 	}
 
 	public override void LogicUpdate()
@@ -166,10 +163,10 @@ public class MultiplayerGameMode : GameMode,
 			$"Zone {capturedEventArgs.ZoneName} captured by {capturedEventArgs.NewTeam}. New scores - Player: {teamScores[Team.Player]}, Enemy: {teamScores[Team.Enemy]}" );
 	}
 
-	public void OnGameEvent( PlayerSpawnEvent eventArgs )
+	public void OnGameEvent( CharacterSpawnEvent eventArgs )
 	{
 		// TODO: Implement player spawning logic
-		Log.Info( $"Player spawned for team {eventArgs.Team}" );
+		Log.Info( $"Player spawned for team {eventArgs.character.CurrentTeam}" );
 	}
 
 	public void OnGameEvent( CharacterDeathEvent eventArgs )

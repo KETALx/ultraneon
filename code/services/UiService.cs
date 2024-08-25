@@ -6,7 +6,7 @@ namespace Ultraneon.Services;
 
 public class UiService : Component,
 	IGameEventHandler<CaptureZoneCapturedEvent>,
-	IGameEventHandler<PlayerSpawnEvent>,
+	IGameEventHandler<CharacterSpawnEvent>,
 	IGameEventHandler<CharacterDeathEvent>,
 	IGameEventHandler<DamageEvent>,
 	IGameEventHandler<MenuActionEvent>,
@@ -62,13 +62,18 @@ public class UiService : Component,
 		HudPanel?.AddInfoMessage( $"Zone {capturedEventArgs.ZoneName} captured by {capturedEventArgs.NewTeam}!", InfoFeedPanel.InfoType.Success );
 	}
 
-	public void OnGameEvent( PlayerSpawnEvent eventArgs )
+	public void OnGameEvent( CharacterSpawnEvent eventArgs )
 	{
+		if ( eventArgs.character.CurrentTeam == Team.Player )
+		{
+			HudPanel.Show();
+		}
 	}
 
 	public void OnGameEvent( CharacterDeathEvent eventArgs )
 	{
 		HudPanel?.AddInfoMessage( $"{eventArgs.Victim.EntityName} was killed by {eventArgs.Killer?.EntityName ?? "unknown"}", InfoFeedPanel.InfoType.Warning );
+		HudPanel?.Hide();
 	}
 
 	public void OnGameEvent( DamageEvent eventArgs )
@@ -91,6 +96,7 @@ public class UiService : Component,
 				{
 					Log.Error( "[UiService] No game mode found to activate." );
 				}
+
 				break;
 			case MenuAction.Settings:
 				Log.Info( "[UiService] Settings!!!" );

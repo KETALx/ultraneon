@@ -136,14 +136,6 @@
               "MapName": "maps/sp_cp_compound.vmap",
               "NoOrigin": false,
               "UseMapFromLaunch": false
-            },
-            {
-              "__type": "PlayerSpawner",
-              "__guid": "3abb8ffe-0cef-41e8-9633-d727db2b8ccf",
-              "PlayerPrefab": {
-                "_type": "gameobject",
-                "prefab": "prefabs/player/player.prefab"
-              }
             }
           ]
         }
@@ -210,13 +202,13 @@
             {
               "__type": "Ultraneon.Game.GameMode.Sp.SingleplayerGameMode",
               "__guid": "80a7bf31-2c0e-4313-aa29-cc162241eda4",
-              "CaptureTime": 15,
               "CaptureZones": [],
               "OvertimeSeconds": 60,
               "PlayerPrefab": {
                 "_type": "gameobject",
                 "prefab": "prefabs/player/player.prefab"
               },
+              "PlayerRespawnTime": 5.4000006,
               "WaveManager": {
                 "_type": "component",
                 "component_id": "0b4113c2-9602-4d16-9bb9-858aa1995476",
@@ -265,7 +257,7 @@
                 {
                   "__type": "Ultraneon.UI.Hud",
                   "__guid": "40f6e14d-fed4-4765-9831-6147d162006d",
-                  "DisplayDebugMessages": false
+                  "DisplayDebugMessages": true
                 }
               ]
             },
@@ -647,6 +639,16 @@
           "Static": true
         }
       ]
+    },
+    {
+      "__guid": "4b8d1ce1-3073-4491-9634-c793fa55834c",
+      "Flags": 0,
+      "Name": "PlayerSpawn",
+      "Position": "-324.9133,-444.1223,160.7792",
+      "Tags": "player",
+      "Enabled": true,
+      "__Prefab": "prefabs/player/playerspawn.prefab",
+      "__PrefabVariables": {}
     }
   ],
   "SceneProperties": {
