@@ -1,0 +1,79 @@
+{
+  "RootObject": {
+    "__guid": "019cdcc1-64b1-45dc-ac87-f0c72e29820e",
+    "Flags": 0,
+    "Name": "ForceField_b",
+    "Position": "1312,2848,608",
+    "Rotation": "0,0,-0.7071067,0.7071068",
+    "Tags": "playerclip",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.BoxCollider",
+        "__guid": "c1e557a8-ce7b-4614-a424-8b172063b901",
+        "Center": "0,0,0",
+        "IsTrigger": false,
+        "Scale": "512,8,320",
+        "Static": false
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "e0e95338-6400-4229-9cf0-e2e9ccba325f",
+        "Flags": 0,
+        "Name": "Particle_l",
+        "Position": "16,0,-160",
+        "Tags": "particles",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.LegacyParticleSystem",
+            "__guid": "00d15cf0-a9e7-4884-8f4c-0a7cf307661b",
+            "ControlPoints": [
+              {
+                "Value": "Vector3",
+                "StringCP": "1",
+                "VectorValue": "0,1400,0",
+                "FloatValue": 255
+              }
+            ],
+            "Looped": true,
+            "Particles": "particles/forcefield.vpcf",
+            "PlaybackSpeed": 1
+          }
+        ]
+      },
+      {
+        "__guid": "6a6db742-b716-45d0-a2e3-1ac6b982f54a",
+        "Flags": 0,
+        "Name": "Particle_r",
+        "Position": "16,0,-160",
+        "Tags": "particles",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.LegacyParticleSystem",
+            "__guid": "5bb02720-e5c9-4717-8efb-5de9207105a4",
+            "ControlPoints": [
+              {
+                "Value": "Vector3",
+                "StringCP": "1",
+                "VectorValue": "0,-1400,0",
+                "FloatValue": 255
+              }
+            ],
+            "Looped": true,
+            "Particles": "particles/forcefield.vpcf",
+            "PlaybackSpeed": 1
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

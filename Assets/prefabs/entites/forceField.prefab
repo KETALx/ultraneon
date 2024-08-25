@@ -1,0 +1,78 @@
+{
+  "RootObject": {
+    "__guid": "7dbed505-bc9a-4cb8-8402-382d58c2f613",
+    "Flags": 0,
+    "Name": "forcefield",
+    "Tags": "playerclip",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.BoxCollider",
+        "__guid": "d053d288-a90e-4137-a7af-69fbe0cc4d90",
+        "Center": "0,0,0",
+        "IsTrigger": false,
+        "Scale": "512,8,320",
+        "Static": false
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "d92c8d8c-afa8-4dd9-87c7-ef48489948f7",
+        "Flags": 0,
+        "Name": "Particle_l",
+        "Position": "16,0,-160",
+        "Tags": "particles",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.LegacyParticleSystem",
+            "__guid": "2df2124b-7411-4677-8efe-ae3b88c78d53",
+            "ControlPoints": [
+              {
+                "Value": "Vector3",
+                "StringCP": "1",
+                "VectorValue": "1400,0,0",
+                "FloatValue": 255
+              }
+            ],
+            "Looped": true,
+            "Particles": "particles/forcefield.vpcf",
+            "PlaybackSpeed": 1
+          }
+        ]
+      },
+      {
+        "__guid": "cb154d5f-8040-418c-8bd7-d60c0f360792",
+        "Flags": 0,
+        "Name": "Particle_r",
+        "Position": "16,0,-160",
+        "Tags": "particles",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.LegacyParticleSystem",
+            "__guid": "46649cfe-e0e6-4e06-81eb-0bca18e16111",
+            "ControlPoints": [
+              {
+                "Value": "Vector3",
+                "StringCP": "1",
+                "VectorValue": "-1400,0,0",
+                "FloatValue": 255
+              }
+            ],
+            "Looped": true,
+            "Particles": "particles/forcefield.vpcf",
+            "PlaybackSpeed": 1
+          }
+        ]
+      }
+    ],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

@@ -871,21 +871,93 @@
     {
       "__guid": "7dbed505-bc9a-4cb8-8402-382d58c2f613",
       "Flags": 0,
-      "Name": "Object",
-      "Position": "992,1751.941,464",
-      "Scale": "6.27715,1,2.51967",
+      "Name": "ForceField",
+      "Position": "1312,3264,608",
+      "Tags": "playerclip",
+      "Enabled": true,
+      "__Prefab": "prefabs/entites/forcefield.prefab",
+      "__PrefabVariables": {}
+    },
+    {
+      "__guid": "019cdcc1-64b1-45dc-ac87-f0c72e29820e",
+      "Flags": 0,
+      "Name": "ForceField_b",
+      "Position": "2864,1472,800",
+      "Rotation": "0,0,-0.7071067,0.7071068",
       "Tags": "playerclip",
       "Enabled": true,
       "Components": [
         {
           "__type": "Sandbox.BoxCollider",
-          "__guid": "d053d288-a90e-4137-a7af-69fbe0cc4d90",
+          "__guid": "c1e557a8-ce7b-4614-a424-8b172063b901",
           "Center": "0,0,0",
           "IsTrigger": false,
-          "Scale": "50,50,50",
+          "Scale": "512,8,320",
           "Static": false
         }
+      ],
+      "Children": [
+        {
+          "__guid": "e0e95338-6400-4229-9cf0-e2e9ccba325f",
+          "Flags": 0,
+          "Name": "Particle_l",
+          "Position": "16,0,-160",
+          "Tags": "particles",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.LegacyParticleSystem",
+              "__guid": "00d15cf0-a9e7-4884-8f4c-0a7cf307661b",
+              "ControlPoints": [
+                {
+                  "Value": "Vector3",
+                  "StringCP": "1",
+                  "VectorValue": "0,560,0",
+                  "FloatValue": 255
+                }
+              ],
+              "Looped": true,
+              "Particles": "particles/forcefield.vpcf",
+              "PlaybackSpeed": 1
+            }
+          ]
+        },
+        {
+          "__guid": "6a6db742-b716-45d0-a2e3-1ac6b982f54a",
+          "Flags": 0,
+          "Name": "Particle_r",
+          "Position": "-16,0.000002861023,-160",
+          "Tags": "particles",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.LegacyParticleSystem",
+              "__guid": "5bb02720-e5c9-4717-8efb-5de9207105a4",
+              "ControlPoints": [
+                {
+                  "Value": "Vector3",
+                  "StringCP": "1",
+                  "VectorValue": "0,-560,0",
+                  "FloatValue": 255
+                }
+              ],
+              "Looped": true,
+              "Particles": "particles/forcefield.vpcf",
+              "PlaybackSpeed": 1
+            }
+          ]
+        }
       ]
+    },
+    {
+      "__guid": "10f58245-3fa7-448c-923a-636a1fe2e699",
+      "Flags": 0,
+      "Name": "forcefield",
+      "Position": "368,464,384",
+      "Tags": "playerclip",
+      "Enabled": true,
+      "__Prefab": "prefabs/entites/forcefield.prefab",
+      "__PrefabVariables": {}
     }
   ],
   "SceneProperties": {
