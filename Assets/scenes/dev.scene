@@ -210,7 +210,7 @@
             {
               "__type": "Ultraneon.Game.GameMode.Sp.SingleplayerGameMode",
               "__guid": "80a7bf31-2c0e-4313-aa29-cc162241eda4",
-              "RespawnDelay": 5,
+              "CaptureTime": 15,
               "CaptureZones": [],
               "OvertimeSeconds": 60,
               "PlayerPrefab": {
@@ -265,7 +265,7 @@
                 {
                   "__type": "Ultraneon.UI.Hud",
                   "__guid": "40f6e14d-fed4-4765-9831-6147d162006d",
-                  "DisplayDebugMessages": true
+                  "DisplayDebugMessages": false
                 }
               ]
             },
@@ -335,8 +335,8 @@
           "__guid": "ff9c3881-ceb5-4b55-9046-cb597e8d4786",
           "Flags": 0,
           "Name": "Capture Point A",
-          "Position": "-26.91423,-513.2108,11.26119",
-          "Scale": "5.199997,6.199998,1",
+          "Position": "143.9405,-564.6517,-10.60592",
+          "Scale": "5.199997,6.199998,0.1999999",
           "Tags": "trigger",
           "Enabled": true,
           "Components": [
@@ -368,9 +368,9 @@
             {
               "__type": "Sandbox.BoxCollider",
               "__guid": "e8e42ce2-df99-4847-b927-37a1ddad87f5",
-              "Center": "0,0,0",
+              "Center": "0,0,214.7002",
               "IsTrigger": true,
-              "Scale": "49.89952,49.59967,87.00007",
+              "Scale": "49.89952,49.59967,492",
               "Static": false
             }
           ]
