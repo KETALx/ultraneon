@@ -15,14 +15,14 @@ public class BaseNeonCharacterEntity : Entity, Component.INetworkListener
 	public float Health { get; set; }
 
 	[Property, ReadOnly]
-	public bool isAlive { get; private set; } = true;
+	public bool IsAlive { get; protected set; } = true;
 
 	[Property]
 	public Team CurrentTeam { get; set; } = Team.Neutral;
 
 	public override void OnDamage( in DamageInfo damage )
 	{
-		if ( !isAlive ) return;
+		if ( !IsAlive ) return;
 		Health = Math.Clamp( Health - damage.Damage, 0f, MaxHealth );
 
 		if ( Health <= 0 ) KillCharacter( damage.Attacker );
@@ -39,7 +39,7 @@ public class BaseNeonCharacterEntity : Entity, Component.INetworkListener
 	public void KillCharacter( GameObject attacker = null )
 	{
 		Health = 0f;
-		isAlive = false;
+		IsAlive = false;
 		BecomeRagdoll();
 
 		var baseNeonCharacterEntity = Components.Get<Entity>();
@@ -54,8 +54,18 @@ public class BaseNeonCharacterEntity : Entity, Component.INetworkListener
 	void BecomeRagdoll()
 	{
 		var collider = GameObject.Components.Get<BoxCollider>();
+		if ( collider == null )
+		{
+			return;
+		}
+
 		collider.Enabled = false;
 		var ragdoll = GameObject.Components.Get<ModelPhysics>( true );
+		if ( ragdoll == null )
+		{
+			return;
+		}
+
 		ragdoll.Enabled = true;
 	}
 

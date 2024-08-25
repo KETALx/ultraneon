@@ -69,13 +69,13 @@ public sealed class BotAi : BaseNeonCharacterEntity
 			return;
 		}
 
-		if ( !isAlive )
+		if ( !IsAlive )
 		{
 			Die();
 			return;
 		}
 
-		if ( CurrentTarget != null && !CurrentTarget.isAlive )
+		if ( CurrentTarget != null && !CurrentTarget.IsAlive )
 		{
 			CurrentTarget = null;
 		}
@@ -212,7 +212,7 @@ public sealed class BotAi : BaseNeonCharacterEntity
 
 	public void SetTarget( PlayerNeon newTarget )
 	{
-		if ( newTarget != null && newTarget != CurrentTarget && newTarget.isAlive )
+		if ( newTarget != null && newTarget != CurrentTarget && newTarget.IsAlive )
 		{
 			CurrentTarget = newTarget;
 			Log.Info( $"BotAi {EntityName} is now targeting {CurrentTarget.EntityName}" );

@@ -210,9 +210,9 @@
             {
               "__type": "Ultraneon.Game.GameMode.Sp.SingleplayerGameMode",
               "__guid": "80a7bf31-2c0e-4313-aa29-cc162241eda4",
-              "CaptureTime": 5,
+              "RespawnDelay": 5,
               "CaptureZones": [],
-              "OvertimeSeconds": 5,
+              "OvertimeSeconds": 60,
               "PlayerPrefab": {
                 "_type": "gameobject",
                 "prefab": "prefabs/player/player.prefab"
@@ -233,9 +233,9 @@
               },
               "BotSpawnPoints": [],
               "BotSpawnPoolTag": "botspawnpool",
-              "InitialBotCount": 2,
-              "MaxBotsAlive": 30,
-              "WaveDuration": 5
+              "InitialBotCount": 4,
+              "MaxBotsAlive": 5,
+              "WaveDuration": 15
             }
           ]
         },
@@ -352,7 +352,7 @@
               "__type": "CaptureZoneEntity",
               "__guid": "80c2b359-9700-4704-9e85-a3f83cc8bfb2",
               "CaptureProgress": 0,
-              "CaptureTime": 3,
+              "CaptureTime": 2,
               "ControllingTeam": "Neutral",
               "EnemyColor": "0.97255,0.20784,0.41961,1",
               "NeutralColor": "0.35294,0.45098,0.5451,1",
@@ -367,54 +367,10 @@
             },
             {
               "__type": "Sandbox.BoxCollider",
-              "__guid": "1f979f6f-708c-4905-84f9-68d0c52cb779",
+              "__guid": "e8e42ce2-df99-4847-b927-37a1ddad87f5",
               "Center": "0,0,0",
               "IsTrigger": true,
-              "Scale": "109,89.49974,87.00007",
-              "Static": false
-            }
-          ]
-        },
-        {
-          "__guid": "b74d05c1-ebf3-4e18-8654-b12f5108cb3f",
-          "Flags": 0,
-          "Name": "Capture Point B",
-          "Position": "-297.6555,749.7561,11.25904",
-          "Scale": "5.199997,6.199998,1",
-          "Tags": "trigger",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Sandbox.ModelRenderer",
-              "__guid": "067da981-281d-4407-95a3-d0214d1f0507",
-              "BodyGroups": 18446744073709551615,
-              "Model": "models/dev/box.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "CaptureZoneEntity",
-              "__guid": "acecb79d-eff3-459f-9878-bda0584f003f",
-              "CaptureProgress": 0,
-              "CaptureTime": 3,
-              "ControllingTeam": "Neutral",
-              "EnemyColor": "0.97255,0.20784,0.41961,1",
-              "NeutralColor": "0.35294,0.45098,0.5451,1",
-              "PlayerColor": "0.32941,0.7451,0.20784,1",
-              "PointName": "B",
-              "ZoneModel": {
-                "_type": "component",
-                "component_id": "067da981-281d-4407-95a3-d0214d1f0507",
-                "go": "b74d05c1-ebf3-4e18-8654-b12f5108cb3f",
-                "component_type": "ModelRenderer"
-              }
-            },
-            {
-              "__type": "Sandbox.BoxCollider",
-              "__guid": "93402eb4-0a17-4c64-973b-b804f4a19c50",
-              "Center": "0,0,0",
-              "IsTrigger": true,
-              "Scale": "110.7996,108.4997,87.00007",
+              "Scale": "49.89952,49.59967,87.00007",
               "Static": false
             }
           ]

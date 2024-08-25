@@ -57,8 +57,12 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 	{
 		if ( IsProxy ) return;
 
-		UpdateCapture();
 		UpdateZoneVisuals();
+	}
+
+	protected override void OnFixedUpdate()
+	{
+		UpdateCapture();
 		GameMode?.OnCaptureProgressUpdated( this, CaptureProgress );
 	}
 
@@ -74,14 +78,14 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 		// Determine the contesting team
 		contestingTeam = DetermineContestingTeam();
 
-		if ( contestingTeam == Team.Neutral || contestingTeam == ControllingTeam )
+		if ( contestingTeam == Team.Neutral )
 		{
-			// No valid contesting team or the controlling team is present, decay capture progress
+			// No valid contesting team, decay capture progress
 			CaptureProgress = Math.Max( 0f, CaptureProgress - Time.Delta / CaptureTime );
 		}
-		else
+		else if ( contestingTeam != ControllingTeam )
 		{
-			// Valid contesting team, increase capture progress
+			// Valid contesting team different from controlling team, increase capture progress
 			CaptureProgress += Time.Delta / CaptureTime;
 
 			if ( CaptureProgress >= 1f )
@@ -89,14 +93,24 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 				CompleteCapture();
 			}
 		}
+		else
+		{
+			// Controlling team is present, reset progress
+			CaptureProgress = 0f;
+		}
+
+		// Log capture progress for debugging
+		Log.Info( $"[CaptureZoneEntity] {PointName} Capture Progress: {CaptureProgress}, Contesting Team: {contestingTeam}, Controlling Team: {ControllingTeam}" );
 
 		HasChanged = true;
 	}
 
 	private Team DetermineContestingTeam()
 	{
-		var playerPresent = charactersInZone.Any( c => c.CurrentTeam == Team.Player );
-		var enemyPresent = charactersInZone.Any( c => c.CurrentTeam == Team.Enemy );
+		var playerPresent = charactersInZone.Any( c => c.CurrentTeam == Team.Player && c.IsAlive );
+		var enemyPresent = charactersInZone.Any( c => c.CurrentTeam == Team.Enemy && c.IsAlive );
+
+		Log.Info( $"[CaptureZoneEntity] {PointName} Player Present: {playerPresent}, Enemy Present: {enemyPresent}, Allow Bot Capture: {AllowBotCapture}" );
 
 		if ( playerPresent && !enemyPresent ) return Team.Player;
 		if ( enemyPresent && !playerPresent && AllowBotCapture ) return Team.Enemy;
@@ -137,7 +151,7 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 	public void OnTriggerEnter( Collider other )
 	{
 		var character = other.GameObject.Components.Get<BaseNeonCharacterEntity>();
-		if ( character != null )
+		if ( character is { IsAlive: true } )
 		{
 			charactersInZone.Add( character );
 			CheckCaptureStart();
@@ -156,6 +170,7 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 
 	private void CheckCaptureStart()
 	{
+		var contestingTeam = DetermineContestingTeam();
 		if ( contestingTeam != Team.Neutral && contestingTeam != ControllingTeam )
 		{
 			OnStartCapture();
@@ -195,5 +210,14 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 	public bool IsEntityInZone( BaseNeonCharacterEntity entity )
 	{
 		return charactersInZone.Contains( entity );
+	}
+
+	public void RemoveDeadCharacterFromZone( BaseNeonCharacterEntity entity )
+	{
+		if ( charactersInZone.Contains( entity ) )
+		{
+			Log.Info( "[CaptureZoneEntity] Removed killed character ${entity.Name}" );
+			charactersInZone.Remove( entity );
+		}
 	}
 }

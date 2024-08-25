@@ -101,7 +101,7 @@ public class WaveManager : Component
 	{
 		if ( currentWave == 0 ) return;
 
-		activeBots.RemoveAll( bot => !bot.IsValid() || !bot.isAlive );
+		activeBots.RemoveAll( bot => !bot.IsValid() || !bot.IsAlive );
 
 		if ( timeSinceWaveStart >= WaveDuration )
 		{
