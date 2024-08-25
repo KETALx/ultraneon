@@ -44,20 +44,17 @@ public class UiService : Component,
 		ShowHud();
 	}
 
-	private void ShowMainMenu()
-	{
-		MainMenuPanel?.Show();
-		HudPanel?.Hide();
-		GameOverPanel?.Hide();
-		GameObject.Dispatch( new GamePausedEvent() );
-	}
-
 	private void ShowHud()
 	{
 		MainMenuPanel?.Hide();
 		HudPanel?.Show();
 		GameOverPanel?.Hide();
 		GameObject.Dispatch( new GameResumedEvent() );
+	}
+
+	private void HideHud()
+	{
+		HudPanel?.Hide();
 	}
 
 	public void OnGameEvent( CaptureZoneCapturedEvent capturedEventArgs )
@@ -118,6 +115,7 @@ public class UiService : Component,
 	public void OnGameEvent( GameOverEvent eventArgs )
 	{
 		HudPanel?.Hide();
+		MainMenuPanel?.Hide();
 		GameOverPanel?.Show( eventArgs.MaxWaveReached );
 		HudPanel?.AddInfoMessage( $"Game Over! Max wave reached: {eventArgs.MaxWaveReached}", InfoFeedPanel.InfoType.Warning );
 	}

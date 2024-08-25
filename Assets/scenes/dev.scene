@@ -200,12 +200,6 @@
                 "go": "8769fff2-b4de-4825-a577-eafbe8440f63",
                 "component_type": "Hud"
               },
-              "MainMenuPanel": {
-                "_type": "component",
-                "component_id": "a6e11689-e712-4302-878c-4e6b88c16c11",
-                "go": "baa4c71f-f6f3-49aa-b447-6b5a16507d9f",
-                "component_type": "MainMenu"
-              },
               "RootPanel": {
                 "_type": "component",
                 "component_id": "4b3f8cd3-6770-43ec-9bc6-527ec3d2c3c4",
@@ -216,9 +210,9 @@
             {
               "__type": "Ultraneon.Game.GameMode.Sp.SingleplayerGameMode",
               "__guid": "80a7bf31-2c0e-4313-aa29-cc162241eda4",
-              "CaptureTime": 15,
+              "CaptureTime": 5,
               "CaptureZones": [],
-              "OvertimeSeconds": 60,
+              "OvertimeSeconds": 5,
               "PlayerPrefab": {
                 "_type": "gameobject",
                 "prefab": "prefabs/player/player.prefab"
@@ -241,7 +235,7 @@
               "BotSpawnPoolTag": "botspawnpool",
               "InitialBotCount": 2,
               "MaxBotsAlive": 30,
-              "WaveDuration": 40
+              "WaveDuration": 5
             }
           ]
         },
@@ -272,18 +266,6 @@
                   "__type": "Ultraneon.UI.Hud",
                   "__guid": "40f6e14d-fed4-4765-9831-6147d162006d",
                   "DisplayDebugMessages": true
-                }
-              ]
-            },
-            {
-              "__guid": "baa4c71f-f6f3-49aa-b447-6b5a16507d9f",
-              "Flags": 0,
-              "Name": "Menu",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "Ultraneon.UI.MainMenu",
-                  "__guid": "a6e11689-e712-4302-878c-4e6b88c16c11"
                 }
               ]
             },

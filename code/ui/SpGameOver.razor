@@ -1,17 +1,22 @@
 ﻿@using System
 @using Sandbox.UI
 @using Ultraneon.Domain.Events
+@using Game = Sandbox.Game
 @inherits PanelComponent
 @namespace Ultraneon.UI
 @attribute [StyleSheet]
 
-<root class="@( IsVisible ? "visible" : "" )">
-	<div class="content">
-		<h1 class="title">Game Over</h1>
+<root class="@( IsVisible ? "visible" : "hidden" )">
+	<div class="menu-container">
+		<div class="title"><span class="title-1">GAME</span>&nbsp;<span class="title-2">OVER</span></div>
 		<p class="max-wave">Max Wave Reached: @MaxWaveReached</p>
-		<div class="buttons">
-			<button class="button" onclick=@OnRestartClick>Restart</button>
-			<button class="button" onclick=@OnMainMenuClick>Main Menu</button>
+		<div class="button-container">
+			<button class="menu-button" onclick=@OnPlayAgainClick>
+				<span>Play Again</span>
+			</button>
+			<button class="menu-button" onclick=@OnMainMenuClick>
+				<span>Main Menu</span>
+			</button>
 		</div>
 	</div>
 </root>
@@ -33,14 +38,14 @@
 		StateHasChanged();
 	}
 
-	private void OnRestartClick()
+	private void OnPlayAgainClick()
 	{
-		// TODO: Restart game
+		Game.ActiveScene.LoadFromFile( "scenes/sp/sp_c1_intro.scene" );
 	}
 
 	private void OnMainMenuClick()
 	{
-		// TODO: Return to main menu
+		Game.ActiveScene.LoadFromFile( "scenes/ui/mainmenu.scene" );
 	}
 
 	protected override int BuildHash() => HashCode.Combine( IsVisible, MaxWaveReached );
