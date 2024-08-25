@@ -682,6 +682,101 @@
               ]
             }
           ]
+        },
+        {
+          "__guid": "574625f1-1bfa-4bd5-901b-3bfcd7abec6d",
+          "Flags": 0,
+          "Name": "#SOUNDS",
+          "Enabled": true,
+          "Children": [
+            {
+              "__guid": "100e7173-40d5-4010-9e3a-4d6e9fe81a91",
+              "Flags": 0,
+              "Name": "dsp_chamber_med",
+              "Position": "2448,1472,848",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "DspVolume",
+                  "__guid": "adb01f1c-f024-451f-8599-e85bc9101d39",
+                  "Dsp": "chamber.medium",
+                  "Priority": 0,
+                  "SceneVolume": {
+                    "Type": "Box",
+                    "Sphere": {
+                      "Radius": 10
+                    },
+                    "Box": {
+                      "Mins": "-469.3026,-222.4406,-217.4273",
+                      "Maxs": "427.5071,353.1524,50"
+                    }
+                  },
+                  "TargetMixer": {
+                    "Name": "game",
+                    "Id": "00000000-0000-0000-0000-000000000000"
+                  }
+                }
+              ]
+            },
+            {
+              "__guid": "9040a62b-2371-4137-b793-ac19506a798c",
+              "Flags": 0,
+              "Name": "dsp_chamber_med",
+              "Position": "816,224,848",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "DspVolume",
+                  "__guid": "3e5d023e-b38d-45a6-8140-182e9d24f307",
+                  "Dsp": "chamber.medium",
+                  "Priority": 0,
+                  "SceneVolume": {
+                    "Type": "Box",
+                    "Sphere": {
+                      "Radius": 10
+                    },
+                    "Box": {
+                      "Mins": "-1085.858,-222.4405,-217.4273",
+                      "Maxs": "427.5071,475.9795,50"
+                    }
+                  },
+                  "TargetMixer": {
+                    "Name": "game",
+                    "Id": "00000000-0000-0000-0000-000000000000"
+                  }
+                }
+              ]
+            },
+            {
+              "__guid": "e15cdb6b-c01c-4cf0-83f9-63d48119b3dd",
+              "Flags": 0,
+              "Name": "dsp_chamber_med",
+              "Position": "-2.248051,871.3059,656",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "DspVolume",
+                  "__guid": "bcd97ac5-0d06-487d-b436-f5f26063de6a",
+                  "Dsp": "chamber.medium",
+                  "Priority": 0,
+                  "SceneVolume": {
+                    "Type": "Box",
+                    "Sphere": {
+                      "Radius": 10
+                    },
+                    "Box": {
+                      "Mins": "-313.5023,-231.7201,-217.4273",
+                      "Maxs": "165.7701,331.5497,283.1743"
+                    }
+                  },
+                  "TargetMixer": {
+                    "Name": "game",
+                    "Id": "00000000-0000-0000-0000-000000000000"
+                  }
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -689,7 +784,7 @@
       "__guid": "acc1d8d4-5f3e-447c-991d-ff8bf231e54d",
       "Flags": 0,
       "Name": "weapon_auto (1)",
-      "Position": "677.9223,2064.621,514.2096",
+      "Position": "1088,2768,514.2096",
       "Rotation": "-0.09167701,0.06799474,0.7979485,0.5918194",
       "Tags": "trigger",
       "Enabled": true,
