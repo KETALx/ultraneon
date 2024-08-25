@@ -64,6 +64,8 @@
 
 	public void AddInfoMessage( string message, InfoFeedPanel.InfoType type )
 	{
+		Player ??= Scene.GetAllComponents<PlayerNeon>().FirstOrDefault(x => x.GameObject.Tags.Has("player"));
+		Inventory ??= Player?.GameObject.Components.Get<PlayerInventory>();
 		Log.Info( $"[Hud] [{{type}}] {message} " );
 		InfoMessages.Add( new InfoFeedPanel.InfoMessage( message, type ) );
 		if ( InfoMessages.Count > InfoFeedPanel.MaxMessages )
