@@ -180,7 +180,7 @@
               "RenderTags": "",
               "TargetEye": "None",
               "Viewport": "0,0,1,1",
-              "ZFar": 10000,
+              "ZFar": 64000,
               "ZNear": 0.1
             },
             {
@@ -316,12 +316,12 @@
                   "__type": "Sandbox.CubemapFog",
                   "__guid": "58b7530e-13ba-46da-99e2-e39ae3a001ba",
                   "Blur": 0,
-                  "EndDistance": 3000,
+                  "EndDistance": 4500,
                   "FalloffExponent": 2,
                   "HeightExponent": 2,
-                  "HeightStart": 2000,
+                  "HeightStart": 0,
                   "HeightWidth": 0,
-                  "StartDistance": 1024,
+                  "StartDistance": 1000,
                   "Tint": "1,1,1,0"
                 }
               ]
@@ -335,12 +335,60 @@
                 {
                   "__type": "Sandbox.GradientFog",
                   "__guid": "15569457-7763-4c97-b4c4-13170aee52d3",
-                  "Color": "0.82326,0.50672,0.22975,1",
-                  "EndDistance": 1024,
-                  "FalloffExponent": 2.9999993,
+                  "Color": "0.84186,0.41173,0.18012,0.78",
+                  "EndDistance": 1500,
+                  "FalloffExponent": 2,
                   "Height": 1024,
-                  "StartDistance": 256,
+                  "StartDistance": 128,
                   "VerticalFalloffExponent": 2
+                }
+              ]
+            },
+            {
+              "__guid": "688328e0-00c3-44a5-945b-00d865c72d87",
+              "Flags": 0,
+              "Name": "#SPRITES",
+              "Enabled": true,
+              "Children": [
+                {
+                  "__guid": "ddf2a584-8ed4-4732-88ed-a5341db9fb9e",
+                  "Flags": 0,
+                  "Name": "DistantLight",
+                  "Position": "-5984,15536,4304",
+                  "Tags": "particles",
+                  "Enabled": true,
+                  "__Prefab": "prefabs/effects/world/distantlight.prefab",
+                  "__PrefabVariables": {}
+                },
+                {
+                  "__guid": "78f7ce37-51db-4bcd-b596-05e96f378bdd",
+                  "Flags": 0,
+                  "Name": "DistantLight",
+                  "Position": "-288,13136,3328",
+                  "Tags": "particles",
+                  "Enabled": true,
+                  "__Prefab": "prefabs/effects/world/distantlight.prefab",
+                  "__PrefabVariables": {}
+                },
+                {
+                  "__guid": "b6921e56-9b64-4137-86d2-bd90a13c698e",
+                  "Flags": 0,
+                  "Name": "DistantLight",
+                  "Position": "-6784,7952,4288",
+                  "Tags": "particles",
+                  "Enabled": true,
+                  "__Prefab": "prefabs/effects/world/distantlight.prefab",
+                  "__PrefabVariables": {}
+                },
+                {
+                  "__guid": "30aeca46-447e-4c7b-92f5-1e8a6224c127",
+                  "Flags": 0,
+                  "Name": "DistantLight",
+                  "Position": "-3888,-4256,3552",
+                  "Tags": "particles",
+                  "Enabled": true,
+                  "__Prefab": "prefabs/effects/world/distantlight.prefab",
+                  "__PrefabVariables": {}
                 }
               ]
             }
@@ -400,8 +448,7 @@
               "__guid": "89aabcb6-e97a-4422-8965-b2ce1d5fd14b",
               "Flags": 0,
               "Name": "BotSpawn",
-              "Position": "272,640,304",
-              "Rotation": "0,0,0.7071067,0.7071068",
+              "Position": "-16.00002,-0.000007629395,79.99998",
               "Tags": "botspawn",
               "Enabled": true,
               "Components": [
@@ -413,11 +460,26 @@
               ]
             },
             {
+              "__guid": "0d427306-c61d-4f6b-9cee-466e7293ed90",
+              "Flags": 0,
+              "Name": "BotSpawn",
+              "Position": "748.9877,-220.1837,79.99998",
+              "Rotation": "0,0,0.9914449,-0.1305261",
+              "Tags": "botspawn",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.SpawnPoint",
+                  "__guid": "2298ceb9-6ebf-4a8c-b353-467b26636b60",
+                  "Color": "0.8902,0.31765,0.05098,1"
+                }
+              ]
+            },
+            {
               "__guid": "67e8945e-aa53-4c2d-9b6b-4323d7c22d55",
               "Flags": 0,
               "Name": "BotSpawn",
-              "Position": "384,640,304",
-              "Rotation": "0,0,0.7071067,0.7071068",
+              "Position": "-16,-112,79.99998",
               "Tags": "botspawn",
               "Enabled": true,
               "Components": [
@@ -429,11 +491,26 @@
               ]
             },
             {
+              "__guid": "5192cc62-a244-46ae-9459-3753541da3f9",
+              "Flags": 0,
+              "Name": "BotSpawn",
+              "Position": "720,-112,79.99998",
+              "Rotation": "0,0,0.9914449,-0.1305261",
+              "Tags": "botspawn",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.SpawnPoint",
+                  "__guid": "85deef2e-ca5a-428e-aa0b-d97dd6e4dd0a",
+                  "Color": "0.8902,0.31765,0.05098,1"
+                }
+              ]
+            },
+            {
               "__guid": "20cf6586-0b05-472a-9806-b74757c3e529",
               "Flags": 0,
               "Name": "BotSpawn",
-              "Position": "496,640,304",
-              "Rotation": "0,0,0.7071067,0.7071068",
+              "Position": "-15.99998,-224,79.99998",
               "Tags": "botspawn",
               "Enabled": true,
               "Components": [
@@ -445,49 +522,113 @@
               ]
             },
             {
-              "__guid": "42dd60a3-ac1f-46fd-892e-d551820367a2",
+              "__guid": "7b1490fd-845a-4cb3-83ec-7c239fa6347c",
               "Flags": 0,
               "Name": "BotSpawn",
-              "Position": "2816,1376,656",
-              "Rotation": "0,0,0.9999999,0.0000001490116",
+              "Position": "691.0123,-3.816307,79.99998",
+              "Rotation": "0,0,0.9914449,-0.1305261",
               "Tags": "botspawn",
               "Enabled": true,
               "Components": [
                 {
                   "__type": "Sandbox.SpawnPoint",
-                  "__guid": "21d5232b-2932-403f-becb-1c13a315478c",
+                  "__guid": "1cb1a209-fd41-46b1-b6d6-5d6f678aaf35",
                   "Color": "0.8902,0.31765,0.05098,1"
                 }
               ]
             },
             {
-              "__guid": "c58110a5-9647-4499-955d-fbcff458c2a1",
+              "__guid": "33f99de7-7621-4f74-b9a6-544bc4919d3d",
               "Flags": 0,
               "Name": "BotSpawn",
-              "Position": "2816,1456,656",
-              "Rotation": "0,0,0.9999999,0.0000001490116",
+              "Position": "2752,768,656",
+              "Rotation": "0,0,0.0000003437187,-0.9999999",
               "Tags": "botspawn",
               "Enabled": true,
               "Components": [
                 {
                   "__type": "Sandbox.SpawnPoint",
-                  "__guid": "10bbab2f-bc53-4f82-a60f-fd43252850b6",
+                  "__guid": "309ebe6e-c114-4cfb-9a9a-404625ff285b",
                   "Color": "0.8902,0.31765,0.05098,1"
                 }
               ]
             },
             {
-              "__guid": "29fba843-4241-4468-b378-41f5a13a7461",
+              "__guid": "7d92d432-bad3-4267-8c61-35c94b9f9c53",
               "Flags": 0,
               "Name": "BotSpawn",
-              "Position": "2816,1536,656",
-              "Rotation": "0,0,0.9999999,0.0000001490116",
+              "Position": "2752,672,656",
+              "Rotation": "0,0,0.0000003437187,-0.9999999",
               "Tags": "botspawn",
               "Enabled": true,
               "Components": [
                 {
                   "__type": "Sandbox.SpawnPoint",
-                  "__guid": "451469b7-2d63-41fd-80b4-f3a1e21c43ac",
+                  "__guid": "d09a0152-4f89-4412-9e2f-80fdec81fab7",
+                  "Color": "0.8902,0.31765,0.05098,1"
+                }
+              ]
+            },
+            {
+              "__guid": "216ecd4e-85a8-4da4-8018-d1f673857eb6",
+              "Flags": 0,
+              "Name": "BotSpawn",
+              "Position": "2752,544,656",
+              "Rotation": "0,0,0.0000003437187,-0.9999999",
+              "Tags": "botspawn",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.SpawnPoint",
+                  "__guid": "1a991074-93c8-4530-a739-8c586688ea79",
+                  "Color": "0.8902,0.31765,0.05098,1"
+                }
+              ]
+            },
+            {
+              "__guid": "0954c124-b154-4070-bacd-0de8a306f035",
+              "Flags": 0,
+              "Name": "BotSpawn",
+              "Position": "3168,3328,224",
+              "Rotation": "0,0,0.7071069,-0.7071065",
+              "Tags": "botspawn",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.SpawnPoint",
+                  "__guid": "a8039eac-00ae-4c3a-b3ba-9347962e9927",
+                  "Color": "0.8902,0.31765,0.05098,1"
+                }
+              ]
+            },
+            {
+              "__guid": "912e509c-4cc9-434e-adbe-b92c9cb429c1",
+              "Flags": 0,
+              "Name": "BotSpawn",
+              "Position": "2992,3328,224",
+              "Rotation": "0,0,0.7071069,-0.7071065",
+              "Tags": "botspawn",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.SpawnPoint",
+                  "__guid": "79827f1e-a096-4aa2-a507-08d183578d57",
+                  "Color": "0.8902,0.31765,0.05098,1"
+                }
+              ]
+            },
+            {
+              "__guid": "218a95d8-c1b0-4863-9460-09244af97dbd",
+              "Flags": 0,
+              "Name": "BotSpawn",
+              "Position": "2992,3088,224",
+              "Rotation": "0,0,0.7071069,-0.7071065",
+              "Tags": "botspawn",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.SpawnPoint",
+                  "__guid": "8d56a733-3924-45e0-a09d-2416e05c07b6",
                   "Color": "0.8902,0.31765,0.05098,1"
                 }
               ]
@@ -629,151 +770,6 @@
           "IsStatic": true,
           "Model": "models/sbox_props/concrete_barrier/concrete_barrier.vmdl",
           "Tint": "1,1,1,1"
-        }
-      ]
-    },
-    {
-      "__guid": "ddf2a584-8ed4-4732-88ed-a5341db9fb9e",
-      "Flags": 0,
-      "Name": "Smoke",
-      "Position": "641.4869,1940.779,624",
-      "Tags": "particles",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.ParticleEffect",
-          "__guid": "d6c936ba-5222-49e7-8825-994a9896bc8a",
-          "Alpha": {
-            "Type": "Curve",
-            "CurveA": [
-              {
-                "in": -4.0000024,
-                "out": 4.0000024
-              },
-              {
-                "x": 0.20812808,
-                "y": 0.475
-              },
-              {
-                "x": 1
-              }
-            ],
-            "Constants": "1,0,0,0"
-          },
-          "ApplyColor": true,
-          "ApplyRotation": true,
-          "ApplyShape": true,
-          "Bounce": {
-            "Constants": "1,0,0,0"
-          },
-          "Brightness": {
-            "Constants": "1,0,0,0"
-          },
-          "Bumpiness": {},
-          "Collision": false,
-          "CollisionRadius": 1,
-          "Damping": {
-            "Constants": "5,0,0,0"
-          },
-          "DieOnCollisionChance": {},
-          "Force": true,
-          "ForceDirection": "0,0,100",
-          "ForceScale": {
-            "Constants": "1,0,0,0"
-          },
-          "Friction": {
-            "Constants": "1,0,0,0"
-          },
-          "Gradient": {
-            "Type": "Range",
-            "GradientA": {
-              "color": [
-                {
-                  "t": 0.5,
-                  "c": "1,1,1,1"
-                }
-              ],
-              "alpha": []
-            },
-            "GradientB": {
-              "color": [
-                {
-                  "t": 0.5,
-                  "c": "1,1,1,1"
-                }
-              ],
-              "alpha": []
-            },
-            "ConstantA": "0.18317,0.18317,0.18317,1",
-            "ConstantB": "1,1,1,1"
-          },
-          "Lifetime": {
-            "Type": "Range",
-            "Evaluation": "Particle",
-            "Constants": "5,8,0,0"
-          },
-          "MaxParticles": 1,
-          "OrbitalForce": {},
-          "OrbitalPull": {},
-          "PerParticleTimeScale": {
-            "Constants": "1,0.4,0,0"
-          },
-          "Pitch": {},
-          "PreWarm": 0,
-          "PushStrength": {},
-          "Roll": {
-            "Type": "Range",
-            "Evaluation": "Particle",
-            "Constants": "0,360,0,0"
-          },
-          "Scale": {
-            "Type": "Range",
-            "Evaluation": "Particle",
-            "CurveA": [
-              {}
-            ],
-            "Constants": "50,60,0,0"
-          },
-          "SequenceId": {},
-          "SequenceSpeed": {
-            "Constants": "0.5,0,0,0"
-          },
-          "SequenceTime": {
-            "Constants": "1,0,0,0"
-          },
-          "SheetSequence": true,
-          "Space": "World",
-          "StartDelay": {},
-          "StartVelocity": {
-            "Type": "Range",
-            "Evaluation": "Particle",
-            "Constants": "10,70,0,0"
-          },
-          "Stretch": {},
-          "TimeScale": 1,
-          "Tint": "1,1,1,1",
-          "Yaw": {}
-        },
-        {
-          "__type": "Sandbox.ParticleSpriteRenderer",
-          "__guid": "8860193a-5734-477f-aa02-82c188a694d7",
-          "Additive": false,
-          "Alignment": "LookAtCamera",
-          "BlurAmount": 0.5,
-          "BlurOpacity": 0.91,
-          "BlurSpacing": 0.73,
-          "DepthFeather": 0,
-          "FaceVelocity": false,
-          "FogStrength": 1,
-          "LeadingTrail": true,
-          "Lighting": false,
-          "MotionBlur": false,
-          "Opaque": false,
-          "RotationOffset": 0,
-          "Scale": 1,
-          "Shadows": true,
-          "SortMode": "Unsorted",
-          "Texture": "materials/tools/terrain/brushes/1_circle.jpg"
         }
       ]
     }
