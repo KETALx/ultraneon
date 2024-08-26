@@ -63,13 +63,13 @@
             {
               "__type": "Ultraneon.Game.GameMode.Sp.SingleplayerGameMode",
               "__guid": "4bdf0e4b-3b2a-43ef-af6a-c5ecb85b8bfb",
-              "CaptureTime": 15,
               "CaptureZones": [],
               "OvertimeSeconds": 60,
               "PlayerPrefab": {
                 "_type": "gameobject",
                 "prefab": "prefabs/player/player.prefab"
               },
+              "PlayerRespawnTime": 6,
               "WaveManager": {
                 "_type": "component",
                 "component_id": "eefcc53e-a9f6-4caa-9908-c587d90656c3",
@@ -117,7 +117,8 @@
               "Components": [
                 {
                   "__type": "Ultraneon.UI.Hud",
-                  "__guid": "60a5ee02-943a-417e-aed8-851a38b762e6"
+                  "__guid": "60a5ee02-943a-417e-aed8-851a38b762e6",
+                  "DisplayDebugMessages": false
                 }
               ]
             },
@@ -402,7 +403,6 @@
               "__guid": "5a85b55e-56e3-46a9-b845-406782d7c7da",
               "CaptureProgress": 0,
               "CaptureTime": 10,
-              "ContestingTeam": "Neutral",
               "ControllingTeam": "Neutral",
               "EnemyColor": "0.8,0.21581,0.21581,1",
               "NeutralColor": "0.79535,0.79535,0.79535,1",
