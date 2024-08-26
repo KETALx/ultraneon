@@ -10,9 +10,9 @@
         "__type": "Ultraneon.WeaponBaseNeon",
         "__guid": "cf2c2bda-0cc9-4d89-9fa8-8c19d6d2aff1",
         "CurrentAmmo": 30,
-        "ClipSize": 30,
-        "EquipTime": 1.5,
-        "FireRate": 0.08,
+        "ClipSize": 35,
+        "EquipTime": 0.15,
+        "FireRate": 0.12,
         "HeadshotMultiplier": 3,
         "ImpactPrefab": {
           "_type": "gameobject",
@@ -20,7 +20,7 @@
         },
         "IsPickedUp": false,
         "IsSemiAuto": false,
-        "ReloadTime": 3,
+        "ReloadTime": 2,
         "ShootSound": "sounds/weapons/pistol_laser_shoot_1.sound",
         "Viewmodel": {
           "_type": "component",
