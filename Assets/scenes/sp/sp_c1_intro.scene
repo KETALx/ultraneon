@@ -1081,28 +1081,6 @@
       "__PrefabVariables": {}
     },
     {
-      "__guid": "5a3c9d1f-5990-468d-b330-ef6576c319bb",
-      "Flags": 0,
-      "Name": "weapon_pistol",
-      "Position": "642.8065,2093.256,493.5216",
-      "Rotation": "-0.1177916,0.07804582,0.8252572,0.5467948",
-      "Tags": "trigger",
-      "Enabled": true,
-      "__Prefab": "prefabs/weapons/weapon_pistol.prefab",
-      "__PrefabVariables": {}
-    },
-    {
-      "__guid": "d15e58bb-45c5-40d4-9822-e808ef55a319",
-      "Flags": 0,
-      "Name": "weapon_semi",
-      "Position": "646.3159,2003.368,538.0869",
-      "Rotation": "-0.03570437,-0.007579774,0.9775484,-0.2075254",
-      "Tags": "trigger",
-      "Enabled": true,
-      "__Prefab": "prefabs/weapons/weapon_semi.prefab",
-      "__PrefabVariables": {}
-    },
-    {
       "__guid": "06fb439a-50fc-4bea-9a47-6917c3fd78e3",
       "Flags": 0,
       "Name": "weapon_auto",

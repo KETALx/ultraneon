@@ -107,6 +107,7 @@ public sealed class PlayerInventory : Component
 		SelectedSlot = Array.IndexOf( Weapons, ActiveWeapon );
 		ActiveWeapon.Equip();
 
+
 		SetupViewmodelArms( weapon.Viewmodel );
 
 		Log.Info(

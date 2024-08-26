@@ -11,7 +11,7 @@
         "__guid": "c1aa54b4-d7fa-4c6c-a5e7-b3ca0c393fe0",
         "CurrentAmmo": 0,
         "ClipSize": 5,
-        "EquipTime": 0.5,
+        "EquipTime": 1,
         "FireRate": 1.5,
         "HeadshotMultiplier": 4,
         "ImpactPrefab": {
@@ -20,7 +20,7 @@
         },
         "IsPickedUp": false,
         "IsSemiAuto": true,
-        "ReloadTime": 4,
+        "ReloadTime": 3,
         "ShootSound": "sounds/weapons/bolt_shoot_1.sound",
         "Viewmodel": {
           "_type": "component",
@@ -41,9 +41,9 @@
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "0569bd32-86ee-4d14-b3cc-712ee6555520",
         "__enabled": false,
-        "BodyGroups": 120611,
+        "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
-        "Model": "models/weapons/sbox_assault_m4a1/v_m4a1.vmdl",
+        "Model": "models/weapons/boltcharge/v_boltcharge.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
@@ -51,9 +51,9 @@
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "c427806b-1128-4c06-a279-827c42fa8211",
-        "BodyGroups": 58,
+        "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
-        "Model": "models/weapons/autorifle/weapon_autorifle.vmdl",
+        "Model": "models/weapons/boltcharge/w_boltcharge.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
@@ -74,8 +74,6 @@
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__references": [
-    "facepunch.v_m4a1"
-  ],
+  "__references": [],
   "__version": 1
 }
