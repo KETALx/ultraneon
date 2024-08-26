@@ -299,7 +299,7 @@
                   "__type": "Sandbox.SkyBox2D",
                   "__guid": "6a280ad8-a6fa-4706-8597-053ac1bf5ff3",
                   "SkyMaterial": "materials/world/nature/sky/sky_orange.vmat",
-                  "Tint": "1,1,1,1"
+                  "Tint": "1.5,1.5,1.5,1"
                 }
               ]
             },
