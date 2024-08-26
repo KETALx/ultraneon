@@ -1,0 +1,187 @@
+{
+  "Model": null,
+  "Description": "",
+  "BlendMode": "Masked",
+  "nodes": [
+    {
+      "_class": "Result",
+      "DefaultOpacity": 1,
+      "DefaultRoughness": 1,
+      "DefaultMetalness": 0,
+      "DefaultAmbientOcclusion": 1,
+      "Identifier": "0",
+      "Position": "0,0",
+      "Albedo": {
+        "Identifier": "1",
+        "Output": "Result"
+      },
+      "Opacity": {
+        "Identifier": "2",
+        "Output": "Result"
+      },
+      "Normal": {
+        "Identifier": "7",
+        "Output": "Result"
+      },
+      "Roughness": {
+        "Identifier": "3",
+        "Output": "Result"
+      },
+      "Metalness": {
+        "Identifier": "4",
+        "Output": "Result"
+      },
+      "AmbientOcclusion": {
+        "Identifier": "5",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "TextureSampler",
+      "Image": "materials/dev/white_color.tga",
+      "Sampler": {
+        "Filter": "Point"
+      },
+      "UI": {
+        "Name": "Color",
+        "Default": "1,1,1,1",
+        "CustomExtension": "",
+        "SrgbRead": true,
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "1",
+      "Position": "-448,-304"
+    },
+    {
+      "_class": "TextureSampler",
+      "Image": "materials/dev/white_color.tga",
+      "Sampler": {
+        "Filter": "Point"
+      },
+      "UI": {
+        "Name": "Transparency",
+        "Default": "1,1,1,1",
+        "Extension": "Trans",
+        "CustomExtension": "",
+        "ColorSpace": "Linear",
+        "SrgbRead": true,
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "2",
+      "Position": "-448,-128"
+    },
+    {
+      "_class": "TextureSampler",
+      "Image": "materials/dev/white_color.tga",
+      "Sampler": {
+        "Filter": "Point"
+      },
+      "UI": {
+        "Name": "Roughness",
+        "Default": "1,1,1,1",
+        "Extension": "Rough",
+        "CustomExtension": "",
+        "ColorSpace": "Linear",
+        "SrgbRead": true,
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "3",
+      "Position": "-448,272"
+    },
+    {
+      "_class": "TextureSampler",
+      "Image": "materials/dev/white_color.tga",
+      "Sampler": {
+        "Filter": "Point"
+      },
+      "UI": {
+        "Name": "Metalness",
+        "Default": "1,1,1,1",
+        "Extension": "Metal",
+        "CustomExtension": "",
+        "ColorSpace": "Linear",
+        "SrgbRead": true,
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "4",
+      "Position": "-448,480"
+    },
+    {
+      "_class": "TextureSampler",
+      "Image": "materials/dev/white_color.tga",
+      "Sampler": {
+        "Filter": "Point"
+      },
+      "UI": {
+        "Name": "AO",
+        "Default": "1,1,1,1",
+        "Extension": "AO",
+        "CustomExtension": "",
+        "ColorSpace": "Linear",
+        "SrgbRead": true,
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "5",
+      "Position": "-464,688"
+    },
+    {
+      "_class": "TextureSampler",
+      "Image": "materials/dev/white_color.tga",
+      "Sampler": {
+        "Filter": "Point"
+      },
+      "UI": {
+        "Name": "Normal",
+        "Default": "1,1,1,1",
+        "Extension": "Normal",
+        "CustomExtension": "",
+        "SrgbRead": true,
+        "PrimaryGroup": {
+          "Name": ""
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "6",
+      "Position": "-656,64"
+    },
+    {
+      "_class": "TransformNormal",
+      "InputSpace": "Tangent",
+      "OutputSpace": "Tangent",
+      "DecodeNormal": true,
+      "Identifier": "7",
+      "Position": "-416,144",
+      "Input": {
+        "Identifier": "6",
+        "Output": "Result"
+      }
+    }
+  ]
+}

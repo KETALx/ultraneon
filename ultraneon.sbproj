@@ -10,7 +10,7 @@
   "EditorReferences": null,
   "IsWhitelistDisabled": false,
   "Metadata": {
-    "MaxPlayers": 4,
+    "MaxPlayers": 1,
     "MinPlayers": 1,
     "TickRate": 50,
     "GameNetworkType": "Multiplayer",
@@ -23,8 +23,8 @@
     "LeaderboardType": "None",
     "CsProjName": "",
     "LaunchMode": "QuickPlay",
-    "StartupScene": "scenes/dev.scene",
-    "MapStartupScene": "scenes/dev.scene",
+    "StartupScene": "scenes/sp/sp_c1_intro.scene",
+    "MapStartupScene": "scenes/sp/sp_c1_intro.scene",
     "ControlModes": {
       "Keyboard": true
     },

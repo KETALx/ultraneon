@@ -1,0 +1,30 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/pixel_master.shader"
+
+	//---- Texture Filtering ----
+	F_TEXTURE_FILTERING 4 // Nearest Neighbour
+
+	AO "materials/world/metal/fence_1a/chainlink_ao.png"
+	Color "materials/world/metal/fence_1a/chainlink_color.png"
+	Metalness "materials/world/metal/fence_1a/chainlink_metal.png"
+	Normal "materials/world/metal/fence_1a/chainlink_normal.png"
+	Roughness "materials/world/metal/fence_1a/chainlink_rough.png"
+	Transparency "materials/world/metal/fence_1a/chainlink_trans.png"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Translucent ----
+	g_flAlphaTestReference "0.500"
+	g_flAntiAliasedEdgeStrength "1.000"
+
+	SystemAttributes
+	{
+		PhysicsSurfaceProperties "metal"
+		WorldMappingWidth "128"
+		WorldMappingHeight "128"
+	}
+}

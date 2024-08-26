@@ -878,7 +878,7 @@
       "Rotation": "-0.03570437,-0.007579774,0.9775484,-0.2075254",
       "Tags": "trigger",
       "Enabled": true,
-      "__Prefab": "prefabs/weapons/weapon_bolt.prefab",
+      "__Prefab": "prefabs/weapons/weapon_auto.prefab",
       "__PrefabVariables": {}
     },
     {

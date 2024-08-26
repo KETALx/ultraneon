@@ -1,0 +1,29 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/pixel_master.shader"
+
+	//---- Texture Filtering ----
+	F_TEXTURE_FILTERING 4 // Nearest Neighbour
+
+	AO "materials/world/metal/corrugated_1a/corrugated_ao.jpg"
+	Color "materials/world/metal/corrugated_1a/corrugated_color.jpg"
+	Metalness "materials/default/default_metal.tga"
+	Normal "materials/world/metal/corrugated_1a/corrugated_normal.jpg"
+	Roughness "materials/world/metal/corrugated_1a/corrugated_rough.jpg"
+	Transparency "materials/default/default_trans.tga"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Translucent ----
+	g_flAlphaTestReference "0.500"
+	g_flAntiAliasedEdgeStrength "1.000"
+
+	SystemAttributes
+	{
+		WorldMappingWidth "128"
+		WorldMappingHeight "128"
+	}
+}

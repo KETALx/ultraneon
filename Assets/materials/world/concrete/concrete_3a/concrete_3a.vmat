@@ -1,0 +1,30 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/pixel_master.shader"
+
+	//---- Texture Filtering ----
+	F_TEXTURE_FILTERING 4 // Nearest Neighbour
+
+	AO "materials/world/concrete/concrete_3a/concrete_3a_ao.jpg"
+	Color "materials/world/concrete/concrete_3a/concrete_3a_color.jpg"
+	Metalness "materials/default/default_metal.tga"
+	Normal "materials/world/concrete/concrete_3a/concrete_3a_normal.jpg"
+	Roughness "materials/world/concrete/concrete_3a/concrete_3a_rough.jpg"
+	Transparency "materials/default/default_trans.tga"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Translucent ----
+	g_flAlphaTestReference "0.500"
+	g_flAntiAliasedEdgeStrength "1.000"
+
+	SystemAttributes
+	{
+		WorldMappingWidth "128"
+		WorldMappingHeight "128"
+		PhysicsSurfaceProperties "concrete"
+	}
+}
