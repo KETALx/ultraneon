@@ -1,12 +1,7 @@
-﻿using Sandbox;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Sandbox.Events;
+﻿using System;
 using Ultraneon;
 using Ultraneon.Domain;
-using Ultraneon.Domain.Events;
-using Ultraneon.Player;
+using Ultraneon.Game.GameMode;
 
 [Category( "Ultraneon" )]
 [Icon( "place" )]
@@ -30,9 +25,6 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 	[Property, HostSync]
 	public Team ControllingTeam { get; set; } = Team.Neutral;
 
-	[Property, HostSync]
-	public Team ContestingTeam { get; set; } = Team.Neutral;
-
 	[Property, ReadOnly, HostSync]
 	public float CaptureProgress { get; set; } = 0f;
 
@@ -42,109 +34,127 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 	[Property]
 	public Action<Team> OnCaptureAction { get; set; }
 
+	[Property]
+	public ICaptureZoneGameMode GameMode { get; set; }
+
 	public float MinimapX { get; set; }
 	public float MinimapY { get; set; }
-	public Team PreviousTeam { get; set; }
 	public bool HasChanged { get; set; }
+
 	public bool AllowBotCapture { get; set; } = true;
 
-	private TimeSince timeSinceLastCapture;
 	private List<BaseNeonCharacterEntity> charactersInZone = new();
+	private Team contestingTeam = Team.Neutral;
 
 	protected override void OnStart()
 	{
 		base.OnStart();
-		timeSinceLastCapture = 0f;
 		UpdateZoneVisuals();
+		GameMode = Scene.GetAllComponents<ICaptureZoneGameMode>().FirstOrDefault();
 	}
 
 	protected override void OnUpdate()
 	{
 		if ( IsProxy ) return;
 
-		UpdateCapture();
 		UpdateZoneVisuals();
+	}
+
+	protected override void OnFixedUpdate()
+	{
+		UpdateCapture();
+		GameMode?.OnCaptureProgressUpdated( this, CaptureProgress );
 	}
 
 	private void UpdateCapture()
 	{
-		if ( charactersInZone.Any() )
+		if ( charactersInZone.Count == 0 )
 		{
-			ContestingTeam = charactersInZone
-				.GroupBy( p => p.CurrentTeam )
-				.OrderByDescending( g => g.Count() )
-				.First().Key;
-
-			if ( ContestingTeam != ControllingTeam )
-			{
-				// Check if it's a bot trying to capture during overtime
-				if ( !AllowBotCapture && ContestingTeam == Team.Enemy )
-				{
-					Log.Error( $"[CaptureZoneEntity-UpdateCapture] {PointName} bot trying to capture during overtime" );
-					return;
-				}
-
-				CaptureProgress += Time.Delta / CaptureTime * charactersInZone.Count( p => p.CurrentTeam == ContestingTeam );
-				if ( CaptureProgress >= 1f )
-				{
-					var previousTeam = ControllingTeam;
-					ControllingTeam = ContestingTeam;
-					CaptureProgress = 0f;
-					OnPointCaptured( previousTeam );
-				}
-			}
-			else
-			{
-				CaptureProgress = Math.Max( 0f, CaptureProgress - Time.Delta / CaptureTime );
-			}
-
-			timeSinceLastCapture = 0f;
+			// No one in the zone, slowly decay capture progress
+			CaptureProgress = Math.Max( 0f, CaptureProgress - Time.Delta / (CaptureTime * 2) );
+			return;
 		}
-		else if ( CaptureProgress > 0 )
+
+		// Determine the contesting team
+		contestingTeam = DetermineContestingTeam();
+
+		if ( contestingTeam == Team.Neutral )
 		{
-			CaptureProgress -= Time.Delta / CaptureTime;
+			// No valid contesting team, decay capture progress
+			CaptureProgress = Math.Max( 0f, CaptureProgress - Time.Delta / CaptureTime );
 		}
+		else if ( contestingTeam != ControllingTeam )
+		{
+			// Valid contesting team different from controlling team, increase capture progress
+			CaptureProgress += Time.Delta / CaptureTime;
+
+			if ( CaptureProgress >= 1f )
+			{
+				CompleteCapture();
+			}
+		}
+		else
+		{
+			// Controlling team is present, reset progress
+			CaptureProgress = 0f;
+		}
+
+		// Log capture progress for debugging
+		//Log.Info( $"[CaptureZoneEntity] {PointName} Capture Progress: {CaptureProgress}, Contesting Team: {contestingTeam}, Controlling Team: {ControllingTeam}" );
+
+		HasChanged = true;
+	}
+
+	private Team DetermineContestingTeam()
+	{
+		var playerPresent = charactersInZone.Any( c => c.CurrentTeam == Team.Player && c.IsAlive );
+		var enemyPresent = charactersInZone.Any( c => c.CurrentTeam == Team.Enemy && c.IsAlive );
+
+		//Log.Info( $"[CaptureZoneEntity] {PointName} Player Present: {playerPresent}, Enemy Present: {enemyPresent}, Allow Bot Capture: {AllowBotCapture}" );
+
+		if ( playerPresent && !enemyPresent ) return Team.Player;
+		if ( enemyPresent && !playerPresent && AllowBotCapture ) return Team.Enemy;
+		return Team.Neutral; // Contested or no valid capturers
+	}
+
+	private void CompleteCapture()
+	{
+		var previousTeam = ControllingTeam;
+		ControllingTeam = contestingTeam;
+		CaptureProgress = 0f;
+		OnPointCaptured( previousTeam );
+		HasChanged = true;
 	}
 
 	private void UpdateZoneVisuals()
 	{
-		if ( ZoneModel != null )
+		if ( ZoneModel == null ) return;
+
+		Color targetColor = ControllingTeam switch
 		{
-			Color dominantTeamColor = ControllingTeam switch
-			{
-				Team.Player => PlayerColor,
-				Team.Enemy => EnemyColor,
-				_ => NeutralColor
-			};
-			
-			if ( CaptureProgress >= 1.0f )
-			{
-				ZoneModel.Tint = dominantTeamColor;
-				return;
-			}
+			Team.Player => PlayerColor,
+			Team.Enemy => EnemyColor,
+			_ => NeutralColor
+		};
 
-			Color contestingTeamColor = ControllingTeam switch
-			{
-				Team.Player => PlayerColor,
-				Team.Enemy => EnemyColor,
-				_ => NeutralColor
-			};
-
-			ZoneModel.Tint = Color.Lerp( dominantTeamColor, contestingTeamColor, CaptureProgress );
-			// TODO: Add particle effects or other visual indicators for capture progress
+		if ( CaptureProgress > 0 && contestingTeam != Team.Neutral )
+		{
+			Color contestColor = contestingTeam == Team.Player ? PlayerColor : EnemyColor;
+			ZoneModel.Tint = Color.Lerp( targetColor, contestColor, CaptureProgress );
+		}
+		else
+		{
+			ZoneModel.Tint = targetColor;
 		}
 	}
 
 	public void OnTriggerEnter( Collider other )
 	{
 		var character = other.GameObject.Components.Get<BaseNeonCharacterEntity>();
-		if ( character != null )
+		if ( character is { IsAlive: true } )
 		{
 			charactersInZone.Add( character );
-			if ( charactersInZone.Count == 1 )
-			{
-				OnStartCapture();
-			}
+			CheckCaptureStart();
 		}
 	}
 
@@ -154,32 +164,47 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 		if ( character != null )
 		{
 			charactersInZone.Remove( character );
+			CheckCaptureStop();
+		}
+	}
+
+	private void CheckCaptureStart()
+	{
+		var contestingTeam = DetermineContestingTeam();
+		if ( contestingTeam != Team.Neutral && contestingTeam != ControllingTeam )
+		{
+			OnStartCapture();
+		}
+	}
+
+	private void CheckCaptureStop()
+	{
+		if ( charactersInZone.Count == 0 || DetermineContestingTeam() == Team.Neutral )
+		{
+			OnStopCapture();
 		}
 	}
 
 	private void OnStartCapture()
 	{
-		Log.Info( $"[CaptureZoneEntity] {PointName} is being captured!" );
-		GameObject.Dispatch( new UiInfoFeedEvent( $"{{PointName}} is being captured!", UiInfoFeedType.Warning ) );
-		// TODO: Send a lightwave in radius to alert other players
+		//Log.Info( $"[CaptureZoneEntity] {PointName} is being captured!" );
+		GameMode?.OnCaptureStarted( this );
+		HasChanged = true;
 	}
-
 
 	private void OnStopCapture()
 	{
-		Log.Info( $"[CaptureZoneEntity] {PointName} stopped being captured!" );
-		GameObject.Dispatch( new UiInfoFeedEvent( $"{{PointName}} stopped being captured!", UiInfoFeedType.Warning ) );
-		// TODO: Send a lightwave in radius to alert other players
+		//Log.Info( $"[CaptureZoneEntity] {PointName} stopped being captured!" );
+		GameMode?.OnCaptureStopped( this );
+		HasChanged = true;
 	}
 
 	private void OnPointCaptured( Team previousTeam )
 	{
-		GameObject.Dispatch( new UiInfoFeedEvent( $"{{PointName}} has been captured by {{ControllingTeam}}!", UiInfoFeedType.Success ) );
-		Log.Info( $"[CaptureZoneEntity] {PointName} has been captured by {ControllingTeam}!" );
-		PreviousTeam = previousTeam;
-		GameObject.Dispatch( new CaptureZoneCapturedEvent( PointName, previousTeam, ControllingTeam ) );
-
-		if ( OnCaptureAction != null ) OnCaptureAction( previousTeam );
+		//Log.Info( $"[CaptureZoneEntity] {PointName} has been captured by {ControllingTeam}!" );
+		GameMode?.OnPointCaptured( this, previousTeam, ControllingTeam );
+		OnCaptureAction?.Invoke( previousTeam );
+		HasChanged = true;
 	}
 
 	public bool IsEntityInZone( BaseNeonCharacterEntity entity )
@@ -187,8 +212,12 @@ public sealed class CaptureZoneEntity : Component, Component.ITriggerListener
 		return charactersInZone.Contains( entity );
 	}
 
-	public bool CanCapture( BaseNeonCharacterEntity entity )
+	public void RemoveDeadCharacterFromZone( BaseNeonCharacterEntity entity )
 	{
-		return AllowBotCapture || entity is PlayerNeon;
+		if ( charactersInZone.Contains( entity ) )
+		{
+			//Log.Info( "[CaptureZoneEntity] Removed killed character ${entity.Name}" );
+			charactersInZone.Remove( entity );
+		}
 	}
 }

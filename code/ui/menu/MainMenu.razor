@@ -2,79 +2,94 @@
 @using Sandbox.Events
 @using Sandbox.UI
 @using Ultraneon.Domain.Events
+@using Game = Sandbox.Game
 @namespace Ultraneon.UI
 @inherits PanelComponent
+@attribute [StyleSheet]
 
-<root>
+<root class="@(IsVisible ? "visible" : "hidden")">
 	<div class="menu-container">
-		<div class="title"><span class="title-1">U L T R A</span>&nbsp;<span class="title-2">N E O N</span></div>
+		<div class="title"><span class="title-1">ULTRA</span>&nbsp;<span class="title-2">NEON</span></div>
 		<div class="button-container">
-			<button class="menu-button" onclick=@( () => OnMenuAction( MenuAction.Play ) )>Play</button>
-			<button class="menu-button" onclick=@( () => OnMenuAction( MenuAction.Settings ) )>Settings</button>
-			<button class="menu-button" onclick=@( () => OnMenuAction( MenuAction.Quit ) )>Quit</button>
+			<button class="menu-button" onclick=@(() => OnMenuAction(MenuAction.Play))>
+				@* <div class="icon">play_arrow</div> *@
+				<span>Play</span>
+			</button>
+			@* <button class="menu-button" onclick=@(() => OnMenuAction(MenuAction.Settings))> *@
+				@* <div class="icon">settings</div> *@
+				@* <span>Settings</span> *@
+			@* </button> *@
+			<button class="menu-button" onclick=@(() => OnMenuAction(MenuAction.Quit))>
+				@* <div class="icon">exit_to_app</div> *@
+				<span>Quit</span>
+			</button>
 		</div>
 	</div>
 </root>
 
 @code {
+    private bool IsVisible { get; set; } = true;
 
-	protected override void OnEnabled()
-	{
-		base.OnEnabled();
+    protected override void OnEnabled()
+    {
+        base.OnEnabled();
 
-		if ( Panel != null )
-		{
-			Panel.AcceptsFocus = true;
-			Panel.Focus();
-		}
-	}
+        if (Panel != null)
+        {
+            Panel.AcceptsFocus = true;
+            Panel.Focus();
+        }
+    }
 
-	protected override void OnTreeBuilt()
-	{
-		base.OnTreeBuilt();
-		UpdatePanelState();
-	}
+    protected override void OnTreeBuilt()
+    {
+        base.OnTreeBuilt();
+        UpdatePanelState();
+    }
 
-	private void UpdatePanelState()
-	{
-		if ( Panel != null )
-		{
-			Panel.Style.PointerEvents = PointerEvents.All;
-			Panel.Style.ZIndex = 100;
-		}
-	}
+    private void UpdatePanelState()
+    {
+        if (Panel != null)
+        {
+            Panel.Style.PointerEvents = PointerEvents.All;
+            Panel.Style.ZIndex = 100;
+        }
+    }
 
-	private void OnMenuAction( MenuAction action )
-	{
-		Log.Info( $"[MainMenu] OnMenuAction called with action: {action}" );
-		GameObject.Dispatch( new MenuActionEvent( action ) );
-	}
+    private void OnMenuAction(MenuAction action)
+    {
+        Log.Info($"[MainMenu] OnMenuAction called with action: {action}");
+        
+        switch (action)
+        {
+	        case MenuAction.Play:
+		        Game.ActiveScene.LoadFromFile( "scenes/sp/sp_c1_intro.scene" );
+		        break;
+	        case MenuAction.Settings:
+		        // TODO
+		        break;
+	        case MenuAction.Quit:
+		        Game.Close();
+		        break;
+        }
+    }
 
-	public void Show()
-	{
-		if ( Panel != null )
-		{
-			Panel.SetClass( "hidden", false );
-			Panel.Focus();
-			StateHasChanged();
-			Log.Info( "[MainMenu] Show called" );
-		}
-	}
+    public void Show()
+    {
+        IsVisible = true;
+        StateHasChanged();
+        Log.Info("[MainMenu] Show called");
+    }
 
-	public void Hide()
-	{
-		if ( Panel != null )
-		{
-			Panel.SetClass( "hidden", true );
-			Panel.Blur();
-			StateHasChanged();
-			Log.Info( "[MainMenu] Hide called" );
-		}
-	}
+    public void Hide()
+    {
+        IsVisible = false;
+        StateHasChanged();
+        Log.Info("[MainMenu] Hide called");
+    }
 
-	protected override int BuildHash()
-	{
-		return HashCode.Combine( Panel?.HasClass( "hidden" ) );
-	}
-
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(IsVisible);
+    }
 }

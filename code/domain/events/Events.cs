@@ -20,7 +20,7 @@ public record GamePausedEvent() : IGameEvent;
 
 public record GameResumedEvent() : IGameEvent;
 
-public record PlayerSpawnEvent( Team Team ) : IGameEvent;
+public record CharacterSpawnEvent( BaseNeonCharacterEntity character, Vector3 spawnPosition ) : IGameEvent;
 
 public record DamageEvent( BaseNeonCharacterEntity Target, Entity Attacker, float Damage, Vector3 Position ) : IGameEvent;
 

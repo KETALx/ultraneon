@@ -2,122 +2,76 @@
 using Sandbox.Events;
 using Ultraneon.Domain;
 using Ultraneon.Domain.Events;
+using Ultraneon.Services;
 
 namespace Ultraneon.Player;
 
-public class PlayerNeon : BaseNeonCharacterEntity
+public class PlayerNeon : BaseNeonCharacterEntity, IGameEventHandler<CharacterSpawnEvent>, IGameEventHandler<CharacterDeathEvent>
 {
-	[Property]
-	public float RespawnDelay { get; set; } = 3f;
-
-	private TimeSince TimeSinceDeath { get; set; }
-
 	[RequireComponent]
 	public PlayerInventory Inventory { get; private set; }
 
-	public bool IsDead => Health <= 0;
-	public bool IsInOvertime { get; private set; }
+	[Property]
+	public CameraComponent MainCamera { get; private set; }
 
-	protected override void OnStart()
+	[Property]
+	public CameraComponent DeathCamera { get; private set; }
+
+	public override void SetupCharacter()
 	{
-		base.OnStart();
-		if ( IsProxy ) return;
-
+		base.SetupCharacter();
 		CurrentTeam = Team.Player;
-		Health = MaxHealth;
 		Inventory = Components.Get<PlayerInventory>();
-		IsInOvertime = false;
-		Log.Info($"[PlayerNeon] Player initialized. Health: {Health}, Team: {CurrentTeam}");
+
+		MainCamera = Scene.GetAllComponents<CameraComponent>().FirstOrDefault( x => x.Tags.Contains( "maincamera" ) );
+		DeathCamera = Scene.GetAllComponents<CameraComponent>().FirstOrDefault( x => x.Tags.Contains( "deathcamera" ) );
+
+		Log.Info( $"[PlayerNeon] Player initialized. Health: {Health}, Team: {CurrentTeam}" );
 	}
 
-	protected override void OnUpdate()
+	public void OnGameEvent( CharacterSpawnEvent eventArgs )
 	{
-		if ( IsProxy || !IsDead ) return;
-
-		if ( !IsInOvertime && TimeSinceDeath >= RespawnDelay )
+		if ( eventArgs.character != this )
 		{
-			Respawn();
+			return;
 		}
+
+		Transform.Position = eventArgs.spawnPosition;
+		SetupCharacter();
+		EnableControls();
+		Log.Info( $"PlayerNeon received CharacterSpawnEvent with args {eventArgs.character.GameObject.Name} " );
 	}
 
-	public override void OnDamage( in DamageInfo info )
+	public void OnGameEvent( CharacterDeathEvent eventArgs )
 	{
-		base.OnDamage( info );
-
-		if ( IsProxy || IsDead ) return;
-
-		if ( info.Attacker.Components.Get<Entity>() is { } entity )
+		if ( eventArgs.Victim != this )
 		{
-			GameObject.Dispatch( new DamageEvent( this, entity, info.Damage, info.Position ) );
+			return;
 		}
-
-		if ( Health <= 0 )
-		{
-			Die( info.Attacker.Components.Get<BaseNeonCharacterEntity>() );
-		}
-	}
-
-	private void Die( BaseNeonCharacterEntity killer )
-	{
-		if ( IsProxy ) return;
-
-		Health = 0;
-		TimeSinceDeath = 0;
-
-		GameObject.Dispatch( new CharacterDeathEvent( this, killer ) );
 
 		DisableControls();
-
-		if ( IsInOvertime )
-		{
-			GameObject.Dispatch( new GameOverEvent( 0 ) ); // TODO: Pass the correct max wave reached
-		}
 	}
 
-	private void Respawn()
+	public void DisableControls()
 	{
-		if ( IsProxy ) return;
+		Log.Info( "[PlayerNeon] Player controls disabled" );
 
-		Health = MaxHealth;
-		var spawnPoint = Scene.GetAllComponents<SpawnPoint>().OrderBy( _ => Random.Shared.Next() ).FirstOrDefault();
-		if ( spawnPoint != null )
-		{
-			Transform.Position = spawnPoint.Transform.Position;
-			Transform.Rotation = spawnPoint.Transform.Rotation;
-		}
+		if ( MainCamera == null || DeathCamera == null ) { return; }
 
-		EnableControls();
-
-		GameObject.Dispatch( new PlayerSpawnEvent( Team.Player ) );
+		MainCamera.Priority = 1;
+		DeathCamera.Priority = 2;
 	}
 
-	private bool IsStylishKill( BaseNeonCharacterEntity killer )
+	protected override void BecomeRagdoll()
 	{
-		// TODO: Implement logic for determining if it's a stylish kill (airborne, wallbang)
-		return false;
 	}
 
-	private void DisableControls()
+	public void EnableControls()
 	{
-		// TODO: Implement disabling player controls
-	}
+		Log.Info( "[PlayerNeon] Player controls enabled" );
+		if ( MainCamera == null || DeathCamera == null ) { return; }
 
-	
-	private void EnableControls()
-	{
-		// TODO: Implement enabling player controls
-		Log.Info("[PlayerNeon] Player controls enabled");
-	}
-
-	public void EnterOvertime()
-	{
-		IsInOvertime = true;
-		// TODO: Implement any player-specific overtime behavior
-	}
-
-	public void ExitOvertime()
-	{
-		IsInOvertime = false;
-		// TODO: Implement any player-specific behavior when exiting overtime
+		MainCamera.Priority = 2;
+		DeathCamera.Priority = 1;
 	}
 }

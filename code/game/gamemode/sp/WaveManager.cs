@@ -91,7 +91,7 @@ public class WaveManager : Component
 			if ( bot != null )
 			{
 				bot.CurrentTeam = Team.Enemy;
-				ShowInfoMessage( $"Bot Spawned!", UiInfoFeedType.Debug );
+				// ShowInfoMessage( $"Bot Spawned!", UiInfoFeedType.Debug );
 				activeBots.Add( bot );
 			}
 		}
@@ -101,7 +101,7 @@ public class WaveManager : Component
 	{
 		if ( currentWave == 0 ) return;
 
-		activeBots.RemoveAll( bot => !bot.IsValid() || !bot.isAlive );
+		activeBots.RemoveAll( bot => !bot.IsValid() || !bot.IsAlive );
 
 		if ( timeSinceWaveStart >= WaveDuration )
 		{

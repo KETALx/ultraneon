@@ -50,9 +50,8 @@
           "Enabled": true,
           "Components": [
             {
-              "__type": "MenuUi",
-              "__guid": "0b2fdd2d-bbe1-4434-b515-8f9865b2b232",
-              "MyStringValue": "Hello World!"
+              "__type": "Ultraneon.UI.MainMenu",
+              "__guid": "3ff6ab03-f659-46a5-9c2b-5f248666a59a"
             }
           ]
         }

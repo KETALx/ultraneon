@@ -6,10 +6,9 @@ namespace Ultraneon.Services;
 
 public class UiService : Component,
 	IGameEventHandler<CaptureZoneCapturedEvent>,
-	IGameEventHandler<PlayerSpawnEvent>,
+	IGameEventHandler<CharacterSpawnEvent>,
 	IGameEventHandler<CharacterDeathEvent>,
 	IGameEventHandler<DamageEvent>,
-	IGameEventHandler<MenuActionEvent>,
 	IGameEventHandler<GameModeActivatedEvent>,
 	IGameEventHandler<UiInfoFeedEvent>,
 	IGameEventHandler<GameOverEvent>
@@ -44,14 +43,6 @@ public class UiService : Component,
 		ShowHud();
 	}
 
-	private void ShowMainMenu()
-	{
-		MainMenuPanel?.Show();
-		HudPanel?.Hide();
-		GameOverPanel?.Hide();
-		GameObject.Dispatch( new GamePausedEvent() );
-	}
-
 	private void ShowHud()
 	{
 		MainMenuPanel?.Hide();
@@ -60,18 +51,28 @@ public class UiService : Component,
 		GameObject.Dispatch( new GameResumedEvent() );
 	}
 
+	private void HideHud()
+	{
+		HudPanel?.Hide();
+	}
+
 	public void OnGameEvent( CaptureZoneCapturedEvent capturedEventArgs )
 	{
 		HudPanel?.AddInfoMessage( $"Zone {capturedEventArgs.ZoneName} captured by {capturedEventArgs.NewTeam}!", InfoFeedPanel.InfoType.Success );
 	}
 
-	public void OnGameEvent( PlayerSpawnEvent eventArgs )
+	public void OnGameEvent( CharacterSpawnEvent eventArgs )
 	{
+		if ( eventArgs.character.CurrentTeam == Team.Player )
+		{
+			HudPanel.Show();
+		}
 	}
 
 	public void OnGameEvent( CharacterDeathEvent eventArgs )
 	{
-		HudPanel?.AddInfoMessage( $"{eventArgs.Victim.EntityName} was killed by {eventArgs.Killer?.EntityName ?? "unknown"}", InfoFeedPanel.InfoType.Warning );
+		// HudPanel?.AddInfoMessage( $"{eventArgs.Victim.EntityName} was killed by {eventArgs.Killer?.EntityName ?? "unknown"}", InfoFeedPanel.InfoType.Warning );
+		// HudPanel?.Hide();
 	}
 
 	public void OnGameEvent( DamageEvent eventArgs )
@@ -79,35 +80,10 @@ public class UiService : Component,
 		// Handle damage event if needed
 	}
 
-	public void OnGameEvent( MenuActionEvent eventArgs )
-	{
-		switch ( eventArgs.Action )
-		{
-			case MenuAction.Play:
-				var gameMode = GameService?.GameModes.FirstOrDefault();
-				if ( gameMode != null )
-				{
-					GameObject.Dispatch( new GameModeActivatedEvent( gameMode ) );
-					ShowHud();
-				}
-				else
-				{
-					Log.Error( "[UiService] No game mode found to activate." );
-				}
-				break;
-			case MenuAction.Settings:
-				Log.Info( "[UiService] Settings!!!" );
-				break;
-			case MenuAction.Quit:
-				Log.Info( "[UiService] Quit!!!" );
-				break;
-		}
-	}
-
 	public void OnGameEvent( GameModeActivatedEvent eventArgs )
 	{
 		ShowHud();
-		HudPanel?.AddInfoMessage( "Game started!", InfoFeedPanel.InfoType.Success );
+		HudPanel?.AddInfoMessage( "Singleplayer Initialized!", InfoFeedPanel.InfoType.Debug );
 	}
 
 	public void OnGameEvent( UiInfoFeedEvent eventArgs )
@@ -118,6 +94,7 @@ public class UiService : Component,
 	public void OnGameEvent( GameOverEvent eventArgs )
 	{
 		HudPanel?.Hide();
+		MainMenuPanel?.Hide();
 		GameOverPanel?.Show( eventArgs.MaxWaveReached );
 		HudPanel?.AddInfoMessage( $"Game Over! Max wave reached: {eventArgs.MaxWaveReached}", InfoFeedPanel.InfoType.Warning );
 	}

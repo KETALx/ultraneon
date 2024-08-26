@@ -68,7 +68,7 @@
               "IsMainCamera": true,
               "Orthographic": false,
               "OrthographicHeight": 1204,
-              "Priority": 1,
+              "Priority": 2,
               "RenderExcludeTags": "",
               "RenderTags": "",
               "TargetEye": "None",
@@ -136,14 +136,6 @@
               "MapName": "maps/sp_cp_compound.vmap",
               "NoOrigin": false,
               "UseMapFromLaunch": false
-            },
-            {
-              "__type": "PlayerSpawner",
-              "__guid": "3abb8ffe-0cef-41e8-9633-d727db2b8ccf",
-              "PlayerPrefab": {
-                "_type": "gameobject",
-                "prefab": "prefabs/player/player.prefab"
-              }
             }
           ]
         }
@@ -200,12 +192,6 @@
                 "go": "8769fff2-b4de-4825-a577-eafbe8440f63",
                 "component_type": "Hud"
               },
-              "MainMenuPanel": {
-                "_type": "component",
-                "component_id": "a6e11689-e712-4302-878c-4e6b88c16c11",
-                "go": "baa4c71f-f6f3-49aa-b447-6b5a16507d9f",
-                "component_type": "MainMenu"
-              },
               "RootPanel": {
                 "_type": "component",
                 "component_id": "4b3f8cd3-6770-43ec-9bc6-527ec3d2c3c4",
@@ -216,13 +202,13 @@
             {
               "__type": "Ultraneon.Game.GameMode.Sp.SingleplayerGameMode",
               "__guid": "80a7bf31-2c0e-4313-aa29-cc162241eda4",
-              "CaptureTime": 15,
               "CaptureZones": [],
               "OvertimeSeconds": 60,
               "PlayerPrefab": {
                 "_type": "gameobject",
                 "prefab": "prefabs/player/player.prefab"
               },
+              "PlayerRespawnTime": 2,
               "WaveManager": {
                 "_type": "component",
                 "component_id": "0b4113c2-9602-4d16-9bb9-858aa1995476",
@@ -240,8 +226,8 @@
               "BotSpawnPoints": [],
               "BotSpawnPoolTag": "botspawnpool",
               "InitialBotCount": 2,
-              "MaxBotsAlive": 30,
-              "WaveDuration": 40
+              "MaxBotsAlive": 6,
+              "WaveDuration": 30
             }
           ]
         },
@@ -270,19 +256,8 @@
               "Components": [
                 {
                   "__type": "Ultraneon.UI.Hud",
-                  "__guid": "40f6e14d-fed4-4765-9831-6147d162006d"
-                }
-              ]
-            },
-            {
-              "__guid": "baa4c71f-f6f3-49aa-b447-6b5a16507d9f",
-              "Flags": 0,
-              "Name": "Menu",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "Ultraneon.UI.MainMenu",
-                  "__guid": "a6e11689-e712-4302-878c-4e6b88c16c11"
+                  "__guid": "40f6e14d-fed4-4765-9831-6147d162006d",
+                  "DisplayDebugMessages": true
                 }
               ]
             },
@@ -297,6 +272,34 @@
                   "__guid": "fbb19f12-c4f9-4212-b1cd-ba8120db718c"
                 }
               ]
+            }
+          ]
+        },
+        {
+          "__guid": "080eb2ab-0355-4bd3-9758-42a6a1be7c6c",
+          "Flags": 0,
+          "Name": "DeathCamera",
+          "Position": "-235.1,-551.5994,447.9001",
+          "Rotation": "0,0.4131042,0,0.9106838",
+          "Tags": "deathcamera",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.CameraComponent",
+              "__guid": "051e50fc-5742-44b2-8f57-112d1a71c761",
+              "BackgroundColor": "0.33333,0.46275,0.52157,1",
+              "ClearFlags": "All",
+              "FieldOfView": 60,
+              "IsMainCamera": false,
+              "Orthographic": false,
+              "OrthographicHeight": 1204,
+              "Priority": 1,
+              "RenderExcludeTags": "",
+              "RenderTags": "",
+              "TargetEye": "None",
+              "Viewport": "0,0,1,1",
+              "ZFar": 10000,
+              "ZNear": 10
             }
           ]
         }
@@ -352,8 +355,9 @@
           "__guid": "ff9c3881-ceb5-4b55-9046-cb597e8d4786",
           "Flags": 0,
           "Name": "Capture Point A",
-          "Position": "-26.91423,-513.2108,11.26119",
-          "Scale": "5.199997,6.199998,1",
+          "Position": "143.9405,-564.6517,-10.60592",
+          "Scale": "5.199997,6.199998,0.1999999",
+          "Tags": "trigger",
           "Enabled": true,
           "Components": [
             {
@@ -369,7 +373,6 @@
               "__guid": "80c2b359-9700-4704-9e85-a3f83cc8bfb2",
               "CaptureProgress": 0,
               "CaptureTime": 3,
-              "ContestingTeam": "Neutral",
               "ControllingTeam": "Neutral",
               "EnemyColor": "0.97255,0.20784,0.41961,1",
               "NeutralColor": "0.35294,0.45098,0.5451,1",
@@ -384,54 +387,10 @@
             },
             {
               "__type": "Sandbox.BoxCollider",
-              "__guid": "1f979f6f-708c-4905-84f9-68d0c52cb779",
-              "Center": "0,0,0",
+              "__guid": "e8e42ce2-df99-4847-b927-37a1ddad87f5",
+              "Center": "0,0,214.7002",
               "IsTrigger": true,
-              "Scale": "109,89.49974,87.00007",
-              "Static": false
-            }
-          ]
-        },
-        {
-          "__guid": "b74d05c1-ebf3-4e18-8654-b12f5108cb3f",
-          "Flags": 0,
-          "Name": "Capture Point B",
-          "Position": "-297.6555,749.7561,11.25904",
-          "Scale": "5.199997,6.199998,1",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Sandbox.ModelRenderer",
-              "__guid": "067da981-281d-4407-95a3-d0214d1f0507",
-              "BodyGroups": 18446744073709551615,
-              "Model": "models/dev/box.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "CaptureZoneEntity",
-              "__guid": "acecb79d-eff3-459f-9878-bda0584f003f",
-              "CaptureProgress": 0,
-              "CaptureTime": 3,
-              "ContestingTeam": "Neutral",
-              "ControllingTeam": "Neutral",
-              "EnemyColor": "0.97255,0.20784,0.41961,1",
-              "NeutralColor": "0.35294,0.45098,0.5451,1",
-              "PlayerColor": "0.32941,0.7451,0.20784,1",
-              "PointName": "B",
-              "ZoneModel": {
-                "_type": "component",
-                "component_id": "067da981-281d-4407-95a3-d0214d1f0507",
-                "go": "b74d05c1-ebf3-4e18-8654-b12f5108cb3f",
-                "component_type": "ModelRenderer"
-              }
-            },
-            {
-              "__type": "Sandbox.BoxCollider",
-              "__guid": "93402eb4-0a17-4c64-973b-b804f4a19c50",
-              "Center": "0,0,0",
-              "IsTrigger": true,
-              "Scale": "80.2998,69.99972,87.00007",
+              "Scale": "49.89952,49.59967,492",
               "Static": false
             }
           ]
@@ -708,6 +667,16 @@
           "Static": true
         }
       ]
+    },
+    {
+      "__guid": "4b8d1ce1-3073-4491-9634-c793fa55834c",
+      "Flags": 0,
+      "Name": "PlayerSpawn",
+      "Position": "-324.9133,-444.1223,160.7792",
+      "Tags": "player",
+      "Enabled": true,
+      "__Prefab": "prefabs/player/playerspawn.prefab",
+      "__PrefabVariables": {}
     }
   ],
   "SceneProperties": {

@@ -29,7 +29,7 @@ public sealed class SpotAi : Component
 	{
 		base.OnUpdate();
 
-		if ( ParentBot == null || !ParentBot.isAlive ) return;
+		if ( ParentBot == null || !ParentBot.IsAlive ) return;
 
 		if ( TimeSinceLastDetection >= DetectionInterval )
 		{
@@ -44,7 +44,7 @@ public sealed class SpotAi : Component
 
 		foreach ( var player in nearbyEntities )
 		{
-			if ( player.isAlive && player.CurrentTeam != ParentBot.CurrentTeam )
+			if ( player.IsAlive && player.CurrentTeam != ParentBot.CurrentTeam )
 			{
 				float distance = Vector3.DistanceBetween( Transform.Position, player.Transform.Position );
 

@@ -105,13 +105,11 @@ namespace Ultraneon
 		}
 
 
-
 		private void UpdatePosition()
 		{
 			var camera = Scene.GetAllComponents<CameraComponent>().FirstOrDefault( x => x.IsMainCamera );
 			if ( camera != null )
 			{
-				
 				Transform.Position = Transform.Position.LerpTo( camera.Transform.Position, 0.025f );
 				Transform.Rotation = camera.Transform.Rotation.Clamp( camera.Transform.Rotation, 5f );
 			}
@@ -168,7 +166,7 @@ namespace Ultraneon
 
 		private void HandleHit( SceneTraceResult shotTrace )
 		{
-			SpawnImpactEffect( shotTrace );
+			// SpawnImpactEffect( shotTrace );
 
 			var damageable = shotTrace.GameObject?.Components.Get<IDamageable>();
 			if ( damageable != null )

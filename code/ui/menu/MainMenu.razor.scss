@@ -1,51 +1,58 @@
-MainMenu {
+MainMenu {  
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Cascadia Code, Arial, sans-serif;
   pointer-events: all;
   backdrop-filter: blur(10px);
+  transition: opacity 0.3s ease;
 
   &.hidden {
-    display: none;
+    opacity: 0;
     pointer-events: none;
   }
 
+  &.visible {
+    opacity: 1;
+  }
+
   .menu-container {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .title {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    background-color: rgba(51, 51, 51, 0.8);
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    margin-bottom: 40px;
+    font-family: Cascadia Code, Arial, sans-serif;
 
-    .title {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: row;
-      gap: 16px;
-      margin-bottom: 40px;
+    .title-1, .title-2 {
+      font-size: 72px;
+      font-weight: bold;
+      letter-spacing: 4px;
+    }
 
-      .title-1 {
-        font-size: 64px;
-        color: #fff;
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-      }
-      .title-2 {
-        font-size: 64px;
-        color: #e847ff;
-        text-shadow: 0 0 10px rgba(232, 71, 255, 0.5);
-      }
+    .title-1 {
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    }
+
+    .title-2 {
+      color: #e847ff;
+      text-shadow: 0 0 10px rgba(232, 71, 255, 0.7);
     }
   }
 
@@ -56,26 +63,38 @@ MainMenu {
   }
 
   .menu-button {
-    background-color: rgba(52, 152, 219, 0.8);
+    background-color: rgba(40, 40, 40, 0.8);
     color: #fff;
     border: none;
     padding: 15px 30px;
-    font-size: 24px;
+    font-size: 18px;
     cursor: pointer;
-    transition: all 0.1s;
-    border-radius: 5px;
-    backdrop-filter: blur(5px);
+    transition: all 0.2s;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-transform: uppercase;
     letter-spacing: 2px;
+    min-width: 250px;
 
     &:hover {
-      background-color: rgba(41, 128, 185, 0.9);
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+      background-color: rgba(60, 60, 60, 0.9);
+      transform: translateX(5px);
+      box-shadow: 0 0 15px rgba(232, 71, 255, 0.3);
     }
 
     &:active {
-      transform: scale(0.98);
+      transform: translateX(2px);
+    }
+    
+    span {
+      font-family: Cascadia Code, Arial, sans-serif;
+      font-size: 32px;
+    }
+    
+    .icon {
+      font-family: Material Icons;
     }
   }
 }

@@ -15,17 +15,17 @@ public class GameService : Component, IGameEventHandler<GameModeActivatedEvent>
 	public void InitializeService()
 	{
 		GameModes = GameObject.Components.GetAll<GameMode>().ToList();
-		Log.Info($"[GameService] Initialized with {GameModes.Count} game modes");
+		Log.Info( $"[GameService] Initialized with {GameModes.Count} game modes" );
 
 		var gameMode = GameModes?.FirstOrDefault();
 		if ( gameMode != null )
 		{
-			Log.Info($"[GameService] Activating game mode: {gameMode.GetType().Name}");
-			GameObject.Dispatch( new GameModeActivatedEvent(gameMode) );
+			Log.Info( $"[GameService] Activating game mode: {gameMode.GetType().Name}" );
+			GameObject.Dispatch( new GameModeActivatedEvent( gameMode ) );
 		}
 		else
 		{
-			Log.Warning("[GameService] No game mode found to activate");
+			Log.Warning( "[GameService] No game mode found to activate" );
 		}
 	}
 
@@ -38,20 +38,14 @@ public class GameService : Component, IGameEventHandler<GameModeActivatedEvent>
 	protected override void OnUpdate()
 	{
 		if ( IsProxy ) return;
-		if ( ActiveGameMode is not null )
-		{
-			ActiveGameMode.LogicUpdate();
-		}
+		ActiveGameMode?.LogicUpdate();
 	}
 
 	protected override void OnFixedUpdate()
 	{
 		if ( IsProxy ) return;
 
-		if ( ActiveGameMode is not null )
-		{
-			ActiveGameMode.PhysicsUpdate();
-		}
+		ActiveGameMode?.PhysicsUpdate();
 	}
 
 	public void OnGameEvent( GameModeActivatedEvent eventArgs )
