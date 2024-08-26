@@ -225,9 +225,9 @@
               },
               "BotSpawnPoints": [],
               "BotSpawnPoolTag": "botspawnpool",
-              "InitialBotCount": 4,
-              "MaxBotsAlive": 5,
-              "WaveDuration": 15
+              "InitialBotCount": 2,
+              "MaxBotsAlive": 6,
+              "WaveDuration": 30
             }
           ]
         },
@@ -372,7 +372,7 @@
               "__type": "CaptureZoneEntity",
               "__guid": "80c2b359-9700-4704-9e85-a3f83cc8bfb2",
               "CaptureProgress": 0,
-              "CaptureTime": 9,
+              "CaptureTime": 3,
               "ControllingTeam": "Neutral",
               "EnemyColor": "0.97255,0.20784,0.41961,1",
               "NeutralColor": "0.35294,0.45098,0.5451,1",
