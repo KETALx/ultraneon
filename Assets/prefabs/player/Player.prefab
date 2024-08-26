@@ -10,15 +10,11 @@
       {
         "__type": "Ultraneon.Player.PlayerNeon",
         "__guid": "98a827c8-40ab-4441-8a5d-5f78d88e626f",
-        "CaptureTime": 15,
         "CurrentTeam": "Player",
-        "HealAmount": 10,
-        "HealInterval": 5,
         "Health": 100,
         "Id": "00000000-0000-0000-0000-000000000000",
-        "isAlive": true,
-        "MaxHealth": 100,
-        "RespawnDelay": 5
+        "IsAlive": true,
+        "MaxHealth": 100
       },
       {
         "__type": "Ultraneon.Player.PlayerInventory",
@@ -82,7 +78,7 @@
         "BodyGroups": 341,
         "CreateBoneObjects": false,
         "Model": "models/citizen/citizen.vmdl",
-        "RenderType": "On",
+        "RenderType": "ShadowsOnly",
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
       },
@@ -129,7 +125,7 @@
             "BodyGroups": 18446744073709551615,
             "CreateBoneObjects": false,
             "Model": "models/first_person/first_person_arms_citizen_4fingers.vmdl",
-            "RenderType": "On",
+            "RenderType": "Off",
             "Tint": "1,1,1,1",
             "UseAnimGraph": true
           }

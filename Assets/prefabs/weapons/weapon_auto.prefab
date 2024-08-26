@@ -40,9 +40,10 @@
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "412b4798-3f36-4a70-9be7-4fec02bee19a",
-        "BodyGroups": 75,
+        "__enabled": false,
+        "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
-        "Model": "models/weapons/sbox_smg_mp5/v_mp5.vmdl",
+        "Model": "models/weapons/autorifle/v_weapon_autorifle.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
@@ -73,8 +74,6 @@
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__references": [
-    "facepunch.v_mp5"
-  ],
+  "__references": [],
   "__version": 1
 }

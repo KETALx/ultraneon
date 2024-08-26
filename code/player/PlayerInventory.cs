@@ -140,21 +140,21 @@ public sealed class PlayerInventory : Component
 
 	private void SetupViewmodelArms( SkinnedModelRenderer viewmodel )
 	{
-		var viewmodelArms = GameObject.Children.FirstOrDefault()?.Components.Get<SkinnedModelRenderer>( true );
-
-		if ( viewmodelArms == null )
-		{
-			Log.Error( "[PlayerInventory] Could not find viewmodel arms." );
-			return;
-		}
-
-		if ( viewmodel == null )
-		{
-			viewmodelArms.Enabled = false;
-			return;
-		}
-
-		viewmodelArms.Enabled = true;
-		viewmodelArms.BoneMergeTarget = viewmodel;
+		//var viewmodelArms = GameObject.Children.FirstOrDefault()?.Components.Get<SkinnedModelRenderer>( true );
+		//
+		//if ( viewmodelArms == null )
+		//{
+		//	Log.Error( "[PlayerInventory] Could not find viewmodel arms." );
+		//	return;
+		//}
+		//
+		//if ( viewmodel == null )
+		//{
+		//	viewmodelArms.Enabled = false;
+		//	return;
+		//}
+		//
+		//viewmodelArms.Enabled = true;
+		//viewmodelArms.BoneMergeTarget = viewmodel;
 	}
 }

@@ -110,8 +110,10 @@ namespace Ultraneon
 			var camera = Scene.GetAllComponents<CameraComponent>().FirstOrDefault( x => x.IsMainCamera );
 			if ( camera != null )
 			{
-				Transform.Position = Transform.Position.LerpTo( camera.Transform.Position, 0.025f );
-				Transform.Rotation = camera.Transform.Rotation.Clamp( camera.Transform.Rotation, 5f );
+				Transform.Position = camera.Transform.Position;
+				Transform.Rotation = camera.Transform.Rotation;
+				//Transform.Position = Transform.Position.LerpTo( camera.Transform.Position, 0.025f );
+				//Transform.Rotation = camera.Transform.Rotation.Clamp( camera.Transform.Rotation, 5f );
 			}
 		}
 
@@ -230,6 +232,7 @@ namespace Ultraneon
 			Log.Info( $"Weapon {GameObject.Name} reloaded. Current Ammo: {CurrentAmmo}/{ClipSize}" );
 			GameObject.Dispatch( new WeaponStateChangedEvent( this ) );
 
+			Viewmodel?.Set( "b_reload", false );
 			// TODO: Play reload complete animation
 			// TODO: Play reload complete sound
 		}
@@ -246,7 +249,7 @@ namespace Ultraneon
 		{
 			SinceEquipped = 0f;
 			SetVisible( true );
-			// TODO: Play equip animation
+			//Viewmodel?.Set( "b_deploy", true );
 			// TODO: Play equip sound
 		}
 
