@@ -12,7 +12,7 @@
         "CurrentAmmo": 0,
         "ClipSize": 5,
         "EquipTime": 0.5,
-        "FireRate": 3,
+        "FireRate": 1.5,
         "HeadshotMultiplier": 4,
         "ImpactPrefab": {
           "_type": "gameobject",
@@ -20,7 +20,7 @@
         },
         "IsPickedUp": false,
         "IsSemiAuto": true,
-        "ReloadTime": 6,
+        "ReloadTime": 4,
         "ShootSound": "sounds/weapons/bolt_shoot_1.sound",
         "Viewmodel": {
           "_type": "component",

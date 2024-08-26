@@ -22,9 +22,9 @@
     "PerMapRanking": false,
     "LeaderboardType": "None",
     "CsProjName": "",
-    "LaunchMode": "QuickPlay",
+    "LaunchMode": "Normal",
     "StartupScene": "scenes/sp/sp_c1_intro.scene",
-    "MapStartupScene": "scenes/sp/sp_c1_intro.scene",
+    "MapStartupScene": "scenes/ui/mainmenu.scene",
     "ControlModes": {
       "Keyboard": true
     },

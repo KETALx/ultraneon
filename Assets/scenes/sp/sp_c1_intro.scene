@@ -147,6 +147,34 @@
               ]
             }
           ]
+        },
+        {
+          "__guid": "e13e38eb-c4b8-401a-b104-add852eda245",
+          "Flags": 0,
+          "Name": "DeathCamera",
+          "Position": "1454.64,2211.185,967.3241",
+          "Rotation": "0.1751449,0.04692993,-0.9499143,0.2545289",
+          "Tags": "deathcamera",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.CameraComponent",
+              "__guid": "f3552f35-5baa-4591-9992-0d53efcb126e",
+              "BackgroundColor": "0.33333,0.46275,0.52157,1",
+              "ClearFlags": "All",
+              "FieldOfView": 79.73,
+              "IsMainCamera": false,
+              "Orthographic": false,
+              "OrthographicHeight": 1204,
+              "Priority": 1,
+              "RenderExcludeTags": "",
+              "RenderTags": "",
+              "TargetEye": "None",
+              "Viewport": "0,0,1,1",
+              "ZFar": 10000,
+              "ZNear": 10
+            }
+          ]
         }
       ]
     },
@@ -280,7 +308,7 @@
               "Flags": 0,
               "Name": "Sun",
               "Position": "0,0,32",
-              "Rotation": "0.1294095,0.4829629,-0.2241438,0.8365163",
+              "Rotation": "0.04511506,0.6242147,-0.117482,0.7710506",
               "Tags": "light_directional,light",
               "Enabled": true,
               "Components": [
@@ -289,7 +317,7 @@
                   "__guid": "ec7cc64c-c964-46ec-b468-8125fab48e87",
                   "FogMode": "Enabled",
                   "FogStrength": 1,
-                  "LightColor": "1.84186,1.30772,1.09655,1",
+                  "LightColor": "4.88372,2.39302,1.40833,1",
                   "Shadows": true,
                   "SkyColor": "0,0,0,0"
                 }
@@ -380,6 +408,176 @@
                   "__PrefabVariables": {}
                 }
               ]
+            },
+            {
+              "__guid": "67be02e8-4c9b-4b0c-ba70-94254c3c5666",
+              "Flags": 0,
+              "Name": "#Cubemaps",
+              "Enabled": true,
+              "Children": [
+                {
+                  "__guid": "2cdea560-3da8-4c9c-ab2f-cdfd20e40318",
+                  "Flags": 0,
+                  "Name": "probe (6)",
+                  "Position": "3196,1440,704",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Sandbox.EnvmapProbe",
+                      "__guid": "4f28b162-66e5-4a5f-acf1-c6597ea07ec5",
+                      "Bounds": {
+                        "Mins": "-368,-184,-96",
+                        "Maxs": "296,240,176"
+                      },
+                      "DelayBetweenUpdates": 0.1,
+                      "Feathering": 0.02,
+                      "FrameInterval": 5,
+                      "MaxDistance": 512,
+                      "Projection": "Box",
+                      "RenderDynamically": true,
+                      "TintColor": "1,1,1,1",
+                      "UpdateStrategy": "OnEnabled",
+                      "ZFar": 4096,
+                      "ZNear": 16
+                    }
+                  ]
+                },
+                {
+                  "__guid": "4421a872-25c4-43b2-a170-d1fd7274c0ff",
+                  "Flags": 0,
+                  "Name": "probe (5)",
+                  "Position": "2468,1492,712",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Sandbox.EnvmapProbe",
+                      "__guid": "e285db50-940f-490f-8de9-fb8601e39f6c",
+                      "Bounds": {
+                        "Mins": "-504.3001,-271,-111.1",
+                        "Maxs": "404.4001,357.7996,217.0001"
+                      },
+                      "DelayBetweenUpdates": 0.1,
+                      "Feathering": 0.06,
+                      "FrameInterval": 5,
+                      "MaxDistance": 512,
+                      "Projection": "Box",
+                      "RenderDynamically": true,
+                      "TintColor": "1,1,1,1",
+                      "UpdateStrategy": "OnEnabled",
+                      "ZFar": 4096,
+                      "ZNear": 16
+                    }
+                  ]
+                },
+                {
+                  "__guid": "6a44df16-0cec-451f-b5c9-648b665d5ee4",
+                  "Flags": 0,
+                  "Name": "probe (4)",
+                  "Position": "-296,1928,605.7377",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Sandbox.EnvmapProbe",
+                      "__guid": "933e35de-c187-4074-a407-9b5c08f4a61d",
+                      "Bounds": {
+                        "Mins": "-355.2001,-304.1,-109.5",
+                        "Maxs": "462.8001,319.8002,234"
+                      },
+                      "DelayBetweenUpdates": 0.1,
+                      "Feathering": 0.18,
+                      "FrameInterval": 5,
+                      "MaxDistance": 512,
+                      "Projection": "Box",
+                      "RenderDynamically": true,
+                      "TintColor": "1,1,1,1",
+                      "UpdateStrategy": "OnEnabled",
+                      "ZFar": 4096,
+                      "ZNear": 16
+                    }
+                  ]
+                },
+                {
+                  "__guid": "a4d5975e-7fb9-4e66-9550-b78a3a4991f2",
+                  "Flags": 0,
+                  "Name": "probe (3)",
+                  "Position": "-4,432,720",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Sandbox.EnvmapProbe",
+                      "__guid": "a054d480-bd4c-478b-adb2-07fad7a6e4ee",
+                      "Bounds": {
+                        "Mins": "-378.0999,-186.4,-221.3",
+                        "Maxs": "194.2,763.9005,196.0002"
+                      },
+                      "DelayBetweenUpdates": 0.1,
+                      "Feathering": 0.1,
+                      "FrameInterval": 5,
+                      "MaxDistance": 512,
+                      "Projection": "Box",
+                      "RenderDynamically": true,
+                      "TintColor": "1,1,1,1",
+                      "UpdateStrategy": "OnEnabled",
+                      "ZFar": 4096,
+                      "ZNear": 16
+                    }
+                  ]
+                },
+                {
+                  "__guid": "2524b276-87b6-43ae-a9b9-4412eaca0a60",
+                  "Flags": 0,
+                  "Name": "probe (2)",
+                  "Position": "400,432,720",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Sandbox.EnvmapProbe",
+                      "__guid": "223256fd-2367-469b-ab25-223b067bb29e",
+                      "Bounds": {
+                        "Mins": "-239.4002,-191.4999,-98.60001",
+                        "Maxs": "195.0001,248.8001,188.4"
+                      },
+                      "DelayBetweenUpdates": 0.1,
+                      "Feathering": 0.18,
+                      "FrameInterval": 5,
+                      "MaxDistance": 512,
+                      "Projection": "Box",
+                      "RenderDynamically": true,
+                      "TintColor": "1,1,1,1",
+                      "UpdateStrategy": "OnEnabled",
+                      "ZFar": 4096,
+                      "ZNear": 16
+                    }
+                  ]
+                },
+                {
+                  "__guid": "54922bce-379b-4ec1-8c4f-86f251973119",
+                  "Flags": 0,
+                  "Name": "probe",
+                  "Position": "944,432,720",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Sandbox.EnvmapProbe",
+                      "__guid": "820d3016-31ba-40b5-91f6-1574e11aa6de",
+                      "Bounds": {
+                        "Mins": "-367.7999,-184.4,-96",
+                        "Maxs": "302.9998,252.2001,183.3001"
+                      },
+                      "DelayBetweenUpdates": 0.1,
+                      "Feathering": 0.23,
+                      "FrameInterval": 5,
+                      "MaxDistance": 512,
+                      "Projection": "Box",
+                      "RenderDynamically": true,
+                      "TintColor": "1,1,1,1",
+                      "UpdateStrategy": "OnEnabled",
+                      "ZFar": 4096,
+                      "ZNear": 16
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -387,7 +585,8 @@
           "__guid": "2bfa93b1-d070-4880-8dc3-740caaaf67ea",
           "Flags": 0,
           "Name": "Capture_zone_a",
-          "Position": "368,1584,560",
+          "Position": "552,1584,740",
+          "Tags": "trigger",
           "Enabled": true,
           "Components": [
             {
@@ -402,10 +601,10 @@
               "__type": "CaptureZoneEntity",
               "__guid": "5a85b55e-56e3-46a9-b845-406782d7c7da",
               "CaptureProgress": 0,
-              "CaptureTime": 10,
+              "CaptureTime": 5,
               "ControllingTeam": "Neutral",
               "EnemyColor": "0.8,0.21581,0.21581,1",
-              "NeutralColor": "0.79535,0.79535,0.79535,1",
+              "NeutralColor": "0.54237,0.75852,0.85116,1",
               "PlayerColor": "0.33189,0.73488,0.28712,1",
               "PointName": "Capture Zone",
               "ZoneModel": {
@@ -419,7 +618,7 @@
               "__type": "Sandbox.ModelRenderer",
               "__guid": "99c0191d-69fc-4bff-bf8e-917a7c775249",
               "BodyGroups": 18446744073709551615,
-              "Model": "models/dev/box.vmdl",
+              "Model": "models/world/capturezone_chamber_mesh_1.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
             }
@@ -625,8 +824,8 @@
               "__guid": "fc3e8473-3fec-4be1-a506-04b41d500b43",
               "Flags": 0,
               "Name": "BotSpawn",
-              "Position": "1200,3248,464",
-              "Rotation": "0,0,0.7071069,-0.7071065",
+              "Position": "419.3232,3664.241,463.9999",
+              "Rotation": "0,0,0.0000003874302,-0.9999998",
               "Tags": "botspawn",
               "Enabled": true,
               "Components": [
@@ -641,8 +840,8 @@
               "__guid": "b66317e8-26f4-4234-b3bf-7c960769ff49",
               "Flags": 0,
               "Name": "BotSpawn",
-              "Position": "1312,3248,464",
-              "Rotation": "0,0,0.7071069,-0.7071065",
+              "Position": "419.3232,3776.241,463.9999",
+              "Rotation": "0,0,0.0000003874302,-0.9999998",
               "Tags": "botspawn",
               "Enabled": true,
               "Components": [
@@ -657,8 +856,8 @@
               "__guid": "d28a0810-071a-4df9-a7f5-affcc10a8de2",
               "Flags": 0,
               "Name": "BotSpawn",
-              "Position": "1440,3248,464",
-              "Rotation": "0,0,0.7071069,-0.7071065",
+              "Position": "419.3232,3904.241,463.9999",
+              "Rotation": "0,0,0.0000003874302,-0.9999998",
               "Tags": "botspawn",
               "Enabled": true,
               "Components": [
