@@ -15,14 +15,7 @@
 				<div class="item @( Inventory?.ActiveWeapon != null && Inventory?.SelectedSlot == slotIndex ? "selected" : "" )">
 					<div class="item-number">@( slotIndex + 1 )</div>
 					<div class="item-content">
-						@if ( Inventory?.Weapons != null && Inventory.Weapons.Length > slotIndex && Inventory.Weapons[slotIndex] != null )
-						{
-							<div class="item-name">@Inventory.Weapons[slotIndex].GameObject.Name</div>
-						}
-						else
-						{
-							<div class="item-name"></div>
-						}
+						<div class="item-image @( Inventory?.Weapons[slotIndex]?.GameObject.Name.ToLower().Replace( "_", "-" ) )"></div>
 					</div>
 				</div>
 			}
