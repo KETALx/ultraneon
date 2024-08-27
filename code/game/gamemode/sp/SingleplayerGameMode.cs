@@ -46,6 +46,16 @@ public class SingleplayerGameMode : GameMode,
 		}
 	}
 
+	[Button( "Damage Player", "close" )]
+	public void DebugDamagePlayer()
+	{
+		if ( Player != null && Player.IsAlive )
+		{
+			var damageInfo = new DamageInfo { Damage = 10.0f, Attacker = GameObject, Position = Player.Transform.Position };
+			Player.OnDamage( damageInfo );
+		}
+	}
+
 	[Button( "Kill All Bots", "smart_toy" )]
 	public void DebugKillBots()
 	{
@@ -134,7 +144,7 @@ public class SingleplayerGameMode : GameMode,
 		gameStarted = true;
 		warmupPhase = true;
 		ResumeGame();
-		ShowInfoMessage( "Capture the zone to start the game!", UiInfoFeedType.Normal );
+		ShowInfoMessage( "Capture the zone to start the game!", UiInfoFeedType.Sticky );
 		Log.Info( "[SinglePlayerGameMode] Let there be light!" );
 	}
 
@@ -174,13 +184,13 @@ public class SingleplayerGameMode : GameMode,
 
 			Player.Transform.Position = spawnPoint.Transform.Position;
 			Player.Transform.Rotation = spawnPoint.Transform.Rotation;
-			ShowInfoMessage( "Player Respawn!", UiInfoFeedType.Debug );
+			// ShowInfoMessage( "Player Respawn!", UiInfoFeedType.Debug );
 		}
 		else
 		{
 			var playerObject = PlayerPrefab.Clone( spawnPoint.Transform.Position, spawnPoint.Transform.Rotation );
 			Player = playerObject.Components.Get<PlayerNeon>();
-			ShowInfoMessage( "Fresh Player Spawn!", UiInfoFeedType.Debug );
+			// ShowInfoMessage( "Fresh Player Spawn!", UiInfoFeedType.Debug );
 		}
 
 		if ( Player == null )
@@ -294,7 +304,7 @@ public class SingleplayerGameMode : GameMode,
 
 	public void OnPointCaptured( CaptureZoneEntity zone, Team previousTeam, Team newTeam )
 	{
-		ShowInfoMessage( $"{zone.PointName} has been captured by {newTeam}!", UiInfoFeedType.Success );
+		Scene.Dispatch( new CaptureZoneCapturedEvent(zone.PointName, previousTeam, newTeam) );
 
 		if ( newTeam == Team.Player && isOvertime )
 		{
@@ -329,7 +339,7 @@ public class SingleplayerGameMode : GameMode,
 
 		Log.Info( $"[SingleplayerGameMode] Character {eventArgs.Victim.GameObject.Name} has died!" );
 
-		ShowInfoMessage( $"Character {eventArgs.Victim.CurrentTeam} has died!", UiInfoFeedType.Debug );
+		// ShowInfoMessage( $"Character {eventArgs.Victim.CurrentTeam} has died!", UiInfoFeedType.Debug );
 		var zonesWithCharacters = CaptureZones.Where( z => z.IsEntityInZone( eventArgs.Victim ) );
 		foreach ( var zone in zonesWithCharacters )
 		{

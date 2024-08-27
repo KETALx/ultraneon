@@ -6,15 +6,21 @@
 @namespace Ultraneon.UI
 
 <root>
-	@if (Player.IsAlive) {
-	<VitalsPanel Player="@Player"/>
-	<InventoryPanel Inventory="@Inventory"/>
-	@if ( Inventory?.ActiveWeapon != null )
+	@if ( Player.IsAlive )
 	{
-		<AmmoPanel Weapon="@Inventory.ActiveWeapon"/>
-	}
-	<CrosshairPanel/>
-	<RadarPanel/>
+		<VitalsPanel Player="@Player"/>
+		<InventoryPanel Inventory="@Inventory"/>
+		@if ( Inventory?.ActiveWeapon != null )
+		{
+			<AmmoPanel Weapon="@Inventory.ActiveWeapon"/>
+		}
+
+		<CrosshairPanel @ref=" crosshairPanel"/>
+		<RadarPanel/>
+		<OvertimeClockPanel @ref=" overtimeClockPanel"/>
+		<CaptureProgressPanel @ref=" captureProgressPanel"/>
+		<NextWaveTimerPanel @ref=" nextWaveTimerPanel"/>
+		<HurtIndicatorPanel @ref=" hurtIndicatorPanel"/>
 	}
 	<InfoFeedPanel Messages="@InfoMessages"/>
 </root>
@@ -26,11 +32,16 @@
 
 	[Property]
 	public PlayerInventory Inventory { get; set; }
-	
+
 	[Property]
 	public bool DisplayDebugMessages { get; set; }
 
 	private List<InfoFeedPanel.InfoMessage> InfoMessages { get; set; } = new List<InfoFeedPanel.InfoMessage>();
+	private CrosshairPanel crosshairPanel;
+	private OvertimeClockPanel overtimeClockPanel;
+	private CaptureProgressPanel captureProgressPanel;
+	private NextWaveTimerPanel nextWaveTimerPanel;
+	private HurtIndicatorPanel hurtIndicatorPanel;
 
 	protected override void OnEnabled()
 	{
@@ -58,7 +69,7 @@
 	public void Show()
 	{
 		Panel.SetClass( "hidden", false );
-		Player ??= Scene.GetAllComponents<PlayerNeon>().FirstOrDefault(x => x.GameObject.Tags.Has("player"));
+		Player ??= Scene.GetAllComponents<PlayerNeon>().FirstOrDefault( x => x.GameObject.Tags.Has( "player" ) );
 		Inventory ??= Player?.GameObject.Components.Get<PlayerInventory>();
 	}
 
@@ -69,13 +80,15 @@
 
 	public void AddInfoMessage( string message, InfoFeedPanel.InfoType type )
 	{
-		Player ??= Scene.GetAllComponents<PlayerNeon>().FirstOrDefault(x => x.GameObject.Tags.Has("player"));
-		Inventory ??= Player?.GameObject.Components.Get<PlayerInventory>();
 		if ( type == InfoFeedPanel.InfoType.Debug && !DisplayDebugMessages )
 		{
 			StateHasChanged();
 			return;
 		}
+
+		Player ??= Scene.GetAllComponents<PlayerNeon>().FirstOrDefault( x => x.GameObject.Tags.Has( "player" ) );
+		Inventory ??= Player?.GameObject.Components.Get<PlayerInventory>();
+
 		Log.Info( $"[Hud] [{{type}}] {message} " );
 		InfoMessages.Add( new InfoFeedPanel.InfoMessage( message, type ) );
 		if ( InfoMessages.Count > InfoFeedPanel.MaxMessages )
@@ -84,5 +97,22 @@
 		}
 
 		StateHasChanged();
+	}
+
+	public void DismissStickyMessages()
+	{
+		var removed = InfoMessages.RemoveAll( x => x.Type == InfoFeedPanel.InfoType.Sticky );
+		Log.Info( $"Removed {removed} sticky messages" );
+		StateHasChanged();
+	}
+
+	public void ShowHitmarker( bool isHeadshot )
+	{
+		crosshairPanel?.ShowHitmarker( isHeadshot );
+	}
+
+	public void ShowHurtIndicator()
+	{
+		hurtIndicatorPanel?.ShowHurtIndicator();
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using Sandbox.Events;
+using Ultraneon.Domain;
 using Ultraneon.Domain.Events;
 using Ultraneon.UI;
 
@@ -59,6 +60,7 @@ public class UiService : Component,
 	public void OnGameEvent( CaptureZoneCapturedEvent capturedEventArgs )
 	{
 		HudPanel?.AddInfoMessage( $"Zone {capturedEventArgs.ZoneName} captured by {capturedEventArgs.NewTeam}!", InfoFeedPanel.InfoType.Success );
+		HudPanel?.DismissStickyMessages();
 	}
 
 	public void OnGameEvent( CharacterSpawnEvent eventArgs )
@@ -77,7 +79,28 @@ public class UiService : Component,
 
 	public void OnGameEvent( DamageEvent eventArgs )
 	{
-		// Handle damage event if needed
+		if ( eventArgs.Target.CurrentTeam == Team.Player )
+		{
+			Log.Info( "[UiService] Showing hurt indicator" );
+			HudPanel?.ShowHurtIndicator();
+			return;
+		}
+		
+		if ( eventArgs.Attacker is not BaseNeonCharacterEntity attackerCharacter )
+		{
+			return;
+		}
+
+		if ( attackerCharacter.CurrentTeam == Team.Player )
+		{
+			Log.Info( "[UiService] Showing hitmarker" );
+			HudPanel?.ShowHitmarker( false );
+		}
+		else if ( eventArgs.Target.CurrentTeam == Team.Player )
+		{
+			Log.Info( "[UiService] Showing hurt indicator" );
+			HudPanel?.ShowHurtIndicator();
+		}
 	}
 
 	public void OnGameEvent( GameModeActivatedEvent eventArgs )

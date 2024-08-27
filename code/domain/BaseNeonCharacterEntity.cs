@@ -42,7 +42,7 @@ public class BaseNeonCharacterEntity : Entity, Component.INetworkListener
 		LastAttacker = damage.Attacker;
 		Log.Info( $"{EntityName} took {damage.Damage} damage from {damage.Attacker?.Name ?? "unknown"}. Remaining health: {Health}" );
 
-		GameObject.Dispatch( new DamageEvent( this, damage.Attacker?.Components.Get<Entity>(), damage.Damage, damage.Position ) );
+		Scene.Dispatch( new DamageEvent( this, damage.Attacker?.Components.Get<Entity>(), damage.Damage, damage.Position ) );
 
 		if ( Health <= 0f )
 		{

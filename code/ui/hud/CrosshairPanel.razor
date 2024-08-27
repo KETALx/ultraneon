@@ -9,9 +9,37 @@
 		<div class="crosshair-right"></div>
 		<div class="crosshair-bottom"></div>
 		<div class="crosshair-left"></div>
+
+		<div class="hitmarker @( IsHitmarkerVisible ? "visible" : "" ) @( IsHeadshotHitmarker ? "headshot" : "" )">
+			<div class="crosshair-top"></div>
+			<div class="crosshair-right"></div>
+			<div class="crosshair-bottom"></div>
+			<div class="crosshair-left"></div>
+		</div>
 	</div>
 </root>
 
 @code
 {
+	private bool IsHitmarkerVisible { get; set; }
+	private bool IsHeadshotHitmarker { get; set; }
+	private TimeSince TimeSinceHitmarkerShown;
+
+	public void ShowHitmarker( bool isHeadshot )
+	{
+		IsHitmarkerVisible = true;
+		IsHeadshotHitmarker = isHeadshot;
+		TimeSinceHitmarkerShown = 0;
+	}
+
+	public override void Tick()
+	{
+		if ( IsHitmarkerVisible && TimeSinceHitmarkerShown > 0.15f )
+		{
+			IsHitmarkerVisible = false;
+			IsHeadshotHitmarker = false;
+		}
+
+		StateHasChanged();
+	}
 }
