@@ -6,6 +6,7 @@
 <root>
 	<div class="next-wave-timer">
 		<div class="wave-label">WAVE @CurrentWave</div>
+		@* <div class="enemy-count">Enemies: @CurrentEnemiesAlive / @TotalEnemies</div> *@
 		<div class="timer">Next: @FormatTime( TimeUntilNextWave )</div>
 	</div>
 </root>
@@ -14,6 +15,12 @@
 {
 	[Property]
 	public int CurrentWave { get; set; }
+
+	[Property]
+	public int CurrentEnemiesAlive { get; set; }
+
+	[Property]
+	public int TotalEnemies { get; set; }
 
 	[Property]
 	public float TimeUntilNextWave { get; set; }
@@ -25,9 +32,12 @@
 		return $"{minutes:D2}:{seconds:D2}";
 	}
 
-	public override void Tick()
+	public void UpdatePanelData( int wave, int enemiesAlive, int totalEnemies, float timeUntilNext )
 	{
-		// Update the time until next wave here if necessary
+		CurrentWave = wave;
+		CurrentEnemiesAlive = enemiesAlive;
+		TotalEnemies = totalEnemies;
+		TimeUntilNextWave = timeUntilNext;
 		StateHasChanged();
 	}
 }
