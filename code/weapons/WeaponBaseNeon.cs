@@ -7,10 +7,10 @@ namespace Ultraneon
 {
 	public enum WeaponType
 	{
+		Auto,
+		Bolt,
 		Pistol,
 		Semi,
-		Auto,
-		Bolt
 	}
 
 	public sealed class WeaponBaseNeon : Component, Component.ITriggerListener
