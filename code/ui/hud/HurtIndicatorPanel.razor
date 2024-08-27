@@ -1,0 +1,30 @@
+﻿@using Sandbox.UI
+@inherits Panel
+@namespace Ultraneon.UI
+@attribute [StyleSheet]
+
+<root>
+	<div class="hurt-indicator @( IsVisible ? "visible" : "" )"></div>
+</root>
+
+@code
+{
+	private bool IsVisible { get; set; }
+	private TimeSince TimeSinceShown;
+
+	public void ShowHurtIndicator()
+	{
+		IsVisible = true;
+		TimeSinceShown = 0;
+	}
+
+	public override void Tick()
+	{
+		if ( IsVisible && TimeSinceShown > 0.4f )
+		{
+			IsVisible = false;
+		}
+
+		StateHasChanged();
+	}
+}

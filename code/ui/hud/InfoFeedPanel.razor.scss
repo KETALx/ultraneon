@@ -51,6 +51,11 @@ InfoFeedPanel {
       color: #fff;
     }
 
+    &.sticky {
+      background-color: rgba(52, 152, 219, 0.2);
+      color: #fff;
+    }
+
     &.warning {
       background-color: rgba(241, 196, 15, 0.2);
       color: #fff;

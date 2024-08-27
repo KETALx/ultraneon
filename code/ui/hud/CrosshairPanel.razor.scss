@@ -45,5 +45,30 @@
     .crosshair-left {
       left: 0;
     }
+
+    .hitmarker {
+      position: relative;
+      top: 0px;
+      left: -20px;
+      width: 100%;
+      height: 100%;
+      transform: rotate(45deg) scale(0.8);
+      opacity: 0;
+      transition: opacity 0.1s ease;
+
+      &.visible {
+        opacity: 0.6;
+      }
+
+      .crosshair-top, .crosshair-right, .crosshair-bottom, .crosshair-left {
+        background-color: #fff;
+      }
+
+      &.headshot {
+        .crosshair-top, .crosshair-right, .crosshair-bottom, .crosshair-left {
+          background-color: #e847ff;
+        }
+      }
+    }
   }
 }

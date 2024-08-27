@@ -1,4 +1,5 @@
 ﻿using Sandbox.Events;
+using Ultraneon.Domain;
 using Ultraneon.Domain.Events;
 using Ultraneon.UI;
 
@@ -6,6 +7,7 @@ namespace Ultraneon.Services;
 
 public class UiService : Component,
 	IGameEventHandler<CaptureZoneCapturedEvent>,
+	IGameEventHandler<CaptureZoneProgressUpdatedEvent>,
 	IGameEventHandler<CharacterSpawnEvent>,
 	IGameEventHandler<CharacterDeathEvent>,
 	IGameEventHandler<DamageEvent>,
@@ -30,6 +32,8 @@ public class UiService : Component,
 
 	[Property]
 	public GameService GameService { get; set; }
+
+	private bool firstCapture = false;
 
 	protected override void OnStart()
 	{
@@ -59,6 +63,18 @@ public class UiService : Component,
 	public void OnGameEvent( CaptureZoneCapturedEvent capturedEventArgs )
 	{
 		HudPanel?.AddInfoMessage( $"Zone {capturedEventArgs.ZoneName} captured by {capturedEventArgs.NewTeam}!", InfoFeedPanel.InfoType.Success );
+		if ( firstCapture == false )
+		{
+			firstCapture = true;
+			HudPanel?.DismissStickyMessages();
+			HudPanel?.DisplayWavePanel();
+		}
+	}
+
+
+	public void OnGameEvent( CaptureZoneProgressUpdatedEvent eventArgs )
+	{
+		HudPanel.UpdateCaptureZoneProgress(eventArgs);
 	}
 
 	public void OnGameEvent( CharacterSpawnEvent eventArgs )
@@ -77,7 +93,28 @@ public class UiService : Component,
 
 	public void OnGameEvent( DamageEvent eventArgs )
 	{
-		// Handle damage event if needed
+		if ( eventArgs.Target.CurrentTeam == Team.Player )
+		{
+			Log.Info( "[UiService] Showing hurt indicator" );
+			HudPanel?.ShowHurtIndicator();
+			return;
+		}
+
+		if ( eventArgs.Attacker is not BaseNeonCharacterEntity attackerCharacter )
+		{
+			return;
+		}
+
+		if ( attackerCharacter.CurrentTeam == Team.Player )
+		{
+			Log.Info( "[UiService] Showing hitmarker" );
+			HudPanel?.ShowHitmarker( false );
+		}
+		else if ( eventArgs.Target.CurrentTeam == Team.Player )
+		{
+			Log.Info( "[UiService] Showing hurt indicator" );
+			HudPanel?.ShowHurtIndicator();
+		}
 	}
 
 	public void OnGameEvent( GameModeActivatedEvent eventArgs )

@@ -1,20 +1,30 @@
 @using Sandbox
 @using Sandbox.UI
+@using Ultraneon.Domain.Events
 @using Ultraneon.Player
 @inherits PanelComponent
 @attribute [StyleSheet]
 @namespace Ultraneon.UI
 
 <root>
-	@if (Player.IsAlive) {
-	<VitalsPanel Player="@Player"/>
-	<InventoryPanel Inventory="@Inventory"/>
-	@if ( Inventory?.ActiveWeapon != null )
+	@if ( Player.IsAlive )
 	{
-		<AmmoPanel Weapon="@Inventory.ActiveWeapon"/>
-	}
-	<CrosshairPanel/>
-	<RadarPanel/>
+		<VitalsPanel Player="@Player"/>
+		<InventoryPanel Inventory="@Inventory"/>
+		@if ( Inventory?.ActiveWeapon != null )
+		{
+			<AmmoPanel Weapon="@Inventory.ActiveWeapon"/>
+		}
+
+		<CrosshairPanel @ref=" crosshairPanel"/>
+		<RadarPanel/>
+		<HurtIndicatorPanel @ref=" hurtIndicatorPanel"/>
+		@if ( displayWavePanel )
+		{
+			<OvertimeClockPanel @ref=" overtimeClockPanel"/>
+			<CaptureProgressPanel @ref=" captureProgressPanel"/>
+			<NextWaveTimerPanel @ref=" nextWaveTimerPanel"/>
+		}
 	}
 	<InfoFeedPanel Messages="@InfoMessages"/>
 </root>
@@ -26,11 +36,19 @@
 
 	[Property]
 	public PlayerInventory Inventory { get; set; }
-	
+
 	[Property]
 	public bool DisplayDebugMessages { get; set; }
 
 	private List<InfoFeedPanel.InfoMessage> InfoMessages { get; set; } = new List<InfoFeedPanel.InfoMessage>();
+	private CrosshairPanel crosshairPanel;
+	private OvertimeClockPanel overtimeClockPanel;
+	private CaptureProgressPanel captureProgressPanel;
+	private NextWaveTimerPanel nextWaveTimerPanel;
+	private HurtIndicatorPanel hurtIndicatorPanel;
+
+	private bool displayWavePanel = false;
+	private bool displayCapturePanel = false;
 
 	protected override void OnEnabled()
 	{
@@ -58,7 +76,7 @@
 	public void Show()
 	{
 		Panel.SetClass( "hidden", false );
-		Player ??= Scene.GetAllComponents<PlayerNeon>().FirstOrDefault(x => x.GameObject.Tags.Has("player"));
+		Player ??= Scene.GetAllComponents<PlayerNeon>().FirstOrDefault( x => x.GameObject.Tags.Has( "player" ) );
 		Inventory ??= Player?.GameObject.Components.Get<PlayerInventory>();
 	}
 
@@ -69,13 +87,15 @@
 
 	public void AddInfoMessage( string message, InfoFeedPanel.InfoType type )
 	{
-		Player ??= Scene.GetAllComponents<PlayerNeon>().FirstOrDefault(x => x.GameObject.Tags.Has("player"));
-		Inventory ??= Player?.GameObject.Components.Get<PlayerInventory>();
 		if ( type == InfoFeedPanel.InfoType.Debug && !DisplayDebugMessages )
 		{
 			StateHasChanged();
 			return;
 		}
+
+		Player ??= Scene.GetAllComponents<PlayerNeon>().FirstOrDefault( x => x.GameObject.Tags.Has( "player" ) );
+		Inventory ??= Player?.GameObject.Components.Get<PlayerInventory>();
+
 		Log.Info( $"[Hud] [{{type}}] {message} " );
 		InfoMessages.Add( new InfoFeedPanel.InfoMessage( message, type ) );
 		if ( InfoMessages.Count > InfoFeedPanel.MaxMessages )
@@ -84,5 +104,63 @@
 		}
 
 		StateHasChanged();
+	}
+
+	public void DismissStickyMessages()
+	{
+		var removed = InfoMessages.RemoveAll( x => x.Type == InfoFeedPanel.InfoType.Sticky );
+		Log.Info( $"Removed {removed} sticky messages" );
+		StateHasChanged();
+	}
+
+	public void DisplayWavePanel()
+	{
+		displayWavePanel = true;
+		StateHasChanged();
+	}
+
+	public void DisplayCapturePanel()
+	{
+		displayWavePanel = true;
+		StateHasChanged();
+	}
+
+	public void HideWavePanel()
+	{
+		displayWavePanel = false;
+		StateHasChanged();
+	}
+
+	public void HideCapturePanel()
+	{
+		displayWavePanel = false;
+		StateHasChanged();
+	}
+
+	public void UpdateCaptureZoneProgress( CaptureZoneProgressUpdatedEvent eventArgs )
+	{
+		if ( captureProgressPanel == null )
+		{
+			return;
+		}
+
+		captureProgressPanel.UpdatePanelData( eventArgs.zone.PointName, eventArgs.zone.CaptureProgress, eventArgs.zone.ControllingTeam.ToString() );
+		StateHasChanged();
+	}
+
+	public void UpdateWaveProgress()
+	{
+		displayWavePanel = true;
+		StateHasChanged();
+	}
+
+	public void ShowHitmarker( bool isHeadshot )
+	{
+		crosshairPanel?.ShowHitmarker( isHeadshot );
+	}
+
+	public void ShowHurtIndicator()
+	{
+		hurtIndicatorPanel?.ShowHurtIndicator();
 	}
 }

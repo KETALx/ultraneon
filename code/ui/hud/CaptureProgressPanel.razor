@@ -1,0 +1,43 @@
+﻿@using Sandbox.UI
+@inherits Panel
+@namespace Ultraneon.UI
+@attribute [StyleSheet]
+
+<root>
+	<div class="capture-progress">
+		<div class="zone-name">@ZoneName</div>
+		<div class="progress-bar">
+			<div class="progress-fill" style="width: @( CaptureProgress * 100 )%;"></div>
+		</div>
+		<div class="status">@Status</div>
+	</div>
+</root>
+
+@code
+{
+	[Property]
+	public string ZoneName { get; set; } = "Capture Zone";
+
+	[Property]
+	public float CaptureProgress { get; set; }
+
+	[Property]
+	public string Status { get; set; } = "Neutral";
+
+	public void UpdatePanelData( string zoneName, float captureProgress, string status )
+	{
+		ZoneName = zoneName;
+		if ( captureProgress == 0.0f )
+		{
+			captureProgress = 1.0f; // Display full
+		}
+		CaptureProgress = captureProgress;
+		Status = status;
+		StateHasChanged();
+	}
+
+	public override void Tick()
+	{
+		StateHasChanged();
+	}
+}

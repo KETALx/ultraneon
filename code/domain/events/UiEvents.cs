@@ -11,6 +11,7 @@ public enum MenuAction
 
 public enum UiInfoFeedType
 {
+	Sticky,
 	Normal,
 	Warning,
 	Success,

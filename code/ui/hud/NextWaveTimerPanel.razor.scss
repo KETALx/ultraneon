@@ -1,0 +1,30 @@
+﻿$secondary-color: #54be35;
+$background-color: rgba(0, 0, 0, 0.7);
+$text-color: #fff;
+
+NextWaveTimerPanel {
+	.next-wave-timer {
+		position: absolute;
+		top: 20px;
+		left: 20px;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		padding: 10px;
+		border-radius: 5px;
+		background-color: $background-color;
+		backdrop-filter: blur(5px);
+		color: $text-color;
+		font-family: Cascadia Code, Arial, sans-serif;
+
+		.wave-label {
+			font-size: 18px;
+			margin-bottom: 5px;
+		}
+
+		.timer {
+			font-size: 24px;
+			text-shadow: 0 0 10px rgba($secondary-color, 0.7);
+		}
+	}
+}

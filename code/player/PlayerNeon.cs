@@ -25,7 +25,7 @@ public class PlayerNeon : BaseNeonCharacterEntity, IGameEventHandler<CharacterSp
 
 		MainCamera = Scene.GetAllComponents<CameraComponent>().FirstOrDefault( x => x.Tags.Contains( "maincamera" ) );
 		DeathCamera = Scene.GetAllComponents<CameraComponent>().FirstOrDefault( x => x.Tags.Contains( "deathcamera" ) );
-
+		
 		Log.Info( $"[PlayerNeon] Player initialized. Health: {Health}, Team: {CurrentTeam}" );
 	}
 

@@ -15,6 +15,8 @@ public record CaptureZoneCharacterExitedEvent( string ZoneName, Team CurrentTeam
 
 public record CaptureZoneCapturedEvent( string ZoneName, Team PreviousTeam, Team NewTeam ) : IGameEvent;
 
+public record CaptureZoneProgressUpdatedEvent( CaptureZoneEntity zone, float progress ) : IGameEvent;
+
 // Game Events
 public record GamePausedEvent() : IGameEvent;
 
