@@ -5,9 +5,9 @@ $text-color: #fff;
 OvertimeClockPanel {
   .overtime-clock {
     position: absolute;
-    bottom: 80px;
-    left: 20px;
-    transform: translateX(-50%);
+    bottom: 150px;
+    right: 32px;
+    width: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,7 +16,7 @@ OvertimeClockPanel {
     background-color: $background-color;
     backdrop-filter: blur(5px);
     color: $text-color;
-    font-family: Cascadia Code, Arial, sans-serif;
+    font-family: Cascadia Code;
 
     .overtime-label {
       font-size: 24px;
