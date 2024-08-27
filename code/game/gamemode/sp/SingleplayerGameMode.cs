@@ -3,6 +3,7 @@ using Sandbox.Events;
 using Ultraneon.Domain;
 using Ultraneon.Domain.Events;
 using Ultraneon.Player;
+using Ultraneon.Services;
 
 namespace Ultraneon.Game.GameMode.Sp;
 
@@ -108,7 +109,7 @@ public class SingleplayerGameMode : GameMode,
 		{
 			return;
 		}
-		
+
 		UpdatePlayerRespawn();
 
 		if ( warmupPhase )
@@ -304,7 +305,7 @@ public class SingleplayerGameMode : GameMode,
 
 	public void OnPointCaptured( CaptureZoneEntity zone, Team previousTeam, Team newTeam )
 	{
-		Scene.Dispatch( new CaptureZoneCapturedEvent(zone.PointName, previousTeam, newTeam) );
+		Scene.Dispatch( new CaptureZoneCapturedEvent( zone.PointName, previousTeam, newTeam ) );
 
 		if ( newTeam == Team.Player && isOvertime )
 		{
@@ -319,7 +320,7 @@ public class SingleplayerGameMode : GameMode,
 
 	public void OnCaptureProgressUpdated( CaptureZoneEntity zone, float progress )
 	{
-		// TODO: Update radar with pulse
+		Scene.Dispatch( new CaptureZoneProgressUpdatedEvent( zone, progress ) );
 	}
 
 	public void OnGameEvent( CaptureZoneCapturedEvent capturedEventArgs )

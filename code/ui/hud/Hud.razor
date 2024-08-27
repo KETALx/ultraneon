@@ -1,5 +1,6 @@
 @using Sandbox
 @using Sandbox.UI
+@using Ultraneon.Domain.Events
 @using Ultraneon.Player
 @inherits PanelComponent
 @attribute [StyleSheet]
@@ -17,10 +18,13 @@
 
 		<CrosshairPanel @ref=" crosshairPanel"/>
 		<RadarPanel/>
-		<OvertimeClockPanel @ref=" overtimeClockPanel"/>
-		<CaptureProgressPanel @ref=" captureProgressPanel"/>
-		<NextWaveTimerPanel @ref=" nextWaveTimerPanel"/>
 		<HurtIndicatorPanel @ref=" hurtIndicatorPanel"/>
+		@if ( displayWavePanel )
+		{
+			<OvertimeClockPanel @ref=" overtimeClockPanel"/>
+			<CaptureProgressPanel @ref=" captureProgressPanel"/>
+			<NextWaveTimerPanel @ref=" nextWaveTimerPanel"/>
+		}
 	}
 	<InfoFeedPanel Messages="@InfoMessages"/>
 </root>
@@ -42,6 +46,9 @@
 	private CaptureProgressPanel captureProgressPanel;
 	private NextWaveTimerPanel nextWaveTimerPanel;
 	private HurtIndicatorPanel hurtIndicatorPanel;
+
+	private bool displayWavePanel = false;
+	private bool displayCapturePanel = false;
 
 	protected override void OnEnabled()
 	{
@@ -103,6 +110,47 @@
 	{
 		var removed = InfoMessages.RemoveAll( x => x.Type == InfoFeedPanel.InfoType.Sticky );
 		Log.Info( $"Removed {removed} sticky messages" );
+		StateHasChanged();
+	}
+
+	public void DisplayWavePanel()
+	{
+		displayWavePanel = true;
+		StateHasChanged();
+	}
+
+	public void DisplayCapturePanel()
+	{
+		displayWavePanel = true;
+		StateHasChanged();
+	}
+
+	public void HideWavePanel()
+	{
+		displayWavePanel = false;
+		StateHasChanged();
+	}
+
+	public void HideCapturePanel()
+	{
+		displayWavePanel = false;
+		StateHasChanged();
+	}
+
+	public void UpdateCaptureZoneProgress( CaptureZoneProgressUpdatedEvent eventArgs )
+	{
+		if ( captureProgressPanel == null )
+		{
+			return;
+		}
+
+		captureProgressPanel.UpdatePanelData( eventArgs.zone.PointName, eventArgs.zone.CaptureProgress, eventArgs.zone.ControllingTeam.ToString() );
+		StateHasChanged();
+	}
+
+	public void UpdateWaveProgress()
+	{
+		displayWavePanel = true;
 		StateHasChanged();
 	}
 
