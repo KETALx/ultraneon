@@ -62,6 +62,9 @@ namespace Ultraneon
 		[Property, Group( "Weapon Effects" )]
 		public GameObject ImpactPrefab { get; set; }
 
+		[Property, Group( "Weapon Effects" )]
+		public GameObject MuzzleObject { get; set; }
+
 		public GameObject Owner { get; private set; }
 
 		public int WeaponSlot { get; private set; }
@@ -153,6 +156,8 @@ namespace Ultraneon
 				.UseHitboxes()
 				.Run();
 
+			CreateParticles();
+
 			if ( shotTrace.Hit )
 			{
 				HandleHit( shotTrace );
@@ -164,6 +169,15 @@ namespace Ultraneon
 			{
 				StartReload();
 			}
+		}
+
+		private async void CreateParticles()
+		{
+
+			MuzzleObject.Transform.Position = Viewmodel.GetAttachment( "muzzle", true ).Value.Position;
+			MuzzleObject.Enabled = true;
+			await Task.Delay( 200 );
+			MuzzleObject.Enabled = false;
 		}
 
 		private void HandleHit( SceneTraceResult shotTrace )

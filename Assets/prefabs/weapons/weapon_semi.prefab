@@ -41,9 +41,8 @@
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "0569bd32-86ee-4d14-b3cc-712ee6555520",
         "__enabled": false,
-        "BodyGroups": 42259,
+        "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
-        "Model": "models/weapons/sbox_assault_m4a1/v_m4a1.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
@@ -51,9 +50,8 @@
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "b7225ee5-e002-46da-a6da-58b1a5fb2e9f",
-        "BodyGroups": 41,
+        "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
-        "Model": "models/weapons/autorifle/weapon_autorifle.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
@@ -74,8 +72,6 @@
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__references": [
-    "facepunch.v_m4a1"
-  ],
+  "__references": [],
   "__version": 1
 }

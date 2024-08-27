@@ -20,6 +20,10 @@
         },
         "IsPickedUp": false,
         "IsSemiAuto": true,
+        "MuzzleObject": {
+          "_type": "gameobject",
+          "go": "5e40dce8-0b61-42a4-9389-6add6512be77"
+        },
         "ReloadTime": 3,
         "ShootSound": "sounds/weapons/bolt_shoot_1.sound",
         "Viewmodel": {
@@ -67,7 +71,180 @@
         "Static": false
       }
     ],
-    "Children": [],
+    "Children": [
+      {
+        "__guid": "efe8d32a-8c31-4179-b027-a46fd4b9539a",
+        "Flags": 0,
+        "Name": "muzzle",
+        "Position": "22.94055,0.00000003386673,-1.012488",
+        "Enabled": true,
+        "Children": [
+          {
+            "__guid": "5e40dce8-0b61-42a4-9389-6add6512be77",
+            "Flags": 0,
+            "Name": "muzzleflash (1)",
+            "Tags": "particles",
+            "Components": [
+              {
+                "__type": "Sandbox.ParticleEffect",
+                "__guid": "655f4d57-b360-4711-b292-76169320595b",
+                "Alpha": {
+                  "Type": "Curve",
+                  "CurveA": [
+                    {
+                      "y": 1
+                    },
+                    {
+                      "x": 1
+                    }
+                  ],
+                  "Constants": "1,0,0,0"
+                },
+                "ApplyColor": true,
+                "ApplyRotation": false,
+                "ApplyShape": true,
+                "Bounce": {
+                  "Constants": "1,0,0,0"
+                },
+                "Brightness": {
+                  "Constants": "1,0,0,0"
+                },
+                "Bumpiness": {},
+                "Collision": false,
+                "CollisionRadius": 1,
+                "Damping": {},
+                "DieOnCollisionChance": {},
+                "Force": false,
+                "ForceDirection": "0,0,0",
+                "ForceScale": {
+                  "Constants": "1,0,0,0"
+                },
+                "Friction": {
+                  "Constants": "1,0,0,0"
+                },
+                "Gradient": {
+                  "Type": "Gradient",
+                  "Evaluation": "Particle",
+                  "GradientA": {
+                    "color": [
+                      {
+                        "c": "0.28521,0.61046,0.95814,1"
+                      },
+                      {
+                        "t": 0.85470086,
+                        "c": "0.0514,0.24912,0.46047,1"
+                      }
+                    ],
+                    "alpha": []
+                  },
+                  "GradientB": {
+                    "color": [
+                      {
+                        "t": 0.5,
+                        "c": "1,1,1,1"
+                      }
+                    ],
+                    "alpha": []
+                  },
+                  "ConstantA": "1,1,1,1",
+                  "ConstantB": "1,1,1,1"
+                },
+                "Lifetime": {
+                  "Constants": "0.15,2,0,0"
+                },
+                "MaxParticles": 50,
+                "OrbitalForce": {},
+                "OrbitalPull": {},
+                "PerParticleTimeScale": {
+                  "Constants": "1,0.4,0,0"
+                },
+                "Pitch": {},
+                "PreWarm": 0,
+                "PushStrength": {},
+                "Roll": {
+                  "Type": "Range",
+                  "Evaluation": "Particle",
+                  "Constants": "0,360,0,0"
+                },
+                "Scale": {
+                  "Type": "Curve",
+                  "CurveA": [
+                    {
+                      "in": -9.333329,
+                      "out": 9.333329
+                    },
+                    {
+                      "x": 0.03325123,
+                      "y": 1,
+                      "in": -0.056075174,
+                      "out": 0.056075174
+                    },
+                    {
+                      "x": 1,
+                      "in": 2.9152544,
+                      "out": -2.9152544
+                    }
+                  ],
+                  "Constants": "1,0,0,0"
+                },
+                "SequenceId": {},
+                "SequenceSpeed": {
+                  "Constants": "1,0,0,0"
+                },
+                "SequenceTime": {
+                  "Constants": "1,0,0,0"
+                },
+                "SheetSequence": false,
+                "Space": "World",
+                "StartDelay": {},
+                "StartVelocity": {
+                  "Constants": "0,70,0,0"
+                },
+                "Stretch": {},
+                "TimeScale": 1,
+                "Tint": "1,1,1,1",
+                "Yaw": {}
+              },
+              {
+                "__type": "Sandbox.ParticleSpriteRenderer",
+                "__guid": "10d296e0-4619-45f7-a5f1-7dcc6b3784d1",
+                "Additive": true,
+                "Alignment": "LookAtCamera",
+                "BlurAmount": 0.5,
+                "BlurOpacity": 0.91,
+                "BlurSpacing": 0.73,
+                "DepthFeather": 0,
+                "FaceVelocity": false,
+                "FogStrength": 1,
+                "LeadingTrail": true,
+                "Lighting": false,
+                "MotionBlur": true,
+                "Opaque": false,
+                "RotationOffset": 0,
+                "Scale": 1,
+                "Shadows": false,
+                "SortMode": "Unsorted",
+                "Texture": "materials/particles/shapes/circle1.vtex"
+              },
+              {
+                "__type": "Sandbox.ParticleSphereEmitter",
+                "__guid": "57ba3fcb-4e06-4ebe-86c8-d25de5181cf0",
+                "Burst": 25,
+                "Delay": 0,
+                "DestroyOnEnd": false,
+                "Duration": 0.5,
+                "Loop": false,
+                "OnEdge": false,
+                "Radius": 2.29,
+                "Rate": 25,
+                "RateOverDistance": 0,
+                "Velocity": 100
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "__variables": []
   },
   "ShowInMenu": false,

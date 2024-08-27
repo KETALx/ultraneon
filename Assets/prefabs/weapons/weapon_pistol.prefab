@@ -41,9 +41,8 @@
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "b4a4919a-28f1-425e-9644-26a585f5c74d",
         "__enabled": false,
-        "BodyGroups": 17685,
+        "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
-        "Model": "models/weapons/sbox_pistol_usp/v_usp.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
@@ -51,9 +50,8 @@
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "6eb81083-303f-425f-9279-68e5523e2cee",
-        "BodyGroups": 171,
+        "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
-        "Model": "models/weapons/sbox_assault_m4a1/w_m4a1.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1",
         "UseAnimGraph": true
@@ -74,9 +72,6 @@
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__references": [
-    "facepunch.v_usp",
-    "facepunch.w_m4a1"
-  ],
+  "__references": [],
   "__version": 1
 }

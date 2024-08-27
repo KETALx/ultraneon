@@ -80,15 +80,16 @@
             {
               "__type": "Ultraneon.Game.GameMode.Sp.WaveManager",
               "__guid": "eefcc53e-a9f6-4caa-9908-c587d90656c3",
+              "BaseWaveDuration": 60,
               "BotPrefab": {
                 "_type": "gameobject",
                 "prefab": "prefabs/entites/enemy_regular.prefab"
               },
               "BotSpawnPoints": [],
               "BotSpawnPoolTag": "botspawnpool",
+              "EarlyWaveStartDelay": 10,
               "InitialBotCount": 2,
-              "MaxBotsAlive": 30,
-              "WaveDuration": 40
+              "MaxBotsAlive": 30
             }
           ]
         },
