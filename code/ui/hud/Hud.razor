@@ -21,9 +21,17 @@
 		<HurtIndicatorPanel @ref=" hurtIndicatorPanel"/>
 		@if ( displayWavePanel )
 		{
-			<OvertimeClockPanel @ref=" overtimeClockPanel"/>
-			<CaptureProgressPanel @ref=" captureProgressPanel"/>
 			<NextWaveTimerPanel @ref=" nextWaveTimerPanel"/>
+		}
+
+		@if ( displayCapturePanel )
+		{
+			<CaptureProgressPanel @ref=" captureProgressPanel"/>
+		}
+
+		@if ( displayOvertimePanel )
+		{
+			<OvertimeClockPanel @ref=" overtimeClockPanel"/>
 		}
 	}
 	<InfoFeedPanel Messages="@InfoMessages"/>
@@ -48,7 +56,8 @@
 	private HurtIndicatorPanel hurtIndicatorPanel;
 
 	private bool displayWavePanel = false;
-	private bool displayCapturePanel = false;
+	private bool displayCapturePanel = true;
+	private bool displayOvertimePanel = false;
 
 	protected override void OnEnabled()
 	{
@@ -121,19 +130,7 @@
 
 	public void DisplayCapturePanel()
 	{
-		displayWavePanel = true;
-		StateHasChanged();
-	}
-
-	public void HideWavePanel()
-	{
-		displayWavePanel = false;
-		StateHasChanged();
-	}
-
-	public void HideCapturePanel()
-	{
-		displayWavePanel = false;
+		displayCapturePanel = true;
 		StateHasChanged();
 	}
 
@@ -148,9 +145,28 @@
 		StateHasChanged();
 	}
 
-	public void UpdateWaveProgress(int currentWave, int currentEnemiesAlive, int totalEnemies, float timeUntilNextWave)
+	public void UpdateWaveProgress( int currentWave, int currentEnemiesAlive, int totalEnemies, float timeUntilNextWave )
 	{
+		if ( nextWaveTimerPanel == null )
+		{
+			return;
+		}
+
 		nextWaveTimerPanel.UpdatePanelData( currentWave, currentWave, totalEnemies, timeUntilNextWave );
+		StateHasChanged();
+	}
+
+	public void UpdateOvertime( bool isOvertime, float remainingTime )
+	{
+		displayOvertimePanel = isOvertime;
+		StateHasChanged();
+		
+		if ( overtimeClockPanel == null )
+		{
+			return;
+		}
+
+		overtimeClockPanel.UpdatePanelData( isOvertime, remainingTime );
 		StateHasChanged();
 	}
 

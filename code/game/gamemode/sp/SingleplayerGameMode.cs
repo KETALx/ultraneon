@@ -270,19 +270,22 @@ public class SingleplayerGameMode : GameMode,
 		}
 
 		Log.Info( "[SinglePlayerGameMode] Overtime ended" );
+		Scene.Dispatch(new OvertimeUpdatedEvent(false, 0.0f));
 	}
 
 	private void UpdateOvertime()
 	{
 		float remainingTime = OvertimeSeconds - overtimeStarted;
-		if ( remainingTime <= 0 )
+		if (remainingTime <= 0)
 		{
 			EndGame();
 		}
-		else if ( remainingTime <= 10 && (int)remainingTime != (int)(remainingTime - Time.Delta) )
+		else if (remainingTime <= 10 && (int)remainingTime != (int)(remainingTime - Time.Delta))
 		{
-			ShowInfoMessage( $"Overtime ending in {(int)remainingTime} seconds!", UiInfoFeedType.Warning );
+			ShowInfoMessage($"Overtime ending in {(int)remainingTime} seconds!", UiInfoFeedType.Warning);
 		}
+
+		Scene.Dispatch(new OvertimeUpdatedEvent(isOvertime, remainingTime));
 	}
 
 	private void CheckGameOver()

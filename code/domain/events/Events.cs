@@ -16,7 +16,10 @@ public record CaptureZoneCharacterExitedEvent( string ZoneName, Team CurrentTeam
 public record CaptureZoneCapturedEvent( string ZoneName, Team PreviousTeam, Team NewTeam ) : IGameEvent;
 
 public record CaptureZoneProgressUpdatedEvent( CaptureZoneEntity zone, float progress ) : IGameEvent;
-public record WaveProgressUpdatedEvent(int CurrentWave, int CurrentEnemiesAlive, int TotalEnemies, float TimeUntilNextWave) : IGameEvent;
+
+public record WaveProgressUpdatedEvent( int CurrentWave, int CurrentEnemiesAlive, int TotalEnemies, float TimeUntilNextWave ) : IGameEvent;
+
+public record OvertimeUpdatedEvent( bool IsOvertime, float RemainingTime ) : IGameEvent;
 
 // Game Events
 public record GamePausedEvent() : IGameEvent;

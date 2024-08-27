@@ -14,7 +14,8 @@ public class UiService : Component,
 	IGameEventHandler<GameModeActivatedEvent>,
 	IGameEventHandler<UiInfoFeedEvent>,
 	IGameEventHandler<GameOverEvent>,
-	IGameEventHandler<WaveProgressUpdatedEvent>
+	IGameEventHandler<WaveProgressUpdatedEvent>,
+	IGameEventHandler<OvertimeUpdatedEvent>
 {
 	[Property]
 	public ScreenPanel RootPanel { get; set; }
@@ -34,7 +35,8 @@ public class UiService : Component,
 	[Property]
 	public GameService GameService { get; set; }
 
-	private bool firstCapture = false;
+	private bool firstCaptureStarted = false;
+	private bool firstCaptureFinished = false;
 
 	protected override void OnStart()
 	{
@@ -64,16 +66,23 @@ public class UiService : Component,
 	public void OnGameEvent( CaptureZoneCapturedEvent capturedEventArgs )
 	{
 		HudPanel?.AddInfoMessage( $"Zone {capturedEventArgs.ZoneName} captured by {capturedEventArgs.NewTeam}!", InfoFeedPanel.InfoType.Success );
-		if ( firstCapture == false )
+		if ( firstCaptureStarted && firstCaptureFinished == false )
 		{
-			firstCapture = true;
+			firstCaptureFinished = true;
 			HudPanel?.DismissStickyMessages();
 			HudPanel?.DisplayWavePanel();
+			HudPanel?.DisplayCapturePanel();
 		}
 	}
 
 	public void OnGameEvent( CaptureZoneProgressUpdatedEvent eventArgs )
 	{
+		if ( eventArgs.progress >= 0.0f && firstCaptureStarted == false )
+		{
+			firstCaptureStarted = true;
+			HudPanel.DisplayCapturePanel();
+		}
+
 		HudPanel.UpdateCaptureZoneProgress( eventArgs.zone.PointName, eventArgs.zone.CaptureProgress, eventArgs.zone.ControllingTeam.ToString() );
 	}
 
@@ -85,6 +94,11 @@ public class UiService : Component,
 			eventArgs.TotalEnemies,
 			eventArgs.TimeUntilNextWave
 		);
+	}
+
+	public void OnGameEvent( OvertimeUpdatedEvent eventArgs )
+	{
+		HudPanel?.UpdateOvertime( eventArgs.IsOvertime, eventArgs.RemainingTime );
 	}
 
 	public void OnGameEvent( CharacterSpawnEvent eventArgs )

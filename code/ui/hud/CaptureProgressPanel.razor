@@ -27,10 +27,11 @@
 	public void UpdatePanelData( string zoneName, float captureProgress, string status )
 	{
 		ZoneName = zoneName;
-		if ( captureProgress == 0.0f )
+		if ( captureProgress == 0.0f && !status.ToLower().Equals( "neutral" ) )
 		{
 			captureProgress = 1.0f; // Display full
 		}
+
 		CaptureProgress = captureProgress;
 		Status = status;
 		StateHasChanged();
