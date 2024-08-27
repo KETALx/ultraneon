@@ -1,5 +1,6 @@
 using Sandbox.Events;
 using System.Runtime.CompilerServices;
+using System.Transactions;
 using Ultraneon.Domain.Events;
 using Ultraneon.Player;
 
@@ -64,6 +65,9 @@ namespace Ultraneon
 
 		[Property, Group( "Weapon Effects" )]
 		public GameObject MuzzleObject { get; set; }
+
+		[Property, Group( "Weapon Effects" )]
+		public GameObject TrailObject { get; set; }
 
 		public GameObject Owner { get; private set; }
 
@@ -173,11 +177,21 @@ namespace Ultraneon
 
 		private async void CreateParticles()
 		{
+			var to = TrailObject.Clone();
+			to.SetParent(GameObject, false );
+			to.Transform.Position = Viewmodel.GetAttachment( "muzzle", true ).Value.Position;
+
+			
 
 			MuzzleObject.Transform.Position = Viewmodel.GetAttachment( "muzzle", true ).Value.Position;
 			MuzzleObject.Enabled = true;
+
+			await Task.Delay( 20 );
+			to.SetParent( null, true );
 			await Task.Delay( 200 );
 			MuzzleObject.Enabled = false;
+			to.Destroy();
+
 		}
 
 		private void HandleHit( SceneTraceResult shotTrace )

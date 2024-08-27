@@ -1090,6 +1090,17 @@
       "Enabled": true,
       "__Prefab": "prefabs/weapons/weapon_auto.prefab",
       "__PrefabVariables": {}
+    },
+    {
+      "__guid": "daa765ab-fa98-4533-8979-b1c5782582b3",
+      "Flags": 0,
+      "Name": "trailprefab",
+      "Position": "1288.258,2591.542,486.9977",
+      "Rotation": "-0.04202077,-0.01965785,0.9048102,-0.4232803",
+      "Tags": "particles",
+      "Enabled": true,
+      "__Prefab": "prefabs/weapons/trailprefab.prefab",
+      "__PrefabVariables": {}
     }
   ],
   "SceneProperties": {

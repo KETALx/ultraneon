@@ -26,6 +26,10 @@
         },
         "ReloadTime": 3,
         "ShootSound": "sounds/weapons/bolt_shoot_1.sound",
+        "TrailObject": {
+          "_type": "gameobject",
+          "prefab": "prefabs/weapons/trailprefab.prefab"
+        },
         "Viewmodel": {
           "_type": "component",
           "component_id": "0569bd32-86ee-4d14-b3cc-712ee6555520",

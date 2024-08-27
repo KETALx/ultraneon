@@ -158,7 +158,7 @@
         "Radius": 2.29,
         "Rate": 25,
         "RateOverDistance": 0,
-        "Velocity": 100
+        "Velocity": 500
       }
     ],
     "Children": [],

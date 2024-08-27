@@ -26,6 +26,10 @@
         },
         "ReloadTime": 2,
         "ShootSound": "sounds/weapons/pistol_laser_shoot_1.sound",
+        "TrailObject": {
+          "_type": "gameobject",
+          "prefab": "prefabs/weapons/trailprefab.prefab"
+        },
         "Viewmodel": {
           "_type": "component",
           "component_id": "412b4798-3f36-4a70-9be7-4fec02bee19a",
@@ -77,7 +81,6 @@
         "Flags": 0,
         "Name": "muzzle",
         "Position": "22.94055,0.00000003386673,-1.012488",
-        "Enabled": true,
         "Children": [
           {
             "__guid": "8e2f4b93-b9e1-446a-be4d-9b8985cc8259",
@@ -85,6 +88,7 @@
             "Name": "muzzleflash (1)",
             "Position": "0,0,0",
             "Tags": "particles",
+            "Enabled": true,
             "Components": [
               {
                 "__type": "Sandbox.ParticleEffect",
