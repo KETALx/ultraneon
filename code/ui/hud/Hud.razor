@@ -137,20 +137,20 @@
 		StateHasChanged();
 	}
 
-	public void UpdateCaptureZoneProgress( CaptureZoneProgressUpdatedEvent eventArgs )
+	public void UpdateCaptureZoneProgress( string pointName, float captureProgress, string controllingTeam )
 	{
 		if ( captureProgressPanel == null )
 		{
 			return;
 		}
 
-		captureProgressPanel.UpdatePanelData( eventArgs.zone.PointName, eventArgs.zone.CaptureProgress, eventArgs.zone.ControllingTeam.ToString() );
+		captureProgressPanel.UpdatePanelData( pointName, captureProgress, controllingTeam );
 		StateHasChanged();
 	}
 
-	public void UpdateWaveProgress()
+	public void UpdateWaveProgress(int currentWave, int currentEnemiesAlive, int totalEnemies, float timeUntilNextWave)
 	{
-		displayWavePanel = true;
+		nextWaveTimerPanel.UpdatePanelData( currentWave, currentWave, totalEnemies, timeUntilNextWave );
 		StateHasChanged();
 	}
 

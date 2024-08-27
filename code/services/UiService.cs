@@ -13,7 +13,8 @@ public class UiService : Component,
 	IGameEventHandler<DamageEvent>,
 	IGameEventHandler<GameModeActivatedEvent>,
 	IGameEventHandler<UiInfoFeedEvent>,
-	IGameEventHandler<GameOverEvent>
+	IGameEventHandler<GameOverEvent>,
+	IGameEventHandler<WaveProgressUpdatedEvent>
 {
 	[Property]
 	public ScreenPanel RootPanel { get; set; }
@@ -71,10 +72,19 @@ public class UiService : Component,
 		}
 	}
 
-
 	public void OnGameEvent( CaptureZoneProgressUpdatedEvent eventArgs )
 	{
-		HudPanel.UpdateCaptureZoneProgress(eventArgs);
+		HudPanel.UpdateCaptureZoneProgress( eventArgs.zone.PointName, eventArgs.zone.CaptureProgress, eventArgs.zone.ControllingTeam.ToString() );
+	}
+
+	public void OnGameEvent( WaveProgressUpdatedEvent eventArgs )
+	{
+		HudPanel?.UpdateWaveProgress(
+			eventArgs.CurrentWave,
+			eventArgs.CurrentEnemiesAlive,
+			eventArgs.TotalEnemies,
+			eventArgs.TimeUntilNextWave
+		);
 	}
 
 	public void OnGameEvent( CharacterSpawnEvent eventArgs )
